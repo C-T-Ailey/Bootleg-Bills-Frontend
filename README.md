@@ -1,7 +1,10 @@
 # Project 04: Full Stack Application using MERN stack
 
 ## Bootleg Bill's Unofficial Audio Rarities
-> *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04). For the deployed app, see [here](https://bootlegbills.herokuapp.com/).*
+
+**Deployed App on Heroku:** [Bootleg Bill's](https://bootlegbills.herokuapp.com/)
+
+> *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
 ## Overview
 Bootleg Bill's Unofficial Audio Rarities is an E-Commerce site for custom-made cassette mixtapes, including rare/obscure original releases and replications of tapes shown in movies, TV shows and video games. Using a combination of React on the frontend and Express/MongoDB on the backend, Bootleg Bill's allows you to sign up as either a buyer or a seller, where they can browse the shop, see details about specific products, add items to the cart, go to checkout to complete their order and see a list and the status of their past orders. Sellers can also access a dashboard allowing them to add, edit or delete products from the inventory as well as view and edit each order status.
