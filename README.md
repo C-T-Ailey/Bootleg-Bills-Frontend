@@ -1,7 +1,7 @@
 # Project 04: Full Stack Application using MERN stack
 
-## Bootleg Bill's 
-> *Unofficial Audio Rarities*
+## Bootleg Bill's Unofficial Audio Rarities
+> *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04). For the deployed app, see [here](https://bootlegbills.herokuapp.com/).*
 
 
 ## Overview
