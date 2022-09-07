@@ -1,4 +1,4 @@
-# GA SEI Project 3: “Cake Sera, Sera” - Baked Goods Recipe-Sharing Community
+# GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
 
 ### Deployed App: https://cakeprojectapp.herokuapp.com/
 
