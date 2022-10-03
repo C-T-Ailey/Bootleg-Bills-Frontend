@@ -1,6 +1,6 @@
 # GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
 
-### Deployed App: https://cakeprojectapp.herokuapp.com/
+### Deployed App: https://bootlegbills.herokuapp.com/
 
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
