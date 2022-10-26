@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button, Modal } from 'react-bootstrap'
+import { Table, Modal } from 'react-bootstrap'
 import './Dash.css'
 import Axios from 'axios'
 import OrderDetails from './OrderDetails';
-import OrderDetailCard from './OrderDetailCard';
 
 export default function OrderHistory(props) {
 

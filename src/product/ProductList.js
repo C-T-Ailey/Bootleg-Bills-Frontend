@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Row, Container, Modal } from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 import './ProductList.css'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
@@ -11,7 +11,6 @@ import Button from 'react-bootstrap/Button'
 
 export default function ProductList(props) {
 
-    const [showModal, setShowModal] = useState(false)
     const [filter, setFilter] = useState("all")
     // const [query, setQuery] = useState("")
     useEffect(() => {
@@ -36,10 +35,6 @@ export default function ProductList(props) {
 
         props.loadProductList()
         
-    }
-
-    const onDetailClick = () => {
-      !showModal ? setShowModal(true) : setShowModal(false)
     }
 
 

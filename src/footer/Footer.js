@@ -1,5 +1,4 @@
 import React from 'react'
-import { Col, Row, Container, Navbar, Form} from "react-bootstrap";
 import './footer.css'
 
 import NewsLetter from './NewsLetter';
@@ -9,6 +8,7 @@ export default function Footer(props) {
 
     <>
     <div className="clear"></div>
+
     <div className="footer-container fixed-bottom d-flex justify-content-center m-auto" >
 
 
@@ -34,8 +34,16 @@ export default function Footer(props) {
         <a href="">Facebook</a>
         <a href="">Twitter</a>
       </div>
+
+      <div>
+        <NewsLetter addNewsletterEmail={props.addNewsletterEmail}/>
+        </div>
       
-      <NewsLetter addNewsletterEmail={props.addNewsletterEmail}/>
+      
+    </div>
+    
+    <div className='copyright'>
+      <p>&copy; 2022 Chris Ailey, Chris Carey & Dr. Ailish McLaughlin</p>
     </div>
     
     </div>

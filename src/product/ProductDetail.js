@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Button,Form } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Button } from 'react-bootstrap'
 import './ProductDetail.css'
 
 

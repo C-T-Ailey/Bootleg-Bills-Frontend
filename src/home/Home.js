@@ -4,29 +4,23 @@ import { Carousel } from 'react-responsive-carousel';
 import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 
-import img1 from "./assets/kirk.jpg";
-import img2 from "./assets/truth-alt.jpg";
-import img3 from "./assets/floral.jpg"
 import Axios from 'axios';
 import Image from 'react-bootstrap/Image'
-import bigLogo from './assets/big_logo.png'
+// import bigLogo from './assets/big_logo.png'
+import bigLogoNew from './assets/big_logo_new.png'
 
 
-// import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
-// import track1 from "./assets/30_Seconds_of_Bowling_Sounds.mp3"
-
-
-const options = {
-  showArrows: false,
-  showStatus: false,
-  showIndicators: false,
-  showThumbs: false,
-  autoPlay: true,
-  infiniteLoop: true,
-  stopOnHover: false,
-  swipeable: false,
-  animationHandler: 'fade',
-};
+// const options = {
+//   showArrows: false,
+//   showStatus: false,
+//   showIndicators: false,
+//   showThumbs: false,
+//   autoPlay: true,
+//   infiniteLoop: true,
+//   stopOnHover: false,
+//   swipeable: false,
+//   animationHandler: 'fade',
+// };
 
 export default function Home(props) {
 
@@ -112,25 +106,32 @@ export default function Home(props) {
       
         
       <>
-      <div className="best-seller">
-        <h2> Our Best Sellers: </h2>
-      </div>
+
+        <div className='homepage-welcome'>
+          <div className='homepage-logo'> 
+          <h3>Welcome to</h3>
+          <Image src={bigLogoNew} alt="" height={400} width={400}/>
+          </div>
+          <div className="homepage-about">
+            <p>Founded in 2016, Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for custom designed, one-of-a-kind, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
+            <p>Originally just a small creative project driven by word-of-mouth, we finally established an online presence in 2022 thanks to Chris Ailey, Chris Carey and Dr. Ailish McLaughlin. Now you can browse what's left to plunder from our catalogue of obscure counterfeit treasures, stay updated on latest releases, and keep track of returning favourites!</p>
+          </div>
+        </div>
+        <div className="best-seller">
+          <h2> Our Best Sellers: </h2>
+        </div>
 
       <Carousel className='main-slide'>
         {top3Products.map(popProduct => (
             <div key={popProduct.product._id}>
-              <div className="type">{popProduct.product.productName}</div>
+              <div className="type">
+                <a></a>{popProduct.product.productName}
+                </div>
+              <div className='carousel-source'>From {popProduct.product.productSource}</div>
               <img alt="" src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/>
             </div>
         ))}
       </Carousel>
-        <div className='homepage-logo'> 
-        <Image src={bigLogo} alt="" height={500}/>
-        <div className="homepage-about">
-          <h3>About Us: </h3>
-          <p> Bootleg Bill's Unofficial Rarities.... SOme more content here....</p>
-        </div>
-        </div>
 
         {/* <div className="test">
   

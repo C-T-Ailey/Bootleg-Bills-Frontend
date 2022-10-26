@@ -13,9 +13,7 @@ import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import {Alert} from 'react-bootstrap'
-import Modal from 'react-modal'
 import Footer from './footer/Footer'
-import NewsLetter from './footer/NewsLetter'
 import Checkout from './cart/Checkout' 
 import OrderConfirmation from './cart/OrderConfirmation'
 import './App.css'
@@ -55,13 +53,11 @@ export default function App() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
-  const [filterUSerOrders, setFilterUserOrders] = useState([])
   
   const [sortedPopular, setSortedPopular] = useState([])
   // const [cartItemQuant, setCartItemQuant] = useState({})
   // const [cartDisplayArr, setCartDisplayArr] = useState([])
-
-  const [query, setQuery] = useState("")
+  
   // Product Detail
   // const [currentProduct, setCurrentProduct] = useState()
   // const [isDetail, setIsDetail] = useState(false)

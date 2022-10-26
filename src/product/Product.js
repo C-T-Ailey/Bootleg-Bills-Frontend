@@ -4,14 +4,9 @@ import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
 
 import {
-  Row,
-  Container,
   Col,
   Modal,
-  Control,
-  Form
 } from "react-bootstrap";
-import {BsCart4} from 'react-icons/bs'
 import './Product.css'
 
 
