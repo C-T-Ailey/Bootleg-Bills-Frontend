@@ -114,7 +114,7 @@ export default function Home(props) {
           </div>
           <div className="homepage-about">
             <p>Founded in 2016, Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for custom designed, one-of-a-kind, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
-            <p>Originally just a small creative project driven by word-of-mouth, we finally established an online presence in 2022 thanks to Chris Ailey, Chris Carey and Dr. Ailish McLaughlin. Now you can browse what's left to plunder from our catalogue of obscure counterfeit treasures, stay updated on latest releases, and keep track of returning favourites!</p>
+            <p>Originally just a small creative project driven by word-of-mouth, we finally established an online presence in 2022 thanks to General Assembly Software Engineering graduates Chris Ailey, Chris Carey and Ailish McLaughlin. Now you can browse what's left to plunder from our catalogue of obscure counterfeit treasures, stay updated on latest releases, and keep track of returning favourites!</p>
           </div>
         </div>
         <div className="best-seller">

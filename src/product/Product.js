@@ -98,7 +98,7 @@ export default function Product(props) {
 
                 <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
                   <Modal.Header closeButton>
-                    <Modal.Title>
+                    <Modal.Title style={{fontWeight: "bolder"}}>
                       More about this product...
                     </Modal.Title>
                   </Modal.Header>

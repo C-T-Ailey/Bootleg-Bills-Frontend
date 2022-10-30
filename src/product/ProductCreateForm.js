@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 import Axios from 'axios'
+import './Product.css'
 
 export default function ProductCreateForm(props) {
 
@@ -13,9 +14,13 @@ export default function ProductCreateForm(props) {
 
     const [sourceTypeAltered, setSourceTypeAltered] = useState(false)
 
+    const [mediaAltered, setMediaAltered] = useState(false)
+
     const [newImageSet, setNewImageSet] = useState([])
 
     const defaultSourceType = "Film/TV"
+
+    const defaultMediaFormat = "Cassette"
 
     const success = props.success
 
@@ -59,7 +64,19 @@ export default function ProductCreateForm(props) {
         var select = document.getElementById('productSourceType')
         var val = select.options[select.selectedIndex].value
         console.log("Select: ", select, "Value: ", val)
-        val !== 'Original Work' ? setIsOriginal(false) : setIsOriginal(true)
+        val !== 'Original Release' ? setIsOriginal(false) : setIsOriginal(true)
+        const product = {...newProduct}
+        product[event.target.name] = event.target.value
+        console.log(product)
+        setNewProduct(product)
+
+    }
+
+    const handleMediaSelectChange = (event) => {
+        setMediaAltered(true)
+        var select = document.getElementById('productMediaFormat')
+        var val = select.options[select.selectedIndex].value
+        console.log("Select: ", select, "Value: ", val)
         const product = {...newProduct}
         product[event.target.name] = event.target.value
         console.log(product)
@@ -89,6 +106,7 @@ export default function ProductCreateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         !sourceTypeAltered ? newProduct.productSourceType = defaultSourceType : (console.log("Source type set to user specified"))
+        !mediaAltered ? newProduct.mediaSourceFormat = defaultMediaFormat : (console.log("Media format set to user specified"))
         console.log(newProduct)
         console.log(newImageSet)
         const filterCriteria = (element) => {
@@ -122,11 +140,21 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Source Material</Form.Label>
-                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={defaultSourceType} onChange={handleSelectChange}>
+                <Form.Select className='select-text' id="productSourceType" name="productSourceType" type="select" defaultValue={defaultSourceType} onChange={handleSelectChange}>
                     {/* <option value="--" disabled>--</option> */}
-                    <option value="Film/TV">Film/TV</option>
-                    <option value="Video Game">Video Game</option>
-                    <option value="Original Work">Original Work</option>
+                    <option className='select-text' value="Film/TV">Film/TV</option>
+                    <option className='select-text' value="Video Game">Video Game</option>
+                    <option className='select-text' value="Original Release">Original Release</option>
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Media Format</Form.Label>
+                <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={defaultSourceType} onChange={handleMediaSelectChange}>
+                    {/* <option value="--" disabled>--</option> */}
+                    <option className='select-text' value="Cassette">Cassette</option>
+                    <option className='select-text' value="Vinyl">Vinyl</option>
+                    <option className='select-text' value="Apparel">Apparel/Accessory</option>
                 </Form.Select>
             </Form.Group>
 
@@ -142,7 +170,7 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Product Description</Form.Label>
-                <Form.Control name="productDescription" as="textarea" rows={5} onChange={handleChange}></Form.Control>
+                <Form.Control className='select-text' name="productDescription" as="textarea" rows={5} onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>

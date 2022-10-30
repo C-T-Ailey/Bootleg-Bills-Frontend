@@ -59,13 +59,11 @@ export default function OrderHistory(props) {
             console.log("Couldn't get order ID.")
         })
     }
-
-    console.log(props.allOrders)
     
     const mappedOrders = props.allOrders?.map((order, index) => (
     
         <tr key={index}>
-            <td><button id='faux-link' value={order._id} onClick={(e) => handleOrderView(e)}>#{order.orderRef}</button></td>
+            <td><button style={{fontWeight:"bolder"}} id='faux-link' value={order._id} onClick={(e) => handleOrderView(e)}>#{order.orderRef}</button></td>
             <td>{order.status}</td>
         </tr>
     
@@ -76,7 +74,7 @@ export default function OrderHistory(props) {
 
         <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
             <Modal.Header closeButton>
-            <Modal.Title>
+            <Modal.Title style={{fontWeight:"bolder"}}>
                 Details for Order #{currentOrder.orderRef}
             </Modal.Title>
             </Modal.Header>
@@ -95,26 +93,6 @@ export default function OrderHistory(props) {
             </thead>
             <tbody>
                 {mappedOrders}
-                {/* <tr>
-                    <td>#000005</td>
-                    <td>Complete</td>
-                </tr>
-                <tr>
-                    <td>#000004</td>
-                    <td>Shipped</td>
-                </tr>
-                <tr>
-                    <td>#000003</td>
-                    <td>Processed</td>
-                </tr>
-                <tr>
-                    <td>#000002</td>
-                    <td>Processing</td>
-                </tr>
-                <tr>
-                    <td>#000001</td>
-                    <td>New</td>
-                </tr> */}
             </tbody>
         </Table>
     </div>

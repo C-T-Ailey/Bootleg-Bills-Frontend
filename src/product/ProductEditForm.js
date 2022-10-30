@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
+import './Product.css'
 
 export default function ProductEditForm(props) {
   
@@ -13,13 +14,15 @@ export default function ProductEditForm(props) {
   
   useEffect(() => {
     setUpdatedProduct(props.productToEdit)
-    setIsOriginal(props.product.productSourceType !== "--" ? (props.product.productSourceType === "Original Work" ? true : false) : "--")
+    setIsOriginal(props.product.productSourceType !== "--" ? (props.product.productSourceType === "Original Release" ? true : false) : "--")
     setNewImageSet(props.product.productImageUrls)
-  }, [props.productToEdit, props.product.productSourceType, props.product.productImageUrls])
+  }, [])
   
+  useEffect(() => {
   console.log(props.productToEdit)
   console.log(isOriginal)
   console.log(newImageSet)
+  }, [])
   
   const handleChange = (e) => {
     !formAltered ? setFormAltered(true) : console.log("Form already altered")
@@ -40,13 +43,25 @@ export default function ProductEditForm(props) {
     var select = document.getElementById('productSourceType')
     var val = select.options[select.selectedIndex].value
     console.log("Select: ", select, "Value: ", val)
-    val !== 'Original Work' ? setIsOriginal(false) : setIsOriginal(true)
+    val !== 'Original Release' ? setIsOriginal(false) : setIsOriginal(true)
     const product = {...updatedProduct}
     product[event.target.name] = event.target.value
     console.log(product)
     setUpdatedProduct(product)
 
 }
+
+  const handleMediaSelectChange = (event) => {
+    !formAltered ? setFormAltered(true) : console.log("Form already altered")
+    var select = document.getElementById('productMediaFormat')
+    var val = select.options[select.selectedIndex].value
+    console.log("Select: ", select, "Value: ", val)
+    const product = {...updatedProduct}
+    product[event.target.name] = event.target.value
+    console.log(product)
+    setUpdatedProduct(product)
+
+  }
 
 const handleUrlChange = (e) => {
 
@@ -72,6 +87,7 @@ const handleUrlChange = (e) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formAltered)
     console.log(newImageSet)
     console.log(props.product.productImageUrls)
     console.log(updatedProduct)
@@ -95,18 +111,28 @@ const handleUrlChange = (e) => {
 
           <Form.Group>
                 <Form.Label>Source Material</Form.Label>
-                <Form.Select id="productSourceType" name="productSourceType" type="select" defaultValue={props.product.productSourceType ? props.product.productSourceType : "--"} onChange={handleSelectChange}>
-                    <option value="--" disabled>--</option>
-                    <option value="Film/TV">Film/TV</option>
-                    <option value="Video Game">Video Game</option>
-                    <option value="Original Work">Original Work</option>
+                <Form.Select className='select-text' id="productSourceType" name="productSourceType" type="select" defaultValue={props.product.productSourceType ? props.product.productSourceType : "--"} onChange={handleSelectChange}>
+                    <option className='select-text' value="--" disabled>--</option>
+                    <option className='select-text' value="Film/TV">Film/TV</option>
+                    <option className='select-text' value="Video Game">Video Game</option>
+                    <option className='select-text' value="Original Release">Original Release</option>
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group>
-                <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
-                <Form.Control name="productSource" type="text" defaultValue={props.product.productSource} onChange={handleChange}></Form.Control>
-            </Form.Group>
+          <Form.Group>
+              <Form.Label>Media Format</Form.Label>
+              <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={props.product.productMediaFormat} onChange={handleMediaSelectChange}>
+                  {/* <option value="--" disabled>--</option> */}
+                  <option className='select-text' value="Cassette">Cassette</option>
+                  <option className='select-text' value="Vinyl">Vinyl</option>
+                  <option className='select-text' value="Apparel">Apparel/Accessory</option>
+              </Form.Select>
+          </Form.Group>
+
+          <Form.Group>
+              <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
+              <Form.Control name="productSource" type="text" defaultValue={props.product.productSource} onChange={handleChange}></Form.Control>
+          </Form.Group>
 
           <Form.Group>
             <Form.Label>Product Price</Form.Label>
@@ -115,7 +141,7 @@ const handleUrlChange = (e) => {
 
           <Form.Group>
             <Form.Label>Product Description</Form.Label>
-            <Form.Control name="productDescription" as="textarea" rows={5} onChange={handleChange} defaultValue={props.product.productDescription}></Form.Control>
+            <Form.Control name="productDescription" as="textarea" rows={5} style={{fontWeight:"bolder"}} onChange={handleChange} defaultValue={props.product.productDescription}></Form.Control>
           </Form.Group>
 
           <Form.Group>

@@ -13,6 +13,11 @@ export default function CardDetailsForm(props) {
         <h3> Enter Card Details: </h3>
         <Container>
             <Form.Group>
+                <Form.Label> Cardholder Name: </Form.Label>
+                <Form.Control name="customerName" onChange={props.handleChange}/> 
+            </Form.Group>
+
+            <Form.Group>
                 <Form.Label> Card Number: </Form.Label>
                 <Form.Control name="cardNumber" onChange={props.handleChange}/> 
             </Form.Group>

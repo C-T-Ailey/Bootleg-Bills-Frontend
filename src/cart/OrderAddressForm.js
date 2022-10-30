@@ -49,6 +49,11 @@ export default function OrderAddressForm(props) {
             <h3> Shipping Address: </h3>
 
             <Form.Group>
+                <Form.Label>Email Address For Order Confirmation:</Form.Label>
+                <Form.Control name="customerEmail" onChange={props.handleShippingChange}></Form.Control>
+            </Form.Group>
+
+            <Form.Group>
                 <Form.Label> Use same shipping address? </Form.Label>
                 <Switch className="switch" onChange={handleToggle} checked={checked}/>
             </Form.Group>

@@ -65,7 +65,7 @@ export default function ProductMetrics(props) {
         
         <Modal size="lg" centered show={showEditModal} onHide={() => onEditClick()}>
             <Modal.Header closeButton>
-                <Modal.Title>
+                <Modal.Title style={{fontWeight:"bolder"}}>
                     Edit Product information
                 </Modal.Title>
             </Modal.Header>

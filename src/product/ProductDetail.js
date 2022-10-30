@@ -81,7 +81,7 @@ export default function ProductDetail(props) {
     
       <div className='detailsInfo'>
         <h3>{props.products.productName}</h3>
-        <p>{props.products.productSourceType!=="Original Work" ? "from" : "by"} {props.products.productSource}</p>
+        <p>{props.products.productSourceType!=="Original Release" ? "from" : "by"} {props.products.productSource}</p>
         <h5>£{props.products.productPrice}</h5>
         <p>{props.products.productDescription}</p>
 
