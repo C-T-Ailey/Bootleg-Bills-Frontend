@@ -64,8 +64,6 @@ export default function ProductList(props) {
     //   </div>
     // ))
 
-
-
   return (
     <div className="product-body">
 

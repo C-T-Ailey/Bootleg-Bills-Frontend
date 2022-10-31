@@ -14,11 +14,17 @@ export default function ProductCreateForm(props) {
 
     const [sourceTypeAltered, setSourceTypeAltered] = useState(false)
 
+    const [variantAltered, setVariantAltered] = useState(false)
+
+    const [hasVariant, setHasVariant] = useState(false)
+
     const [mediaAltered, setMediaAltered] = useState(false)
 
     const [newImageSet, setNewImageSet] = useState([])
 
     const defaultSourceType = "Film/TV"
+
+    const defaultVariants = "false"
 
     const defaultMediaFormat = "Cassette"
 
@@ -72,6 +78,19 @@ export default function ProductCreateForm(props) {
 
     }
 
+    const handleVariantChange = (event) => {
+        setVariantAltered(true)
+        var select = document.getElementById('hasVariant')
+        var val = select.options[select.selectedIndex].value
+        console.log("Select: ", select, "Value: ", val)
+        val !== 'yes' ? setHasVariant(false) : setHasVariant(true)
+        const product = {...newProduct}
+        product[event.target.name] = event.target.value
+        console.log(product)
+        setNewProduct(product)
+
+    }
+
     const handleMediaSelectChange = (event) => {
         setMediaAltered(true)
         var select = document.getElementById('productMediaFormat')
@@ -88,6 +107,20 @@ export default function ProductCreateForm(props) {
         console.log("Add Product")
         console.log(product)
         product.productImageUrls = newImageSet
+        product.productMediaFormat = document.getElementById("productMediaFormat").value
+        if (variantAltered) {
+            let variantArr = [document.getElementById("var0").value, document.getElementById("var1").value, document.getElementById("var2").value, document.getElementById("var3").value]
+            let filteredVariants = []
+            variantArr.forEach(element => {
+                if (element !== "") {
+                    filteredVariants.push(element)
+                }
+            });
+            product.productVariants = filteredVariants
+            console.log(variantArr)
+            console.log("Variants added")
+        }
+
         Axios.post("product/add", product, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -106,7 +139,8 @@ export default function ProductCreateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         !sourceTypeAltered ? newProduct.productSourceType = defaultSourceType : (console.log("Source type set to user specified"))
-        !mediaAltered ? newProduct.mediaSourceFormat = defaultMediaFormat : (console.log("Media format set to user specified"))
+        !variantAltered ? newProduct.hasVariant = defaultVariants : newProduct.hasVariant = "yes"
+        !mediaAltered ? newProduct.productMediaFormat = mediaAltered : (console.log("Media format set to user specified"))
         console.log(newProduct)
         console.log(newImageSet)
         const filterCriteria = (element) => {
@@ -150,7 +184,7 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Media Format</Form.Label>
-                <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={defaultSourceType} onChange={handleMediaSelectChange}>
+                <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={"Cassette"} onChange={handleMediaSelectChange}>
                     {/* <option value="--" disabled>--</option> */}
                     <option className='select-text' value="Cassette">Cassette</option>
                     <option className='select-text' value="Vinyl">Vinyl</option>
@@ -185,6 +219,30 @@ export default function ProductCreateForm(props) {
                 <Form.Control id='2' onChange={handleUrlChange}></Form.Control>
                 <Form.Control id='3' onChange={handleUrlChange}></Form.Control>
             </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Has variants?</Form.Label>
+                <Form.Select className='select-text' id="hasVariant" name="hasVariant" type="select" defaultValue={"undefined"} onChange={handleVariantChange}>
+                    <option className='select-text' value="no">No</option>
+                    <option className='select-text' value="yes">Yes</option>
+                </Form.Select>
+            </Form.Group>
+
+            { hasVariant ? 
+            
+                (<Form.Group>
+                    <Form.Label>Variants</Form.Label>
+                    <Form.Control id='var0'></Form.Control>
+                    <Form.Control id='var1'></Form.Control>
+                    <Form.Control id='var2'></Form.Control>
+                    <Form.Control id='var3'></Form.Control>
+                </Form.Group>)
+
+                :
+
+                (<></>)
+
+            } 
 
             <Form.Group>
                 <Form.Label>Product Audio</Form.Label>

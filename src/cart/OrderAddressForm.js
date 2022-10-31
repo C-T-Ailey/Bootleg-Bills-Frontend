@@ -19,7 +19,7 @@ export default function OrderAddressForm(props) {
     
   return (
     <div>
-        <h2> Address Details </h2>
+        <h2 className='cart-h2'> Address Details </h2>
         <Container>
         <h3> Enter Billing Address: </h3>
             <Form.Group>

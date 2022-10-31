@@ -113,8 +113,8 @@ export default function Home(props) {
           <Image src={bigLogoNew} alt="" height={400} width={400}/>
           </div>
           <div className="homepage-about">
-            <p>Founded in 2016, Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for custom designed, one-of-a-kind, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
-            <p>Originally just a small creative project driven by word-of-mouth, we finally established an online presence in 2022 thanks to General Assembly Software Engineering graduates Chris Ailey, Chris Carey and Ailish McLaughlin. Now you can browse what's left to plunder from our catalogue of obscure counterfeit treasures, stay updated on latest releases, and keep track of returning favourites!</p>
+            <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
+            <p>Founded in 2016 as a small creative project driven by word-of-mouth, we finally established an online presence in 2022 thanks to General Assembly Software Engineering graduates Chris Ailey, Chris Carey and Ailish McLaughlin. Now you can browse what's to plunder from our catalogue of obscure counterfeit treasures, stay updated on latest releases, and catch up on our returning favourites!</p>
           </div>
         </div>
         <div className="best-seller">

@@ -11,6 +11,7 @@ export default function CardDetailsForm(props) {
   return (
     <div>
         <h3> Enter Card Details: </h3>
+        <h5>(But don't really, this isn't an actual shop)</h5>
         <Container>
             <Form.Group>
                 <Form.Label> Cardholder Name: </Form.Label>

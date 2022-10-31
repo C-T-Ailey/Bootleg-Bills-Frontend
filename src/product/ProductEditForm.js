@@ -5,12 +5,18 @@ import './Product.css'
 export default function ProductEditForm(props) {
   
   const [formAltered, setFormAltered] = useState(false)
+
+  const [variantUpdated, setVariantUpdated] = useState(false)
   
   const [updatedProduct, setUpdatedProduct] = useState(props.productToEdit)
 
   const [isOriginal, setIsOriginal] = useState("")
 
   const [newImageSet, setNewImageSet] = useState([])
+
+  const [variantAltered, setVariantAltered] = useState(false)
+
+  const [hasVariant, setHasVariant] = useState(props.productToEdit.hasVariant)
   
   useEffect(() => {
     setUpdatedProduct(props.productToEdit)
@@ -49,6 +55,32 @@ export default function ProductEditForm(props) {
     console.log(product)
     setUpdatedProduct(product)
 
+}
+
+const handleVariantChange = (event) => {
+  !formAltered ? setFormAltered(true) : console.log("Form already altered")
+  console.log(document.getElementById('hasVariant').value)
+  setVariantAltered(true)
+  var select = document.getElementById('hasVariant')
+  var val = select.options[select.selectedIndex].value
+  console.log("Select: ", select, "Value: ", val)
+  val !== 'true' ? setHasVariant(false) : setHasVariant(true)
+  const product = {...updatedProduct}
+  product[event.target.name] = event.target.value
+  console.log(product)
+  setUpdatedProduct(product)
+
+}
+
+const handleVariantUpdate = (event) => {
+  !formAltered ? setFormAltered(true) : console.log("Form already altered")
+  const index = event.target.id[3]
+  console.log(event.target.id[3])
+  setVariantUpdated(true)
+  const product = {...updatedProduct}
+  product.productVariants[index] = event.target.value
+  console.log(product.productVariants[index])
+  setUpdatedProduct(product)
 }
 
   const handleMediaSelectChange = (event) => {
@@ -97,6 +129,20 @@ const handleUrlChange = (e) => {
     } else {
       console.log("Record not changed.")
     }
+
+  //   if (variantAltered) {
+  //     let variantArr = [document.getElementById("var0").value, document.getElementById("var1").value, document.getElementById("var2").value, document.getElementById("var3").value]
+  //     let filteredVariants = []
+  //     variantArr.forEach(element => {
+  //         if (element !== "") {
+  //             filteredVariants.push(element)
+  //         }
+  //     });
+  //     updatedProduct.productVariants = filteredVariants
+  //     console.log(variantArr)
+  //     console.log("Variants added")
+  // }
+
     setFormAltered(false)
     props.showModal(false)
   }
@@ -121,7 +167,7 @@ const handleUrlChange = (e) => {
 
           <Form.Group>
               <Form.Label>Media Format</Form.Label>
-              <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={props.product.productMediaFormat} onChange={handleMediaSelectChange}>
+              <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={props.product.productMediaFormat ? props.product.productMediaFormat : "Cassette"} onChange={handleMediaSelectChange}>
                   {/* <option value="--" disabled>--</option> */}
                   <option className='select-text' value="Cassette">Cassette</option>
                   <option className='select-text' value="Vinyl">Vinyl</option>
@@ -156,6 +202,30 @@ const handleUrlChange = (e) => {
                 <Form.Control id='2' onChange={handleUrlChange} defaultValue={props.product.productImageUrls[2]}></Form.Control>
                 <Form.Control id='3' onChange={handleUrlChange} defaultValue={props.product.productImageUrls[3]}></Form.Control>
             </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Has variants?</Form.Label>
+                <Form.Select className='select-text' id="hasVariant" name="hasVariant" type="select" defaultValue={hasVariant} onChange={handleVariantChange}>
+                    <option className='select-text' value="false">No</option>
+                    <option className='select-text' value="true">Yes</option>
+                </Form.Select>
+            </Form.Group>
+
+            { hasVariant ? 
+            
+                (<Form.Group>
+                    <Form.Label>Variants</Form.Label>
+                    <Form.Control id='var0' defaultValue={props.product.productVariants[0]} onChange={handleVariantUpdate}></Form.Control>
+                    <Form.Control id='var1' defaultValue={props.product.productVariants[1]} onChange={handleVariantUpdate}></Form.Control>
+                    <Form.Control id='var2' defaultValue={props.product.productVariants[2]} onChange={handleVariantUpdate}></Form.Control>
+                    <Form.Control id='var3' defaultValue={props.product.productVariants[3]} onChange={handleVariantUpdate}></Form.Control>
+                </Form.Group>)
+
+                :
+
+                (<></>)
+
+            } 
 
           <Form.Group>
             <Form.Label>Product Audio</Form.Label>
