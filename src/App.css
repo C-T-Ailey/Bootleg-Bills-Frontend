@@ -1,11 +1,12 @@
 body {
     font-family: 'Bungee Hairline', cursive;
-    font-weight: bold;
+    font-weight: bolder;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bungee', cursive;
 
 }
+
 .navbar-bg {
     background-color: #00BFC3;
 }

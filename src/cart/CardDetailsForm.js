@@ -11,7 +11,13 @@ export default function CardDetailsForm(props) {
   return (
     <div>
         <h3> Enter Card Details: </h3>
+        <h5>(But don't really, this isn't an actual shop)</h5>
         <Container>
+            <Form.Group>
+                <Form.Label> Cardholder Name: </Form.Label>
+                <Form.Control name="customerName" onChange={props.handleChange}/> 
+            </Form.Group>
+
             <Form.Group>
                 <Form.Label> Card Number: </Form.Label>
                 <Form.Control name="cardNumber" onChange={props.handleChange}/> 

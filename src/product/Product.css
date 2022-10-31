@@ -22,3 +22,7 @@ input{
 .card-text {
     font-weight: bold;
 }
+
+.select-text {
+    font-weight: bolder;
+}

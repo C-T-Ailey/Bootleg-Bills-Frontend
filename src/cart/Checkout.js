@@ -7,7 +7,7 @@ import CardDetailsForm from './CardDetailsForm'
 import OrderAddressForm from './OrderAddressForm'
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios'
-import Switch from 'react-switch'
+import './Cart.css'
 // import OrderConfirmation from './OrderConfirmation'
 
 
@@ -181,7 +181,7 @@ export default function Checkout(props) {
     const checkoutList = checkoutItems.map((item, key) => (
 
         <Card key={key}>
-            <Card.Img src={item.productImageUrl} alt="" style={{width: '5rem'}} />
+            <Card.Img src={item.productImageUrls[0]} alt="" style={{width: '10rem'}} />
             <Card.Body>
             <Card.Title> {item.productName} </Card.Title>
             <Card.Text> Quantity: {countOccurrences(props.cart, item)} </Card.Text>
@@ -197,8 +197,7 @@ export default function Checkout(props) {
     // }
   return (
     <div>
-        <h2>Checkout:</h2>
-        <Button onClick={() => decreaseStock()}></Button>
+        <h2 className='cart-h2'>Checkout:</h2>
 
         {checkoutList}
         <div>Total: £{getTotalPrice} </div> 

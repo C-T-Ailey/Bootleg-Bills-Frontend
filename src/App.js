@@ -13,9 +13,7 @@ import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import {Alert} from 'react-bootstrap'
-import Modal from 'react-modal'
 import Footer from './footer/Footer'
-import NewsLetter from './footer/NewsLetter'
 import Checkout from './cart/Checkout' 
 import OrderConfirmation from './cart/OrderConfirmation'
 import './App.css'
@@ -55,13 +53,11 @@ export default function App() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
-  const [filterUSerOrders, setFilterUserOrders] = useState([])
   
   const [sortedPopular, setSortedPopular] = useState([])
   // const [cartItemQuant, setCartItemQuant] = useState({})
   // const [cartDisplayArr, setCartDisplayArr] = useState([])
-
-  const [query, setQuery] = useState("")
+  
   // Product Detail
   // const [currentProduct, setCurrentProduct] = useState()
   // const [isDetail, setIsDetail] = useState(false)
@@ -178,7 +174,6 @@ export default function App() {
   const loadProductList = () => {
     Axios.get("product/index")
     .then((response) => {
-        console.log(response.data.product)
         // Setting state here:
         setProducts(response.data.product)
     })
@@ -265,9 +260,11 @@ const editGet = (id) => {
 
   const filmArray = products.filter(products => products.productSourceType === "Film/TV")
   const videoArray = products.filter(products => products.productSourceType === "Video Game")
-  const originalArray = products.filter(products => products.productSourceType === "Original Work")
+  const originalArray = products.filter(products => products.productSourceType === "Original Release")
 
-  console.log(filmArray)
+  const cassetteArray = products.filter(products => products.productMediaFormat === "Cassette")
+  const vinylArray = products.filter(products => products.productMediaFormat === "Vinyl")
+  const apparelArray = products.filter(products => products.productMediaFormat === "Apparel")
 
   const allProducts = products.map((products, index) => (
     
@@ -280,7 +277,7 @@ const editGet = (id) => {
   ))
 
   const filmProducts = filmArray.map((products, index) => (
-    <div key={index}>
+    <div className="productCard" key={index}>
 
     <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
     
@@ -288,7 +285,7 @@ const editGet = (id) => {
   ))
 
   const videoProducts = videoArray.map((products, index) => (
-    <div key={index}>
+    <div className="productCard" key={index}>
 
     <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
     
@@ -296,7 +293,31 @@ const editGet = (id) => {
   ))
 
   const originalProducts = originalArray.map((products, index) => (
-    <div key={index}>
+    <div className="productCard" key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const cassetteProducts = cassetteArray.map((products, index) => (
+    <div className="productCard" key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const vinylProducts = vinylArray.map((products, index) => (
+    <div className="productCard" key={index}>
+
+    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    
+    </div>
+  ))
+
+  const apparelProducts = apparelArray.map((products, index) => (
+    <div className="productCard" key={index}>
 
     <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
     
@@ -438,7 +459,7 @@ const editGet = (id) => {
           <Routes>
             <Route path="/" element={<Home loadProductList={loadProductList} products={products} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
+            <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} cassetteProducts={cassetteProducts} vinylProducts={vinylProducts} apparelProducts={apparelProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />

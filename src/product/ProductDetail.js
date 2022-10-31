@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Button,Form } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Button, Container, Form } from 'react-bootstrap'
 import './ProductDetail.css'
 
 
@@ -59,6 +59,10 @@ export default function ProductDetail(props) {
     </div>
   );
 
+  const productVars = props.products.productVariants.map((variant) =>
+    <option className='select-text' value={variant}>{variant}</option>
+  );
+
   // console.log(props.productAudio)
 
 
@@ -81,9 +85,10 @@ export default function ProductDetail(props) {
     
       <div className='detailsInfo'>
         <h3>{props.products.productName}</h3>
-        <p>{props.products.productSourceType!=="Original Work" ? "from" : "by"} {props.products.productSource}</p>
+        <p>{props.products.productSourceType!=="Original Release" ? "from" : "by"} {props.products.productSource}</p>
         <h5>£{props.products.productPrice}</h5>
         <p>{props.products.productDescription}</p>
+
 
         <div className='audioPlayer'>
 
@@ -94,16 +99,34 @@ export default function ProductDetail(props) {
             <div className='seekBar'>
               <div className='elapsed'></div>
             </div>
-          </div>
+            </div>
           <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
 
           <audio id="audio" width="300" height="32" src={props.products.productAudio} controls> </audio>
+
+          </div>
+
+          <div className='variantSelection'>
+            { props.products.hasVariant ? (
+              <Container>
+                <Form.Group>
+                  <Form.Label>Choose a variant:</Form.Label>
+                  <Form.Select className='variantForm'>
+                    {productVars}
+                  </Form.Select>
+                </Form.Group>
+              </Container>
+              ) : (
+              <></>
+              )
+              }
+          </div>
 
           <div className='quantityCounter'>
               {/* CHRIS CHANGES */}
             {/* <Button disabled={props.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
               <input disabled={props.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} value={1} min={1} onChange={(e) => handleChange(e)} ></input>
-            <Button disabled={props.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
+              <Button disabled={props.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
             <Button disabled={props.productStock === 0 ? true : false} variant="primary"> Add to Cart </Button> &nbsp; */}
             <Button disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => props.handleNumber(e)} > - </Button>
               <input disabled={props.products.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={props.numberInput} defaultValue={1} min={1} max={props.products.productStock} onChange={(e) => props.handleChange(e)} ></input>
@@ -111,7 +134,6 @@ export default function ProductDetail(props) {
             <Button disabled={props.products.productStock === 0 ? true : false} variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
           </div>
 
-        </div>
       </div>
    
     </div>

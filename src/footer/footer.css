@@ -110,7 +110,10 @@ transition: 0.3s ease-out;
     flex-direction: column;
 }
 
-
+.copyright {
+    position: absolute;
+    bottom: 0px;
+}
 
 @media (max-width: 1237px) {
 

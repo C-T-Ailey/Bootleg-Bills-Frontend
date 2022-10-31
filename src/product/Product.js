@@ -4,14 +4,9 @@ import ProductDetail from './ProductDetail';
 import Button from 'react-bootstrap/Button';
 
 import {
-  Row,
-  Container,
   Col,
   Modal,
-  Control,
-  Form
 } from "react-bootstrap";
-import {BsCart4} from 'react-icons/bs'
 import './Product.css'
 
 
@@ -103,7 +98,7 @@ export default function Product(props) {
 
                 <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
                   <Modal.Header closeButton>
-                    <Modal.Title>
+                    <Modal.Title style={{fontWeight: "bolder"}}>
                       More about this product...
                     </Modal.Title>
                   </Modal.Header>

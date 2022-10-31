@@ -19,7 +19,7 @@ export default function OrderAddressForm(props) {
     
   return (
     <div>
-        <h2> Address Details </h2>
+        <h2 className='cart-h2'> Address Details </h2>
         <Container>
         <h3> Enter Billing Address: </h3>
             <Form.Group>
@@ -47,6 +47,11 @@ export default function OrderAddressForm(props) {
                 <Form.Control name="postcode" onChange={props.handleBillingChange}/> 
             </Form.Group>
             <h3> Shipping Address: </h3>
+
+            <Form.Group>
+                <Form.Label>Email Address For Order Confirmation:</Form.Label>
+                <Form.Control name="customerEmail" onChange={props.handleShippingChange}></Form.Control>
+            </Form.Group>
 
             <Form.Group>
                 <Form.Label> Use same shipping address? </Form.Label>

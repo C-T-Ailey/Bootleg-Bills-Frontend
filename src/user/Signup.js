@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {Container, Form, Button} from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
 import Switch from 'react-switch'
 import './user.css'
 
 
 export default function Signup(props) {
-
-    const navigation = useNavigate()
 
     const [newUser, setNewUser] = useState({})
 

@@ -28,7 +28,7 @@
 
 .type {
     position: absolute;
-    top: 70%;
+    top: 65%;
     left: 10%;
 
 
@@ -36,6 +36,16 @@
     font-size: 2rem;
     background-color: rgba(255, 255, 255, 0.778);
     /* padding: 0 20px 0 20px; */
+}
+
+.carousel-source {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.778);
 }
 
 .carousel .control-dots .dot {
@@ -79,15 +89,23 @@
     height: 50px;
 }
 
+.homepage-welcome {
+    display: flex;
+    align-items: center;
+
+}
+
 .homepage-logo {
     margin: 30px 10%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
 .homepage-about {
     width: 40%;
 }
+
 .loading {
     display: flex;
     flex-direction: row;

@@ -93,7 +93,11 @@ table {
 
 .orderDetail {
     margin-left: 25px;
-    font-weight: normal;
+    font-weight: bolder;
+}
+
+.orderStatus {
+    font-weight: bolder;
 }
 
 .product-details {

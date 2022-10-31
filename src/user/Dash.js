@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import OrderHistory from './OrderHistory'
-import Axios from 'axios'
 import ProductCreateForm from '../product/ProductCreateForm'
 import { Button } from 'react-bootstrap'
 import Modal from 'react-modal'
@@ -9,7 +8,7 @@ import './Dash.css'
 export default function Dash(props) {
     useEffect(() => {
         props.loadProductList()
-    }, [])
+    }, [props])
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 

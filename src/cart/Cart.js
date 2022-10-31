@@ -68,7 +68,7 @@ export default function Cart(props) {
     
           <Card key={key} style={{width: '30rem'}} >
               <Col style={{width: '10rem'}}>
-              <Card.Img src={item.productImageUrls[0]} style={{width: '8rem'}} />
+              <Card.Img src={item.productImageUrls[0]} style={{width: '10rem'}} />
               </Col>
                 <Col>
                <Card.Body style={{width: '20rem'}}>

@@ -6,8 +6,13 @@
     /* background-color: red; */
 }
 
+.variantSelection {
+    margin-bottom: 3rem;
+}
 
-
+.variantForm {
+    font-weight: bolder;
+}
 
 .mainImg {
     display: flex;

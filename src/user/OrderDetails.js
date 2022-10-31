@@ -21,8 +21,6 @@ export default function OrderDetails(props) {
 
   console.log(orderSet)
 
-  const userProducts = []
-
   const getQuantity = (id) => {
     return props.cart.filter(x => x===id).length
   }
@@ -37,21 +35,21 @@ export default function OrderDetails(props) {
 
 ))
 
-  const getOrderUser = (id) => {
-    Axios.get(`auth/users/detail?id=${id}`, {
-      headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-  })
-    .then((response) => {
-        console.log(response.data.user)
-        setCurrentUser(response.data.user)
-    })
-    .catch((error) => {
-        console.log(error)
-        console.log("Couldn't get order ID.")
-    })
-    }
+  // const getOrderUser = (id) => {
+  //   Axios.get(`auth/users/detail?id=${id}`, {
+  //     headers: {
+  //         "Authorization": `Bearer ${localStorage.getItem("token")}`
+  //     }
+  // })
+  //   .then((response) => {
+  //       console.log(response.data.user)
+  //       setCurrentUser(response.data.user)
+  //   })
+  //   .catch((error) => {
+  //       console.log(error)
+  //       console.log("Couldn't get order ID.")
+  //   })
+  //   }
 
     const handleStatus = (e) => {
       console.log(e.target.value)
