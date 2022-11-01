@@ -4,32 +4,45 @@ import './Product.css'
 
 export default function ProductEditForm(props) {
   
+  // formAltered variable: used in handleSubmit to check if the form has been changed, and only update the product if it has.
   const [formAltered, setFormAltered] = useState(false)
 
+  // Unused. Set within handleVariantChange.
   const [variantUpdated, setVariantUpdated] = useState(false)
   
+  // Stores the product to be edited by default; stores edited version of the product via below useEffect once a change is made
   const [updatedProduct, setUpdatedProduct] = useState(props.productToEdit)
 
+  // tracks if the selected product's productSourceType is "Original Release" - determines whether the productSource field is labelled "source name" or "original creator"
   const [isOriginal, setIsOriginal] = useState("")
 
+  // stores the new array of URLs to be used as images for the product
   const [newImageSet, setNewImageSet] = useState([])
 
+  // Does nothing yet. Set within handleVariantChange
   const [variantAltered, setVariantAltered] = useState(false)
 
+  // Tracks the product's hasVariant property. Set to the opposite of default once handleVariantChange is triggered.
   const [hasVariant, setHasVariant] = useState(props.productToEdit.hasVariant)
   
+  // useEffect to update whenever productImageUrls, productSourceType and productToEdit are updated.
   useEffect(() => {
+    // Is this necessary? Why would I set updatedProduct to the default iteration of productToEdit?
     setUpdatedProduct(props.productToEdit)
+    // set isOriginal to "true" if sourceType is "original release" - if not, set to "false"; if productSourceType is nonexistent, set to "--"
     setIsOriginal(props.product.productSourceType !== "--" ? (props.product.productSourceType === "Original Release" ? true : false) : "--")
+    // set newImageSet to the urls for the product images. How does this work? What is this doing? This needs to be tested.
     setNewImageSet(props.product.productImageUrls)
-  }, [])
+  }, [props.product.productImageUrls, props.product.productSourceType, props.productToEdit])
   
+  // useEffect for logging the status of the above states
   useEffect(() => {
   console.log(props.productToEdit)
   console.log(isOriginal)
   console.log(newImageSet)
   }, [])
   
+  // Handles changes to most plain text fields.
   const handleChange = (e) => {
     !formAltered ? setFormAltered(true) : console.log("Form already altered")
     console.log(updatedProduct)
@@ -64,7 +77,7 @@ const handleVariantChange = (event) => {
   var select = document.getElementById('hasVariant')
   var val = select.options[select.selectedIndex].value
   console.log("Select: ", select, "Value: ", val)
-  val !== 'true' ? setHasVariant(false) : setHasVariant(true)
+  val !== 'true' ? setHasVariant(true) : setHasVariant(false)
   const product = {...updatedProduct}
   product[event.target.name] = event.target.value
   console.log(product)
