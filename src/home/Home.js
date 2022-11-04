@@ -100,9 +100,11 @@ export default function Home(props) {
               });
             }); 
       }
-    }, [getOrderState, props.products]) // do this any time props.products updates
+    }, [getOrderState, props.products])
 
+    // if there are no products currently accessible,
     if(!props.products.length){
+      // return a plain screen stating "Loading..."
       return (
         <div>
           <p>Loading...</p>
@@ -110,12 +112,14 @@ export default function Home(props) {
       )
     }
 
+    // top3Products is... Hoo boy
+    // top3Products checks to see if the popular state is populated. If so, the keys of popular are mapped and sorted from most to least popular, then returned as a slice of the first three indices to obtain the three best sellers : else, return an empty array
     const top3Products = !!Object.keys(popular).length ? Object.keys(popular).map((key) => popular[key]).sort((a,b) => b.popularity - a.popularity).slice(0,3) : [];
     console.log(top3Products, "TOP 3 PRODUCTS")
 
 
 
-    
+    // if top3Products is fully populated, let 'er rip.
     if(top3Products.length === 3) {
     
     return (
@@ -134,44 +138,30 @@ export default function Home(props) {
             <Link to={'/about'}>Want to know more about us?</Link>
           </div>
         </div>
+
         <div className="best-seller">
           <h2> Our Best Sellers: </h2>
         </div>
 
-      <Carousel className='main-slide'>
+      <Carousel className='main-slide' swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"100%"}>
+        {/* Map each of the top3Products to a div with a key corresponding to its product id */}
         {top3Products.map(popProduct => (
             <div key={popProduct.product._id}>
               <div className="type">
+                {/* Name of the product as a link to its store page - GET THIS WORKING */}
                 <a></a>{popProduct.product.productName}
                 </div>
-              <div className='carousel-source'>From {popProduct.product.productSource}</div>
+              {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
+              <div className='carousel-source'> {popProduct.product.productSourceType!== "Original Release" ? "From " + popProduct.product.productSource : "By " + popProduct.product.productSource}</div>
+              {/* background image taken from the last index of popProduct's productImageUrls property array */}
               <img alt="" src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/>
             </div>
         ))}
       </Carousel>
 
-        {/* <div className="test">
-  
-        <input className="search" id="search" placeholder="Enter Post Title" onChange={event => setQuery(event.target.value)} />
-          <div className="results">
-            {test}
-          </div>
-        </div> */}
-
 
      </>
     )
-  } 
-    
-      // return (
-      //   <Carousel className='main-slide'>
-      //   {top3Products.map(popProduct => (
-      //       <div key={popProduct.product._id}>
-      //         <div className="type">{popProduct.product.productName}</div>
-      //         <img alt="" src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/>
-      //       </div>
-      //   ))}
-      // </Carousel>
-      // )
   }
+}
 
