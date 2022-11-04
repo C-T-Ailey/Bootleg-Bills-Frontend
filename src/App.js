@@ -64,13 +64,15 @@ export default function App() {
   // const [isDetail, setIsDetail] = useState(false)
 
   useEffect(() => {
+
     console.log("useEffect triggered")
     loadProductList()
+
     
     setCartCount(cart.length)
     console.log(cartCount)
-    let token = localStorage.getItem("token")
 
+    let token = localStorage.getItem("token")
 
     if(token != null){
       let user = jwt_decode(token)
@@ -87,8 +89,6 @@ export default function App() {
       }
     }
 
-    
-    
   }, [cart, cartCount, mostPopular])
 
 
