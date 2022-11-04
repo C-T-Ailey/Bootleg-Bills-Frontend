@@ -1,0 +1,33 @@
+.billsStory {
+    width: 52rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.billsStory h2 {
+    color: black;
+    margin-top: 5%;
+    margin-bottom: 3%
+}
+
+.billsStory p {
+
+    color: black;
+    font-weight: bolder;
+    font-size: 1.1rem;
+}
+
+.bigBill {
+    font-family: "Bungee", cursive;
+}
+
+.drama {
+    text-decoration: underline;
+}
+
+.smol {
+    font-size: 0.5rem;
+}

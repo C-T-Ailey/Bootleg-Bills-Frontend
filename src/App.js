@@ -3,6 +3,7 @@ import Signup from './user/Signup'
 import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
+import AboutBills from './home/AboutBills'
 import {Route, Routes, Link, useNavigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
@@ -460,6 +461,7 @@ const editGet = (id) => {
             <Route path="/" element={<Home loadProductList={loadProductList} products={products} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} cassetteProducts={cassetteProducts} vinylProducts={vinylProducts} apparelProducts={apparelProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
+            <Route path="/about" element={<AboutBills />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />

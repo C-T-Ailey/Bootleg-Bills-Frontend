@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import './home.css'
+import AboutBills from './AboutBills'
 // import ReactAudioPlayer from 'react-audio-player';
 
 import Axios from 'axios';
 import Image from 'react-bootstrap/Image'
 // import bigLogo from './assets/big_logo.png'
 import bigLogoNew from './assets/big_logo_new.png'
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 
 // const options = {
@@ -114,7 +117,8 @@ export default function Home(props) {
           </div>
           <div className="homepage-about">
             <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
-            <p>Founded in 2016 as a small creative project driven by word-of-mouth, we finally established an online presence in 2022 thanks to General Assembly Software Engineering graduates Chris Ailey, Chris Carey and Ailish McLaughlin. Now you can browse what's to plunder from our catalogue of obscure counterfeit treasures, stay updated on latest releases, and catch up on our returning favourites!</p>
+            <p>Founded in 2016 as a small word-of-mouth creative project, we finally established an online presence in 2022 thanks to Software Engineers Ailish McLaughlin, Christopher Carey and Chris Ailey. Now you can have a look at what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest releases, and bag one of your very own unofficial audio rarities!</p>
+            <Link to={'/about'}>Want to know more about us?</Link>
           </div>
         </div>
         <div className="best-seller">
