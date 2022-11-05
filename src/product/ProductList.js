@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Row, Container } from "react-bootstrap";
+import { Row, Container, Modal } from "react-bootstrap";
 import './ProductList.css'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
+import { useLocation } from 'react-router-dom';
+import ProductDetail from './ProductDetail';
 
 
 
@@ -11,11 +13,21 @@ import Button from 'react-bootstrap/Button'
 
 export default function ProductList(props) {
 
+    const location = useLocation()
+    const bestseller = location.state
+
     const [filter, setFilter] = useState("all")
     const [categoryFilter, setCategoryFilter] = useState("all")
-    // const [query, setQuery] = useState("")
+
+    const [modalIsOpen, setModalIsOpen] = useState(!!bestseller ? true : false);
+
+    const setModalOpen =()=>{
+      !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
+    }
+
     useEffect(() => {
-        loadProductList()
+        props.loadProductList()
+        
     }, [])
 
 
@@ -32,14 +44,11 @@ export default function ProductList(props) {
     //     })
     // }
 
-    const loadProductList = () => {
+    // const loadProductList = () => {
 
-        props.loadProductList()
+    //     props.loadProductList()
         
-    }
-
-
-    console.log(props.products, "ProductList Test")
+    // }
 
     const handleFilterClick = (e) => {
       console.log(e.target.name)
@@ -65,8 +74,29 @@ export default function ProductList(props) {
     // ))
 
   return (
+
     <div className="product-body">
 
+        { !!bestseller 
+          ? 
+            (
+              
+              <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
+                  <Modal.Header closeButton>
+                    <Modal.Title style={{fontWeight: "bolder"}}>
+                      More about this product...
+                    </Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+  
+                    <ProductDetail products={bestseller} addToCart={props.addToCart} handleProductQuantity={props.handleProductQuantity} />
+
+                  </Modal.Body>
+                </Modal>
+            )
+          : 
+            console.log("Neutral entry.")}
+        {console.log(bestseller)}
 
         <div className="filter-container">
 
@@ -77,7 +107,7 @@ export default function ProductList(props) {
           <Button variant="primary" name="Original Release" onClick={(e) => {handleFilterClick(e)}}>Original Release</Button>
           </ButtonGroup>
           &nbsp;
-     
+        
         </div>
 
         <div className="filter-container">

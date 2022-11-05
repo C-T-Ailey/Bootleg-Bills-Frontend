@@ -271,7 +271,7 @@ const editGet = (id) => {
     
     <div className="productCard" key={index}>
 
-      <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+      <Product products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
       
     </div>
 

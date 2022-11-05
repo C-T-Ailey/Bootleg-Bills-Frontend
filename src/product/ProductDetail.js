@@ -17,21 +17,6 @@ export default function ProductDetail(props) {
     defaultImg.className = "selected-img"
   },[])
 
-  // const handleNumber = (e) => {
-  //   let number = numberInput.current
-  //   console.log(number)
-  //   number.focus();
-  //   let inputInt = parseInt(number.value)
-  //   e.target.innerText === "+" ? inputInt += 1 : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
-  //   number.value = inputInt
-  //   console.log(number.value)
-  //   props.handleProductQuantity(number.value)
-  // }
-
-  // const handleChange = (e) => {
-  //   console.log(numberInput.current.value)
-  // }
-
   const handleSelect = (e) => {
     console.log(e.target)
     if(currentlySelected === e.target){
@@ -62,9 +47,6 @@ export default function ProductDetail(props) {
   const productVars = props.products.productVariants.map((variant) =>
     <option className='select-text' value={variant}>{variant}</option>
   );
-
-  // console.log(props.productAudio)
-
 
   return (
     <div className='detailModalFlex'>

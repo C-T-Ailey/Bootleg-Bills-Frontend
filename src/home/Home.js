@@ -147,12 +147,15 @@ export default function Home(props) {
         {/* Map each of the top3Products to a div with a key corresponding to its product id */}
         {top3Products.map(popProduct => (
             <div key={popProduct.product._id}>
+              {console.log(popProduct.product._id)}
               <div className="type">
                 {/* Name of the product as a link to its store page - GET THIS WORKING */}
-                <a></a>{popProduct.product.productName}
+                <Link to={'/index'} state={popProduct.product}>
+                  {popProduct.product.productName}
+                </Link>
                 </div>
               {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
-              <div className='carousel-source'> {popProduct.product.productSourceType!== "Original Release" ? "From " + popProduct.product.productSource : "By " + popProduct.product.productSource}</div>
+              <div className='carousel-source'> {popProduct.product.productSourceType!== "Original Release" ? `From "${popProduct.product.productSource}"` : `By ${popProduct.product.productSource}`}</div>
               {/* background image taken from the last index of popProduct's productImageUrls property array */}
               <img alt="" src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/>
             </div>
