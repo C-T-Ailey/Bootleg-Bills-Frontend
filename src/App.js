@@ -20,10 +20,7 @@ import OrderConfirmation from './cart/OrderConfirmation'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Image from 'react-bootstrap/Image'
+import { Container, Nav, Navbar, Image } from 'react-bootstrap';
 import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
@@ -36,8 +33,6 @@ export default function App() {
   const [cartCount, setCartCount] = useState(0)
   
   const navigation = useNavigate()
-  
-  const [mostPopular, setMostPopular] = useState([])
 
 
 
@@ -89,7 +84,7 @@ export default function App() {
       }
     }
 
-  }, [cart, cartCount, mostPopular])
+  }, [cart, cartCount])
 
 
   
@@ -447,7 +442,7 @@ const editGet = (id) => {
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
+          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
           </>
           )}
           </Nav>

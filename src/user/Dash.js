@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OrderHistory from './OrderHistory'
 import ProductCreateForm from '../product/ProductCreateForm'
-import { Button } from 'react-bootstrap'
-import Modal from 'react-modal'
+import { Button, Modal } from 'react-bootstrap'
 import './Dash.css'
 
 export default function Dash(props) {
@@ -21,7 +20,9 @@ export default function Dash(props) {
         setModalIsOpen(false)
     }
 
-    
+    const onAddClick = () => {
+        !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
+    }
 
   return (
     <div className="dash-container">
@@ -30,11 +31,22 @@ export default function Dash(props) {
 
 
             <div id='add-modal' >
-            <Modal isOpen={modalIsOpen} ariaHideApp={false} >
+            {/* <Modal isOpen={modalIsOpen} ariaHideApp={false} >
         
             <Button onClick={setModalIsOpenToFalse}>x</Button>
             <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
 
+            </Modal> */}
+
+            <Modal size="lg" centered show={modalIsOpen} onHide={() => onAddClick()}>
+                <Modal.Header closeButton>
+                    <Modal.Title style={{fontWeight:"bolder"}}>
+                        Edit Product information
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
+                </Modal.Body>
             </Modal>
             </div>
 

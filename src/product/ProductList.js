@@ -7,17 +7,19 @@ import { useLocation } from 'react-router-dom';
 import ProductDetail from './ProductDetail';
 
 
-
-
-
-
 export default function ProductList(props) {
 
     const location = useLocation()
     const bestseller = location.state
 
-    const [filter, setFilter] = useState("all")
-    const [categoryFilter, setCategoryFilter] = useState("all")
+    const prods = props.products
+
+    const [filter, setFilter] = useState("allProducts")
+    const [categoryFilter, setCategoryFilter] = useState("allProducts")
+
+    const mainFilter = props[filter]
+
+    let subFilter = mainFilter
 
     const [modalIsOpen, setModalIsOpen] = useState(!!bestseller ? true : false);
 
@@ -27,36 +29,20 @@ export default function ProductList(props) {
 
     useEffect(() => {
         props.loadProductList()
-        
+
     }, [])
 
-
-    // const loadProductList = () => {
-
-    //     Axios.get("product/index")
-    //     .then((response) => {
-    //         console.log(response)
-    //         // Setting state here:
-    //         props.setProducts(response.data.product)
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     })
-    // }
-
-    // const loadProductList = () => {
-
-    //     props.loadProductList()
-        
-    // }
-
+    
     const handleFilterClick = (e) => {
       console.log(e.target.name)
       setFilter(e.target.name)
     }
-
+    
     const handleCategoryClick = (e) => {
-      console.log(e.target.name)
+      console.log(mainFilter)
+      console.log(prods)
+      const simplerFilter = prods.filter(prods => prods.productMediaFormat === "Vinyl")
+      console.log("HERE", simplerFilter)
       setCategoryFilter(e.target.name)
     }
 
@@ -101,11 +87,17 @@ export default function ProductList(props) {
         <div className="filter-container">
 
           <ButtonGroup id="shopFilter" className="filter" >
+          <Button variant="primary" name="allProducts" onClick={(e) => {handleFilterClick(e)}}>All</Button>
+          <Button variant="primary" name="filmProducts" onClick={(e) => {handleFilterClick(e)}}>Film/TV</Button>
+          <Button variant="primary" name="videoProducts" onClick={(e) => {handleFilterClick(e)}}>Video Game</Button>
+          <Button variant="primary" name="originalProducts" onClick={(e) => {handleFilterClick(e)}}>Original Release</Button>
+          </ButtonGroup>
+          {/* <ButtonGroup id="shopFilter" className="filter" >
           <Button variant="primary" name="All" onClick={(e) => {handleFilterClick(e)}}>All</Button>
           <Button variant="primary" name="Film/TV" onClick={(e) => {handleFilterClick(e)}}>Film/TV</Button>
           <Button variant="primary" name="Video Game" onClick={(e) => {handleFilterClick(e)}}>Video Game</Button>
           <Button variant="primary" name="Original Release" onClick={(e) => {handleFilterClick(e)}}>Original Release</Button>
-          </ButtonGroup>
+          </ButtonGroup> */}
           &nbsp;
         
         </div>
@@ -113,10 +105,10 @@ export default function ProductList(props) {
         <div className="filter-container">
 
           <ButtonGroup id="shopFilter" className="filter" >
-          <Button variant="primary" name="All" onClick={(e) => {handleCategoryClick(e)}}>All</Button>
-          <Button variant="primary" name="Cassette" onClick={(e) => {handleCategoryClick(e)}}>Cassettes</Button>
-          <Button variant="primary" name="Vinyl" onClick={(e) => {handleCategoryClick(e)}}>Vinyl</Button>
-          <Button variant="primary" name="Apparel" onClick={(e) => {handleCategoryClick(e)}}>Apparel</Button>
+          <Button variant="primary" name="allProducts" onClick={(e) => {handleCategoryClick(e)}}>All</Button>
+          <Button variant="primary" name="cassetteProducts" onClick={(e) => {handleCategoryClick(e)}}>Cassettes</Button>
+          <Button variant="primary" name="vinylProducts" onClick={(e) => {handleCategoryClick(e)}}>Vinyl</Button>
+          <Button variant="primary" name="apparelProducts" onClick={(e) => {handleCategoryClick(e)}}>Apparel</Button>
           </ButtonGroup>
           &nbsp;
      
@@ -125,11 +117,10 @@ export default function ProductList(props) {
 
           <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
 
-            {(filter === "Original Release" ? props.originalProducts : (filter === "Video Game" ? props.videoProducts : (filter === "Film/TV" ? props.filmProducts : props.allProducts ) ) )}
-            {/* {props.filmProuducts} */}
-            {/* {(categoryFilter === "Cassette" ? props.cassetteProducts : (categoryFilter === "Vinyl" ? props.vinylProducts : (categoryFilter === "Apparel" ? props.apparelProducts : props.allProducts ) ) )} */}
+            {/* {(filter === "Original Release" ? props.originalProducts : (filter === "Video Game" ? props.videoProducts : (filter === "Film/TV" ? props.filmProducts : props.allProducts ) ) )} */}
 
-            
+            { mainFilter }
+          
           </Row> 
         </Container>
  

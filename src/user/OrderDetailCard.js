@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import Axios from 'axios'
 
 export default function OrderDetailCard(props) {
-
-    console.log(props.currentOrder)
 
     const [thisProduct, setThisProduct] = useState()
 
     const prod = props.id
 
-    console.log(prod)
-
-    useEffect(() => {
+    useLayoutEffect(() => {
         verifyProduct(prod)
-    }, [prod])
+    },[prod])
 
     const verifyProduct = (id) => {
         Axios.get(`product/detail?id=${id}`)

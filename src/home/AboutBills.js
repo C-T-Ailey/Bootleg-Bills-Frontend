@@ -22,7 +22,7 @@ export default function AboutBills(props) {
           <br/><br/>
           Until then, be excellent to each other!
           <br/><br/>
-          <span className='drama'>Chris</span>
+          <span className='bigBill'>Chris</span>
           </p>
         </div>
     </div>

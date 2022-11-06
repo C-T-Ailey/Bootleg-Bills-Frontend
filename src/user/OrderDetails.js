@@ -8,18 +8,9 @@ export default function OrderDetails(props) {
   const [currentUser, setCurrentUser] = useState({})
   const [currentProducts, setCurrentProducts] = useState([])
 
-  useEffect(() => {
-    // getOrderUser(props.user)
-    console.log(currentProducts)
-  }, [currentProducts])
 
-  console.log(props)
-
-  console.log(props.user)
 
   const orderSet = [...new Set(props.cart)]
-
-  console.log(orderSet)
 
   const getQuantity = (id) => {
     return props.cart.filter(x => x===id).length

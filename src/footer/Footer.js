@@ -16,7 +16,6 @@ export default function Footer(props) {
       <div className="footer-heading footer-2">
         <h2>About Us</h2>
         <hr></hr>
-        <a href="">The True Story</a>
         <a href="">Careers</a>
         <a href="">Terms of Service</a>
         <a href="">FAQs</a>

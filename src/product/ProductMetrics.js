@@ -50,7 +50,7 @@ export default function ProductMetrics(props) {
     <div>
         <Modal size="sm" centered show={showDeleteModal}>
             <Modal.Header>
-                <Modal.Title>
+                <Modal.Title style={{fontWeight:"bolder"}}>
                     Confirm Deletion
                 </Modal.Title>
             </Modal.Header>
@@ -79,7 +79,7 @@ export default function ProductMetrics(props) {
                 <Card.Title>{props.product.productName}</Card.Title>
                 <Card.Text>Stock: {props.product.productStock}</Card.Text>
                 <Card.Text># of Outstanding Orders: 2</Card.Text>
-                <Card.Text>Total Orders: 28</Card.Text>
+                <Card.Text>Total Ordered: 28</Card.Text>
                 <Button variant="primary" onClick={() => onEditClick()}>Update Record</Button> &nbsp;
                 <Button variant="primary" onClick={() => onDeleteClick()}>De-list Item</Button>
             </Card.Body>
