@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "mv build ../project-04-fe/",
+    "postbuild": "mv build ../project-04/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
