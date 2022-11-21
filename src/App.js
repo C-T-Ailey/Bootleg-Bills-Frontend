@@ -434,7 +434,7 @@ const editGet = (id) => {
           </Navbar.Text>
           </Nav.Link>
           <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
-          <Navbar.Text>{`Welcome, ${user.user.name}!`}</Navbar.Text>
+          <Navbar.Text style={{textShadow: '-2px 2px #000000'}}>{`Welcome, ${user.user.name}!`}</Navbar.Text>
           </>
           ):(
           <>
@@ -442,7 +442,7 @@ const editGet = (id) => {
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/cart" style={{textShadow: '-2px 2px #000000'}}><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
+          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
           </>
           )}
           </Nav>

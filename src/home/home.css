@@ -3,6 +3,27 @@
     margin: 30px 10%;
 }
 
+.bestseller-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.bestseller-head {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    position: absolute;
+    z-index: 1;
+    /* user-select: none;
+    margin-top: 0.5rem;
+    margin-left: 1rem; */
+}
+
+.bestseller-head h2 {
+    color: #000000;
+    text-shadow: -2px 2px #FF2273;
+}
+
 .bestsellerCarousel {
     display: flex;
     justify-content: center;
