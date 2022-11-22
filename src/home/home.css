@@ -22,6 +22,7 @@
 .bestseller-head h2 {
     color: #000000;
     text-shadow: -2px 2px #FF2273;
+    user-select: none;
 }
 
 .bestsellerCarousel {
@@ -84,6 +85,8 @@
     font-weight: bold;
     font-size: 2rem;
     background-color: rgba(255, 255, 255, 0.778);
+
+    user-select: none;
 }
 
 .carousel .control-dots .dot {
