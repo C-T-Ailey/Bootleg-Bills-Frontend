@@ -14,12 +14,15 @@ export default function ProductList(props) {
 
     const prods = props.products
 
-    const [filter, setFilter] = useState("allProducts")
+    const [filterSource, setFilterSource] = useState("allProducts")
+    const [filter, setFilter] = useState(props.allProducts)
     const [categoryFilter, setCategoryFilter] = useState("allProducts")
 
-    const mainFilter = props[filter]
+    let mainFilter = props[filter]
 
-    let subFilter = mainFilter
+    let addFilter = []
+
+    const [fullFilter, setFullFilter] = useState(mainFilter)
 
     const [modalIsOpen, setModalIsOpen] = useState(!!bestseller ? true : false);
 
@@ -35,15 +38,22 @@ export default function ProductList(props) {
     
     const handleFilterClick = (e) => {
       console.log(e.target.name)
-      setFilter(e.target.name)
+      setFilterSource(e.target.name)
+      setFilter(props[e.target.name])
     }
     
     const handleCategoryClick = (e) => {
-      console.log(mainFilter)
-      console.log(prods)
-      const simplerFilter = prods.filter(prods => prods.productMediaFormat === "Vinyl")
-      console.log("HERE", simplerFilter)
-      setCategoryFilter(e.target.name)
+      console.log(e.target.name)
+      if (e.target.name !== 'allProducts') {
+        console.log(filter)
+        console.log(prods)
+        let resetFilter = props[filterSource]
+        addFilter = resetFilter.filter(prod => prod.props.children.props.products.productMediaFormat === e.target.id)
+        console.log("HERE", addFilter)
+        setFilter(addFilter)       
+      } else {
+        setFilter(props[filterSource])
+      }
     }
 
     // const test = props.products.filter(post => {
@@ -106,9 +116,9 @@ export default function ProductList(props) {
 
           <ButtonGroup id="shopFilter" className="filter" >
           <Button variant="primary" name="allProducts" onClick={(e) => {handleCategoryClick(e)}}>All</Button>
-          <Button variant="primary" name="cassetteProducts" onClick={(e) => {handleCategoryClick(e)}}>Cassettes</Button>
-          <Button variant="primary" name="vinylProducts" onClick={(e) => {handleCategoryClick(e)}}>Vinyl</Button>
-          <Button variant="primary" name="apparelProducts" onClick={(e) => {handleCategoryClick(e)}}>Apparel</Button>
+          <Button variant="primary" id='Cassette' name="cassetteProducts" onClick={(e) => {handleCategoryClick(e)}}>Cassettes</Button>
+          <Button variant="primary" id='Vinyl' name="vinylProducts" onClick={(e) => {handleCategoryClick(e)}}>Vinyl</Button>
+          <Button variant="primary" id='Apparel' name="apparelProducts" onClick={(e) => {handleCategoryClick(e)}}>Apparel</Button>
           </ButtonGroup>
           &nbsp;
      
@@ -119,7 +129,7 @@ export default function ProductList(props) {
 
             {/* {(filter === "Original Release" ? props.originalProducts : (filter === "Video Game" ? props.videoProducts : (filter === "Film/TV" ? props.filmProducts : props.allProducts ) ) )} */}
 
-            { mainFilter }
+            { filter }
           
           </Row> 
         </Container>

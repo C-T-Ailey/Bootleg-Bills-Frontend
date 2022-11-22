@@ -31,6 +31,10 @@
     /* background-color: blue; */
 }
 
+.status-option {
+    font-weight: bolder;
+}
+
 th {
     text-align: center;
 }

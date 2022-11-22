@@ -67,11 +67,11 @@ export default function Product(props) {
     productQuantity = "OUT OF STOCK"
     divStyle.color = 'red'    
 
-  } else if (productQuantity <= 10 ){
+  } else if (productQuantity <= 20 ){
     productQuantity = `ONLY ${productQuantity} LEFT`
     divStyle.color = 'orange'
     
-  } else if (productQuantity > 10) {
+  } else if (productQuantity > 20) {
     productQuantity = "IN STOCK"
     divStyle.color = 'green'
 
