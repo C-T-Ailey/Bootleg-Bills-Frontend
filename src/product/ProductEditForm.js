@@ -19,6 +19,8 @@ export default function ProductEditForm(props) {
   // stores the new array of URLs to be used as images for the product
   const [newImageSet, setNewImageSet] = useState([])
 
+  const [newMediaFormat, setNewMediaFormat] = useState(props.productToEdit.productMediaFormat ? props.productToEdit.productMediaFormat : '')
+
   // Does nothing yet. Set within handleVariantChange
   const [variantAltered, setVariantAltered] = useState(false)
 
@@ -97,14 +99,12 @@ const handleVariantUpdate = (event) => {
 }
 
   const handleMediaSelectChange = (event) => {
+    console.log(newMediaFormat)
     !formAltered ? setFormAltered(true) : console.log("Form already altered")
     var select = document.getElementById('productMediaFormat')
     var val = select.options[select.selectedIndex].value
     console.log("Select: ", select, "Value: ", val)
-    const product = {...updatedProduct}
-    product[event.target.name] = event.target.value
-    console.log(product)
-    setUpdatedProduct(product)
+    setNewMediaFormat(val)
 
   }
 
@@ -134,10 +134,12 @@ const handleUrlChange = (e) => {
     e.preventDefault();
     console.log(formAltered)
     console.log(newImageSet)
+    console.log("NEW MEDIA:", newMediaFormat)
     console.log(props.product.productImageUrls)
     console.log(updatedProduct)
     if(formAltered){
       updatedProduct.productImageUrls = newImageSet
+      updatedProduct.productMediaFormat = newMediaFormat
       props.updateProduct(updatedProduct)
     } else {
       console.log("Record not changed.")
@@ -180,8 +182,8 @@ const handleUrlChange = (e) => {
 
           <Form.Group>
               <Form.Label>Media Format</Form.Label>
-              <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={props.product.productMediaFormat ? props.product.productMediaFormat : "Cassette"} onChange={handleMediaSelectChange}>
-                  {/* <option value="--" disabled>--</option> */}
+              <Form.Select className='select-text' id="productMediaFormat" name="productMediaFormat" type="select" defaultValue={props.product.productMediaFormat ? props.product.productMediaFormat : ""} onChange={handleMediaSelectChange}>
+                  <option value="" disabled>--</option>
                   <option className='select-text' value="Cassette">Cassette</option>
                   <option className='select-text' value="Vinyl">Vinyl</option>
                   <option className='select-text' value="Apparel">Apparel/Accessory</option>
