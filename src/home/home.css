@@ -1,4 +1,10 @@
-.best-seller > h2 {
+.upcoming {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upcoming h2 {
     color: black;
     margin: 30px 10%;
 }

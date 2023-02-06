@@ -162,9 +162,14 @@ export default function Home(props) {
           </div>
         </div>
 
-        <div className="best-seller">
-          <h2>In our spotlight this month:</h2>
-          <p>This space is going to be where we'll talk about a featured product. Why we like it, why we made it, why the source material is significant, etc.</p>
+        <div className="upcoming">
+          <h2>{"Coming Soon!"}</h2>
+          <ul>
+            <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
+            <li>Video Game: Cyberpunk 2077 (2019), Vinyl</li>
+            <li>Film/TV: The Crow (1994), Vinyl</li>
+          </ul>
+          <p></p>
         </div>
 
 

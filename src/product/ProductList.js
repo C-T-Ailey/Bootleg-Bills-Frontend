@@ -17,6 +17,8 @@ export default function ProductList(props) {
     const [filterSource, setFilterSource] = useState("allProducts")
     const [filter, setFilter] = useState(props.allProducts)
     const [categoryFilter, setCategoryFilter] = useState("allProducts")
+    const [selectedOrigin, setSelectedOrigin] = useState("allProducts")
+    const [selectedMedia, setSelectedMedia] = useState("allProducts")
 
     let mainFilter = props[filter]
 
@@ -40,6 +42,7 @@ export default function ProductList(props) {
       console.log(e.target.name)
       setFilterSource(e.target.name)
       setFilter(props[e.target.name])
+      setSelectedOrigin(e.target.name)
     }
     
     const handleCategoryClick = (e) => {
@@ -48,11 +51,13 @@ export default function ProductList(props) {
         console.log(filter)
         console.log(prods)
         let resetFilter = props[filterSource]
-        addFilter = resetFilter.filter(prod => prod.props.children.props.products.productMediaFormat === e.target.id)
+        addFilter = resetFilter.filter(prod => prod.props.children.props.products.productMediaFormat === e.target.innerText)
         console.log("HERE", addFilter)
-        setFilter(addFilter)       
+        setFilter(addFilter)
+        setSelectedMedia(e.target.name)       
       } else {
         setFilter(props[filterSource])
+        setSelectedMedia(e.target.name)
       }
     }
 
@@ -96,11 +101,13 @@ export default function ProductList(props) {
 
         <div className="filter-container">
 
+          <h5>Filter Origin</h5>
+
           <ButtonGroup id="shopFilter" className="filter" >
-          <Button variant="primary" name="allProducts" onClick={(e) => {handleFilterClick(e)}}>All</Button>
-          <Button variant="primary" name="filmProducts" onClick={(e) => {handleFilterClick(e)}}>Film/TV</Button>
-          <Button variant="primary" name="videoProducts" onClick={(e) => {handleFilterClick(e)}}>Video Game</Button>
-          <Button variant="primary" name="originalProducts" onClick={(e) => {handleFilterClick(e)}}>Original Release</Button>
+          <Button variant="primary" id={selectedOrigin==="allProducts" ? "isSelected" : ""} name="allProducts" onClick={(e) => {handleFilterClick(e)}}>All</Button>
+          <Button variant="primary" id={selectedOrigin==="filmProducts" ? "isSelected" : ""} name="filmProducts" onClick={(e) => {handleFilterClick(e)}}>Film/TV</Button>
+          <Button variant="primary" id={selectedOrigin==="videoProducts" ? "isSelected" : ""} name="videoProducts" onClick={(e) => {handleFilterClick(e)}}>Video Game</Button>
+          <Button variant="primary" id={selectedOrigin==="originalProducts" ? "isSelected" : ""} name="originalProducts" onClick={(e) => {handleFilterClick(e)}}>Original Release</Button>
           </ButtonGroup>
           {/* <ButtonGroup id="shopFilter" className="filter" >
           <Button variant="primary" name="All" onClick={(e) => {handleFilterClick(e)}}>All</Button>
@@ -114,11 +121,13 @@ export default function ProductList(props) {
 
         <div className="filter-container">
 
+          <h5>Filter Media</h5>
+
           <ButtonGroup id="shopFilter" className="filter" >
-          <Button variant="primary" name="allProducts" onClick={(e) => {handleCategoryClick(e)}}>All</Button>
-          <Button variant="primary" id='Cassette' name="cassetteProducts" onClick={(e) => {handleCategoryClick(e)}}>Cassettes</Button>
-          <Button variant="primary" id='Vinyl' name="vinylProducts" onClick={(e) => {handleCategoryClick(e)}}>Vinyl</Button>
-          <Button variant="primary" id='Apparel' name="apparelProducts" onClick={(e) => {handleCategoryClick(e)}}>Apparel</Button>
+          <Button variant="primary" id={selectedMedia==="allProducts" ? "isSelected" : ""}  name="allProducts" onClick={(e) => {handleCategoryClick(e)}}>All</Button>
+          <Button variant="primary" id={selectedMedia==="cassetteProducts" ? "isSelected" : ""} name="cassetteProducts" onClick={(e) => {handleCategoryClick(e)}}>Cassette</Button>
+          <Button variant="primary" id={selectedMedia==="vinylProducts" ? "isSelected" : ""} name="vinylProducts" onClick={(e) => {handleCategoryClick(e)}}>Vinyl</Button>
+          <Button variant="primary" id={selectedMedia==="apparelProducts" ? "isSelected" : ""} name="apparelProducts" onClick={(e) => {handleCategoryClick(e)}}>Apparel</Button>
           </ButtonGroup>
           &nbsp;
      

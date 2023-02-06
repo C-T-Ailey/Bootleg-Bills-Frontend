@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import './about.css'
 
 export default function AboutBills(props) {
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  });
+
   return (
     <div>
       <div className='billsStory'>

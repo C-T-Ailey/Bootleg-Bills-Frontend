@@ -1,5 +1,6 @@
 import React from 'react'
 import './footer.css'
+import { Link } from 'react-router-dom';
 
 import NewsLetter from './NewsLetter';
 
@@ -16,6 +17,7 @@ export default function Footer(props) {
       <div className="footer-heading footer-2">
         <h2>About Us</h2>
         <hr></hr>
+        <Link to={'/about'}>About us</Link>
         <a href="">Careers</a>
         <a href="">Terms of Service</a>
         <a href="">FAQs</a>
