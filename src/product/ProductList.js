@@ -51,6 +51,7 @@ export default function ProductList(props) {
         console.log(filter)
         console.log(prods)
         let resetFilter = props[filterSource]
+        console.log("E TARGET INNER TEXT:", e.target.innerText)
         addFilter = resetFilter.filter(prod => prod.props.children.props.products.productMediaFormat === e.target.innerText)
         console.log("HERE", addFilter)
         setFilter(addFilter)
@@ -101,7 +102,7 @@ export default function ProductList(props) {
 
         <div className="filter-container">
 
-          <h5>Filter Origin</h5>
+          <h5>Filter By Origin</h5>
 
           <ButtonGroup id="shopFilter" className="filter" >
           <Button variant="primary" id={selectedOrigin==="allProducts" ? "isSelected" : ""} name="allProducts" onClick={(e) => {handleFilterClick(e)}}>All</Button>
@@ -116,12 +117,8 @@ export default function ProductList(props) {
           <Button variant="primary" name="Original Release" onClick={(e) => {handleFilterClick(e)}}>Original Release</Button>
           </ButtonGroup> */}
           &nbsp;
-        
-        </div>
 
-        <div className="filter-container">
-
-          <h5>Filter Media</h5>
+          <h5>Filter By Medium</h5>
 
           <ButtonGroup id="shopFilter" className="filter" >
           <Button variant="primary" id={selectedMedia==="allProducts" ? "isSelected" : ""}  name="allProducts" onClick={(e) => {handleCategoryClick(e)}}>All</Button>
@@ -132,6 +129,7 @@ export default function ProductList(props) {
           &nbsp;
      
         </div>
+
         <Container className="d-flex"  >
 
           <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
