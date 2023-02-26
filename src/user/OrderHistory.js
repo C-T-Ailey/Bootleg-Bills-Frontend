@@ -21,7 +21,7 @@ export default function OrderHistory(props) {
     
     const getOrders = () => {
         console.log(props.user)
-        Axios.get("orders/index")
+        Axios.get("https://bootlegbackend.herokuapp.com/orders/index")
         .then((response) => {
             if(props.user.user.role === "seller"){
                 console.log(response.data.length)
@@ -47,7 +47,7 @@ export default function OrderHistory(props) {
 
     const handleOrderView = (e) => {
         const orderId = e.target.value
-        Axios.get(`orders/detail?id=${orderId}`)
+        Axios.get(`https://bootlegbackend.herokuapp.com/orders/detail?id=${orderId}`)
         .then((response) => {
             console.log(response)
             

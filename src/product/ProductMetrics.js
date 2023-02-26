@@ -27,7 +27,7 @@ export default function ProductMetrics(props) {
 
     const updateProduct = (product) => {
     console.log(product)
-    Axios.put("product/update", product, {
+    Axios.put("https://bootlegbackend.herokuapp.com/product/update", product, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
