@@ -170,6 +170,7 @@ export default function App() {
   const loadProductList = () => {
     Axios.get("product/index")
     .then((response) => {
+      console.log(response)
         // Setting state here:
         setProducts(response.data.product)
     })
