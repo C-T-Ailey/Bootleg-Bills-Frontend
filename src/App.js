@@ -174,7 +174,7 @@ export default function App() {
         setProducts(response.data.product)
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error.response.data)
     })
   }
   
