@@ -41,10 +41,7 @@ export default function App() {
   const [orderRef, setOrderRef] = useState()
   const [products, setProducts] = useState([])
   const [userRole, setUserRole] = useState("")
-  // const [cart, setCart] = useState([])
-  // const [cartCount, setCartCount] = useState(0)
   const [productQuantity, setProductQuantity] = useState(1)
-  // const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
@@ -62,11 +59,7 @@ export default function App() {
 
     console.log("useEffect triggered")
     loadProductList()
-
     
-    setCartCount(cart.length)
-    console.log(cartCount)
-
     let token = localStorage.getItem("token")
 
     if(token != null){
@@ -84,13 +77,18 @@ export default function App() {
       }
     }
 
+  }, [])
+
+  useEffect(() => {
+    
+    setCartCount(cart.length)
+    console.log(cartCount)
+
   }, [cart, cartCount])
-
-
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
-    Axios.post("newsletter", email)
+    Axios.post("https://bootlegbackend.herokuapp.com/newsletter", email)
     .then(response => {
         console.log("Recipe Add Fine")
     })
@@ -103,7 +101,7 @@ export default function App() {
 
   
   const registerHandler = (user) => {
-    Axios.post("auth/signup", user)
+    Axios.post("https://bootlegbackend.herokuapp.com/auth/signup", user)
     .then(response => {
       if(response.data.message.slice(0, 6) === "Failed"){
         setErrorMessage("User registration failed.")
@@ -168,8 +166,9 @@ export default function App() {
   }
   
   const loadProductList = () => {
-    Axios.get("product/index")
+    Axios.get("https://bootlegbackend.herokuapp.com/product/index")
     .then((response) => {
+      console.log(response)
         // Setting state here:
         setProducts(response.data.product)
     })
@@ -182,7 +181,7 @@ export default function App() {
     console.log(id)
     console.log("clicked")
     
-    Axios.delete(`product/delete?id=${id}`, {
+    Axios.delete(`https://bootlegbackend.herokuapp.com/product/delete?id=${id}`, {
       headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
@@ -201,7 +200,7 @@ export default function App() {
 const editGet = (id) => {
   console.log("Edit GET MAIN")
   console.log(id)
-  Axios.get(`product/edit?id=${id}`, {
+  Axios.get(`https://bootlegbackend.herokuapp.com/product/edit?id=${id}`, {
     headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
     }
@@ -241,7 +240,7 @@ const editGet = (id) => {
       console.log(idArr)
       var dataObj = {user : user.user.id, status : "active", product : idArr }
       console.log(dataObj)
-      Axios.post("cart", dataObj)
+      Axios.post("https://bootlegbackend.herokuapp.com/cart", dataObj)
       .then(response => {
         console.log(response)
         navigation("/checkout")
@@ -332,7 +331,7 @@ const editGet = (id) => {
 
   const loginHandler = (cred) => {
     console.log(cred)
-    Axios.post("auth/login", cred)
+    Axios.post("https://bootlegbackend.herokuapp.com/auth/login", cred)
     .then(response => {
       console.log(response.data.token)
       if(Object.keys(response.data.token).length){

@@ -12,7 +12,7 @@ export default function OrderDetailCard(props) {
     },[prod])
 
     const verifyProduct = (id) => {
-        Axios.get(`product/detail?id=${id}`)
+        Axios.get(`https://bootlegbackend.herokuapp.com/product/detail?id=${id}`)
         .then((response) => {
             console.log(response.data.product.productName)
             setThisProduct(response.data.product.productName)

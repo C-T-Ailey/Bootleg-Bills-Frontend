@@ -22,7 +22,7 @@ export default function Checkout(props) {
     useEffect(() => {
         setCheckoutItems(Array.from(new Set(props.cart)))
 
-        Axios.get("orders/index", {
+        Axios.get("https://bootlegbackend.herokuapp.com/orders/index", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -69,7 +69,7 @@ export default function Checkout(props) {
         console.log(quantities)
         quantities.forEach(product => {
             const newStockLevel = {"_id": product._id, "productStock": product.productStock - product.count}
-            Axios.put('product/update', newStockLevel, {
+            Axios.put('https://bootlegbackend.herokuapp.com/product/update', newStockLevel, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
@@ -158,7 +158,7 @@ export default function Checkout(props) {
         props.setOrderRef(order.orderRef)
         order.totalPrice = getTotalPrice
         console.log(order)
-        Axios.post("/checkout", order)
+        Axios.post("https://bootlegbackend.herokuapp.com/checkout", order)
         .then(response => {
             console.log(response)
             console.log("ordere added successfully")

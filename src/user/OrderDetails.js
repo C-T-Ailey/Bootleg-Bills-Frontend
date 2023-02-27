@@ -49,7 +49,7 @@ export default function OrderDetails(props) {
       console.log(props.currentOrder.status)
       const newStatus = {"_id": props.currentOrder._id, "status": e.target.value }
       console.log(newStatus)
-      Axios.put(`orders/update`, newStatus, {
+      Axios.put(`https://bootlegbackend.herokuapp.com/orders/update`, newStatus, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }

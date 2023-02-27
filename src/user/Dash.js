@@ -7,7 +7,7 @@ import './Dash.css'
 export default function Dash(props) {
     useEffect(() => {
         props.loadProductList()
-    }, [props])
+    }, [])
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
