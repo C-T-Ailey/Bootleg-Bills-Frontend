@@ -1,12 +1,13 @@
 # GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
 
-### Deployed App: https://bootlegbills.herokuapp.com/
+### Deployed App: https://bootlegbills.herokuapp.com/ *(Currently defunct - new deployment coming soon)*
 
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
 ![bootlegbills](https://i.imgur.com/X5cwrx5.png)
 
 #### Table of Contents
+* Current App Status
 * Introduction
   * Brief and Requirements
   * Project Overview
@@ -28,6 +29,13 @@
   * Bugs
   * Future Inclusions and Improvements
   * Key Learnings
+
+### Latest App Status - 27/02/23
+Since finishing development of the application within the scope of the General Assembly course for which it was submitted, I have independently been making incremental progress towards refactoring several components and rectifying bugs and incomplete features from the initial development process. 
+
+This specific repository is for the application's frontend, to which the majority of adjustments so far have been made. Several styling improvements and bugfixes have been implemented, along with new features such as the means to offer (and "purchase") design variations for different products, filtering by products by category, and an About Us page detailing the project's conceptual background.
+
+As the project was originally deployed under Heroku's now-defunct free service, it has been without hosting since this service was discontinued. Steps are currently being taken towards remedying this, and the app is expected to be re-deployed by 07/03/2023. A more comprehensive write-up of the changes will be provided once the app is available once more.
 
 ### Introduction
 
