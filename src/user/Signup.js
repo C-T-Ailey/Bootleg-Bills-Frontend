@@ -22,8 +22,6 @@ export default function Signup(props) {
 
     const sellerKey = process.env.REACT_APP_SELLER_KEY
     
-    console.log(process.env.REACT_APP_SELLER_KEY)
-    
     const handleChange = (event) => {
         const user = {...newUser}
         user[event.target.name] = event.target.value
