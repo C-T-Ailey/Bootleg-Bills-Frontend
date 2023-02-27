@@ -41,10 +41,7 @@ export default function App() {
   const [orderRef, setOrderRef] = useState()
   const [products, setProducts] = useState([])
   const [userRole, setUserRole] = useState("")
-  // const [cart, setCart] = useState([])
-  // const [cartCount, setCartCount] = useState(0)
   const [productQuantity, setProductQuantity] = useState(1)
-  // const [message, setMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
@@ -62,11 +59,7 @@ export default function App() {
 
     console.log("useEffect triggered")
     loadProductList()
-
     
-    setCartCount(cart.length)
-    console.log(cartCount)
-
     let token = localStorage.getItem("token")
 
     if(token != null){
@@ -84,9 +77,14 @@ export default function App() {
       }
     }
 
+  }, [])
+
+  useEffect(() => {
+    
+    setCartCount(cart.length)
+    console.log(cartCount)
+
   }, [cart, cartCount])
-
-
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 

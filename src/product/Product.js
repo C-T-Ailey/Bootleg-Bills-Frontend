@@ -47,7 +47,7 @@ export default function Product(props) {
     console.log(inputInt)
     e.target.innerText === "+" ? inputInt += 1 : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
     number.value = inputInt
-    console.log(number.value)
+    console.log("number value:",number.value)
     props.handleProductQuantity(number.value)
   }
 
@@ -56,6 +56,23 @@ export default function Product(props) {
     console.log(numberInput.current.value)
   }
 
+  // const addToCart = (product) => {
+  //   console.log("button clicked")
+  //   console.log(product)
+  //   console.log(productQuantity)
+  //   // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
+  //   // console.log(cartItemQuant[product._id])
+  //   // let tempCart = []
+  //   for (let i = 1; i <= props.productQuantity; i++){
+  //     setCart(cart => [...cart, product])
+  //   }
+  //   // setCart(cart.concat(product))
+  //   // setCart(cart => [...cart, product])
+  //   setCartCount(cart.length)
+  //   setProductQuantity(1)
+  //   console.log(cart)
+  //   console.log(cartCount)
+  // }
   
   const divStyle ={
     color: 'black',
