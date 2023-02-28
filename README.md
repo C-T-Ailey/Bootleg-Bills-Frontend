@@ -4,7 +4,7 @@
 
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
-**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to do one of the following:
+**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well as one of the following CORS solutions:
 * Use a CORS browser extension;
 * Adjust the CORS configuration in the backend's server.js file to reflect whichever localhost address the frontend will be running on;
 * Define a proxy in the frontend's package.json file pointing to the localhost address the backend will be running on. 
@@ -49,18 +49,20 @@ This specific repository is for the application's frontend, to which the majorit
 * Detailed list coming soon. Please see repository commit notes until such time.
 
 #### Planned Improvements
+* Rewrite and update styling to make the site responsive to mobile devices.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Increased number of potential images and variants for products.
-* Adjust the Product model and "Add to Cart" function so that any selected variant for a product will be recorded in a customer's orders.
+* Adjust the Product and Orders models and rewrite the "Add to Cart" function so that any selected variant for a product will be recorded in a customer's orders.
 * Cart and Checkout components rewritten from scratch.
 * Separate entry in the Product model for the "Bestseller" image, instead of using whichever image occupies the last populated index of the product images array.
 * A means of selecting which of a given product's images will be used as its "Bestseller" image.
-* Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them.
-* Alphabetical/reverse alphabetical and date added (ascending/descending) sorting to accompany the Origin/Media filters on the Products page.
+* Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
+* Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Origin/Media filters on the Products page.
 * Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
 
 #### Known Bugs
+* The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
 * The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
 * When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
 * On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.
