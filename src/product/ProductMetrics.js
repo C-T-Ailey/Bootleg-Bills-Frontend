@@ -15,6 +15,7 @@ export default function ProductMetrics(props) {
     }
 
     const onEditClick = () => {
+        
         console.log(props.product)
         if(!showEditModal){ 
             setShowEditModal(true)
@@ -27,7 +28,7 @@ export default function ProductMetrics(props) {
 
     const updateProduct = (product) => {
     console.log(product)
-    Axios.put("https://bootlegbackend.herokuapp.com/product/update", product, {
+    Axios.put("http://localhost:4000/product/update", product, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
@@ -37,7 +38,7 @@ export default function ProductMetrics(props) {
       props.loadProductList();
     })
     .catch((error) => {
-      console.log("Error updating product:", error)
+      console.log("Error updating product:", error.response.data)
     })
   }
 

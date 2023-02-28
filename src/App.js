@@ -64,7 +64,8 @@ export default function App() {
 
     if(token != null){
       let user = jwt_decode(token)
-      console.log(`Token is valid; logged in as [${user.user.name}] with ${user.user.role} privileges. Full object :`, [user.user])
+      let timeNow = new Date().valueOf()
+      console.log(`Token is ${timeNow - user.user.timestamp < 1800000 ? "valid" : "invalid"}; logged in as [${user.user.name}] with ${user.user.role} privileges. Full object :`, [user])
 
       if(user){
         setIsAuth(true)
@@ -88,7 +89,7 @@ export default function App() {
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
-    Axios.post("https://bootlegbackend.herokuapp.com/newsletter", email)
+    Axios.post("http://localhost:4000/newsletter", email)
     .then(response => {
         console.log("Recipe Add Fine")
     })
@@ -101,7 +102,7 @@ export default function App() {
 
   
   const registerHandler = (user) => {
-    Axios.post("https://bootlegbackend.herokuapp.com/auth/signup", user)
+    Axios.post("http://localhost:4000/auth/signup", user)
     .then(response => {
       if(response.data.message.slice(0, 6) === "Failed"){
         setErrorMessage("User registration failed.")
@@ -166,7 +167,7 @@ export default function App() {
   }
   
   const loadProductList = () => {
-    Axios.get("https://bootlegbackend.herokuapp.com/product/index")
+    Axios.get("http://localhost:4000/product/index")
     .then((response) => {
       console.log(response)
         // Setting state here:
@@ -181,7 +182,7 @@ export default function App() {
     console.log(id)
     console.log("clicked")
     
-    Axios.delete(`https://bootlegbackend.herokuapp.com/product/delete?id=${id}`, {
+    Axios.delete(`http://localhost:4000/product/delete?id=${id}`, {
       headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
@@ -192,15 +193,15 @@ export default function App() {
         loadProductList()
     })
     .catch((error) => {
-        console.log("Error deleting product record:")
-        console.log(error)
+        console.log("Error deleting product record:", error)
+        sessionExpiredHandler()
     })
 }
 
 const editGet = (id) => {
   console.log("Edit GET MAIN")
   console.log(id)
-  Axios.get(`https://bootlegbackend.herokuapp.com/product/edit?id=${id}`, {
+  Axios.get(`http://localhost:4000/product/edit?id=${id}`, {
     headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
     }
@@ -212,6 +213,7 @@ const editGet = (id) => {
   })
   .catch((error) => {
     console.log("Error loading product information:", error)
+    sessionExpiredHandler()
   })
 }
 
@@ -240,7 +242,7 @@ const editGet = (id) => {
       console.log(idArr)
       var dataObj = {user : user.user.id, status : "active", product : idArr }
       console.log(dataObj)
-      Axios.post("https://bootlegbackend.herokuapp.com/cart", dataObj)
+      Axios.post("http://localhost:4000/cart", dataObj)
       .then(response => {
         console.log(response)
         navigation("/checkout")
@@ -331,7 +333,7 @@ const editGet = (id) => {
 
   const loginHandler = (cred) => {
     console.log(cred)
-    Axios.post("https://bootlegbackend.herokuapp.com/auth/login", cred)
+    Axios.post("http://localhost:4000/auth/login", cred)
     .then(response => {
       console.log(response.data.token)
       if(Object.keys(response.data.token).length){
@@ -375,7 +377,19 @@ const editGet = (id) => {
       }, 3000);
   }
 
+  const sessionExpiredHandler = () => {
+    localStorage.removeItem("token");
+    setIsAuth(false)
+    setUser(null)
+    setUserRole("")
+    console.log("Session token expired.")
+    setErrorMessage("Session expired.")
+    navigation("/login")
 
+    setTimeout(() => {
+      setErrorMessage(null);
+      }, 3000);
+  }
 
   const sucMessage = successMessage ? (
     <Alert id="box" variant="success" onClose={() => setSuccessMessage(null)} dismissible>{successMessage}</Alert>
@@ -457,7 +471,7 @@ const editGet = (id) => {
             <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} cassetteProducts={cassetteProducts} vinylProducts={vinylProducts} apparelProducts={apparelProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
             <Route path="/about" element={<AboutBills />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage}/>} />
+            <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />

@@ -29,7 +29,7 @@ export default function Home(props) {
 
     // function to retrieve all orders from db
     const getOrder = async () => {
-      const data = await Axios.get('https://bootlegbackend.herokuapp.com/orders/index');
+      const data = await Axios.get('http://localhost:4000/orders/index');
       return data.data
     }
     
@@ -60,7 +60,7 @@ export default function Home(props) {
             
             // function for fetching product by id
             const getProduct = () => {
-              return Axios.get(`https://bootlegbackend.herokuapp.com/product/detail?id=${productId}`);
+              return Axios.get(`http://localhost:4000/product/detail?id=${productId}`);
             }
             
             // array each returned ID from getProduct, and execute the following promise on each one:

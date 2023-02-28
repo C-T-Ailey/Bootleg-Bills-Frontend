@@ -49,7 +49,7 @@ export default function OrderDetails(props) {
       console.log(props.currentOrder.status)
       const newStatus = {"_id": props.currentOrder._id, "status": e.target.value }
       console.log(newStatus)
-      Axios.put(`https://bootlegbackend.herokuapp.com/orders/update`, newStatus, {
+      Axios.put(`http://localhost:4000/orders/update`, newStatus, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
@@ -60,6 +60,7 @@ export default function OrderDetails(props) {
           })
         .catch((error) => {
             console.log("Error updating order:", error)
+            props.sessionExpiredHandler()
         })
     }
 
