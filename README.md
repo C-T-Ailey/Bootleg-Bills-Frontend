@@ -49,7 +49,8 @@ This specific repository is for the application's frontend, to which the majorit
 * Detailed list coming soon. Please see repository commit notes until such time.
 
 #### Planned Improvements
-* Rewrite and update styling to make the site responsive to mobile devices.
+* Rewrite/update styling to make the site more responsive to mobile devices.
+* Refactor the codebase so more functions and props are employed only on their required pages and less burden is placed on App.js.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Increased number of potential images and variants for products.
