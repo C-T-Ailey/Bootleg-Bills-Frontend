@@ -1,15 +1,25 @@
 # GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
 
-### Deployed App: https://bootlegbills.herokuapp.com/ *(Currently defunct - new deployment coming soon)*
+### Deployed App: https://bootleg-bills.herokuapp.com/
 
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
+
+**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to do one of the following:
+* Use a CORS browser extension;
+* Adjust the CORS configuration in the backend's server.js file to reflect whichever localhost address the frontend will be running on;
+* Define a proxy in the frontend's package.json file pointing to the localhost address the backend will be running on. 
+
+The frontend also requires a .env file storing the key `REACT_APP_SELLER_KEY=` with a value of your choosing. This will be required if you wish to register as a Seller during the site's Signup process.
 
 ![bootlegbills](https://i.imgur.com/X5cwrx5.png)
 
 #### Table of Contents
-* Latest Development Status
-* Introduction
-  * Brief and Requirements
+* Development Status
+  * Post-Submission Additions and Changes
+  * Planned Improvements
+  * Known Bugs
+* Project Debrief: Introduction
+  * Project Requirements
   * Project Overview
   * Contributors
   * Timeframe
@@ -26,18 +36,40 @@
 * Outcome
   * Challenges
   * Wins
-  * Bugs
   * Future Inclusions and Improvements
   * Key Learnings
 
-### Latest Development Status - 27/02/23
-Since finishing development of the application within the scope of the General Assembly course for which it was submitted, I have independently been making incremental progress towards refactoring several components and rectifying bugs and incomplete features from the initial development process. 
+### Development Status
+
+Since finishing development of the application within the scope of the General Assembly course for which it was submitted, I have independently been making incremental progress towards refactoring several components and rectifying bugs and incomplete features from the initial development process. As all the product images and audio samples used on the site were (and continue to be) personally designed and edited, the application now serves as a minor portfolio for my graphic design work in addition to an example of my previous software development projects.
 
 This specific repository is for the application's frontend, to which the majority of adjustments so far have been made. Several styling improvements and bugfixes have been implemented, along with new features such as the means to offer (and "purchase") design variations for different products, filtering by products by category, and an About Us page detailing the project's conceptual background.
 
-As the project was originally deployed under Heroku's now-defunct free service, it has been without hosting since this service was discontinued. Steps are currently being taken towards remedying this, and the app is expected to be re-deployed by 07/03/2023. A more comprehensive write-up of the changes will be provided once the app is available once more.
+#### Post-Submission Additions and Changes
+* Detailed list coming soon. Please see repository commit notes until such time.
 
-### Introduction
+#### Planned Improvements
+* Improved layout for the homepage.
+* Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
+* Increased number of potential images and variants for products.
+* Adjust the Product model and "Add to Cart" function so that any selected variant for a product will be recorded in a customer's orders.
+* Cart and Checkout components rewritten from scratch.
+* Separate entry in the Product model for the "Bestseller" image, instead of using whichever image occupies the last populated index of the product images array.
+* A means of selecting which of a given product's images will be used as its "Bestseller" image.
+* Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them.
+* Alphabetical/reverse alphabetical and date added (ascending/descending) sorting to accompany the Origin/Media filters on the Products page.
+* Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
+
+#### Known Bugs
+* The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
+* When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
+* On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.
+* On the "Products" page, clicking "Add to cart" for a product will only add one of that product to the cart, regardless of the quantity set by the user.
+* Attempting to update a product's details from the Seller dashboard (or perform any other operation which requires the user to be logged in) with an expired session token will crash the app.
+* When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will alter the details for a different product instead of the intended one.
+
+
+### Project Debrief: Introduction
 
 #### Project Requirements
 
@@ -433,12 +465,6 @@ if(top3Products.length === 3) {
 * The most fulfilling win of the project is easily the project itself. We started with the knowledge that we were aiming high; the fact that we were able to plan and construct the app with nearly every feature we initially envisioned is nothing short of a resounding success for each of us.
 * Creating an application which neatly separates the functionality for two different categories of user was a significant accomplishment, and offered a great deal of insight into how the average E-Commerce app may function behind the scenes of what a customer would typically see.
 * Being given the opportunity to provide custom media assets, and being able to create them to an appreciable quality, went a long way towards making the project feel authentic, unique and personal to us.
-
-
-#### Bugs
-* As the majority of our products are derived from TV shows, films and video games, we had initially intended to use a third party IMDB API in order to generate trivia about the product’s source material in the product details view. Due to time constraints, we were unable to implement it in time; I would ideally like to see this minor but enriching feature implemented.
-A product search feature in the product index view is also among potential future features, as well as an Order Ref. search and Order Status filter in the seller dashboard.
-A means of storing the shopping cart data in the browser’s local storage would be beneficial in preventing the shopping cart’s contents from being lost due to a page refresh or connectivity issues.
 
 #### Future Inclusions and Improvements
 * As the majority of our products are derived from TV shows, films and video games, we had initially intended to use a third party IMDB API in order to generate trivia about the product’s source material in the product details view. Due to time constraints, we were unable to implement it in time; I would ideally like to see this minor but enriching feature implemented.
