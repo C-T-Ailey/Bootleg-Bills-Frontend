@@ -1,19 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import OrderHistory from './OrderHistory'
 import ProductCreateForm from '../product/ProductCreateForm'
 import { Button, Modal } from 'react-bootstrap'
+import jwt_decode from 'jwt-decode'
 import './Dash.css'
 
 export default function Dash(props) {
+
+    const navigate = useNavigate()
+
+    const token = localStorage.getItem("token")
+
     useEffect(() => {
-        props.loadProductList()
+        let timeNow = new Date().valueOf()
+        console.log("Comparing current time with token expiration stamp:", timeNow, props.user.exp * 1000)
+        if (!token) {
+            console.log("No token")
+            navigate("/login")
+        } else if (timeNow >= props.user.exp * 1000) {
+            props.sessionExpiredHandler()
+            
+        } else {
+            props.loadProductList()
+
+        }
     }, [])
+
+    const [allOrders, setAllOrders] = useState([])
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const setModalIsOpenToTrue =()=>{
-    
-        setModalIsOpen(true)
+        let timeNow = new Date().valueOf()
+        if (timeNow >= props.user.exp * 1000) {
+            props.sessionExpiredHandler()
+        } else {
+            setModalIsOpen(true)
+            
+        }
     }
 
     const setModalIsOpenToFalse =()=>{
@@ -45,7 +70,7 @@ export default function Dash(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} />
+                    <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </Modal.Body>
             </Modal>
             </div>
@@ -55,7 +80,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table'>
                     <h4>Customer Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user}/>
+                    <OrderHistory allOrders={allOrders} setAllOrders={setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             
                 <div>
@@ -72,7 +97,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table-buyer'>
                     <h4>My Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user}/>
+                    <OrderHistory allOrders={allOrders} setAllOrders={setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             </div>
         )

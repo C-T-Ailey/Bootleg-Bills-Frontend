@@ -12,7 +12,7 @@ import './Cart.css'
 
 
 export default function Checkout(props) {
-    const navigation = useNavigate()
+    const navigate = useNavigate()
 
     let getTotalPrice = 0
 
@@ -22,7 +22,7 @@ export default function Checkout(props) {
     useEffect(() => {
         setCheckoutItems(Array.from(new Set(props.cart)))
 
-        Axios.get("https://bootlegbackend.herokuapp.com/orders/index", {
+        Axios.get("http://localhost:4000/orders/index", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -69,7 +69,7 @@ export default function Checkout(props) {
         console.log(quantities)
         quantities.forEach(product => {
             const newStockLevel = {"_id": product._id, "productStock": product.productStock - product.count}
-            Axios.put('https://bootlegbackend.herokuapp.com/product/update', newStockLevel, {
+            Axios.put('http://localhost:4000/product/update', newStockLevel, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
@@ -158,12 +158,12 @@ export default function Checkout(props) {
         props.setOrderRef(order.orderRef)
         order.totalPrice = getTotalPrice
         console.log(order)
-        Axios.post("https://bootlegbackend.herokuapp.com/checkout", order)
+        Axios.post("http://localhost:4000/checkout", order)
         .then(response => {
             console.log(response)
             console.log("ordere added successfully")
             decreaseStock()
-            navigation("/confirmation")
+            navigate("/confirmation")
             // props.setCart([])
             // console.log(props.cart)    
         })

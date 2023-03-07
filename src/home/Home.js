@@ -29,14 +29,14 @@ export default function Home(props) {
 
     // function to retrieve all orders from db
     const getOrder = async () => {
-      const data = await Axios.get('https://bootlegbackend.herokuapp.com/orders/index');
+      const data = await Axios.get('http://localhost:4000/orders/index');
       return data.data
     }
     
     useEffect(()=>{
       // run getOrder, then set getOrderState to the response
       getOrder().then(response => setGetOrderState(response));
-      console.log(getOrderState)      
+      console.log(getOrderState)
     },[])
     
 
@@ -60,7 +60,7 @@ export default function Home(props) {
             
             // function for fetching product by id
             const getProduct = () => {
-              return Axios.get(`https://bootlegbackend.herokuapp.com/product/detail?id=${productId}`);
+              return Axios.get(`http://localhost:4000/product/detail?id=${productId}`);
             }
             
             // array each returned ID from getProduct, and execute the following promise on each one:
@@ -69,10 +69,10 @@ export default function Home(props) {
     
                 // store the product object currently being iterated over
                 const popProduct = responses[0].data.product
-                console.log("This is popProduct:", popProduct)
+                // console.log("This is popProduct:", popProduct)
     
                 // log each order in the DB
-                console.log('GET ORDER', getOrderState)
+                // console.log('GET ORDER', getOrderState)
     
                 // for each order in getOrderState,
                 getOrderState.forEach(order => {
@@ -82,15 +82,14 @@ export default function Home(props) {
                     totalOrdered += order.cart.filter(x => x===productId).length
                   } else {
                     // otherwise state that the order does not include the product. !! Possibly trim this out.
-                    console.log("Order does not include product")
+                    // console.log("Order does not include product")
                   }
                 })
                 
                 // var popularities is set to include all current values, updated with the product object currently stored in popProduct and their popularity stored as their totalOrdered count.
                 popularities = {...popularities, [productId]: {product: popProduct, popularity: totalOrdered}}
                 // log how many times popProduct has been ordered, the full contents of popularities, and set the popular state to the updated popularities.
-                console.log(`${popProduct.productName} has been ordered ${totalOrdered} times.`)
-                console.log(popularities)
+                // console.log(`${popProduct.productName} has been ordered ${totalOrdered} times.`)
                 setPopular(popularities) 
                 
               });
@@ -104,11 +103,18 @@ export default function Home(props) {
     
     
     const top3Products = !!Object.keys(popular).length ? Object.keys(popular).map((key) => popular[key]).sort((a,b) => b.popularity - a.popularity).slice(0,3) : [];
-    console.log(top3Products, "TOP 3 PRODUCTS")
+    // console.log(top3Products, "TOP 3 PRODUCTS")
     
-    
-    // if there are no products currently accessible or top3Products isn't fully populated,
-    if(!props.products.length || top3Products.length !== 3){
+    // useEffect(() => {
+    //   console.log(Object.keys(popular).length === Object.keys(props.products).length)
+    //   console.log("popular length, products length:", Object.keys(popular).length, Object.keys(props.products).length)
+    // },[popular])
+
+    // if there are no products currently accessible or top3Products isn't fully populated, (OUTDATED, RESERVED FOR BACKUP)
+    // if(!props.products.length || top3Products.length !== 3){
+
+    // if the "popular" state isn't populated with the full product list sorted by times ordered,
+    if(Object.keys(popular).length !== Object.keys(props.products).length){
       // return a plain screen stating "Loading..."
       return (
         <div>
@@ -119,7 +125,7 @@ export default function Home(props) {
 
     // if top3Products is fully populated, let 'er rip.
     else {
-    
+ 
     return (
       
         
@@ -133,9 +139,8 @@ export default function Home(props) {
             {/* Map each of the top3Products to a div with a key corresponding to its product id */}
             {top3Products.map(popProduct => (
                 <div key={popProduct.product._id}>
-                  {console.log(popProduct.product._id)}
                   <div className="type">
-                    {/* Name of the product as a link to its store page - GET THIS WORKING */}
+                    {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
                     <Link className='bestLink' to={'/index'} state={popProduct.product}>
                       {popProduct.product.productName}
                     </Link>
@@ -166,7 +171,6 @@ export default function Home(props) {
           <h2>{"Coming Soon!"}</h2>
           <ul>
             <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
-            <li>Video Game: Cyberpunk 2077 (2019), Vinyl</li>
             <li>Film/TV: The Crow (1994), Vinyl</li>
           </ul>
           <p></p>
