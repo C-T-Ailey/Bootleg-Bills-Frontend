@@ -28,7 +28,7 @@ export default function ProductList(props) {
     // useEffect hook with API call to retrieve all products from database on page load
     useEffect(() => {
       console.log("Productlist useEffect")
-        Axios.get("http://localhost:4000/product/index")
+        Axios.get("https://bootlegbackend.herokuapp.com/product/index")
       .then((response) => {
         console.log(response)
 
