@@ -64,7 +64,9 @@ This specific repository is for the application's frontend, to which the majorit
 * Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
 
 #### Known Bugs
-* The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
+* Firefox Browser-specific issues:
+  * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
+  * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
 * When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel only briefly appears once before displaying the populated carousel. To be fully fixed shortly.
