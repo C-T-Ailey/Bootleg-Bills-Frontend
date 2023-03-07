@@ -62,6 +62,7 @@ This specific repository is for the application's frontend, to which the majorit
 * A means of selecting which of a given product's images will be used as its "Bestseller" image.
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
 * Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
+* Implement conditionals to hide the audio player on products without audio samples.
 
 #### Known Bugs
 * Firefox Browser-specific issues:
