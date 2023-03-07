@@ -29,10 +29,11 @@ import logo from './product/images/nav_logo_new.png'
 
 
 export default function App() {
+  // Cart array,
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
   
-  const navigation = useNavigate()
+  const navigate = useNavigate()
 
 
 
@@ -65,7 +66,11 @@ export default function App() {
     if(token != null){
       let user = jwt_decode(token)
       let timeNow = new Date().valueOf()
-      console.log(`Token is ${timeNow - user.user.timestamp < 1800000 ? "valid" : "invalid"}; logged in as [${user.user.name}] with ${user.user.role} privileges. Full object :`, [user])
+      console.log(
+        `Token issued at ${new Date(user.iat * 1000)}, and expires at ${new Date(user.exp * 1000)}.\n
+        Logged in as [${user.user.name}] with ${user.user.role} privileges.\n
+        Token is currently ${timeNow - user.user.timestamp < 1800000 ? "valid" : "invalid"}.\n
+        Full object :`, [user])
 
       if(user){
         setIsAuth(true)
@@ -81,11 +86,11 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    
+    // loadProductList()
     setCartCount(cart.length)
-    console.log(cartCount)
+    console.log(cart)
 
-  }, [cart, cartCount])
+  }, [cart])
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
@@ -111,7 +116,7 @@ export default function App() {
       console.log("Signed up successfully!")
       console.log(user)
       setSuccessMessage("User signup has been successful")
-      navigation("/login")
+      navigate("/login")
       }
     })
     .catch(error => {
@@ -139,23 +144,39 @@ export default function App() {
         }
         
         
-        const addToCart = (product) => {
-          console.log("button clicked")
-          console.log(product)
-          console.log(productQuantity)
-          // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
-          // console.log(cartItemQuant[product._id])
-          // let tempCart = []
-          for (let i = 1; i <= productQuantity; i++){
-            setCart(cart => [...cart, product])
-          }
-          // setCart(cart.concat(product))
-          // setCart(cart => [...cart, product])
-          setCartCount(cart.length)
-          setProductQuantity(1)
-          console.log(cart)
-          console.log(cartCount)
-        }
+        // const addToCart = (product) => {
+        //   console.log("button clicked")
+        //   console.log(product)
+        //   console.log(productQuantity)
+        //   // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
+        //   // console.log(cartItemQuant[product._id])
+        //   // let tempCart = []
+        //   for (let i = 1; i <= productQuantity; i++){
+        //     setCart(cart => [...cart, product])
+        //   }
+        //   // setCart(cart.concat(product))
+        //   // setCart(cart => [...cart, product])
+        //   setCartCount(cart.length)
+        //   setProductQuantity(1)
+        //   console.log(cart)
+        //   console.log(cartCount)
+        // }
+
+        // const addToCart = (product) => {
+        //   console.log("button clicked")
+        //   // console.log(product)
+        //   // console.log(productQuantity)
+        //   console.log(cart)
+        //   let preCart = []
+        //   console.log("Cart before adding product:", preCart)
+        //   for (let i = 1; i <= productQuantity; i++){
+        //     preCart.push(product)
+        //     // props.setCart([...props.cart, product])
+        //   }
+        //   let postCart = cart.concat(preCart)
+        //   console.log("Cart after adding product:",postCart)
+        //   setCart(postCart)
+        // }
 
 
   const handleRemoveFromCart = (deletedItem) => {
@@ -245,13 +266,13 @@ const editGet = (id) => {
       Axios.post("http://localhost:4000/cart", dataObj)
       .then(response => {
         console.log(response)
-        navigation("/checkout")
+        navigate("/checkout")
       })
       .catch(error => {
         console.log(error)
       })
     } else {
-      navigation("/login")
+      navigate("/login")
     }
   }
 
@@ -267,7 +288,7 @@ const editGet = (id) => {
     
     <div className="productCard" key={index}>
 
-      <Product products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+      <Product product={products} cart={cart} setCart={setCart} setCartCount={setCartCount} />
       
     </div>
 
@@ -276,7 +297,7 @@ const editGet = (id) => {
   const filmProducts = filmArray.map((products, index) => (
     <div className="productCard" key={index}>
 
-    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
     
     </div>
   ))
@@ -284,7 +305,7 @@ const editGet = (id) => {
   const videoProducts = videoArray.map((products, index) => (
     <div className="productCard" key={index}>
 
-    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
     
     </div>
   ))
@@ -292,7 +313,7 @@ const editGet = (id) => {
   const originalProducts = originalArray.map((products, index) => (
     <div className="productCard" key={index}>
 
-    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
     
     </div>
   ))
@@ -300,7 +321,7 @@ const editGet = (id) => {
   const cassetteProducts = cassetteArray.map((products, index) => (
     <div className="productCard" key={index}>
 
-    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
     
     </div>
   ))
@@ -308,7 +329,7 @@ const editGet = (id) => {
   const vinylProducts = vinylArray.map((products, index) => (
     <div className="productCard" key={index}>
 
-    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
     
     </div>
   ))
@@ -316,7 +337,7 @@ const editGet = (id) => {
   const apparelProducts = apparelArray.map((products, index) => (
     <div className="productCard" key={index}>
 
-    <Product  products={products} addToCart={addToCart} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} />
+    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
     
     </div>
   ))
@@ -343,7 +364,7 @@ const editGet = (id) => {
         setUser(user)
         console.log(user.user.role)
         setUserRole(user.user.role)
-        user.user.role === "seller" ? navigation("/manage") : navigation("/index")
+        user.user.role === "seller" ? navigate("/manage") : navigate("/index")
         console.log("User successfully logged in.")
         setSuccessMessage("User successfully logged in.")
         setTimeout(() => {
@@ -370,7 +391,7 @@ const editGet = (id) => {
     setUserRole("")
     console.log("User successfully logged out.")
     setSuccessMessage("User successfully logged out.")
-    navigation("/")
+    navigate("/")
 
     setTimeout(() => {
       setSuccessMessage(null);
@@ -384,7 +405,7 @@ const editGet = (id) => {
     setUserRole("")
     console.log("Session token expired.")
     setErrorMessage("Session expired.")
-    navigation("/login")
+    navigate("/login")
 
     setTimeout(() => {
       setErrorMessage(null);
@@ -451,11 +472,11 @@ const editGet = (id) => {
           </>
           ):(
           <>
-          <Nav.Link as={Link} to="/login"> Login</Nav.Link>
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
-          <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/index"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
+          <Nav.Link as={Link} to="/login"> Login</Nav.Link>
+          <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
+          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cart.length} </Badge></Nav.Link>          
           </>
           )}
           </Nav>
@@ -468,11 +489,11 @@ const editGet = (id) => {
           <Routes>
             <Route path="/" element={<Home loadProductList={loadProductList} products={products} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
-            <Route path="/index" element={<ProductList allProducts={allProducts} filmProducts={filmProducts} videoProducts={videoProducts} originalProducts={originalProducts} cassetteProducts={cassetteProducts} vinylProducts={vinylProducts} apparelProducts={apparelProducts} setProducts={setProducts} addToCart={addToCart} loadProductList={loadProductList} products={products}/>} />
+            <Route path="/index" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
-            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} addToCart={addToCart} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
+            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>

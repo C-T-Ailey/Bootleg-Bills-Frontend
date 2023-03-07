@@ -71,8 +71,8 @@ export default function OrderDetails(props) {
       <div className='delivery-details'>
         <h3>Delivery Details</h3>
         <h4>Customer</h4>
-        <p>Full Name: <span className='orderDetail'>{currentUser.firstName} {currentUser.lastName}</span></p>
-        <p>Email Address: <span className='orderDetail'>{currentUser.emailAddress}</span></p>
+        <p>Full Name: <span className='orderDetail'>{props.currentOrder.paymentDetails.customerName}</span></p>
+        <p>Email Address: <span className='orderDetail'>{props.currentOrder.shippingAddress.customerEmail}</span></p>
         
         <h4>Shipping Address</h4>
         <p>Address Line 1: <span className='orderDetail'>{props.currentOrder.shippingAddress.lineOne}</span></p>

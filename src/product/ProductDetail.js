@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import './ProductDetail.css'
 
 
+// Props required by this component from ProductList: product, cart, setCart, (handleChange - potentially obsolete, keep an eye on it)
+// Props required by this component from Product: product, cart, setCart
 
 export default function ProductDetail(props) {
-  let altText = props.products.productName.replace(/ /g, '').toLowerCase()
-
-  // const numberInput = useRef(null)
+  let altText = props.product.productName.replace(/ /g, '').toLowerCase()
   
   const [currentlySelected, setCurrentlySelected] = useState("")
+
+  const [productQuantity, setProductQuantity] = useState(1)
   
   useEffect(()=>{
     setCurrentlySelected(document.getElementById("thumb-0"))
@@ -34,17 +36,47 @@ export default function ProductDetail(props) {
       setCurrentlySelected(e.target)
     }
   }
-  const imgThumbsSansBestSeller = props.products.productImageUrls.slice(0, -1)
+
+  const numberInput = useRef(null)
+
+  const handleNumber = (e) => {
+    let number = numberInput.current
+    console.log(number.value)
+    // number.focus();
+    let inputInt = parseInt(number.value)
+    console.log(inputInt)
+    e.target.innerText === "+" ? (inputInt < props.product.productStock ? inputInt += 1 : inputInt = props.product.productStock) : (inputInt > 1 ? inputInt -= 1 : inputInt = 1)
+    number.value = inputInt
+    console.log("number value:",number.value)
+    setProductQuantity(number.value)
+  }
+
+  const addToCart = (product) => {
+    console.log("button clicked")
+    // console.log(product)
+    // console.log(productQuantity)
+    let preCart = []
+    console.log("Cart before adding product:", props.cart)
+    for (let i = 1; i <= productQuantity; i++){
+      preCart.push(product)
+      // props.setCart([...props.cart, product])
+    }
+    let postCart = props.cart.concat(preCart)
+    console.log("Cart after adding product:",postCart)
+    props.setCart(postCart)
+  }
+
+  const imgThumbsSansBestSeller = props.product.productImageUrls.slice(0, -1)
 
   console.log(imgThumbsSansBestSeller)
   
   const imgThumbs = imgThumbsSansBestSeller.map((url, index) =>
     <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
-      <img className='thumb' id={`thumb-${index}`} src={props.products.productImageUrls[index]} alt={`thumb-${index}`} />
+      <img className='thumb' id={`thumb-${index}`} src={props.product.productImageUrls[index]} alt={`thumb-${index}`} />
     </div>
   );
 
-  const productVars = props.products.productVariants.map((variant) =>
+  const productVars = props.product.productVariants.map((variant) =>
     <option className='select-text' value={variant}>{variant}</option>
   );
 
@@ -66,10 +98,10 @@ export default function ProductDetail(props) {
       <div className='vr'></div>
     
       <div className='detailsInfo'>
-        <h3>{props.products.productName}</h3>
-        <p>{props.products.productSourceType!=="Original Release" ? "from" : "by"} {props.products.productSource}</p>
-        <h5>£{props.products.productPrice}</h5>
-        <p>{props.products.productDescription}</p>
+        <h3>{props.product.productName}</h3>
+        <p>{props.product.productSourceType!=="Original Release" ? "from" : "by"} {props.product.productSource}</p>
+        <h5>£{props.product.productPrice}</h5>
+        <p>{props.product.productDescription}</p>
 
 
         <div className='audioPlayer'>
@@ -84,12 +116,12 @@ export default function ProductDetail(props) {
             </div>
           <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
 
-          <audio id="audio" width="300" height="32" src={props.products.productAudio} controls> </audio>
+          <audio id="audio" width="300" height="32" src={props.product.productAudio} controls> </audio>
 
           </div>
 
           <div className='variantSelection'>
-            { props.products.hasVariant ? (
+            { props.product.hasVariant ? (
               <Container>
                 <Form.Group>
                   <Form.Label>Choose a variant:</Form.Label>
@@ -105,15 +137,10 @@ export default function ProductDetail(props) {
           </div>
 
           <div className='quantityCounter'>
-              {/* CHRIS CHANGES */}
-            {/* <Button disabled={props.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
-              <input disabled={props.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} value={1} min={1} onChange={(e) => handleChange(e)} ></input>
-              <Button disabled={props.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
-            <Button disabled={props.productStock === 0 ? true : false} variant="primary"> Add to Cart </Button> &nbsp; */}
-            <Button disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => props.handleNumber(e)} > - </Button>
-              <input disabled={props.products.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={props.numberInput} defaultValue={1} min={1} max={props.products.productStock} onChange={(e) => props.handleChange(e)} ></input>
-            <Button disabled={props.products.productStock === 0 ? true : false} variant='secondary' onClick={(e) => props.handleNumber(e)}> + </Button> &nbsp;
-            <Button disabled={props.products.productStock === 0 ? true : false} variant="primary" onClick={() => {props.addToCart(props.products)}}> Add to Cart </Button> &nbsp;
+            <Button disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)} > - </Button>
+              <input disabled={props.product.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} max={props.product.productStock} onChange={(e) => props.handleChange(e)} ></input>
+            <Button disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
+            <Button disabled={props.product.productStock === 0 ? true : false} variant="primary" onClick={() => addToCart(props.product)}> Add to Cart </Button> &nbsp;
           </div>
 
       </div>

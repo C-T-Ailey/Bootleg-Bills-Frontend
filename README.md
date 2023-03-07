@@ -40,35 +40,42 @@ The frontend also requires a .env file storing the key `REACT_APP_SELLER_KEY=` w
 
 ### Development Status
 
-Since finishing development of the application within the scope of the General Assembly course for which it was submitted, I have independently been making incremental progress towards refactoring several components and rectifying bugs and incomplete features from the initial development process. As all the product images and audio samples used on the site were (and continue to be) personally designed and edited, the application now serves as a minor portfolio for my graphic design work in addition to an example of my previous software development projects.
+Since finishing development of the application within the scope of the General Assembly course for which it was submitted, I have independently been making incremental progress towards refactoring several components and rectifying bugs and incomplete features from the initial development process. As all the product images and audio samples used on the site were (and continue to be) personally designed and edited, the application now serves as a minor portfolio for my graphic design work in addition to an example of my previous software development projects. The version of the project as it stood upon completion of the course can be found under the "Legacy" branch of this repository.
 
 This specific repository is for the application's frontend, to which the majority of adjustments so far have been made. Several styling improvements and bugfixes have been implemented, along with new features such as the means to offer (and "purchase") design variations for different products, filtering by products by category, and an About Us page detailing the project's conceptual background.
 
 #### Post-Submission Additions and Changes
-* Detailed list coming soon. Please see repository commit notes until such time.
+* Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
+* Full list of changes coming soon -- please see repository commit notes until such time.
 
 #### Planned Improvements
+* :construction_worker: The majority of variables and functions are currently declared at the top level in App.js and passed as props to various components; refactor the codebase so more functions and props are employed only on their required pages to reduce memory usage.
+  * In progress.
+* :construction_worker: Cart and Checkout components rewritten from scratch.
+  * In progress.
 * Rewrite/update styling to make the site more responsive to mobile devices.
-* Refactor the codebase so more functions and props are employed only on their required pages and less burden is placed on App.js.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Increased number of potential images and variants for products.
 * Adjust the Product and Orders models and rewrite the "Add to Cart" function so that any selected variant for a product will be recorded in a customer's orders.
-* Cart and Checkout components rewritten from scratch.
 * Separate entry in the Product model for the "Bestseller" image, instead of using whichever image occupies the last populated index of the product images array.
 * A means of selecting which of a given product's images will be used as its "Bestseller" image.
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
-* Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Origin/Media filters on the Products page.
 * Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
 
 #### Known Bugs
 * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
-* The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
-* When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
-* On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.
-* On the "Products" page, clicking "Add to cart" for a product will only add one of that product to the cart, regardless of the quantity set by the user.
-* Attempting to update a product's details from the Seller dashboard (or perform any other operation which requires the user to be logged in) with an expired session token will crash the app.
-* When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will alter the details for a different product instead of the intended one.
+* When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
+* :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
+  * Somewhat fixed - the carousel only briefly appears once before displaying the populated carousel. To be fully fixed shortly.
+* :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
+  * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
+* :white_check_mark: On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.
+  * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
+* :white_check_mark: On the "Products" page, clicking "Add to cart" for a product will only add one of that product to the cart, regardless of the quantity set by the user.
+  * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
+* :white_check_mark: Attempting to update a product's details from the Seller dashboard (or perform any other operation which requires the user to be logged in) with an expired session token will crash the app.
+  * Fully fixed by implementing more extensive auth-token validation and checks to sign a user out, remove their expired token from local storage, and redirect them to the login page.
 
 
 ### Project Debrief: Introduction
@@ -321,7 +328,7 @@ const loginHandler = (cred) => {
        setUser(user)
        console.log(user.user.role)
        setUserRole(user.user.role)
-       user.user.role === "seller" ? navigation("/manage") : navigation("/index")
+       user.user.role === "seller" ? navigate("/manage") : navigate("/index")
        console.log("User successfully logged in.")
        setSuccessMessage("User successfully logged in.")
        setTimeout(() => {

@@ -2,9 +2,14 @@ h1 {
     text-align: center;
 }
 
-#shopFilter {
+/* #sourceFilter, #formatFilter, #sortBy {
     margin: 20px;
+} */
+
+.filter {
+  margin-bottom: 20px;
 }
+
 .btn-primary:focus, .btn-secondary:focus, input:focus{
   outline:none;
 }
@@ -70,12 +75,16 @@ h1 {
 
 }
 
-.filter-container{
+.filter-flex-container{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
 
+/* .filter-container{
 display: flex;
 justify-content: center;
-margin-bottom: 30px;
-}
+} */
 
 
 #addToCart{

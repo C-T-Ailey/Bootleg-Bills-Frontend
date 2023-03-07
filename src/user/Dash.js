@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import OrderHistory from './OrderHistory'
 import ProductCreateForm from '../product/ProductCreateForm'
 import { Button, Modal } from 'react-bootstrap'
@@ -6,21 +7,33 @@ import jwt_decode from 'jwt-decode'
 import './Dash.css'
 
 export default function Dash(props) {
+
+    const navigate = useNavigate()
+
+    const token = localStorage.getItem("token")
+
     useEffect(() => {
         let timeNow = new Date().valueOf()
-        if (timeNow - props.user.user.timestamp >= 1800000) {
+        console.log("Comparing current time with token expiration stamp:", timeNow, props.user.exp * 1000)
+        if (!token) {
+            console.log("No token")
+            navigate("/login")
+        } else if (timeNow >= props.user.exp * 1000) {
             props.sessionExpiredHandler()
+            
         } else {
             props.loadProductList()
-            
+
         }
     }, [])
+
+    const [allOrders, setAllOrders] = useState([])
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const setModalIsOpenToTrue =()=>{
         let timeNow = new Date().valueOf()
-        if (timeNow - props.user.user.timestamp >= 1800000) {
+        if (timeNow >= props.user.exp * 1000) {
             props.sessionExpiredHandler()
         } else {
             setModalIsOpen(true)
@@ -67,7 +80,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table'>
                     <h4>Customer Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <OrderHistory allOrders={allOrders} setAllOrders={setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             
                 <div>
@@ -84,7 +97,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table-buyer'>
                     <h4>My Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <OrderHistory allOrders={allOrders} setAllOrders={setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             </div>
         )

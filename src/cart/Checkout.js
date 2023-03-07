@@ -12,7 +12,7 @@ import './Cart.css'
 
 
 export default function Checkout(props) {
-    const navigation = useNavigate()
+    const navigate = useNavigate()
 
     let getTotalPrice = 0
 
@@ -163,7 +163,7 @@ export default function Checkout(props) {
             console.log(response)
             console.log("ordere added successfully")
             decreaseStock()
-            navigation("/confirmation")
+            navigate("/confirmation")
             // props.setCart([])
             // console.log(props.cart)    
         })

@@ -6,13 +6,16 @@ import OrderDetails from './OrderDetails';
 
 export default function OrderHistory(props) {
 
+    const [allOrders, setAllOrders] = useState([])
+
+    const [currentOrder, setCurrentOrder] = useState("")
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const setModalOpen =()=>{
         !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
     }
 
-    const [currentOrder, setCurrentOrder] = useState("")
 
     useEffect(() => {
         getOrders()
@@ -25,7 +28,7 @@ export default function OrderHistory(props) {
         .then((response) => {
             if(props.user.user.role === "seller"){
                 console.log(response.data.length)
-                props.setAllOrders(response.data)
+                setAllOrders(response.data)
             } else {
                 let buyerOrders = []
                 console.log(response.data)
@@ -37,7 +40,7 @@ export default function OrderHistory(props) {
                 }
             });
             console.log(buyerOrders)
-            props.setAllOrders(buyerOrders)
+            setAllOrders(buyerOrders)
             }
         })
         .catch((error) => {
@@ -60,7 +63,7 @@ export default function OrderHistory(props) {
         })
     }
     
-    const mappedOrders = props.allOrders?.map((order, index) => (
+    const mappedOrders = allOrders?.map((order, index) => (
     
         <tr key={index}>
             <td><button style={{fontWeight:"bolder"}} id='faux-link' value={order._id} onClick={(e) => handleOrderView(e)}>#{order.orderRef}</button></td>
