@@ -123,7 +123,7 @@ export default function Home(props) {
       )
     }
 
-    // if top3Products is fully populated, let 'er rip.
+    // when top3Products is fully populated and the "popular" state's length matches that of props.products, let 'er rip.
     else {
  
     return (
@@ -172,6 +172,8 @@ export default function Home(props) {
           <ul>
             <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
             <li>Film/TV: The Crow (1994), Vinyl</li>
+            <li>Video Game: DOOM (1993), Cassette</li>
+            <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
           </ul>
           <p></p>
         </div>
