@@ -3,7 +3,7 @@
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
 ### Deployed App: https://bootleg-bills.herokuapp.com/
-* **Please note that this project is hosted using Heroku's "Eco" dynos. As such, it may take a few moments for both the frontend and backend to wake up before loading.**
+* **Please be aware that this project is hosted using Heroku's "Eco" dynos. As such, it may take a few moments for both the frontend and backend to wake up before loading.**
 
 
 **Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well as either of the following CORS solutions:
