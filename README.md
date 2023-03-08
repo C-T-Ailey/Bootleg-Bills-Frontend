@@ -1,8 +1,10 @@
 # GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
 
-### Deployed App: https://bootleg-bills.herokuapp.com/
-
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
+
+### Deployed App: https://bootleg-bills.herokuapp.com/
+* **Please note that this project is hosted using Heroku's "Eco" dynos. As such, it may take a few moments for both the frontend and backend to wake up before loading.**
+
 
 **Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well as either of the following CORS solutions:
 * Use a CORS browser extension;
@@ -65,9 +67,10 @@ This specific repository is for the application's frontend, to which the majorit
 
 #### Known Bugs
 * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
-* When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel only briefly appears once before displaying the populated carousel. To be fully fixed shortly.
+* :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
+  * Fully fixed.
 * :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
   * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
 * :white_check_mark: On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.
