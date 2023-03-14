@@ -121,7 +121,7 @@ export default function ProductCreateForm(props) {
             console.log("Variants added")
         }
 
-        Axios.post("http://localhost:4000/product/add", product, {
+        Axios.post("https://bootlegbackend.herokuapp.com/product/add", product, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
