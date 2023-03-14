@@ -48,6 +48,8 @@ This specific repository is for the application's frontend, to which the majorit
 
 #### Post-Submission Additions and Changes
 * Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
+* Implemented functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
+* Currently selected image on the Product Details modal view can now be clicked to open the full image in a new tab.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
 #### Planned Improvements
@@ -63,7 +65,6 @@ This specific repository is for the application's frontend, to which the majorit
 * Separate entry in the Product model for the "Bestseller" image, instead of using whichever image occupies the last populated index of the product images array.
 * A means of selecting which of a given product's images will be used as its "Bestseller" image.
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
-* Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
 
 #### Known Bugs
 * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.

@@ -111,21 +111,26 @@ export default function ProductDetail(props) {
         <p>{props.product.productDescription}</p>
 
 
-        <div className='audioPlayer'>
-
-          {/* <div className='player'>
-            <div className='playButton'>
-              <div className='arrow'></div>
-            </div>
-            <div className='seekBar'>
-              <div className='elapsed'></div>
-            </div>
-            </div>
-          <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
-
-          <audio id="audio" width="300" height="32" src={props.product.productAudio} controls> </audio>
-
-          </div>
+        {!!props.product.productAudio ?
+        
+            <div className='audioPlayer'>
+            
+              {/* <div className='player'>
+                <div className='playButton'>
+                  <div className='arrow'></div>
+                </div>
+                <div className='seekBar'>
+                  <div className='elapsed'></div>
+                </div>
+                </div>
+              <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
+            
+              <audio id="audio" width="300" height="32" src={props.product.productAudio} controls> </audio>
+            
+              </div>
+          : 
+          <></>
+        }
 
           <div className='variantSelection'>
             { props.product.hasVariant ? (

@@ -171,7 +171,6 @@ export default function Home(props) {
           <h2>{"Coming Soon!"}</h2>
           <ul>
             <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
-            <li>Film/TV: The Crow (1994), Vinyl</li>
             <li>Video Game: DOOM (1993), Cassette</li>
             <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
           </ul>
