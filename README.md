@@ -49,7 +49,7 @@ This specific repository is for the application's frontend, to which the majorit
 #### Post-Submission Additions and Changes
 * Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
 * Implemented functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
-  * Requires adjustments so counters can when a product is updated without reloading the dashboard.
+  * Requires adjustments so counters renew when a product is updated without reloading the dashboard.
 * Currently selected image on the Product Details modal view can now be clicked to open the full image in a new tab.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
@@ -58,7 +58,8 @@ This specific repository is for the application's frontend, to which the majorit
   * In progress.
 * :construction_worker: Cart and Checkout components rewritten from scratch.
   * In progress.
-* Rewrite/update styling to make the site more responsive to mobile devices.
+* :construction_worker: Rewrite/update styling to make the site more responsive to mobile devices.
+  * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Increased number of potential images and variants for products.
