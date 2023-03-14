@@ -171,10 +171,10 @@ export default function ProductList(props) {
             <h5>Sort by:</h5>
           
             <ButtonGroup id="sortBy" className="filter" >
-              <Button variant="primary" id={selectedSort==="Alpha AZ" ? "isSelected" : ""} name="Alpha AZ" onClick={(e) => {setSelectedSort(e.target.name)}}>Alphabetical (A-Z)</Button>
-              <Button variant="primary" id={selectedSort==="Alpha ZA" ? "isSelected" : ""} name="Alpha ZA" onClick={(e) => {setSelectedSort(e.target.name)}}>Alphabetical (Z-A)</Button>
-              <Button variant="primary" id={selectedSort==="Date Asc" ? "isSelected" : ""}  name="Date Asc" onClick={(e) => {setSelectedSort(e.target.name)}}>Date Added (Asc.)</Button>
-              <Button variant="primary" id={selectedSort==="Date Desc" ? "isSelected" : ""} name="Date Desc" onClick={(e) => {setSelectedSort(e.target.name)}}>Date Added (Desc.)</Button>
+              <Button variant="primary" id={selectedSort==="Alpha AZ" ? "isSelected" : ""} name="Alpha AZ" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(A-Z)</Button>
+              <Button variant="primary" id={selectedSort==="Alpha ZA" ? "isSelected" : ""} name="Alpha ZA" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(Z-A)</Button>
+              <Button variant="primary" id={selectedSort==="Date Desc" ? "isSelected" : ""} name="Date Desc" onClick={(e) => {setSelectedSort(e.target.name)}}>Date Added<br/>(Recent)</Button>
+              <Button variant="primary" id={selectedSort==="Date Asc" ? "isSelected" : ""}  name="Date Asc" onClick={(e) => {setSelectedSort(e.target.name)}}>Date Added<br/>(Oldest)</Button>
             </ButtonGroup>
             &nbsp;
           

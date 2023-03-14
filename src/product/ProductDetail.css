@@ -1,3 +1,7 @@
+img:hover {
+    cursor: pointer;
+}
+
 .detailModalFlex {
     display: flex;
     flex-direction: row;
@@ -17,6 +21,7 @@
 .mainImg {
     display: flex;
     justify-content: center;
+    max-width: 1000px;
 }
 
 .detailImg {
@@ -173,6 +178,8 @@ audio::-webkit-media-controls-play-button {
     border-radius: 10%; 
 }
 
-
+.widthSpacer {
+    width: 400px;
+}
 
 

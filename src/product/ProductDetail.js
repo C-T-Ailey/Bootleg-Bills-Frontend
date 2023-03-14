@@ -19,6 +19,13 @@ export default function ProductDetail(props) {
     defaultImg.className = "selected-img"
   },[])
 
+  const openImage = (e) => {
+    let imgUrl = e.target.src.slice(0, e.target.src.length-4)
+    let imgUrlFormat = e.target.src.slice(e.target.src.length-4)
+    let imgUrlAppended = `${imgUrl}_d${imgUrlFormat}?maxwidth=1985&shape=thumb&fidelity=high`
+    window.open(imgUrlAppended, "_blank")
+  }
+
   const handleSelect = (e) => {
     console.log(e.target)
     if(currentlySelected === e.target){
@@ -86,7 +93,7 @@ export default function ProductDetail(props) {
       <div className='images'>
 
         <div className='mainImg'>
-          <img className='detailImg' src={currentlySelected.src} alt={`${altText}_img`}/>
+          <img className='detailImg' src={currentlySelected.src} alt={`${altText}_img`} onClick={(e) => openImage(e)}/>
         </div>
         
         <div className='img-thumbs'>
@@ -104,21 +111,26 @@ export default function ProductDetail(props) {
         <p>{props.product.productDescription}</p>
 
 
-        <div className='audioPlayer'>
-
-          {/* <div className='player'>
-            <div className='playButton'>
-              <div className='arrow'></div>
-            </div>
-            <div className='seekBar'>
-              <div className='elapsed'></div>
-            </div>
-            </div>
-          <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
-
-          <audio id="audio" width="300" height="32" src={props.product.productAudio} controls> </audio>
-
-          </div>
+        {!!props.product.productAudio ?
+        
+            <div className='audioPlayer'>
+            
+              {/* <div className='player'>
+                <div className='playButton'>
+                  <div className='arrow'></div>
+                </div>
+                <div className='seekBar'>
+                  <div className='elapsed'></div>
+                </div>
+                </div>
+              <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
+            
+              <audio id="audio" width="300" height="32" src={props.product.productAudio} controls> </audio>
+            
+              </div>
+          : 
+          <></>
+        }
 
           <div className='variantSelection'>
             { props.product.hasVariant ? (
@@ -135,6 +147,8 @@ export default function ProductDetail(props) {
               )
               }
           </div>
+
+          <div className='widthSpacer'></div>
 
           <div className='quantityCounter'>
             <Button disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)} > - </Button>

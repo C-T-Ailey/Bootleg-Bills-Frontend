@@ -29,11 +29,6 @@ h1 {
     font-weight:light;
     border: 2px solid #FF2273;
     border-radius: 5px;
- 
-
-
-
-  
   }
 
   
@@ -133,3 +128,21 @@ justify-content: center;
   margin-top: 40px;
 }
 
+@media (max-width: 790px) {
+
+  .d-flex {
+    display: flex;
+    justify-content: center;
+  }
+    
+  .productCard {
+    width: 100vw;
+    
+  }
+
+  .filter {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+}

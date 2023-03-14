@@ -46,6 +46,8 @@ This specific repository is for the application's frontend, to which the majorit
 
 #### Post-Submission Additions and Changes
 * Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
+* Implemented conditionals to hide the audio player on products without audio samples.
+* Currently selected image on the Product Details modal view can now be clicked to open the full image in a new tab.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
 #### Planned Improvements
@@ -53,7 +55,10 @@ This specific repository is for the application's frontend, to which the majorit
   * In progress.
 * :construction_worker: Cart and Checkout components rewritten from scratch.
   * In progress.
-* Rewrite/update styling to make the site more responsive to mobile devices.
+* :construction_worker: Rewrite/update styling to make the site more responsive to mobile devices.
+  * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
+* :construction_worker: Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
+  * Requires adjustments so counters renew when a product is updated without reloading the dashboard - also requires a significant loading period before orders and statistics are viewable.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Increased number of potential images and variants for products.
@@ -61,16 +66,15 @@ This specific repository is for the application's frontend, to which the majorit
 * Separate entry in the Product model for the "Bestseller" image, instead of using whichever image occupies the last populated index of the product images array.
 * A means of selecting which of a given product's images will be used as its "Bestseller" image.
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
-* Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
-* Implement conditionals to hide the audio player on products without audio samples.
 
 #### Known Bugs
 * Firefox Browser-specific issues:
   * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
-* When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel only briefly appears once before displaying the populated carousel. To be fully fixed shortly.
+* :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
+  * Fully fixed.
 * :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
   * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
 * :white_check_mark: On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.

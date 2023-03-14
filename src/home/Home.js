@@ -123,7 +123,7 @@ export default function Home(props) {
       )
     }
 
-    // if top3Products is fully populated, let 'er rip.
+    // when top3Products is fully populated and the "popular" state's length matches that of props.products, let 'er rip.
     else {
  
     return (
@@ -163,7 +163,7 @@ export default function Home(props) {
           <div className="homepage-about">
             <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
             <p>Founded in 2016 as a small word-of-mouth creative project, we finally established an online presence in 2022 thanks to Software Engineers Ailish McLaughlin, Christopher Carey and Chris Ailey. Now you can have a look at what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest releases, and bag one of your very own unofficial audio rarities!</p>
-            <Link to={'/about'}>Want to know more about us?</Link>
+            <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link>
           </div>
         </div>
 
@@ -171,7 +171,8 @@ export default function Home(props) {
           <h2>{"Coming Soon!"}</h2>
           <ul>
             <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
-            <li>Film/TV: The Crow (1994), Vinyl</li>
+            <li>Video Game: DOOM (1993), Cassette</li>
+            <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
           </ul>
           <p></p>
         </div>
