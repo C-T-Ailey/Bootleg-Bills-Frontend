@@ -1,12 +1,10 @@
 # GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
 
+### Deployed App: https://bootleg-bills.herokuapp.com/
+
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
-### Deployed App: https://bootleg-bills.herokuapp.com/
-* **Please be aware that this project is hosted using Heroku's "Eco" dynos. As such, it may take a few moments for both the frontend and backend to wake up before loading.**
-
-
-**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well as either of the following CORS solutions:
+**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well either of the following CORS solutions:
 * Use a CORS browser extension;
 * Adjust the CORS configuration in the backend's server.js file to reflect whichever localhost address the frontend will be running on.
 
@@ -48,8 +46,7 @@ This specific repository is for the application's frontend, to which the majorit
 
 #### Post-Submission Additions and Changes
 * Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
-* Implemented functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
-  * Requires adjustments so counters renew when a product is updated without reloading the dashboard.
+* Implemented conditionals to hide the audio player on products without audio samples.
 * Currently selected image on the Product Details modal view can now be clicked to open the full image in a new tab.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
@@ -60,6 +57,8 @@ This specific repository is for the application's frontend, to which the majorit
   * In progress.
 * :construction_worker: Rewrite/update styling to make the site more responsive to mobile devices.
   * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
+* :construction_worker: Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
+  * Requires adjustments so counters renew when a product is updated without reloading the dashboard - also requires a significant loading period before orders and statistics are viewable.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Increased number of potential images and variants for products.
@@ -69,7 +68,9 @@ This specific repository is for the application's frontend, to which the majorit
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
 
 #### Known Bugs
-* The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
+* Firefox Browser-specific issues:
+  * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
+  * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel only briefly appears once before displaying the populated carousel. To be fully fixed shortly.
 * :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
