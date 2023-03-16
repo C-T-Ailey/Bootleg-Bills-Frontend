@@ -13,8 +13,18 @@ export default function Product(props) {
   
   const numberInput = useRef(null)
 
-  const [productQuantity, setProductQuantity] = useState(1)
-  const [productPlaceholder, setProductPlaceholder] = ([])
+  const [isNameHover, setIsNameHover] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsNameHover(true)
+  }
+
+  const handleMouseOut = () => {
+    setIsNameHover(false)
+  }
+
+  const [productQuantity, setProductQuantity] = useState(1);
+  const [productPlaceholder, setProductPlaceholder] = ([]);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -82,7 +92,17 @@ export default function Product(props) {
             <Card.Body >
                 
                 
-                <Card.Title onClick={() => setModalOpen()} >{props.product.productName}</Card.Title> 
+                {!isNameHover ? 
+                  <Card.Title onClick={() => setModalOpen()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{props.product.productName}</Card.Title> 
+                : 
+                  <Card.Title id="marquee" onClick={() => setModalOpen()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+                    {props.product.productName.length > 19 ?
+                      <div id="marquee__content">{props.product.productName}</div>
+                    :
+                    <div>{props.product.productName}</div>
+                    }
+                  </Card.Title>
+                }
                 <hr></hr>
                 <Card.Text onClick={() => setModalOpen()} >£{props.product.productPrice}</Card.Text>
                 

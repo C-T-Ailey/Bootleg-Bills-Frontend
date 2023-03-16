@@ -23,6 +23,30 @@ input{
     font-weight: bold;
 }
 
-.select-text {
-    font-weight: bolder;
-}
+
+#marquee {
+    --gap: 1rem;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--gap);
+  }
+  
+  #marquee__content {
+    animation: marquee 10s linear infinite;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+  }
+    
+    @keyframes marquee {
+    10% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+  }

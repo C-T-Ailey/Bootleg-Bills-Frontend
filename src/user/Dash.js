@@ -80,7 +80,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table'>
                     <h4>Customer Orders</h4>
-                    <OrderHistory allOrders={allOrders} setAllOrders={setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             
                 <div>
@@ -97,7 +97,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table-buyer'>
                     <h4>My Orders</h4>
-                    <OrderHistory allOrders={allOrders} setAllOrders={setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             </div>
         )
