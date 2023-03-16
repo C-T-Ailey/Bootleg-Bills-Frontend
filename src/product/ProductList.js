@@ -183,8 +183,8 @@ export default function ProductList(props) {
 
         <Container className="d-flex"  >
 
-          {/* <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}> */}
-          <Row  className="m-auto align-self-center" lg={4}>
+          <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
+          {/* <Row  className="m-auto align-self-center" lg={4}> */}
 
             { 
               productList.map((products, index) => (
