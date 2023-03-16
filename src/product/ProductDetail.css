@@ -18,6 +18,11 @@ img:hover {
     font-weight: bolder;
 }
 
+.select-text {
+    font-family: 'Bungee Hairline', Courier, monospace;
+    font-weight: bolder;
+}
+
 .mainImg {
     display: flex;
     justify-content: center;

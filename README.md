@@ -48,6 +48,7 @@ This specific repository is for the application's frontend, to which the majorit
 * Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
 * Implemented conditionals to hide the audio player on products without audio samples.
 * Currently selected image on the Product Details modal view can now be clicked to open the full image in a new tab.
+* Product names which are too long to fully fit on their Product card in the Products menu will now display as an animated scrolling marquee when hovered over with the mouse.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
 #### Planned Improvements
@@ -71,8 +72,9 @@ This specific repository is for the application's frontend, to which the majorit
 * Firefox Browser-specific issues:
   * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
+    * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
-  * Somewhat fixed - the carousel only briefly appears once before displaying the populated carousel. To be fully fixed shortly.
+  * Somewhat fixed - the carousel occasionally briefly appears just once before displaying the populated carousel. Efforts continue to be made to fix fully.
 * :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
   * Fully fixed.
 * :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.

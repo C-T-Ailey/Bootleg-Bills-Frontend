@@ -58,9 +58,8 @@ export default function ProductMetrics(props) {
 
     const fetchOutstanding = async () => {
         let outstanding = 0
-        let totalOrdered = 0
         const qualifiedStatus = ["open", "processing"]
-        const data = await Axios.get('http://localhost:4000/orders/index');
+        const data = await Axios.get('https://bootlegbackend.herokuapp.com/orders/index');
         data.data.forEach(order => {
             if (order.cart.includes(props.product._id) && qualifiedStatus.includes(order.status)) {
                 // console.log("includes this product:", order.cart.includes(props.product._id))
@@ -74,7 +73,7 @@ export default function ProductMetrics(props) {
 
     const fetchTotal = async () => {
         let total = 0
-        const data = await Axios.get('http://localhost:4000/orders/index');
+        const data = await Axios.get('https://bootlegbackend.herokuapp.com/orders/index');
         data.data.forEach(order => {
             if (order.cart.includes(props.product._id)) {
                 let product = props.product._id

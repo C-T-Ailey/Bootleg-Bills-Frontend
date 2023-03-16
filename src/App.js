@@ -29,6 +29,7 @@ import logo from './product/images/nav_logo_new.png'
 
 
 export default function App() {
+
   // Cart array,
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
@@ -49,12 +50,6 @@ export default function App() {
   const [allOrders, setAllOrders] = useState([])
   
   const [sortedPopular, setSortedPopular] = useState([])
-  // const [cartItemQuant, setCartItemQuant] = useState({})
-  // const [cartDisplayArr, setCartDisplayArr] = useState([])
-  
-  // Product Detail
-  // const [currentProduct, setCurrentProduct] = useState()
-  // const [isDetail, setIsDetail] = useState(false)
 
   useEffect(() => {
 
@@ -86,7 +81,6 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    // loadProductList()
     setCartCount(cart.length)
     console.log(cart)
 
@@ -124,59 +118,13 @@ export default function App() {
       setErrorMessage("User registration failed!")
     })
   }
-  
-  // const increaseQuantity = (e) => {
-    //   console.log("increment button clicked")
-    //   setProductQuantity(productQuantity + 1)
-    // }
-    // const decreaseQuantity = (e) => {
-      //   console.log("decrement button clicked")
-      //   if(productQuantity > 1){
-        //     setProductQuantity(productQuantity - 1)
-        //   }
-        // }
 
-        const handleProductQuantity = (quantity) => {
-          console.log("hello")
-          console.log(quantity)
-          setProductQuantity(quantity)
-          // console.log(productQuantity)
-        }
-        
-        
-        // const addToCart = (product) => {
-        //   console.log("button clicked")
-        //   console.log(product)
-        //   console.log(productQuantity)
-        //   // setCartItemQuant(cartItemQuant[product._id]=productQuantity)
-        //   // console.log(cartItemQuant[product._id])
-        //   // let tempCart = []
-        //   for (let i = 1; i <= productQuantity; i++){
-        //     setCart(cart => [...cart, product])
-        //   }
-        //   // setCart(cart.concat(product))
-        //   // setCart(cart => [...cart, product])
-        //   setCartCount(cart.length)
-        //   setProductQuantity(1)
-        //   console.log(cart)
-        //   console.log(cartCount)
-        // }
-
-        // const addToCart = (product) => {
-        //   console.log("button clicked")
-        //   // console.log(product)
-        //   // console.log(productQuantity)
-        //   console.log(cart)
-        //   let preCart = []
-        //   console.log("Cart before adding product:", preCart)
-        //   for (let i = 1; i <= productQuantity; i++){
-        //     preCart.push(product)
-        //     // props.setCart([...props.cart, product])
-        //   }
-        //   let postCart = cart.concat(preCart)
-        //   console.log("Cart after adding product:",postCart)
-        //   setCart(postCart)
-        // }
+  const handleProductQuantity = (quantity) => {
+    console.log("hello")
+    console.log(quantity)
+    setProductQuantity(quantity)
+    // console.log(productQuantity)
+  }
 
 
   const handleRemoveFromCart = (deletedItem) => {
@@ -238,19 +186,6 @@ const editGet = (id) => {
   })
 }
 
-  // const loadCartArray = (cartItems) => {
-  //   // console.log("cart clicked")
-  //   // console.log(cart)
-  //   console.log(cartItems)
-  // //   Axios.get("cart", cartItems)
-  // //   .then(response => {
-  // //     console.log(response)
-  // //   })
-  // //   .catch(error => {
-  // //     console.log(error)
-  // //   })
-  // }
-
   const makeCart = (cartItems) => {
     // e.preventDefault()
     console.log(cartItems)
@@ -275,72 +210,6 @@ const editGet = (id) => {
       navigate("/login")
     }
   }
-
-  const filmArray = products.filter(products => products.productSourceType === "Film/TV")
-  const videoArray = products.filter(products => products.productSourceType === "Video Game")
-  const originalArray = products.filter(products => products.productSourceType === "Original Release")
-
-  const cassetteArray = products.filter(products => products.productMediaFormat === "Cassette")
-  const vinylArray = products.filter(products => products.productMediaFormat === "Vinyl")
-  const apparelArray = products.filter(products => products.productMediaFormat === "Apparel")
-
-  const allProducts = products.map((products, index) => (
-    
-    <div className="productCard" key={index}>
-
-      <Product product={products} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-      
-    </div>
-
-  ))
-
-  const filmProducts = filmArray.map((products, index) => (
-    <div className="productCard" key={index}>
-
-    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-    
-    </div>
-  ))
-
-  const videoProducts = videoArray.map((products, index) => (
-    <div className="productCard" key={index}>
-
-    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-    
-    </div>
-  ))
-
-  const originalProducts = originalArray.map((products, index) => (
-    <div className="productCard" key={index}>
-
-    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-    
-    </div>
-  ))
-
-  const cassetteProducts = cassetteArray.map((products, index) => (
-    <div className="productCard" key={index}>
-
-    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-    
-    </div>
-  ))
-
-  const vinylProducts = vinylArray.map((products, index) => (
-    <div className="productCard" key={index}>
-
-    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-    
-    </div>
-  ))
-
-  const apparelProducts = apparelArray.map((products, index) => (
-    <div className="productCard" key={index}>
-
-    <Product  product={products} productQuantity={productQuantity} handleProductQuantity={handleProductQuantity} cart={cart} setCart={setCart} setCartCount={setCartCount} />
-    
-    </div>
-  ))
 
   const allStock = products.map((product, index) => (
 
@@ -421,19 +290,6 @@ const editGet = (id) => {
     
   ): null;
 
-  // const test = products.filter(post => {
-  //   if (query === '') {
-  //     return post;
-  //   } else if (post.productName.toLowerCase().includes(query.toLowerCase())) {
-  //     return post;
-  //   }
-  // }).map((post) => (
-  //   <div key={post._id}>
-  //     <p>{post.productName}</p>
-  //     <p>{post.productPrice}</p>
-  //   </div>
-  // ))
-
 
 
 
@@ -447,12 +303,9 @@ const editGet = (id) => {
 
     
       {/* React Bootstrap Nav Bar*/}
-    <Navbar collapseOnSelect expand="lg" className="navbar-bg"  sticky="top">
+      <Navbar collapseOnSelect expand="lg" className="navbar-bg"  sticky="top">
       <Container>
 
-
-
-        
         <Navbar.Brand href="/"><Image src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
@@ -487,7 +340,7 @@ const editGet = (id) => {
      {errMessage}
         <div>
           <Routes>
-            <Route path="/" element={<Home loadProductList={loadProductList} products={products} sortedPopular={sortedPopular} setSortedPopular={setSortedPopular} />} />
+            <Route path="/" element={<Home products={products} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/index" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />
