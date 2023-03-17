@@ -96,7 +96,7 @@ export default function Product(props) {
                   <Card.Title onClick={() => setModalOpen()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{props.product.productName}</Card.Title> 
                 : 
                   <Card.Title id="marquee" onClick={() => setModalOpen()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-                    {props.product.productName.length > 19 ?
+                    {props.product.productName.length > 15 ?
                       <div id="marquee__content">{props.product.productName}</div>
                     :
                     <div>{props.product.productName}</div>
