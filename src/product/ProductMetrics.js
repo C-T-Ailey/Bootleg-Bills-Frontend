@@ -29,7 +29,7 @@ export default function ProductMetrics(props) {
         if(!showEditModal){ 
             setShowEditModal(true)
             console.log("Prod ID:", props.product._id)
-            props.editGet(props.product._id)
+            editGet(props.product._id)
         } else {
             setShowEditModal(false)
         }
@@ -51,9 +51,48 @@ export default function ProductMetrics(props) {
     })
   }
 
+    const handleDelete = (id) => {
+        console.log(id)
+        console.log("clicked")
+        
+        Axios.delete(`https://bootlegbackend.herokuapp.com/product/delete?id=${id}`, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+        })
+        .then((response) => {
+            console.log(response)
+            console.log("Product record successfully deleted.")
+            props.loadProductList()
+        })
+        .catch((error) => {
+            console.log("Error deleting product record:", error)
+            props.sessionExpiredHandler()
+        })
+    }
+
     const confirmDelete = () => {
-        props.handleDelete(props.product._id)
+        handleDelete(props.product._id)
         setShowDeleteModal(false)
+    }
+
+    const editGet = (id) => {
+        console.log("Edit GET MAIN")
+        console.log(id)
+        Axios.get(`https://bootlegbackend.herokuapp.com/product/edit?id=${id}`, {
+          headers: {
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+          }
+        })
+        .then(response => {
+          var product = response.data.product
+          console.log("GET PRODUCT", product)
+          props.setProductToEdit(product)
+        })
+        .catch((error) => {
+          console.log("Error loading product information:", error)
+          props.sessionExpiredHandler()
+        })
     }
 
     const fetchOutstanding = async () => {

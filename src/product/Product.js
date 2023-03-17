@@ -39,6 +39,7 @@ export default function Product(props) {
 
 
   const handleNumber = (e) => {
+    e.stopPropagation();
     let number = numberInput.current
     // number.focus();
     let inputInt = parseInt(number.value)
@@ -48,10 +49,12 @@ export default function Product(props) {
   }
 
   const handleChange = (e) => {
+    e.stopPropagation();
     console.log(numberInput.current.value)
   }
 
-  const addToCart = (product) => {
+  const addToCart = (e, product) => {
+    e.stopPropagation();
     let preCart = []
     console.log("Cart before adding product:", props.cart)
     for (let i = 1; i <= productQuantity; i++){
@@ -84,57 +87,59 @@ export default function Product(props) {
 
 
   return (
-    <><Col style={{marginBottom: '20px'}} >
-        <Card  style={{ cursor: 'pointer'}} className="card-container">
+    <>
+
+      <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{fontWeight: "bolder"}}>
+            More about this product...
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <ProductDetail product={props.product} cart={props.cart} setCart={props.setCart}/>
+
+        </Modal.Body>
+      </Modal>
+    
+      <Col style={{marginBottom: '20px'}} >
+        <Card  style={{ cursor: 'pointer'}} className="card-container" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} onClick={() => setModalOpen()}>
 
           
-            <Card.Img className="imageHover" onClick={() => setModalOpen()} variant="top" src={props.product.productImageUrls[0]} />
-            <Card.Body >
-                
-                
-                {!isNameHover ? 
-                  <Card.Title onClick={() => setModalOpen()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>{props.product.productName}</Card.Title> 
-                : 
-                  <Card.Title id="marquee" onClick={() => setModalOpen()} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
-                    {props.product.productName.length > 15 ?
-                      <div id="marquee__content">{props.product.productName}</div>
-                    :
-                    <div>{props.product.productName}</div>
-                    }
-                  </Card.Title>
+          <Card.Img className="imageHover" variant="top" src={props.product.productImageUrls[0]} />
+          
+          <Card.Body >
+              
+            {!isNameHover ? 
+              <Card.Title>{props.product.productName}</Card.Title> 
+            : 
+              <Card.Title id="marquee">
+                {props.product.productName.length > 15 ?
+                  <div id="marquee__content">{props.product.productName}</div>
+                :
+                <div>{props.product.productName}</div>
                 }
-                <hr></hr>
-                <Card.Text onClick={() => setModalOpen()} >£{props.product.productPrice}</Card.Text>
-                
+              </Card.Title>
+            }
+            <hr></hr>
+            
+            <Card.Text >£{props.product.productPrice}</Card.Text>
+            
+            <Card.Text  style={divStyle}>{stockAlert}</Card.Text>
 
-                <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
-                  <Modal.Header closeButton>
-                    <Modal.Title style={{fontWeight: "bolder"}}>
-                      More about this product...
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-  
-                    <ProductDetail product={props.product} cart={props.cart} setCart={props.setCart}/>
+            <div className="button-container">
+              <Button size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
+                <input disabled={props.product.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} max={props.product.productStock} onChange={(e) => handleChange(e)} ></input>
+              <Button size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
+            </div>
+            <Button size="" disabled={props.product.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={(e) => addToCart(e, props.product)} style={{marginBottom: '10px'}}> Add To Cart </Button>
 
-                  </Modal.Body>
-                </Modal>
+            &nbsp; 
 
-                <Card.Text onClick={() => setModalOpen()}  style={divStyle}>{stockAlert}</Card.Text>
-                <div className="button-container">
-                  <Button size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
-                    <input disabled={props.product.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} max={props.product.productStock} onChange={(e) => handleChange(e)} ></input>
-                  <Button size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
-                  
-                </div>
-                <Button size="" disabled={props.product.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={() => addToCart(props.product)} style={{marginBottom: '10px'}}> Add To Cart </Button>
-                 &nbsp; 
-
-
-            </Card.Body>
+          </Card.Body>
 
         </Card>
-        </Col>
+      </Col>
     </>
   )
 }
