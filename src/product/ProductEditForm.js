@@ -39,7 +39,7 @@ export default function ProductEditForm(props) {
   setHasVariant(props.product.hasVariant)
   }, [])
   
-  // Handles changes to most plain text fields.
+  // Handles changes to most plain text fields: name, source, price, description, stock, audio
   const handleChange = (e) => {
     !formAltered ? setFormAltered(true) : console.log("Form already altered")
     console.log(updatedProduct)

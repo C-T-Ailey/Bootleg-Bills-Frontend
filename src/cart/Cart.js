@@ -9,6 +9,10 @@ export default function Cart(props) {
 
     const [cartDisplayArr, setCartDisplayArr] = useState([])
 
+    useEffect(()=>{
+        console.log("Cart:",props.cart)
+    },[])
+
     useEffect(() => {
         console.log(props.cart)
         setCartDisplayArr(Array.from(new Set(props.cart)))

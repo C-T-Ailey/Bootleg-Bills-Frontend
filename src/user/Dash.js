@@ -5,12 +5,23 @@ import ProductCreateForm from '../product/ProductCreateForm'
 import { Button, Modal } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
 import './Dash.css'
+import ProductMetrics from '../product/ProductMetrics'
 
 export default function Dash(props) {
 
     const navigate = useNavigate()
 
     const token = localStorage.getItem("token")
+
+    const allStock = props.products.sort((a,b) => (a.productName > b.productName) ? 1 : -1).map((product, index) => (
+
+        <div key={index}>
+    
+            <ProductMetrics product={product} productId={props.productToEdit._Id} productToEdit={props.productToEdit} setProductToEdit={props.setProductToEdit} loadProductList={props.loadProductList} sessionExpiredHandler={props.sessionExpiredHandler}/>
+    
+        </div>
+    
+      ))
 
     useEffect(() => {
         let timeNow = new Date().valueOf()
@@ -87,7 +98,7 @@ export default function Dash(props) {
                     <h4>Product inventory</h4>
                     <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
                     <div className='inventory-list scroll'>
-                    {props.allStock}
+                    {allStock}
                     </div>
                 </div>
             </div>

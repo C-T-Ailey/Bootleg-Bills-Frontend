@@ -50,7 +50,7 @@ export default function AboutBills(props) {
         <p>www.pixpine.com</p>
 
         <h5>Multi-tape Set Mockup Template</h5>
-        <p>www.orderrecordlabels.com</p>
+        <p>www.otherrecordlabels.com</p>
 
         <h5>Vinyl Record Mockup Template</h5>
         <p>MadeByMe @ www.graphicburger.com</p>

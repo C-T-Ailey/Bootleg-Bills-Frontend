@@ -73,10 +73,11 @@ This specific repository is for the application's frontend, to which the majorit
   * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
     * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
+* Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel occasionally briefly appears just once before displaying the populated carousel. Efforts continue to be made to fix fully.
-* :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
-  * Fully fixed.
+* :warning: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
+  * Partially fixed - the behaviour of the "Has variants?" selection has been corrected, but updating any given product's details will sometimes clear a product's productMediaFormat property.
 * :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
   * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
 * :white_check_mark: On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.

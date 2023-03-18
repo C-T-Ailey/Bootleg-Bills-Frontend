@@ -146,45 +146,6 @@ export default function App() {
       console.log(error.response.data)
     })
   }
-  
-  const handleDelete = (id) => {
-    console.log(id)
-    console.log("clicked")
-    
-    Axios.delete(`https://bootlegbackend.herokuapp.com/product/delete?id=${id}`, {
-      headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    })
-    .then((response) => {
-        console.log(response)
-        console.log("Product record successfully deleted.")
-        loadProductList()
-    })
-    .catch((error) => {
-        console.log("Error deleting product record:", error)
-        sessionExpiredHandler()
-    })
-}
-
-const editGet = (id) => {
-  console.log("Edit GET MAIN")
-  console.log(id)
-  Axios.get(`https://bootlegbackend.herokuapp.com/product/edit?id=${id}`, {
-    headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-    }
-  })
-  .then(response => {
-    var product = response.data.product
-    console.log("GET PRODUCT", product)
-    setProductToEdit(product)
-  })
-  .catch((error) => {
-    console.log("Error loading product information:", error)
-    sessionExpiredHandler()
-  })
-}
 
   const makeCart = (cartItems) => {
     // e.preventDefault()
@@ -210,16 +171,6 @@ const editGet = (id) => {
       navigate("/login")
     }
   }
-
-  const allStock = products.map((product, index) => (
-
-    <div key={index}>
-
-        <ProductMetrics product={product} setProducts={setProducts} handleDelete={handleDelete} editGet={editGet} productId={productToEdit._id} productToEdit={productToEdit} setProductToEdit={setProductToEdit} loadProductList={loadProductList}/>
-
-    </div>
-
-  ))
 
   const loginHandler = (cred) => {
     console.log(cred)
@@ -345,7 +296,7 @@ const editGet = (id) => {
             <Route path="/index" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash user={user} role={userRole} allStock={allStock} products={products} allOrders={allOrders} setAllOrders={setAllOrders} setProducts={setProducts} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
+            <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
             <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
