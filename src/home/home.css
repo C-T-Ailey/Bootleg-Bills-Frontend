@@ -59,10 +59,6 @@
     
 }
 
-.sourceImage {
-    border: 2px solid black;
-}
-
 .imageBg {
     height: 400px;
 }
@@ -120,10 +116,6 @@
     opacity: 1;
 }
 
-#test {
-    border-radius: 10px !important;
-}
-
 .search{
     text-align: center;
     width: 60rem;
@@ -141,10 +133,15 @@
     height: 50px;
 }
 
+.billsLogo {
+    max-width: 300px;
+}
+
 .homepage-welcome {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    margin-top: 2rem;
 }
 
 .homepage-welcome p {
@@ -153,7 +150,6 @@
 }
 
 .homepage-logo {
-    margin: 30px 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,7 +165,16 @@
 }
 
 .homepage-about {
-    width: 40%;
+    margin-left: 5rem;
+}
+
+.homepage-about p {
+    width: 30vw;
+}
+
+.about-link {
+    display: flex;
+    text-decoration: none;
 }
 
 .loading {
@@ -221,28 +226,54 @@
     .homepage-welcome {
         display: flex;
         flex-direction: column;
+        align-items: center;
         /* justify-content: flex-start; */
     }
-
+    
     .homepage-logo {
         display: flex;
         justify-content: center;
     }
     
-    .homepage-about p {
-        width: 100vw;
-        text-align: center;
-        padding-left: 2vw;
-        padding-right: 2vw;
+    .billsLogo {
+        max-width: 225px;
+    }
+    
+    .homepage-logo p {
+        margin-top: auto;
+        font-size: 1rem;
     }
     
     .homepage-about {
-        width: 100vw;
+        width: 90vw;
+        margin-left: 0px;
+        margin-top: 2rem;
     }
+    
+    .homepage-about p {
+        font-size: 1rem;
+        width: 90vw;
+        text-align: center;
+    }
+    
     .about-link {
-        width: 100vw;
+        width: 70vw;
         display: flex;
-        justify-content: center;
+        text-align: center;
+        text-decoration: none;
+        margin: auto;
+    }
+
+    .upcoming {
+        max-width: 90vw;
+        font-size: 1.2rem;
+        text-align: center;
+        margin: auto;
+    }
+
+    .comingList {
+        list-style-position: inside;
+        padding: 0px 15px 0px 15px;
     }
 
 

@@ -13,14 +13,13 @@ import Home from './home/Home'
 import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
-import {Alert} from 'react-bootstrap'
 import Footer from './footer/Footer'
 import Checkout from './cart/Checkout' 
 import OrderConfirmation from './cart/OrderConfirmation'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Container, Nav, Navbar, Image } from 'react-bootstrap';
+import { Container, Nav, Navbar, Image, Alert } from 'react-bootstrap';
 import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
@@ -259,7 +258,7 @@ export default function App() {
 
     
       {/* React Bootstrap Nav Bar*/}
-      <Navbar collapseOnSelect expand="lg" className="navbar-bg"  sticky="top">
+      <Navbar id="navId" collapseOnSelect="true" expand="lg" className="navbar-bg"  sticky="top">
       <Container >
 
         <Navbar.Brand href="/"><Image src={logo} height="50px" /></Navbar.Brand>

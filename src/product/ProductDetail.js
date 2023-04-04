@@ -85,11 +85,11 @@ export default function ProductDetail(props) {
   }
 
   // const imgThumbsSansBestSeller = props.product.productImageUrls.slice(0, -1)
-  const imgThumbsSansBestSeller = props.product.productImageUrls
+  const imgThumbs = props.product.productImageUrls
 
-  console.log(imgThumbsSansBestSeller)
+  console.log(imgThumbs)
   
-  const imgThumbs = imgThumbsSansBestSeller.map((url, index) =>
+  const mapThumbs = imgThumbs.map((url, index) =>
     <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
       <img className='thumb' id={`thumb-${index}`} src={props.product.productImageUrls[index]} alt={`thumb-${index}`} />
     </div>
@@ -109,7 +109,7 @@ export default function ProductDetail(props) {
         </div>
         
         <div className='img-thumbs'>
-          {imgThumbs}
+          {mapThumbs}
         </div>
       </div>
       

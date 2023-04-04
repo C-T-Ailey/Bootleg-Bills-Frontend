@@ -39,14 +39,14 @@ export default function Footer(props) {
 
       <div>
         <NewsLetter addNewsletterEmail={props.addNewsletterEmail}/>
-        </div>
+      </div>
       
+      <div className='footer-heading footer-3 copyright'>
+        <p>&copy; 2022 Chris Ailey, Chris Carey & Ailish McLaughlin</p>
+      </div>
       
     </div>
     
-    <div className='copyright'>
-      <p>&copy; 2022 Chris Ailey, Chris Carey & Ailish McLaughlin</p>
-    </div>
     
     </div>
 
