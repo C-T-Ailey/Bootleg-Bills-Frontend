@@ -247,10 +247,6 @@ export default function ProductEditForm(props) {
                 
                 <Form.Group>
                     <Form.Label>Product Image URLs &#40;max. 8&#41;</Form.Label>
-                    {/* <Form.Control id='0' onChange={(e) => handleUrlChange(e)} defaultValue={props.product.productImageUrls[0]}></Form.Control>
-                    <Form.Control id='1' onChange={(e) => handleUrlChange(e)} defaultValue={props.product.productImageUrls[1]}></Form.Control>
-                    <Form.Control id='2' onChange={(e) => handleUrlChange(e)} defaultValue={props.product.productImageUrls[2]}></Form.Control>
-                    <Form.Control id='3' onChange={(e) => handleUrlChange(e)} defaultValue={props.product.productImageUrls[3]}></Form.Control> */}
                     <div id='imageUrls'>
                         {urls.map((url, index) => (
                             index === 0 ?
@@ -263,7 +259,7 @@ export default function ProductEditForm(props) {
                         ))}
                     </div>
                     <Button variant='primary' disabled={urls.length !== 8 ? false : true} onClick={(e) => handleAddImgField(e)}>+</Button>
-                    <Button variant="primary" onClick={() => console.log(urls)}>Check new images</Button>
+                    {/* <Button variant="primary" onClick={() => console.log(urls)}>Check new images</Button> */}
                 </Form.Group>
 
                 <Form.Group>
@@ -283,10 +279,6 @@ export default function ProductEditForm(props) {
                 
                     (<Form.Group>
                         <Form.Label>Variants</Form.Label>
-                        {/* <Form.Control id='var0' defaultValue={props.product.productVariants[0]} onChange={(e) => handleVariantUpdate(e)}></Form.Control>
-                        <Form.Control id='var1' defaultValue={props.product.productVariants[1]} onChange={(e) => handleVariantUpdate(e)}></Form.Control>
-                        <Form.Control id='var2' defaultValue={props.product.productVariants[2]} onChange={(e) => handleVariantUpdate(e)}></Form.Control>
-                        <Form.Control id='var3' defaultValue={props.product.productVariants[3]} onChange={(e) => handleVariantUpdate(e)}></Form.Control> */}
                         <div id='variants'>
                         {variants.map((variant, index) => (
                             index === 0 ?
@@ -299,7 +291,7 @@ export default function ProductEditForm(props) {
                         ))}
                     </div>
                     <Button variant='primary' disabled={urls.length !== 8 ? false : true} onClick={(e) => handleAddVarField(e)}>+</Button>
-                    <Button variant="primary" onClick={() => console.log(variants)}>Check new variants</Button>
+                    {/* <Button variant="primary" onClick={() => console.log(variants)}>Check new variants</Button> */}
                     </Form.Group>)
 
                     :
