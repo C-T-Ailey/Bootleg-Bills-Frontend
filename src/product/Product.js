@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
-import ProductDetail from './ProductDetail';
+import ProductDetail from './ProductDetail.js';
+import {BsCartPlusFill} from 'react-icons/bs'
 import Button from 'react-bootstrap/Button';
-
 import { Col, Modal } from "react-bootstrap";
 import './Product.css' 
 
@@ -53,6 +53,10 @@ export default function Product(props) {
     console.log(numberInput.current.value)
   }
 
+  const handleInput = (e) => {
+    e.stopPropagation();
+  }
+
   const addToCart = (e, product) => {
     e.stopPropagation();
     let preCart = []
@@ -68,10 +72,14 @@ export default function Product(props) {
   const divStyle ={
     color: 'black',
   }
+
+  const handleDisabledClick = (e) => {
+    e.stopPropagation();
+  }
   
 
   if (productStock === 0){
-    stockAlert = "OUT OF STOCK"
+    stockAlert = "SOLD OUT"
     divStyle.color = 'red'    
 
   } else if (productStock <= 20 ){
@@ -123,18 +131,29 @@ export default function Product(props) {
             }
             <hr></hr>
             
-            <Card.Text >£{props.product.productPrice}</Card.Text>
-            
-            <Card.Text  style={divStyle}>{stockAlert}</Card.Text>
-
-            <div className="button-container">
-              <Button size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> - </Button>
-                <input disabled={props.product.productStock === 0 ? true : false} className='numInput' type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} max={props.product.productStock} onChange={(e) => handleChange(e)} ></input>
-              <Button size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' onClick={(e) => handleNumber(e)}> + </Button> &nbsp;
+            <div className='priceStock'>
+              
+              <Card.Text >£{props.product.productPrice}</Card.Text>
+              
+              <Card.Text style={divStyle}>{stockAlert}</Card.Text>
+              
             </div>
-            <Button size="" disabled={props.product.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={(e) => addToCart(e, props.product)} style={{marginBottom: '10px'}}> Add To Cart </Button>
-
-            &nbsp; 
+            
+            <div className="button-container">
+              <div className={props.product.productStock !== 0 ? "quantity-container" : "disabled-quantity-container"} onClick={(e) => handleDisabledClick(e)}>
+                <Button id="reduceQuant" size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' className='shadow-none' onClick={(e) => handleNumber(e)}> - </Button>
+                  <input disabled={props.product.productStock === 0 ? true : false} readOnly={true} className='numInput' id="numInput" type="text" inputMode='numeric' ref={numberInput} defaultValue={1} min={1} max={props.product.productStock} onClick={(e) => handleInput(e)} onChange={(e) => handleChange(e)}></input>
+                <Button id="increaseQuant" size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' className='shadow-none' onClick={(e) => handleNumber(e)}> + </Button>
+              </div>
+              <div className={props.product.productStock !== 0 ? "add-cart-container" : "cart-container-disabled"} id="add-cart-container" onClick={(e) => handleDisabledClick(e)}>
+                <Button disabled={props.product.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={(e) => addToCart(e, props.product)} style={{marginBottom: '10px'}}> 
+                    {/* Add To Cart  */}
+                    <div>
+                      <BsCartPlusFill size={30}></BsCartPlusFill>
+                    </div>
+                </Button>
+              </div>
+            </div>
 
           </Card.Body>
 

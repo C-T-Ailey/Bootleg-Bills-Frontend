@@ -4,7 +4,7 @@ import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
 import AboutBills from './home/AboutBills'
-import {Route, Routes, Link, useNavigate} from 'react-router-dom'
+import {Route, Routes, Link, NavLink, useNavigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
 import Product from './product/Product'
@@ -30,13 +30,14 @@ import logo from './product/images/nav_logo_new.png'
 
 export default function App() {
 
+  // window location handler
+
+
   // Cart array,
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
   
   const navigate = useNavigate()
-
-
 
   const [isAuth, setIsAuth] = useState(false)
   const [user, setUser] = useState({})
@@ -52,6 +53,8 @@ export default function App() {
   const [sortedPopular, setSortedPopular] = useState([])
 
   useEffect(() => {
+
+    
 
     console.log("useEffect triggered")
     loadProductList()
@@ -85,6 +88,8 @@ export default function App() {
     console.log(cart)
 
   }, [cart])
+
+
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
@@ -184,7 +189,7 @@ export default function App() {
         setUser(user)
         console.log(user.user.role)
         setUserRole(user.user.role)
-        user.user.role === "seller" ? navigate("/manage") : navigate("/index")
+        user.user.role === "seller" ? navigate("/manage") : navigate("/products")
         console.log("User successfully logged in.")
         setSuccessMessage("User successfully logged in.")
         setTimeout(() => {
@@ -255,7 +260,7 @@ export default function App() {
     
       {/* React Bootstrap Nav Bar*/}
       <Navbar collapseOnSelect expand="lg" className="navbar-bg"  sticky="top">
-      <Container>
+      <Container >
 
         <Navbar.Brand href="/"><Image src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
@@ -264,7 +269,7 @@ export default function App() {
           { isAuth ? (
           <>
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
-          <Nav.Link as={Link} to="/index"> Products</Nav.Link>
+          <Nav.Link as={Link} to="/products"> Products</Nav.Link>
           <Nav.Link as={Link} to="/logout" onClick={onLogoutHandler}>Logout</Nav.Link>
           <Nav.Link as={Link} to="/manage"> 
           <Navbar.Text className="dash-link">
@@ -277,7 +282,7 @@ export default function App() {
           ):(
           <>
           <Nav.Link as={Link} to="/"> Home</Nav.Link>
-          <Nav.Link as={Link} to="/index"> Products</Nav.Link>
+          <Nav.Link as={Link} to="/products"> Products</Nav.Link>
           <Nav.Link as={Link} to="/login"> Login</Nav.Link>
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
           <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cart.length} </Badge></Nav.Link>          
@@ -289,7 +294,7 @@ export default function App() {
     </Navbar>
      {sucMessage}
      {errMessage}
-        <div>
+        {/* <div id='slashRouting'>
           <Routes>
             <Route path="/" element={<Home products={products} />} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
@@ -301,8 +306,20 @@ export default function App() {
             <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>
+        </div> */}
+        <div id='slashRouting'>
+          <Routes>
+            <Route path="/" element={<Home products={products} />} />
+            <Route path="/signup" element={<Signup register={registerHandler} />} />
+            <Route path="/products" element={<ProductList cart={cart} setCart={setCart}/>} />
+            <Route path="/about" element={<AboutBills />} />
+            <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
+            <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
+            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
+            <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
+          </Routes>
         </div>
-
 
 
 

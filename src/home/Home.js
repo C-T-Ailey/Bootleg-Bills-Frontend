@@ -27,6 +27,8 @@ export default function Home(props) {
 
     const [getOrderState, setGetOrderState] = useState([])
 
+    const [lock, setLock] = useState(true)
+
     // function to retrieve all orders from db
     const getOrder = async () => {
       const data = await Axios.get('https://bootlegbackend.herokuapp.com/orders/index');
@@ -37,6 +39,7 @@ export default function Home(props) {
       // run getOrder, then set getOrderState to the response
       getOrder().then(response => setGetOrderState(response));
       console.log(getOrderState)
+      window.scrollTo(0, 0)
     },[])
     
 
@@ -49,8 +52,6 @@ export default function Home(props) {
     
           // map function for mapping each product in db's ID
           const mapIds = props.products ? props.products.map(product => product._id) : []
-      
-          console.log(mapIds)
       
       
           // for each product ID in mapIds,
@@ -114,51 +115,68 @@ export default function Home(props) {
     // if(!props.products.length || top3Products.length !== 3){
 
     // if the "popular" state isn't populated with the full product list sorted by times ordered,
-    if(Object.keys(popular).length !== Object.keys(props.products).length){
-      // return a plain screen stating "Loading..."
-      return (
-        <div>
-          <p>Loading...</p>
-        </div>
-      )
-    }
+    // if(Object.keys(popular).length !== Object.keys(props.products).length){
+    //   // return a plain screen stating "Loading..."
+    //   return (
+    //     <div>
+    //       <p>Loading...</p>
+    //     </div>
+    //   )
+    // }
 
-    // when top3Products is fully populated and the "popular" state's length matches that of props.products, let 'er rip.
-    else {
+    // // when top3Products is fully populated and the "popular" state's length matches that of props.products, let 'er rip.
+    // else {
  
     return (
       
         
       <>
       
-        <div className='bestsellerCarousel'>
-          <div className='bestseller-head'>
-            <h2>Bill's Best Sellers</h2>
+        { Object.keys(popular).length !== Object.keys(props.products).length ?
+
+          <div className='loading'>
+            <p>Loading bestsellers...</p>
           </div>
-          <Carousel className='main-slide' swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"80rem"}>
-            {/* Map each of the top3Products to a div with a key corresponding to its product id */}
-            {top3Products.map(popProduct => (
-                <div key={popProduct.product._id}>
-                  <div className="type">
-                    {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
-                    <Link className='bestLink' to={'/index'} state={popProduct.product}>
-                      {popProduct.product.productName}
-                    </Link>
+
+          :
+          
+          <>
+          <div className='bestsellerCarousel'>
+
+            <div className='bestseller-head'>
+              <h2>Bill's Best Sellers</h2>
+            </div>
+            
+            <Carousel className='main-slide' showThumbs={false} swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"80rem"}>
+              {/* Map each of the top3Products to a div with a key corresponding to its product id */}
+              {top3Products.map(popProduct => (
+                  <div key={popProduct.product._id}>
+                    <div className="type">
+                      {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
+                      <Link className='bestLink' to={'/index'} state={popProduct.product}>
+                        {popProduct.product.productName}
+                      </Link>
+                      </div>
+                    {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
+                    <div className='carousel-source'> {popProduct.product.productSourceType!== "Original Release" ? `From "${popProduct.product.productSource}"` : `By ${popProduct.product.productSource}`}</div>
+                    {/* background image taken from the last index of popProduct's productImageUrls property array */}
+                    <div className='imageBg'>
+                      {/* <img src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/> */}
+                      <img src={popProduct.product.productBestsellerImage}/>
                     </div>
-                  {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
-                  <div className='carousel-source'> {popProduct.product.productSourceType!== "Original Release" ? `From "${popProduct.product.productSource}"` : `By ${popProduct.product.productSource}`}</div>
-                  {/* background image taken from the last index of popProduct's productImageUrls property array */}
-                  <img alt="" src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/>
-                </div>
-            ))}
-          </Carousel>
-        </div>
+                  </div>
+              ))}
+            </Carousel>
+          </div>
+        </>
+        }
       
 
         <div className='homepage-welcome'>
           <div className='homepage-logo'> 
           <h3>Welcome to</h3>
           <Image src={bigLogoNew} alt="" height={300} width={300}/>
+          <p>(This site is best displayed in Chrome. Firefox doesn't seem to like us much.)</p>
           </div>
           <div className="homepage-about">
             <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
@@ -186,5 +204,5 @@ export default function Home(props) {
      </>
     )
   }
-}
+// }
 

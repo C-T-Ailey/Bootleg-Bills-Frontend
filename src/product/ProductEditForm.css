@@ -1,0 +1,4 @@
+#editContainer {
+    display: flex;
+    flex-direction: column;
+}

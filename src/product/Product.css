@@ -14,6 +14,106 @@ input{
     height: 20px;
 } */
 
+/* .card {
+    width: 15em;
+} */
+
+.btn-secondary:focus {
+    background-color: #FF2273;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.quantity-container {
+    display: flex;
+    background-color: #FF2273;
+    border: 2px solid #FF2273;
+    border-radius: 5px;
+    max-width: fit-content;
+}
+
+.disabled-quantity-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid rgb(255, 255, 255);
+    outline: 2px solid #cccccc;
+    border-radius: 5px;
+    max-width: fit-content;
+    cursor: default;
+}
+
+.numInput {
+    height: 33px;
+    width: 33px;
+    text-align: center;
+    border-radius: 0;
+    border-color: white;
+    margin-top: 0px;
+    cursor: default;
+}
+
+#numInput:disabled {
+    height: 33px;
+    width: 33px;
+    text-align: center;
+    border-radius: 0px;
+    margin-top: 0px;
+    cursor: default;
+}
+
+#reduceQuant {
+    height: 33px;
+    width: 33px;
+    border-radius: 5px 0 0 5px;
+    border-color: white;
+    margin-top: 0px;
+}
+
+#reduceQuant:hover {
+    border: 2px solid #FF2273;
+}
+
+#reduceQuant:disabled {
+    height: 33px;
+    width: 33px;
+    border-radius: 5px 0 0 5px;
+    border-color: grey;
+    margin-top: 0px;
+}
+
+#increaseQuant {
+    height: 33px;
+    width: 33px;
+    border-radius: 0 5px 5px 0;
+    border-color: white;
+    margin-top: 0px;
+}
+
+#increaseQuant:hover {
+    border: 2px solid #FF2273;
+}
+
+#increaseQuant:disabled {
+    height: 33px;
+    width: 33px;
+    border-radius: 0 5px 5px 0;
+    border-color: grey;
+    margin-top: 0px;
+    cursor: default;
+}
+
+.cart-container-disabled {
+    cursor: default;
+}
+
+#addToCart:disabled {
+    cursor: default;
+}
+
 .card-title {
     font-weight: bold;
     color: black;
@@ -22,7 +122,6 @@ input{
 .card-text {
     font-weight: bold;
 }
-
 
 #marquee {
     --gap: 1rem;
@@ -33,20 +132,27 @@ input{
     gap: var(--gap);
   }
   
-  #marquee__content {
+#marquee__content {
     animation: marquee 10s linear infinite;
     flex-shrink: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: left;
     gap: var(--gap);
     min-width: 100%;
-  }
+}
     
-    @keyframes marquee {
+@keyframes marquee {
     10% {
         transform: translateX(0%);
     }
     100% {
         transform: translateX(calc(-100% - var(--gap)));
     }
-  }
+}
+
+.priceStock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: right;
+}

@@ -14,6 +14,8 @@ export default function ProductMetrics(props) {
 
     const [totalOrdered, setTotalOrdered] = useState(0)
 
+    const [productToEdit, setProductToEdit] = useState("")
+
     useEffect(() => {
         fetchOutstanding()
         fetchTotal()
@@ -27,9 +29,9 @@ export default function ProductMetrics(props) {
         
         console.log(props.product)
         if(!showEditModal){ 
+            editGet(props.product._id)
             setShowEditModal(true)
             console.log("Prod ID:", props.product._id)
-            editGet(props.product._id)
         } else {
             setShowEditModal(false)
         }
@@ -87,7 +89,8 @@ export default function ProductMetrics(props) {
         .then(response => {
           var product = response.data.product
           console.log("GET PRODUCT", product)
-          props.setProductToEdit(product)
+        //   props.setProductToEdit(product)
+          setProductToEdit(product)
         })
         .catch((error) => {
           console.log("Error loading product information:", error)
@@ -151,7 +154,7 @@ export default function ProductMetrics(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <ProductEditForm loadProductList={props.loadProductList} showModal={setShowEditModal} product={props.product} updateProduct={updateProduct} productToEdit={props.productToEdit}/>
+                <ProductEditForm loadProductList={props.loadProductList} showModal={setShowEditModal} product={props.product} updateProduct={updateProduct} productToEdit={productToEdit}/>
             </Modal.Body>
         </Modal>
 

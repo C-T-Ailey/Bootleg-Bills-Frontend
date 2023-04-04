@@ -1,7 +1,8 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { Alert, Button, Container, Form } from 'react-bootstrap'
 import Axios from 'axios'
-import './Product.css'
+// import './Product.css'
+import './ProductCreateForm.css'
 
 export default function ProductCreateForm(props) {
 
@@ -18,9 +19,15 @@ export default function ProductCreateForm(props) {
 
     const [hasVariant, setHasVariant] = useState(false)
 
+    const [variants, setVariants] = useState([""])
+
     const [mediaAltered, setMediaAltered] = useState(false)
 
     const [newImageSet, setNewImageSet] = useState([])
+
+    const [characterCount, setCharacterCount] = useState(0)
+
+    const [urls, setUrls] = useState(["Image 1"])
 
     const defaultSourceType = "Film/TV"
 
@@ -32,37 +39,106 @@ export default function ProductCreateForm(props) {
 
     const error = props.error
 
+    // useEffect(()=>{
+    //     console.log("test")
+    // },[urls])
+    
     const handleChange = (e) => {
-
+        // product attribute to change is defined as the event target's name, e.g. productName, productAudio
         const attributeToChange = e.target.name
-
+        // value for attribute to change is defined as event target's value
         const newValue = e.target.value
-
+        // define product as current state of newProduct object
         const product = {...newProduct}
-
+        // the property of product corresponding to attributeToChange is set to newValue
         product[attributeToChange] = newValue
-
+        
+        // newProduct is set to product
         setNewProduct(product)
     }
-
+    
+    const handleDescrChange = (e) => {
+        // product attribute to change is defined as the event target's name, productDescription
+        const description = e.target.name
+        // description's value is set to event target's value
+        const newValue = e.target.value
+        // define product as current state of newProduct object
+        const product = {...newProduct}
+        // product description is set to newValue
+        product[description] = newValue
+        
+        // set characterCount to the length of newValue, for tracking remaining characters vs limit
+        setCharacterCount(newValue.length)
+        
+        // newProduct is set to product
+        setNewProduct(product)
+    }    
+    
+    
     const handleUrlChange = (e) => {
-
+        // the ID of the url being changed is defined as the value of the event target's ID
         let urlToChange = e.target.id
-
         console.log(urlToChange)
 
-        const newValue = e.target.value
-
-        console.log(newValue)
-
-        const images = [...newImageSet]
-
-        images[urlToChange] = newValue
         
-        console.log(images)
+        // new value of URL is set to the value of the event target
+        const newValue = e.target.value
+        console.log(newValue)
+        
+        // var images defaulted to the contents of newImageSet state
+        const images = [...newImageSet]
+        
+        // if event target ID denotes it as the primary image:
+        if(e.target.id === "primary"){
+            // index 0 of images is set to newValue
+            images[0] = newValue
 
+        // otherwise,
+        } else {
+            // the image at the index corresponding with urlToChange is set to newValue
+            images[urlToChange] = newValue
+        }
+
+        
+        // log the image set
+        console.log(images)
+        
+        // set newImageSet to the defined array of images
         setNewImageSet(images)
         
+    }
+
+    const handleAddImgField = (e) => {
+        
+        let currentUrls = Array.from(urls)
+        currentUrls.push(`Image ${currentUrls.length + 1}`)
+        setUrls(currentUrls)
+        
+    }
+
+    const handleAddVarField = (e) => {
+        
+        let currentVars = Array.from(variants)
+        currentVars.push(``)
+        setVariants(currentVars)
+        
+    }
+
+    const handleRemoveUrl = (e) => {
+        let currentUrls = Array.from(urls)
+        const found = currentUrls.find(element => element === e.target.id)
+        currentUrls.splice(currentUrls.indexOf(found),1)
+        setUrls(currentUrls)
+    }
+
+    const handleRemoveVariant = (e) => {
+        let currentVars = Array.from(variants)
+        console.log("current field text:",e.target.innerText)
+        console.log("ID of element to delete:",e.target.id, typeof parseInt(e.target.id))
+        console.log("Value of the element at index [id]:",currentVars[parseInt(e.target.id)])
+        console.log(currentVars.splice(parseInt(e.target.id),1))
+        console.log("current variants:",currentVars)
+        setVariants(currentVars)
     }
 
     const handleSelectChange = (event) => {
@@ -88,7 +164,29 @@ export default function ProductCreateForm(props) {
         product[event.target.name] = event.target.value
         console.log(product)
         setNewProduct(product)
+    }
 
+    const handleVariant = (e) => {
+        console.log(e.target.id)
+        // array of new variants initialised as current "variants" state
+        const newVars = Array.from(variants)
+        // index of variation to change is defined as event target's name
+        const editIndex = e.target.id
+
+        // new value of URL is set to the value of the event target
+        const newValue = e.target.value
+        console.log(newValue)
+        
+        // 
+        newVars[editIndex] = newValue
+
+
+        
+        // log the image set
+        console.log(newVars)
+        
+        // set newImageSet to the defined array of images
+        setVariants(newVars)
     }
 
     const handleMediaSelectChange = (event) => {
@@ -109,15 +207,16 @@ export default function ProductCreateForm(props) {
         product.productImageUrls = newImageSet
         product.productMediaFormat = document.getElementById("productMediaFormat").value
         if (variantAltered) {
-            let variantArr = [document.getElementById("var0").value, document.getElementById("var1").value, document.getElementById("var2").value, document.getElementById("var3").value]
-            let filteredVariants = []
-            variantArr.forEach(element => {
-                if (element !== "") {
-                    filteredVariants.push(element)
-                }
-            });
+            // let variantArr = [document.getElementById("var0").value, document.getElementById("var1").value, document.getElementById("var2").value, document.getElementById("var3").value]
+            // let filteredVariants = []
+            let filteredVariants = variants.filter(element => element !== "")
+            console.log(filteredVariants)
+            // variantArr.forEach(element => {
+            //     if (element !== "") {
+            //         filteredVariants.push(element)
+            //     }
+            // });
             product.productVariants = filteredVariants
-            console.log(variantArr)
             console.log("Variants added")
         }
 
@@ -204,7 +303,8 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Product Description</Form.Label>
-                <Form.Control className='select-text' name="productDescription" as="textarea" rows={5} onChange={handleChange}></Form.Control>
+                <Form.Control id="description" className='select-text' name="productDescription" as="textarea" rows={5} maxLength={600} onChange={(e) => handleDescrChange(e)}></Form.Control>
+                {<p>{characterCount}/600</p>}
             </Form.Group>
 
             <Form.Group>
@@ -213,11 +313,28 @@ export default function ProductCreateForm(props) {
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Product Image URLs &#40;up to four&#41;</Form.Label>
-                <Form.Control id='0'onChange={handleUrlChange}></Form.Control>
-                <Form.Control id='1' onChange={handleUrlChange}></Form.Control>
-                <Form.Control id='2' onChange={handleUrlChange}></Form.Control>
-                <Form.Control id='3' onChange={handleUrlChange}></Form.Control>
+                <Form.Label>Product Image URLs &#40;max. 8&#41;</Form.Label>
+                <div id='imageUrls'>
+                    {/* <Form.Control id='0'onChange={handleUrlChange}></Form.Control>
+                    <Form.Control id='1' onChange={handleUrlChange}></Form.Control>
+                    <Form.Control id='2' onChange={handleUrlChange}></Form.Control>
+                    <Form.Control id='3' onChange={handleUrlChange}></Form.Control> */}
+                    {urls.map((url, index) => (
+                        index === 0 ?
+                        <Form.Control key={index} id={"primary"} onChange={handleUrlChange} placeholder={index===0 ? "Primary Image (required)" : `Image ${index + 1}`}></Form.Control>
+                        :
+                        <div className='removable-form'>
+                            <Form.Control key={index} id={index} onChange={handleUrlChange} placeholder={`Image ${index + 1}`}></Form.Control>
+                            <Button id={`Image ${index + 1}`} onClick={(e) => handleRemoveUrl(e)}>X</Button>
+                        </div>
+                    ))}
+                </div>
+                <Button variant='primary' disabled={urls.length !== 8 ? false : true} onClick={(e) => handleAddImgField(e)}>+</Button>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Bestseller Product Image</Form.Label>
+                <Form.Control name="productBestsellerImage" onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>
@@ -231,11 +348,25 @@ export default function ProductCreateForm(props) {
             { hasVariant ? 
             
                 (<Form.Group>
-                    <Form.Label>Variants</Form.Label>
-                    <Form.Control id='var0'></Form.Control>
-                    <Form.Control id='var1'></Form.Control>
-                    <Form.Control id='var2'></Form.Control>
-                    <Form.Control id='var3'></Form.Control>
+                    {/* <Form.Label>Variants</Form.Label>
+                    <Form.Control id='var0' name={0} onChange={(e) => handleVariant(e)}></Form.Control>
+                    <Form.Control id='var1' name={1} onChange={(e) => handleVariant(e)}></Form.Control>
+                    <Form.Control id='var2' name={3} onChange={(e) => handleVariant(e)}></Form.Control>
+                    <Form.Control id='var3' name={4} onChange={(e) => handleVariant(e)}></Form.Control> */}
+                    <div id='imageVariants'>
+                        {variants.map((variant, index) => (
+                            <div className='removable-form'>
+                                <Form.Control key={index} id={`${index}`} onChange={(e) => handleVariant(e)} placeholder={`Variant ${index +1}`}></Form.Control>
+                                {index === 0 ?
+                                <></>
+                                :
+                                <Button id={`${index}`} onClick={(e) => handleRemoveVariant(e)}>X</Button>
+                                }
+                            </div>
+                        ))}
+                    </div>
+                    <Button variant='primary' disabled={variants.length !== 8 ? false : true} onClick={(e) => handleAddVarField(e)}>+</Button>
+
                 </Form.Group>)
 
                 :

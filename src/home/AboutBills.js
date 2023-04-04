@@ -12,7 +12,7 @@ export default function AboutBills(props) {
       <div className='billsStory'>
           <h2>The Legend of Bootleg Bill</h2>
           <div className='billsP'>
-            <p>Hi! I'm Chris Ailey - Founder, Product Graphics Designer and contributing Web Developer for <span className='bigBill'>Bootleg Bill's Unofficial Audio Rarities.</span> Disregard the spiel on the homepage -- that's mostly just fluff to make us sound like a genuine commercial endeavour. The true story is this: 
+            <p>Hi! I'm Chris Ailey - Founder, Product Graphics Designer and co-developer for <span className='bigBill'>Bootleg Bill's Unofficial Audio Rarities.</span> Disregard the spiel on the homepage -- that's mostly just fluff to make us sound like a genuine commercial endeavour. The true story is this: 
             <br/><br/>
             In June of 2016, a fresh replay of the game 'Metal Gear Solid: Peace Walker' inspired me to start what I had intended to be a small, one-off art piece. The goal was to design and record a copy of one of the game's world-building supplements, presented as cassette recordings of characters as they discuss contemporary events and personal histories. After replicating the tape from in-game materials and recording the audio tracks, I posted images of my prototype on a music forum and caught the attention of a 'Metal Gear' super-fan. He mentioned that he enthusiastically collected merchandise relating to it, regardless of legitimacy, and after no small amount of discussion I had been commissioned for a full set: six tapes, covering seven characters' worth of audio. The order was completed in good time and promptly changed hands, but not without leaving a taste for the craft that would drive the creation of many more pieces.
             <br/><br/>
@@ -36,9 +36,31 @@ export default function AboutBills(props) {
       <div className='credits'>
         <h3>Credits</h3>
         <h5>Web design & development</h5>
-        <p>Dr. Ailish McLaughlin</p>
-        <p>Christopher Carey</p>
-        <p>Chris Ailey</p>
+        <div>
+          <p className='dev-names'>Chris Ailey</p>
+          <ul>
+              <ul>
+                <li>Active Developer</li>
+                <li>Graphic + audio design</li>
+                <li>Original contributing developer</li>
+              </ul>
+          </ul>
+            
+          <p className='dev-names'>Ailish McLaughlin</p>
+          <ul>
+            <ul>
+              <li>Original Project Co-ordinator</li>
+              <li>Original Contributing Developer</li>
+            </ul>
+          </ul>
+
+          <p className='dev-names'>Christopher Carey</p>
+          <ul>
+              <ul>
+                <li>Original Contributing Developer</li>
+              </ul>
+          </ul>
+        </div>
 
         <h5>Graphic and Audio Design</h5>
         <p>Chris Ailey</p>
