@@ -173,10 +173,9 @@ export default function Home(props) {
       
 
         <div className='homepage-welcome'>
-          <div className='homepage-logo'> 
-          <h3>Welcome to</h3>
-          <Image src={bigLogoNew} alt="" height={300} width={300}/>
-          <p>(This site is best displayed in Chrome. Firefox doesn't seem to like us much.)</p>
+          <div className='homepage-logo'>
+            <h3>Welcome to</h3>
+            <img className="billsLogo" src={bigLogoNew} alt=""/>
           </div>
           <div className="homepage-about">
             <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
@@ -187,7 +186,7 @@ export default function Home(props) {
 
         <div className="upcoming">
           <h2>{"Coming Soon!"}</h2>
-          <ul>
+          <ul className='comingList'>
             <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
             <li>Video Game: DOOM (1993), Cassette</li>
             <li>Film/TV: Blade (1998), Cassette + Vinyl</li>

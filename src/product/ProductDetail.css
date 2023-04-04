@@ -47,6 +47,7 @@ img:hover {
 .img-thumbs {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 25px
 }
@@ -93,24 +94,39 @@ img:hover {
 
 @media (max-width: 996px) {
 
-    .modal-content{
-      height: 1300px;
+    h3 {
+        font-size: 1.5rem;
+    }
     
+    .modal-content{
+        display: flex;
+        width: 95vw;
+        height: fit-content;
+        justify-self: center;
     }
     
     .detailModalFlex{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      
-    
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        
+        
+    }
+
+    .detailImg {
+        width: 94vw;
+        display: flex;
+        justify-self: center;
+        box-shadow: none;
+        border-radius: 0px;
     }
     
     .detailsInfo{
+        font-size: 1rem;
         padding-top: 20px;
         width: 100%;
-        padding-right: 10%;
+        padding-right: 0%;
         /* width: 300px;
         display: flex;
         flex-direction: row;
@@ -121,6 +137,16 @@ img:hover {
         display: none;
     }
     
+    .img-thumbs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    .div-thumb, .selected-img {
+        margin-top: 15px;
+    }
     
 }
 

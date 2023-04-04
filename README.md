@@ -49,8 +49,8 @@ This specific repository is for the application's frontend, to which the majorit
 * Implemented conditionals to hide the audio player on products without audio samples.
 * Currently selected image on the Product Details modal view can now be clicked to open the full image in a new tab.
 * Product names which are too long to fully fit on their Product card in the Products menu will now display as an animated scrolling marquee when hovered over with the mouse.
-* Separate entry in the Product model for the "Bestseller" image, instead of using whichever image occupies the last populated index of the product images array.
-* A separate field in the product create/edit form for designating the "Bestseller" image.
+* Each product's "bestseller" image, used in the homepage carousel for products which have sold enough to be among the top 3 highest selling products, can now be assigned separately when creating/editing products. This removes the previous limitation of only having four potential images and using the image occupying the last index of the product image array to represent it on the carousel.
+* Users can now add up to 8 images and variants for each product.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
 #### Planned Improvements
@@ -62,8 +62,6 @@ This specific repository is for the application's frontend, to which the majorit
   * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
 * :construction_worker: Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
   * Requires adjustments so counters renew when a product is updated without reloading the dashboard - also requires a significant loading period before orders and statistics are viewable.
-* :construction_worker: Increased number of potential images and variants for products.
-  * Adding up to 8 product images and variants upon product creation is now supported, with only minor adjustments required to expand further - not fully functional for product editing yet.
 * Improved layout for the homepage.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
 * Adjust the Product and Orders models and rewrite the "Add to Cart" function so that any selected variant for a product will be recorded in a customer's orders.

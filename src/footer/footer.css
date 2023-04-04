@@ -58,9 +58,9 @@ transition: 0.3s ease-out;
     
 }
 
-.EmailTitle{
-    /* margin-bottom: 23px; */
-}
+/* .EmailTitle{
+    margin-bottom: 23px;
+} */
 
 .emailButton{
     margin-bottom: 2rem;
@@ -76,7 +76,7 @@ transition: 0.3s ease-out;
     border: none;
     padding-left: 0.5rem;
     font-size: 1rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .emailInput::placeholder{
@@ -94,7 +94,7 @@ transition: 0.3s ease-out;
     color: #F8DC38;
     font-size: 1rem;
     font-weight: bolder;
-
+    margin: auto;
 }
 
 
@@ -113,6 +113,8 @@ transition: 0.3s ease-out;
 .copyright {
     position: absolute;
     bottom: 0px;
+    margin-bottom: 0px !important;
+    color: white;
 }
 
 @media (max-width: 1237px) {
@@ -226,12 +228,19 @@ text-align: center;
 @media (max-width: 457px) {
 
     .footer-container {
-
-        height: 35rem;
+        height: 50rem;
     }
     .clear { 
         clear: both; 
-        height: 50rem; 
+        height: 55rem; 
+    }
+
+    .copyright {
+        position: relative;
+    }
+
+    hr {
+        margin: auto;
     }
 
 }
