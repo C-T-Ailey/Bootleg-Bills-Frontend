@@ -38,7 +38,14 @@ export default function ProductList(props) {
       .catch((error) => {
         console.log(error.response.data)
       })
+
+      window.scrollTo(0, 0)
+      
     }, [])
+
+    // useEffect(()=>{
+    //   window.scrollTo(0, 0)
+    // },[])
 
     // useEffect hook for setting productList (used to render mapped products) once products state is set above
     useEffect(() => {
@@ -120,7 +127,7 @@ export default function ProductList(props) {
           ? 
             (
               
-              <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
+              <Modal className='detailsModal' bsPrefix='modal' centered show={modalIsOpen} onHide={() => setModalOpen()}>
                   <Modal.Header closeButton>
                     <Modal.Title style={{fontWeight: "bolder"}}>
                       More about this product...
@@ -181,7 +188,7 @@ export default function ProductList(props) {
           </div>
         </div>
 
-        <Container className="d-flex"  >
+        <Container id="productFlex" className="d-flex" >
 
           <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
           {/* <Row  className="m-auto align-self-center" lg={4}> */}

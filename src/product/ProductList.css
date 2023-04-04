@@ -1,5 +1,16 @@
+.modal-dialog {
+  margin-top: 1vw;
+  max-width: 90vw;
+  display: flex;
+  align-self: flex-start;
+}
+
 h1 {
     text-align: center;
+}
+
+h5 {
+  font-size: 1.8rem;
 }
 
 /* #sourceFilter, #formatFilter, #sortBy {
@@ -87,7 +98,7 @@ justify-content: center;
   color: white;
   border: 2px solid #00BFC3;
 
-  WIDTH: 94PX;
+  width: 103px;
   font-size: 13px;
   padding: 8px;
 
@@ -118,8 +129,15 @@ justify-content: center;
   white-space: nowrap;
 }
 
+#productFlex {
+  max-width: 90vw;
+  display: flex;
+  justify-content: center;
+}
+
 .productCard{
   filter: drop-shadow(0 2mm 2mm rgb(173, 173, 173, 0.3));
+  max-width: 90vw;
 }
 
 

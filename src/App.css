@@ -1,21 +1,26 @@
 body {
     font-family: 'Bungee Hairline', cursive;
     font-weight: bolder;
+    font-size: 1.3rem;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bungee', cursive;
-
+    
 }
 
 .navbar-bg {
     background-color: #00BFC3;
 }
 
+/* .container {
+    display: flex;
+    justify-content: flex-start;
+} */
+
 
 .nav-style {
     color: black;
     font-family: 'Bungee', cursive;
-
 }
 
 .nav-link {
