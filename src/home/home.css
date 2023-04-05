@@ -221,7 +221,13 @@
     
         user-select: none;
     }
-    
+
+    #imageBg {
+        display: flex;
+        justify-content: center;
+        width: 500px;
+        height: 225px;
+    }
     
     .homepage-welcome {
         display: flex;

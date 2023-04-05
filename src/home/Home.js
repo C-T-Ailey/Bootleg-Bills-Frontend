@@ -153,14 +153,14 @@ export default function Home(props) {
                   <div key={popProduct.product._id}>
                     <div className="type">
                       {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
-                      <Link className='bestLink' to={'/index'} state={popProduct.product}>
+                      <Link className='bestLink' to={'/products'} state={popProduct.product}>
                         {popProduct.product.productName}
                       </Link>
                       </div>
                     {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
                     <div className='carousel-source'> {popProduct.product.productSourceType!== "Original Release" ? `From "${popProduct.product.productSource}"` : `By ${popProduct.product.productSource}`}</div>
                     {/* background image taken from the last index of popProduct's productImageUrls property array */}
-                    <div className='imageBg'>
+                    <div id="imageBg" className='imageBg'>
                       {/* <img src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/> */}
                       <img src={popProduct.product.productBestsellerImage}/>
                     </div>
