@@ -31,6 +31,17 @@ h5 {
   border: 2px solid #FF2273;
 }
 
+#isSelected:focus {
+  outline: none !important;
+  box-shadow: none !important;
+
+}
+
+#isSelected:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 
 .btn-primary, .btn-secondary, input {
     margin-top: 5px;
@@ -86,6 +97,8 @@ h5 {
   text-align: center;
   flex-direction: column;
 }
+
+
 
 /* .filter-container{
 display: flex;
@@ -158,17 +171,39 @@ justify-content: center;
     
   }
 
-  .filter-flex-container {
-    width: 100vw;
+  /* .filter-flex-container {
+    width: 90vw;
     display: flex;
+    justify-content: center;
     align-items: center;
-  }
+  } */
 
   .filter-container {
-    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  h5 {
+    font-size: 1.3rem;
+    margin-bottom: 0px;
+    margin-top: 5px;
+  }
+
+  .filter {
+    width: 95vw;
+    height: 55px;
+  }
+
+  .filter .btn {
+    max-width: 24vw;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0;
+  }
+
+  #nbsp-span {
+    font-size: 1px;
   }
 
 }
