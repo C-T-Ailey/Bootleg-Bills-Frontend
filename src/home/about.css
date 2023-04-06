@@ -57,10 +57,19 @@
         text-align: center;
         padding: 0 1em 0 1em;
     }
+
+    .billsStory p {
+        font-size: 1rem;
+    }
   
     .credits {
         text-align: center;
         padding: 0 1em 0 1em;
+        font-size: 1rem;
+    }
+
+    .credits h5 {
+        font-size: 20px;
     }
 
   }
