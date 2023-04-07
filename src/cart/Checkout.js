@@ -19,8 +19,17 @@ export default function Checkout(props) {
     const [orderRef, setOrderRef] = useState("")
     const [sameAddress, setSameAddress] = useState(true)
 
+    console.log(orderRef)
+    console.log("at checkout")
+    const [orderForm, setorderForm] = useState({"cart":props.cart})
+    const [newOrder, setNewOrder] = useState({})
+    const [newShippingAddress, setNewShippingAddress] = useState({})
+    const [newBillingAddress, setNewBillingAddress] = useState({})
+    const [newPaymentDetails, setNewPaymentDetails] = useState({})
+
+    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+
     useEffect(() => {
-        setCheckoutItems(Array.from(new Set(props.cart)))
 
         Axios.get("https://bootlegbackend.herokuapp.com/orders/index", {
             headers: {
@@ -30,39 +39,31 @@ export default function Checkout(props) {
         .then((response) => {
             console.log(response.data.length)
             let orderRefNo = String(response.data.length + 1).padStart(4, '0')
-            console.log(orderRefNo)
+            console.log("Order ref:",orderRefNo)
             setOrderRef(orderRefNo)
-            // console.log(generateOrderRef)
-            // return generateOrderRef
         })
         .catch((error) => {
             console.log(error)
         }) 
         
     }, [props.cart])
-    
-    // const getTotalPrice = () => {
-    //     pro
-    // }
+
     const handlePriceCalc = () => {
         props.cart.forEach(item => {
             getTotalPrice += item.productPrice
         })
         return getTotalPrice
     }
-    // handlePriceCalc()
-
-    console.log(handlePriceCalc())
 
    const decreaseStock = () => {
         
         console.log(props.cart)
         var map = new Map();
         props.cart.forEach((item) => {
-            if(map.has(item._id)){
-                map.get(item._id).count++;
+            if(map.has(item.product._id)){
+                map.get(item.product._id).count++;
             } else {
-                map.set(item._id,Object.assign(item,{count:1}));
+                map.set(item.product._id,Object.assign(item,{count:1}));
             }
         });
         var quantities = [...map.values()];
@@ -99,16 +100,7 @@ export default function Checkout(props) {
     // }
 
     // console.log(createOrderRefNo())
-    console.log(orderRef)
-    console.log("at checkout")
-    const [checkoutItems, setCheckoutItems] = useState([])
-    const [orderForm, setorderForm] = useState({"cart":props.cart})
-    const [newOrder, setNewOrder] = useState({})
-    const [newShippingAddress, setNewShippingAddress] = useState({})
-    const [newBillingAddress, setNewBillingAddress] = useState({})
-    const [newPaymentDetails, setNewPaymentDetails] = useState({})
-    // setCheckoutItems(Array.from(new Set(props.cart)))
-    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    
 
     // console.log(checkoutItems)
 
@@ -178,14 +170,14 @@ export default function Checkout(props) {
         addOrder(order)
     }
 
-    const checkoutList = checkoutItems.map((item, key) => (
+    const checkoutList = props.cart.map((item, key) => (
 
         <Card key={key}>
-            <Card.Img src={item.productImageUrls[0]} alt="" style={{width: '10rem'}} />
+            <Card.Img src={item.product.productImageUrls[0]} alt="" style={{width: '10rem'}} />
             <Card.Body>
-            <Card.Title> {item.productName} </Card.Title>
-            <Card.Text> Quantity: {countOccurrences(props.cart, item)} </Card.Text>
-            <Card.Text> Subtotal: £{countOccurrences(props.cart, item) * item.productPrice} </Card.Text>
+            <Card.Title> {item.product.productName} </Card.Title>
+            <Card.Text> Quantity: {item.cartQuantity} </Card.Text>
+            <Card.Text> Subtotal: £{item.cartQuantity * item.product.productPrice} </Card.Text>
             </Card.Body>
         </Card>
     ));
@@ -200,7 +192,7 @@ export default function Checkout(props) {
         <h2 className='cart-h2'>Checkout:</h2>
 
         {checkoutList}
-        <div>Total: £{getTotalPrice} </div> 
+        <div>Total: £{props.totalPrice} </div> 
         <br></br>
         <CardDetailsForm orderForm={orderForm} setorderForm={setorderForm} handleChange={handleChange} />
         <OrderAddressForm  handleBillingChange={handleBillingChange} handleShippingChange={handleShippingChange} sameAddress={sameAddress} setSameAddress={setSameAddress} />

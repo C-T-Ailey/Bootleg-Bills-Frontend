@@ -25,23 +25,17 @@ h5 {
   outline:none;
 }
 
+.filter .btn-primary:active, .filter .btn-primary:focus {
+  box-shadow: none;
+  background-color: #FF2273;
+  border-color: rgba(0,0,0,0);
+}
+
 #isSelected {
   background-color: #FF2273;
   color: white;
   border: 2px solid #FF2273;
 }
-
-#isSelected:focus {
-  outline: none !important;
-  box-shadow: none !important;
-
-}
-
-#isSelected:active {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
 
 .btn-primary, .btn-secondary, input {
     margin-top: 5px;

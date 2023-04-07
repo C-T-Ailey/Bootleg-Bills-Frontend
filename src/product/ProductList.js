@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Row, Container, Modal } from "react-bootstrap";
-import './ProductList.css'
 import Axios from "axios"
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import { useLocation } from 'react-router-dom';
 import Product from './Product';
 import ProductDetail from './ProductDetail';
+import './ProductList.css'
 
 // Props required by this component from App.js: cart, setCart
 export default function ProductList(props) {

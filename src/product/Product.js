@@ -59,14 +59,27 @@ export default function Product(props) {
 
   const addToCart = (e, product) => {
     e.stopPropagation();
-    let preCart = []
-    console.log("Cart before adding product:", props.cart)
-    for (let i = 1; i <= productQuantity; i++){
-      preCart.push(product)
+    // let preCart = []
+    console.log(props.cart)
+    const fullProduct = product
+    const productId = product._id
+    const quantity = parseInt(productQuantity)
+    let preCart = {...props.cart}
+    let cartProduct = {
+      "product": fullProduct,
+      "cartQuantity": quantity
     }
-    let postCart = props.cart.concat(preCart)
-    console.log("Cart after adding product:",postCart)
-    props.setCart(postCart)
+
+    console.log("Cart before adding product:", props.cart)
+
+    // preCart[cartProductJson]["cartQuantity"] += quantity
+
+    !Object.hasOwn(preCart, [productId]) ? preCart = {...preCart, [productId]:cartProduct} : preCart[productId]["cartQuantity"] += quantity
+
+    // typeof preCart[product] === 'undefined' ? preCart = {...preCart,"product": fullProduct,"quantity": quantity} : preCart.quantity += quantity;
+
+    console.log("Cart after adding product:", preCart)
+    props.setCart(Array.from(Object.values(preCart)))
   }
   
   const divStyle ={
@@ -92,7 +105,10 @@ export default function Product(props) {
 
   }
 
-
+  // useEffect(()=>{
+  //   const cartProducts = Array.from(Object.values(props.cart))
+  //   console.log("TEST:",cartProducts)
+  // },[props.cart])
 
   return (
     <>
