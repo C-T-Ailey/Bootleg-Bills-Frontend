@@ -81,15 +81,19 @@ export default function App() {
       }
     }
 
+    let parseCart = JSON.parse(localStorage.getItem("Cart"))
+
+    setCart(parseCart)
+
   }, [])
 
   useEffect(() => {
-    
-    const quants = cart.map(product => product.cartQuantity)
 
-    const cartTotal = quants.reduce((counter, value) => counter + value, 0)
+    const cartTotal = cart.reduce((counter, obj) => counter + obj.cartQuantity, 0)
 
     setCartCount(cartTotal)
+
+    localStorage.setItem("Cart", JSON.stringify(cart))
     
     console.log("Cart updated!",cart)
 
@@ -139,8 +143,11 @@ export default function App() {
 
 
   const handleRemoveFromCart = (deletedItem) => {
-    console.log(deletedItem._id)
-    const updatedCart = cart.filter(element => element._id !== deletedItem._id)
+    console.log(deletedItem.product._id)
+    const findItem = cart.find(item => item.product._id === deletedItem.product._id) 
+    const updatedCart = Array.from(cart)
+    console.log("index:",updatedCart.indexOf(findItem))
+    updatedCart.splice(updatedCart.indexOf(findItem),1)
     // setCartDisplayArr(cartDisplayArr.filter(element => element._id !== deletedItem._id))
     console.log(updatedCart)
     setCart(updatedCart)

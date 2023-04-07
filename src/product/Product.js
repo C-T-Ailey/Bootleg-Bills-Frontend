@@ -5,6 +5,7 @@ import {BsCartPlusFill} from 'react-icons/bs'
 import Button from 'react-bootstrap/Button';
 import { Col, Modal } from "react-bootstrap";
 import './Product.css' 
+import { type } from '@testing-library/user-event/dist/type/index.js';
 
 // Props required by this component from App.js: product, cart, setCart
 export default function Product(props) {
@@ -59,27 +60,26 @@ export default function Product(props) {
 
   const addToCart = (e, product) => {
     e.stopPropagation();
-    // let preCart = []
+
     console.log(props.cart)
     const fullProduct = product
     const productId = product._id
     const quantity = parseInt(productQuantity)
-    let preCart = {...props.cart}
+    let preCart = Array.from(props.cart)
     let cartProduct = {
       "product": fullProduct,
       "cartQuantity": quantity
     }
 
-    console.log("Cart before adding product:", props.cart)
+    let productInCart = preCart.find(product => {
+      return product.product._id === productId
+    })
 
-    // preCart[cartProductJson]["cartQuantity"] += quantity
+    typeof productInCart === 'undefined' ? preCart.push(cartProduct) : preCart[preCart.indexOf(productInCart)]["cartQuantity"] += quantity;
 
-    !Object.hasOwn(preCart, [productId]) ? preCart = {...preCart, [productId]:cartProduct} : preCart[productId]["cartQuantity"] += quantity
+    props.setCart(preCart)
 
-    // typeof preCart[product] === 'undefined' ? preCart = {...preCart,"product": fullProduct,"quantity": quantity} : preCart.quantity += quantity;
-
-    console.log("Cart after adding product:", preCart)
-    props.setCart(Array.from(Object.values(preCart)))
+    
   }
   
   const divStyle ={

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import Card from 'react-bootstrap/Card'
-// import Cart from './Cart'
+// import Cart from './Cart'setorderForm
 import { useNavigate } from 'react-router-dom'
 import CardDetailsForm from './CardDetailsForm'
 import OrderAddressForm from './OrderAddressForm'
@@ -21,7 +21,7 @@ export default function Checkout(props) {
 
     console.log(orderRef)
     console.log("at checkout")
-    const [orderForm, setorderForm] = useState({"cart":props.cart})
+    const [orderForm, setOrderForm] = useState({"cart":props.cart})
     const [newOrder, setNewOrder] = useState({})
     const [newShippingAddress, setNewShippingAddress] = useState({})
     const [newBillingAddress, setNewBillingAddress] = useState({})
@@ -58,18 +58,9 @@ export default function Checkout(props) {
    const decreaseStock = () => {
         
         console.log(props.cart)
-        var map = new Map();
-        props.cart.forEach((item) => {
-            if(map.has(item.product._id)){
-                map.get(item.product._id).count++;
-            } else {
-                map.set(item.product._id,Object.assign(item,{count:1}));
-            }
-        });
-        var quantities = [...map.values()];
-        console.log(quantities)
-        quantities.forEach(product => {
-            const newStockLevel = {"_id": product._id, "productStock": product.productStock - product.count}
+
+        props.cart.forEach(item => {
+            const newStockLevel = {"_id": item.product._id, "productStock": item.product.productStock - item.cartQuantity}
             Axios.put('https://bootlegbackend.herokuapp.com/product/update', newStockLevel, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -84,34 +75,14 @@ export default function Checkout(props) {
         });
    }
 
-    // const createOrderRefNo = () => {
-    //     Axios.get("orders/index")
-    //     .then((response) => {
-    //         console.log(response.data.length)
-    //         let orderRefNo = String(response.data.length + 1).padStart(4, '0')
-    //         console.log(orderRefNo)
-    //         setOrderRef(orderRefNo)
-    //         // console.log(generateOrderRef)
-    //         // return generateOrderRef
-    //     })
-    //     .catch((error) => {
-    //         console.log(error)
-    //     }) 
-    // }
-
-    // console.log(createOrderRefNo())
-    
-
-    // console.log(checkoutItems)
-
     const handleChange = (e) => {
         console.log(e.target)
         const attrToChange = e.target.name
         const newValue = e.target.value
         const paymentDetails = {...newPaymentDetails}
-        // const order = {...newOrder}
+        const order = {...newOrder}
         paymentDetails[attrToChange] = newValue
-        // setNewOrder(paymentDetails)
+        setNewOrder(paymentDetails)
         setNewPaymentDetails(paymentDetails)
     }
 
@@ -137,25 +108,31 @@ export default function Checkout(props) {
     }
 
 
-
+    // Order schema may need to be updated as the cart is no longer an object, instead now an array of objects
+    // May need to be set to "types.Mixed"
     const addOrder = (order) => {
         console.log("adding order to db")
         console.log(order)
-        order.paymentDetails = newPaymentDetails
-        order.shippingAddress = newShippingAddress
-        order.billingAddress = newBillingAddress
-        order.cart = props.cart
-        order.user = props.user.user.id
-        order.orderRef = orderRef
-        props.setOrderRef(order.orderRef)
-        order.totalPrice = getTotalPrice
-        console.log(order)
-        Axios.post("https://bootlegbackend.herokuapp.com/checkout", order)
+        let finalOrder = {...order}
+        finalOrder.paymentDetails = newPaymentDetails
+        finalOrder.shippingAddress = newShippingAddress
+        finalOrder.billingAddress = newBillingAddress
+        finalOrder.cart = props.cart
+        finalOrder.user = props.user.user.id
+        finalOrder.orderRef = orderRef
+        // props.setOrderRef(finalOrder.orderRef)
+        finalOrder.totalPrice = props.totalPrice
+        console.log(finalOrder)
+        Axios.post("https://bootlegbackend.herokuapp.com/checkout", finalOrder)
         .then(response => {
-            console.log(response)
-            console.log("ordere added successfully")
-            decreaseStock()
-            navigate("/confirmation")
+            if (response.data !== 'cannot accept order, please try again later') {
+                console.log(response)
+                console.log("order added successfully")
+                decreaseStock()
+                navigate("/confirmation")
+            } else {
+                console.log("Order unsuccessful.")
+            }
             // props.setCart([])
             // console.log(props.cart)    
         })
@@ -194,7 +171,7 @@ export default function Checkout(props) {
         {checkoutList}
         <div>Total: £{props.totalPrice} </div> 
         <br></br>
-        <CardDetailsForm orderForm={orderForm} setorderForm={setorderForm} handleChange={handleChange} />
+        <CardDetailsForm orderForm={orderForm} setOrderForm={setOrderForm} handleChange={handleChange} />
         <OrderAddressForm  handleBillingChange={handleBillingChange} handleShippingChange={handleShippingChange} sameAddress={sameAddress} setSameAddress={setSameAddress} />
         <Button onClick={(e) => {handleSubmit(e)}}> Submit Order</Button>
         
