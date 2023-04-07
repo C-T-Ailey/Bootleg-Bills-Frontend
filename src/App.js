@@ -35,6 +35,7 @@ export default function App() {
   // Cart array,
   const [cart, setCart] = useState([])
   const [cartCount, setCartCount] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
   
   const navigate = useNavigate()
 
@@ -80,11 +81,21 @@ export default function App() {
       }
     }
 
+    let parseCart = JSON.parse(localStorage.getItem("Cart"))
+
+    setCart(parseCart)
+
   }, [])
 
   useEffect(() => {
-    setCartCount(cart.length)
-    console.log(cart)
+
+    const cartTotal = cart.reduce((counter, obj) => counter + obj.cartQuantity, 0)
+
+    setCartCount(cartTotal)
+
+    localStorage.setItem("Cart", JSON.stringify(cart))
+    
+    console.log("Cart updated!",cart)
 
   }, [cart])
 
@@ -132,8 +143,11 @@ export default function App() {
 
 
   const handleRemoveFromCart = (deletedItem) => {
-    console.log(deletedItem._id)
-    const updatedCart = cart.filter(element => element._id !== deletedItem._id)
+    console.log(deletedItem.product._id)
+    const findItem = cart.find(item => item.product._id === deletedItem.product._id) 
+    const updatedCart = Array.from(cart)
+    console.log("index:",updatedCart.indexOf(findItem))
+    updatedCart.splice(updatedCart.indexOf(findItem),1)
     // setCartDisplayArr(cartDisplayArr.filter(element => element._id !== deletedItem._id))
     console.log(updatedCart)
     setCart(updatedCart)
@@ -284,7 +298,7 @@ export default function App() {
           <Nav.Link as={Link} to="/products"> Products</Nav.Link>
           <Nav.Link as={Link} to="/login"> Login</Nav.Link>
           <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cart.length} </Badge></Nav.Link>          
+          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
           </>
           )}
           </Nav>
@@ -314,8 +328,8 @@ export default function App() {
             <Route path="/about" element={<AboutBills />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
-            <Route path="/cart" element={<Cart cart={cart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity}/>} />
-            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}/>} />
+            <Route path="/cart" element={<Cart isAuth={isAuth} user={user} cart={cart} setCart={setCart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>}/>
+            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}  totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>
         </div>

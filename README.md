@@ -51,13 +51,14 @@ This specific repository is for the application's frontend, to which the majorit
 * Product names which are too long to fully fit on their Product card in the Products menu will now display as an animated scrolling marquee when hovered over with the mouse.
 * Each product's "bestseller" image, used in the homepage carousel for products which have sold enough to be among the top 3 highest selling products, can now be assigned separately when creating/editing products. This removes the previous limitation of only having four potential images and using the image occupying the last index of the product image array to represent it on the carousel.
 * Users can now add up to 8 images and variants for each product.
+* The user's cart status is now tracked and stored in their browser's local storage, allowing their selections to persist after refreshing and between visits to the site.
 * Full list of changes coming soon -- please see repository commit notes until such time.
 
 #### Planned Improvements
 * :construction_worker: The majority of variables and functions are currently declared at the top level in App.js and passed as props to various components; refactor the codebase so more functions and props are employed only on their required pages to reduce memory usage.
   * In progress.
 * :construction_worker: Cart and Checkout components rewritten from scratch.
-  * In progress.
+  * In progress - Cart component has been completely reworked, fixing persistent bugs and streamlining code. Checkout has been updated and is almost fully functional - changes need to be made to the Order model on the backend to get full functionality.
 * :construction_worker: Rewrite/update styling to make the site more responsive to mobile devices.
   * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
 * :construction_worker: Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
@@ -72,11 +73,12 @@ This specific repository is for the application's frontend, to which the majorit
   * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
     * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
-* Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel occasionally briefly appears just once before displaying the populated carousel. Efforts continue to be made to fix fully.
-* :warning: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
-  * Partially fixed - the behaviour of the "Has variants?" selection has been corrected, but updating any given product's details will sometimes clear a product's productMediaFormat property.
+* :white_check_mark: Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
+  * Fully fixed as part of a full overhaul of the Cart and Checkout components.
+* :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
+  * Fully fixed as part of a full overhaul of the ProductCreateForm and ProductEditForm components.
 * :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
   * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
 * :white_check_mark: On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.

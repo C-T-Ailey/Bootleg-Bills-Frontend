@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Row, Container, Modal } from "react-bootstrap";
-import './ProductList.css'
 import Axios from "axios"
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import { useLocation } from 'react-router-dom';
 import Product from './Product';
 import ProductDetail from './ProductDetail';
+import './ProductList.css'
 
 // Props required by this component from App.js: cart, setCart
 export default function ProductList(props) {
@@ -180,8 +180,8 @@ export default function ProductList(props) {
             <ButtonGroup id="sortBy" className="filter" >
               <Button variant="primary" id={selectedSort==="Alpha AZ" ? "isSelected" : ""} name="Alpha AZ" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(A-Z)</Button>
               <Button variant="primary" id={selectedSort==="Alpha ZA" ? "isSelected" : ""} name="Alpha ZA" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(Z-A)</Button>
-              <Button variant="primary" id={selectedSort==="Date Desc" ? "isSelected" : ""} name="Date Desc" onClick={(e) => {setSelectedSort(e.target.name)}}>Date Added<br/>(Recent)</Button>
-              <Button variant="primary" id={selectedSort==="Date Asc" ? "isSelected" : ""}  name="Date Asc" onClick={(e) => {setSelectedSort(e.target.name)}}>Date Added<br/>(Oldest)</Button>
+              <Button variant="primary" id={selectedSort==="Date Desc" ? "isSelected" : ""} name="Date Desc" onClick={(e) => {setSelectedSort(e.target.name)}}>Added<br/>(Recent)</Button>
+              <Button variant="primary" id={selectedSort==="Date Asc" ? "isSelected" : ""}  name="Date Asc" onClick={(e) => {setSelectedSort(e.target.name)}}>Added<br/>(Oldest)</Button>
             </ButtonGroup>
             &nbsp;
           
