@@ -1,3 +1,26 @@
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .cart-h2 {
     color: rgb(0, 0, 0)
+}
+
+.card-title {
+    text-overflow: unset;
+    white-space: pre-wrap;
+}
+
+.cartQuantity {
+    max-width: 50px;
+}
+
+.cart-card-flex {
+    display: flex;
+    flex-direction: row;
 }
