@@ -11,7 +11,7 @@
     color: rgb(0, 0, 0)
 }
 
-.card-title {
+.title {
     text-overflow: unset;
     white-space: pre-wrap;
 }
