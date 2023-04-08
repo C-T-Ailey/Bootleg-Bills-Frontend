@@ -117,7 +117,7 @@ export default function Checkout(props) {
         finalOrder.paymentDetails = newPaymentDetails
         finalOrder.shippingAddress = newShippingAddress
         finalOrder.billingAddress = newBillingAddress
-        finalOrder.cart = props.cart
+        finalOrder.cart = JSON.stringify(props.cart)
         finalOrder.user = props.user.user.id
         finalOrder.orderRef = orderRef
         // props.setOrderRef(finalOrder.orderRef)
