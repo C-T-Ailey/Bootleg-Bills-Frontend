@@ -40,6 +40,8 @@ export default function ProductList(props) {
       })
 
       window.scrollTo(0, 0)
+
+      !!bestseller ? console.log(bestseller) : console.log("no bestseller")
       
     }, [])
 
@@ -116,7 +118,7 @@ export default function ProductList(props) {
     const [modalIsOpen, setModalIsOpen] = useState(!!bestseller ? true : false);
 
     const setModalOpen =()=>{
-      !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
+      !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false);
     }
 
     const handleSearch = (e) => {
@@ -151,10 +153,10 @@ export default function ProductList(props) {
           ? 
             (
               
-              <Modal className='detailsModal' bsPrefix='modal' centered show={modalIsOpen} onHide={() => setModalOpen()}>
+              <Modal className='detailsModal' id="product-modal" bsPrefix='modal' centered show={modalIsOpen} onHide={() => setModalOpen()}>
                   <Modal.Header closeButton>
                     <Modal.Title style={{fontWeight: "bolder"}}>
-                      More about this product...
+                      More about this bestseller...
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>

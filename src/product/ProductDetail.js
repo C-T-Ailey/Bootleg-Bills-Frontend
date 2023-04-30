@@ -119,7 +119,7 @@ export default function ProductDetail(props) {
   
   const mapThumbs = imgThumbs.map((url, index) =>
     <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
-      <img className='thumb' id={`thumb-${index}`} src={props.product.productImageUrls[index]} alt={`thumb-${index}`} />
+      <img className='thumb' id={`thumb-${index}`} src={url} alt={`thumb-${index}`} />
     </div>
   );
 
