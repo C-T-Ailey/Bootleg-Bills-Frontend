@@ -33,6 +33,16 @@ export default function Product(props) {
     !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
   }
 
+  const [variantModal, setVariantModal] = useState(false);
+
+  const setVariantModalOpen =()=>{
+    !variantModal ? setVariantModal(true) : setVariantModal(false);
+  }
+
+  const handleVariantCheck = () => {
+
+  }
+
   // const handleInputChange = (e) => {
   //   console.log(e.target.value)
   //   handleProductQuantity(e.target.value)
@@ -63,21 +73,38 @@ export default function Product(props) {
 
     console.log(props.cart)
     const fullProduct = product
+    console.log(product)
     const productId = product._id
     const quantity = parseInt(productQuantity)
     let preCart = Array.from(props.cart)
     let cartProduct = {
       "product": fullProduct,
-      "cartQuantity": quantity
+      "cartQuantity": quantity,
+      "variant": fullProduct.hasVariant ? fullProduct.productVariants[0] : "none"
     }
+
+    // if (product.hasVariant) {
+    //   console.log("has variant:",product.hasVariant)
+    //   cartProduct = {...cartProduct, "variant": fullProduct.productVariants[0]} 
+    // }
+    
+    console.log("post variant")
 
     let productInCart = preCart.find(product => {
       return product.product._id === productId
     })
 
-    typeof productInCart === 'undefined' ? preCart.push(cartProduct) : preCart[preCart.indexOf(productInCart)]["cartQuantity"] += quantity;
+    // typeof productInCart === 'undefined' ? preCart.push(cartProduct) : preCart[preCart.indexOf(productInCart)]["cartQuantity"] += quantity;
+
+    if(typeof productInCart === 'undefined' || productInCart.variant !== cartProduct.variant) {
+      preCart.push(cartProduct)
+    } else {
+      preCart[preCart.indexOf(productInCart)]["cartQuantity"] += quantity;
+    }
 
     props.setCart(preCart)
+
+    if (variantModal) setVariantModal(false)
 
     
   }
@@ -96,7 +123,7 @@ export default function Product(props) {
     divStyle.color = 'red'    
 
   } else if (productStock <= 20 ){
-    stockAlert = `ONLY ${productStock} LEFT`
+    stockAlert = `${productStock} LEFT`
     divStyle.color = 'orange'
     
   } else if (productStock > 20) {
@@ -113,7 +140,23 @@ export default function Product(props) {
   return (
     <>
 
-      <Modal size="xl" centered show={modalIsOpen} onHide={() => setModalOpen()}>
+      <Modal size='sm' id="variant-notice" centered show={variantModal} onHide={() => setVariantModalOpen()}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{fontWeight: "bolder"}}>
+            So you know...
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          This product has available variants. If you proceed with Adding to Cart from here, the default variant will be selected.
+          <br></br>
+          <Button onClick={(e) => addToCart(e, props.product)}>OK</Button>
+          <Button onClick={() => setVariantModalOpen()}>Cancel</Button>
+
+        </Modal.Body>
+      </Modal>
+
+      <Modal size="xl" id="product-modal" centered show={modalIsOpen} onHide={() => setModalOpen()}>
         <Modal.Header closeButton>
           <Modal.Title style={{fontWeight: "bolder"}}>
             More about this product...
@@ -162,7 +205,7 @@ export default function Product(props) {
                 <Button id="increaseQuant" size="sm" disabled={props.product.productStock === 0 ? true : false} variant='secondary' className='shadow-none' onClick={(e) => handleNumber(e)}> + </Button>
               </div>
               <div className={props.product.productStock !== 0 ? "add-cart-container" : "cart-container-disabled"} id="add-cart-container" onClick={(e) => handleDisabledClick(e)}>
-                <Button disabled={props.product.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={(e) => addToCart(e, props.product)} style={{marginBottom: '10px'}}> 
+                <Button disabled={props.product.productStock === 0 ? true : false} type="text"  id="addToCart" variant="primary" onClick={props.product.hasVariant ? () => setVariantModalOpen() : (e) => addToCart(e, props.product)} style={{marginBottom: '10px'}}> 
                     {/* Add To Cart  */}
                     <div>
                       <BsCartPlusFill size={30}></BsCartPlusFill>

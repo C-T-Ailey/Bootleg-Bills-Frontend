@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Row, Container, Modal } from "react-bootstrap";
+import { Row, Container, Modal, Form } from "react-bootstrap";
 import Axios from "axios"
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
@@ -119,6 +119,30 @@ export default function ProductList(props) {
       !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
     }
 
+    const handleSearch = (e) => {
+      console.log()
+      console.log(e.target.value)
+      // console.log(searchProducts.filter(product => product.productName.includes(e.target.value)))
+
+      if(e.target.value === ""){
+        console.log("empty")
+        let firstBySource = (selectedSource !== "All Sources" ? products.filter(products => products.productSourceType === selectedSource) : products)
+        let thenByFormat = (selectedFormat !== "All Formats" ? firstBySource.filter(products => products.productMediaFormat === selectedFormat) : firstBySource)
+        setProductList(sorting(thenByFormat))
+      } else {
+
+      const searchProducts = Array.from(products)
+
+      const filteredSearch = searchProducts.filter(product => product.productName.toLowerCase().includes(e.target.value.toLowerCase()))
+
+      console.log(filteredSearch)
+
+      setProductList(filteredSearch)
+      }
+    }
+
+
+
   return (
 
     <div className="product-body">
@@ -186,11 +210,20 @@ export default function ProductList(props) {
             &nbsp;
           
           </div>
+          
+        </div>
+
+        <div className='search-name'>
+          <Container>
+            <Form.Label>Search by Name</Form.Label>
+            <Form.Control id="input" type='text' placeholder="what'll it be, stranger?" onChange={(e)=>handleSearch(e)}></Form.Control>
+          </Container>
         </div>
 
         <Container id="productFlex" className="d-flex" >
 
-          <Row  className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
+          <Row className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}>
+          {/* <Row className="m-auto align-self-center" xs={1} sm={2} md={3} lg={4} xl={5}> */}
           {/* <Row  className="m-auto align-self-center" lg={4}> */}
 
             { 

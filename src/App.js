@@ -24,9 +24,6 @@ import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
 
-
-
-
 export default function App() {
 
   // window location handler
@@ -329,7 +326,7 @@ export default function App() {
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
             <Route path="/cart" element={<Cart isAuth={isAuth} user={user} cart={cart} setCart={setCart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>}/>
-            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}  totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}  totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>
         </div>
