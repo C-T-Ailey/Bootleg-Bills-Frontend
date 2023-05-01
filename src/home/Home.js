@@ -7,6 +7,11 @@ import './home.css'
 import Axios from 'axios';
 import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
+import storeThumb from './assets/products.jpg'
+import signupThumb from './assets/signup.jpg'
+import loginThumb from './assets/login.jpg'
+import dashThumb from './assets/dash.jpg'
+import aboutThumb from './assets/about.jpg'
 import { Link } from 'react-router-dom';
 
 // const options = {
@@ -164,10 +169,10 @@ export default function Home(props) {
         <div className='homepage-nav-thumbs'>
           <div className='thumbs-flex'>
             <div className='products-thumb'></div>
-            <div className='products-thumb'></div>
-            <div className='products-thumb'></div>
-            <div className='products-thumb'></div>
-            <div className='products-thumb'></div>
+            <div className='login-thumb'></div>
+            <div className='signup-thumb'></div>
+            <div className='dash-thumb'></div>
+            <div className='about-thumb'></div>
           </div>
         </div>
 
