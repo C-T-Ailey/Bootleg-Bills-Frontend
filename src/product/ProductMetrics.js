@@ -16,10 +16,10 @@ export default function ProductMetrics(props) {
 
     const [productToEdit, setProductToEdit] = useState("")
 
-    useEffect(() => {
-        fetchOutstanding()
-        fetchTotal()
-    }, [])
+    // useEffect(() => {
+    //     fetchOutstanding()
+    //     fetchTotal()
+    // }, [])
 
     const onDeleteClick = () => {
         !showDeleteModal ? setShowDeleteModal(true) : setShowDeleteModal(false)

@@ -218,7 +218,7 @@ export default function ProductList(props) {
         <div className='search-name'>
           <Container>
             <Form.Label>Search by Name</Form.Label>
-            <Form.Control id="input" type='text' placeholder="what'll it be, stranger?" onChange={(e)=>handleSearch(e)}></Form.Control>
+            <Form.Control id="input" type='text' placeholder="Search for a product" onChange={(e)=>handleSearch(e)}></Form.Control>
           </Container>
         </div>
 

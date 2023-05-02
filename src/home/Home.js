@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import {Nav} from 'react-bootstrap';
 import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 
@@ -162,26 +163,63 @@ export default function Home(props) {
           <div className="homepage-about">
             <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
             <p>Founded in 2016 as a small word-of-mouth creative project, we finally established an online presence in 2022 thanks to Software Engineers Ailish McLaughlin, Christopher Carey and Chris Ailey. Now you can have a look at what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest releases, and bag one of your very own unofficial audio rarities!</p>
-            <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link>
+            {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
           </div>
         </div>
 
         <div className='homepage-nav-thumbs'>
-          <div className='thumbs-flex'>
-            <div className='products-thumb'></div>
-            <div className='login-thumb'></div>
-            <div className='signup-thumb'></div>
-            <div className='dash-thumb'></div>
-            <div className='about-thumb'></div>
+          <div className='thumbs-flex' id="bootstrap-overrides">
+            <Nav.Link as={Link} to="/products">
+            <div>
+              <img className='nav-thumb' src={storeThumb}/>
+            </div>
+            </Nav.Link>
+              
+            { !props.isAuth ? 
+            <>
+              <Nav.Link as={Link} to="/login">
+                <div>
+                  <img className='nav-thumb' src={loginThumb}/>
+                </div>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/signup">
+                <div>
+                  <img className='nav-thumb' src={signupThumb}/>
+                </div>
+              </Nav.Link>
+            </>
+            :
+            <>
+            <Nav.Link as={Link} to="/manage">
+              <div>
+                <img className='nav-thumb' src={dashThumb}/>
+              </div>
+            </Nav.Link>
+            </>
+            }
+            <Nav.Link as={Link} to="/about">
+              <div>
+                <img className='nav-thumb' src={aboutThumb}/>
+              </div>
+            </Nav.Link>
           </div>
         </div>
 
         <div className="upcoming">
           <h2>{"Coming Soon!"}</h2>
+          <h4>{"Products"}</h4>
           <ul className='comingList'>
             <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
             <li>Video Game: DOOM (1993), Cassette</li>
             <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
+            <li>Limited Release: Double Bill (New!), Cassette</li>
+          </ul>
+          <p></p>
+          <h4>{"Site Features"}</h4>
+          <ul className='comingList'>
+            <li>News</li>
+            <li>Articles & Archives</li>
+            <li>FAQs</li>
           </ul>
           <p></p>
         </div>

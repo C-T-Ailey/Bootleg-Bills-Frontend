@@ -67,15 +67,25 @@ export default function App() {
         Token is currently ${timeNow - user.user.timestamp < 1800000 ? "valid" : "invalid"}.\n
         Full object :`, [user])
 
-      if(user){
+      if (verifyToken() === false) {
+        console.log("token invalid")
+        localStorage.removeItem("token");
+        setIsAuth(false)
+      } else if (verifyToken() === true) {
+        console.log("token valid")
         setIsAuth(true)
         setUser(user)
         setUserRole(user.user.role)
       }
-      else if (!user){
-        localStorage.removeItem("token");
-        setIsAuth(false)
-      }
+      // if(user){
+      //   setIsAuth(true)
+      //   setUser(user)
+      //   setUserRole(user.user.role)
+      // }
+      // else if (!user){
+      //   localStorage.removeItem("token");
+      //   setIsAuth(false)
+      // }
     }
 
     let parseCart = JSON.parse(localStorage.getItem("Cart"))
@@ -96,7 +106,12 @@ export default function App() {
 
   }, [cart])
 
-
+  const verifyToken = () => {
+    let token = localStorage.getItem("token")
+    let timeNow = new Date().valueOf()
+    let user = jwt_decode(token)
+    return timeNow - user.user.timestamp < 1800000
+  }
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
@@ -153,7 +168,7 @@ export default function App() {
   const loadProductList = () => {
     Axios.get("https://bootlegbackend.herokuapp.com/product/index")
     .then((response) => {
-      console.log(response)
+      // console.log(response)
         // Setting state here:
         setProducts(response.data.product)
     })
@@ -319,7 +334,7 @@ export default function App() {
         </div> */}
         <div id='slashRouting'>
           <Routes>
-            <Route path="/" element={<Home products={products} />} />
+            <Route path="/" element={<Home products={products} isAuth={isAuth}/>} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/products" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />

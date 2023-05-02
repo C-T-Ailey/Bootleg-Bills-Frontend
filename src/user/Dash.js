@@ -2,18 +2,24 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import OrderHistory from './OrderHistory'
 import ProductCreateForm from '../product/ProductCreateForm'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Modal, Container, Form } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
 import './Dash.css'
 import ProductMetrics from '../product/ProductMetrics'
 
 export default function Dash(props) {
-
+    
     const navigate = useNavigate()
-
+    
     const token = localStorage.getItem("token")
+    
+    const [allOrders, setAllOrders] = useState([])
+    
+    const [productList, setProductList] = useState(props.products)
+    
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const allStock = props.products.sort((a,b) => (a.productName > b.productName) ? 1 : -1).map((product, index) => (
+    const allStock = productList.sort((a,b) => (a.productName > b.productName) ? 1 : -1).map((product, index) => (
 
         <div key={index}>
     
@@ -33,14 +39,26 @@ export default function Dash(props) {
             props.sessionExpiredHandler()
             
         } else {
-            props.loadProductList()
+            // props.loadProductList()
+            setProductList(props.products)
 
         }
     }, [])
 
-    const [allOrders, setAllOrders] = useState([])
+    useEffect(() => {
+        if(!!document.getElementById("input")){
+            const textSearch = document.getElementById("input").value
+            props.loadProductList()
+            if ( textSearch !== "") {
+                const searchProducts = Array.from(props.products)
+                const filteredSearch = searchProducts.filter(product => product.productName.toLowerCase().includes(textSearch.toLowerCase()))
+                setProductList(filteredSearch)
+            } else {
+                setProductList(props.products)
+            }
+    }
+    },[props.products])
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const setModalIsOpenToTrue =()=>{
         let timeNow = new Date().valueOf()
@@ -59,6 +77,31 @@ export default function Dash(props) {
     const onAddClick = () => {
         !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false)
     }
+
+    const handleSearch = (e) => {
+    //     return true
+    // }
+
+    // const handleSearch = (e) => {
+        console.log()
+        console.log(e.target.value)
+        // console.log(searchProducts.filter(product => product.productName.includes(e.target.value)))
+        const searchProducts = Array.from(props.products)
+  
+        const filteredSearch = searchProducts.filter(product => product.productName.toLowerCase().includes(e.target.value.toLowerCase()))
+  
+        if(e.target.value === ""){
+          console.log("empty")
+          
+          setProductList(props.products)
+        } else {
+  
+  
+        console.log(filteredSearch)
+  
+        setProductList(filteredSearch)
+        }
+      }
 
   return (
     <div className="dash-container">
@@ -96,6 +139,14 @@ export default function Dash(props) {
             
                 <div>
                     <h4>Product inventory</h4>
+
+                    <div className='search-name'>
+                        <Container>
+                            <Form.Label>Search by Name</Form.Label>
+                            <Form.Control id="input" type='text' placeholder="search for a product" onChange={(e)=>handleSearch(e)}></Form.Control>
+                        </Container>
+                    </div>
+
                     <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
                     <div className='inventory-list scroll'>
                     {allStock}
