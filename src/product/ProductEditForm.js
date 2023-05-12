@@ -201,7 +201,7 @@ export default function ProductEditForm(props) {
             <Container>
                 <Form.Group>
                     <Form.Label>Product Name</Form.Label>
-                    <Form.Control name="productName" onChange={(e) => handleChange(e)} defaultValue={props.product.productName}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productName" onChange={(e) => handleChange(e)} defaultValue={props.product.productName}></Form.Control>
                 </Form.Group>
 
                 <Form.Group>
@@ -226,12 +226,12 @@ export default function ProductEditForm(props) {
 
                 <Form.Group>
                     <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
-                    <Form.Control name="productSource" type="text" defaultValue={props.product.productSource} onChange={(e) => handleChange(e)}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productSource" type="text" defaultValue={props.product.productSource} onChange={(e) => handleChange(e)}></Form.Control>
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label>Product Price</Form.Label>
-                    <Form.Control name="productPrice" type="number" onChange={(e) => handleChange(e)} defaultValue={props.product.productPrice}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productPrice" type="number"  onChange={(e) => handleChange(e)} defaultValue={props.product.productPrice}></Form.Control>
                 </Form.Group>
 
                 <Form.Group>
@@ -242,7 +242,7 @@ export default function ProductEditForm(props) {
 
                 <Form.Group>
                     <Form.Label>Stock Count</Form.Label>
-                    <Form.Control name="productStock" type="number" onChange={(e) => handleChange(e)} defaultValue={props.product.productStock}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productStock" type="number" onChange={(e) => handleChange(e)} defaultValue={props.product.productStock}></Form.Control>
                 </Form.Group>
                 
                 <Form.Group>
@@ -250,10 +250,10 @@ export default function ProductEditForm(props) {
                     <div id='imageUrls'>
                         {urls.map((url, index) => (
                             index === 0 ?
-                            <Form.Control key={index} id={"primary"} onChange={(e) => handleUrlChange(e)} defaultValue={url.slice(0,5) === "https" ? url : ""} placeholder={"Primary Image (required)"}></Form.Control>
+                            <Form.Control key={index} id={"primary"} style={{lineHeight:"1", height:"35px"}} onChange={(e) => handleUrlChange(e)} defaultValue={url.slice(0,5) === "https" ? url : ""} placeholder={"Primary Image (required)"}></Form.Control>
                             :
                             <div className='removable-form'>
-                                <Form.Control key={index} id={`${index}`} onChange={(e) => handleUrlChange(e)} defaultValue={url.slice(0,5) === "https" ? url : ""} placeholder={`Image ${index+1}`}></Form.Control>
+                                <Form.Control key={index} id={`${index}`} style={{lineHeight:"1", height:"35px"}} onChange={(e) => handleUrlChange(e)} defaultValue={url.slice(0,5) === "https" ? url : ""} placeholder={`Image ${index+1}`}></Form.Control>
                                 <Button id={`${index}`} onClick={(e) => handleRemoveUrl(e)}>X</Button>
                             </div>
                         ))}
@@ -264,7 +264,7 @@ export default function ProductEditForm(props) {
 
                 <Form.Group>
                     <Form.Label>Product Bestseller Image</Form.Label>
-                    <Form.Control name="productBestsellerImage" onChange={(e) => handleChange(e)} defaultValue={props.product.productBestsellerImage}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productBestsellerImage" onChange={(e) => handleChange(e)} defaultValue={props.product.productBestsellerImage}></Form.Control>
                 </Form.Group>
 
                 <Form.Group>
@@ -282,10 +282,10 @@ export default function ProductEditForm(props) {
                         <div id='variants'>
                         {variants.map((variant, index) => (
                             index === 0 ?
-                            <Form.Control key={index} id={"primary"} onChange={(e) => handleVariantUpdate(e)} defaultValue={variant} placeholder={"Variant 1"}></Form.Control>
+                            <Form.Control key={index} id={"primary"} style={{lineHeight:"1", height:"35px"}} onChange={(e) => handleVariantUpdate(e)} defaultValue={variant} placeholder={"Variant 1"}></Form.Control>
                             :
                             <div className='removable-form'>
-                                <Form.Control key={index} id={`${index}`} onChange={(e) => handleVariantUpdate(e)} defaultValue={variant !== `Variant ${index + 1}` ? variant : ""} placeholder={`Variant ${index+1}`}></Form.Control>
+                                <Form.Control key={index} id={`${index}`} style={{lineHeight:"1", height:"35px"}} onChange={(e) => handleVariantUpdate(e)} defaultValue={variant !== `Variant ${index + 1}` ? variant : ""} placeholder={`Variant ${index+1}`}></Form.Control>
                                 <Button id={`${index}`} onClick={(e) => handleRemoveVariant(e)}>X</Button>
                             </div>
                         ))}
@@ -302,7 +302,7 @@ export default function ProductEditForm(props) {
 
                 <Form.Group>
                     <Form.Label>Product Audio</Form.Label>
-                    <Form.Control name="productAudio" onChange={handleChange} defaultValue={props.product.productAudio}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productAudio" onChange={handleChange} defaultValue={props.product.productAudio}></Form.Control>
                 </Form.Group>
                 
                 <Button variant="primary" onClick={(e) => handleSubmit(e)}>Update Product</Button>

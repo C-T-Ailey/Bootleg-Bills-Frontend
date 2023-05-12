@@ -268,7 +268,7 @@ export default function ProductCreateForm(props) {
         <Container>
             <Form.Group>
                 <Form.Label>Product Name</Form.Label>
-                <Form.Control name="productName" onChange={handleChange} autoFocus></Form.Control>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productName" onChange={handleChange} autoFocus></Form.Control>
             </Form.Group>
 
             <Form.Group>
@@ -293,12 +293,12 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>{(typeof isOriginal == "boolean") ? (isOriginal ? "Original Creator" : "Source Name") : ("")}</Form.Label>
-                <Form.Control name="productSource" type={isOriginal==="--" ? ("hidden") : ("text")} onChange={handleChange}></Form.Control>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productSource" type={isOriginal==="--" ? ("hidden") : ("text")} onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>
                 <Form.Label>Product Price &#40;£&#41;</Form.Label>
-                <Form.Control name="productPrice" type="number" onChange={handleChange}></Form.Control>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productPrice" type="number" onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>
@@ -309,7 +309,7 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Stock Count</Form.Label>
-                <Form.Control name="productStock" type="number" onChange={handleChange}></Form.Control>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productStock" type="number" onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>
@@ -321,10 +321,10 @@ export default function ProductCreateForm(props) {
                     <Form.Control id='3' onChange={handleUrlChange}></Form.Control> */}
                     {urls.map((url, index) => (
                         index === 0 ?
-                        <Form.Control key={index} id={"primary"} onChange={handleUrlChange} placeholder={index===0 ? "Primary Image (required)" : `Image ${index + 1}`}></Form.Control>
+                        <Form.Control key={index} id={"primary"} style={{lineHeight:"1", height:"35px"}} onChange={handleUrlChange} placeholder={index===0 ? "Primary Image (required)" : `Image ${index + 1}`}></Form.Control>
                         :
                         <div className='removable-form'>
-                            <Form.Control key={index} id={index} onChange={handleUrlChange} placeholder={`Image ${index + 1}`}></Form.Control>
+                            <Form.Control key={index} id={index} style={{lineHeight:"1", height:"35px"}} onChange={handleUrlChange} placeholder={`Image ${index + 1}`}></Form.Control>
                             <Button id={`Image ${index + 1}`} onClick={(e) => handleRemoveUrl(e)}>X</Button>
                         </div>
                     ))}
@@ -334,7 +334,7 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Bestseller Product Image</Form.Label>
-                <Form.Control name="productBestsellerImage" onChange={handleChange}></Form.Control>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productBestsellerImage" onChange={handleChange}></Form.Control>
             </Form.Group>
 
             <Form.Group>
@@ -356,7 +356,7 @@ export default function ProductCreateForm(props) {
                     <div id='imageVariants'>
                         {variants.map((variant, index) => (
                             <div className='removable-form'>
-                                <Form.Control key={index} id={`${index}`} onChange={(e) => handleVariant(e)} placeholder={`Variant ${index +1}`}></Form.Control>
+                                <Form.Control key={index} id={`${index}`} style={{lineHeight:"1", height:"35px"}} onChange={(e) => handleVariant(e)} placeholder={`Variant ${index +1}`}></Form.Control>
                                 {index === 0 ?
                                 <></>
                                 :
@@ -377,7 +377,7 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Product Audio</Form.Label>
-                <Form.Control name="productAudio" onChange={handleChange} autoFocus></Form.Control>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productAudio" onChange={handleChange} autoFocus></Form.Control>
             </Form.Group>
             <br/>
             <Button variant="primary" onClick={(e) => handleSubmit(e)}>Add Product</Button>

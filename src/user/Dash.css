@@ -33,6 +33,7 @@
 
 .status-option {
     font-weight: bolder;
+    
 }
 
 th {
@@ -130,6 +131,8 @@ table {
 }
 
 .status-dropdown {
+    display: flex;
+    align-self: center;
     width: 150px;
     height: 35px;
 }

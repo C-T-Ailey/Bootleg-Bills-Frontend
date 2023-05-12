@@ -6,6 +6,11 @@ img:hover {
     cursor: pointer;
 }
 
+.btn-secondary:focus, .btn-secondary:active {
+    background-color: #FF2273;
+    border-color:#FF2273;
+}
+
 .detailModalFlex {
     display: flex;
     flex-direction: row;
@@ -20,6 +25,7 @@ img:hover {
 
 .variantForm {
     font-weight: bolder;
+    
 }
 
 .select-text {

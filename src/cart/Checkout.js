@@ -129,6 +129,7 @@ export default function Checkout(props) {
                 console.log(response)
                 console.log("order added successfully")
                 decreaseStock()
+                props.setCart([])
                 navigate("/confirmation")
             } else {
                 console.log("Order unsuccessful.")

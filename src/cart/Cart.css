@@ -11,16 +11,22 @@
     color: rgb(0, 0, 0)
 }
 
-.title {
+#title {
     text-overflow: unset;
     white-space: pre-wrap;
 }
 
 .cartQuantity {
     max-width: 50px;
+    overflow: hidden;
 }
 
 .cart-card-flex {
     display: flex;
     flex-direction: row;
+}
+
+.card {
+    margin-bottom: 1rem;
+    box-shadow: 2px 2px 5px rgb(128, 128, 128);
 }

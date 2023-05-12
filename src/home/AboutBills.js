@@ -66,7 +66,10 @@ export default function AboutBills(props) {
         <p>Chris Ailey</p>
 
         <h5>"Snatcher" Cover Source Art</h5>
-        <p>vandrell.deviantart.com</p>
+        <p>Vandrell @ vandrell.deviantart.com</p>
+
+        <h5>"Double Bill Vol. 1": Astrophysics Source Art</h5>
+        <p>Jazz @ jazzboys.carrd.co</p>
 
         <h5>Side-by-Side Case + Tape Mockup Template</h5>
         <p>www.pixpine.com</p>

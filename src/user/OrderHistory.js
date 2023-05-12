@@ -19,8 +19,7 @@ export default function OrderHistory(props) {
 
     useEffect(() => {
         getOrders()
-        setCurrentOrder(currentOrder)
-    }, [currentOrder])
+    }, [])
     
     const getOrders = () => {
         console.log(props.user)

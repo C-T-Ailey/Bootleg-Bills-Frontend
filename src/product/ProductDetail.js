@@ -13,6 +13,8 @@ export default function ProductDetail(props) {
   const [currentlySelected, setCurrentlySelected] = useState("")
 
   const [productQuantity, setProductQuantity] = useState(1)
+
+  const [selectedVariant, setSelectedVariant] = useState("")
   
   useEffect(()=>{
     // set currentlySelected thumb to the first child element of div-0, i.e. the primary image for the product
@@ -21,7 +23,14 @@ export default function ProductDetail(props) {
     var defaultImg = document.getElementById("div-0")
     // set the classname of div-0 to "selected-img" to denote it as selected
     defaultImg.className = "selected-img"
+
+    setSelectedVariant(props.product.hasVariant ? props.product.productVariants[0] : "none")
+
   },[])
+
+  useEffect(()=>{
+    console.log(selectedVariant)
+  },[selectedVariant])
 
   const openImage = (e) => {
     let imgUrl = e.target.src.slice(0, e.target.src.length-4)
@@ -70,18 +79,37 @@ export default function ProductDetail(props) {
   }
 
   const addToCart = (product) => {
-    console.log("button clicked")
-    // console.log(product)
-    // console.log(productQuantity)
-    let preCart = []
-    console.log("Cart before adding product:", props.cart)
-    for (let i = 1; i <= productQuantity; i++){
-      preCart.push(product)
-      // props.setCart([...props.cart, product])
+    console.log(props.cart)
+    const fullProduct = {...product}
+
+    //
+    if (selectedVariant.slice(selectedVariant.length-9, selectedVariant.length)==="discount!") {
+      fullProduct.productPrice -= 5
     }
-    let postCart = props.cart.concat(preCart)
-    console.log("Cart after adding product:",postCart)
-    props.setCart(postCart)
+    //
+
+    const productId = product._id
+    const quantity = parseInt(productQuantity)
+    let preCart = Array.from(props.cart)
+    let cartProduct = {
+      "product": fullProduct,
+      "cartQuantity": quantity,
+      "variant": selectedVariant
+    }
+
+    let productInCart = preCart.find(product => {
+      return product.product._id === productId
+    })
+
+    // typeof productInCart === 'undefined' ? preCart.push(cartProduct) : preCart[preCart.indexOf(productInCart)]["cartQuantity"] += quantity;
+
+    if(typeof productInCart === 'undefined' || productInCart.variant !== cartProduct.variant) {
+      preCart.push(cartProduct)
+    } else {
+      preCart[preCart.indexOf(productInCart)]["cartQuantity"] += quantity;
+    }
+
+    props.setCart(preCart)
   }
 
   // const imgThumbsSansBestSeller = props.product.productImageUrls.slice(0, -1)
@@ -91,7 +119,7 @@ export default function ProductDetail(props) {
   
   const mapThumbs = imgThumbs.map((url, index) =>
     <div key={index} className={`div-thumb`} id={`div-${index}`} onClick={(e) => handleSelect(e)}>
-      <img className='thumb' id={`thumb-${index}`} src={props.product.productImageUrls[index]} alt={`thumb-${index}`} />
+      <img className='thumb' id={`thumb-${index}`} src={url} alt={`thumb-${index}`} />
     </div>
   );
 
@@ -119,7 +147,7 @@ export default function ProductDetail(props) {
       <div className='detailsInfo'>
         <h3>{props.product.productName}</h3>
         <p>{props.product.productSourceType!=="Original Release" ? "from" : "by"} {props.product.productSource}</p>
-        <h3>£{props.product.productPrice}</h3>
+        <h3>£{selectedVariant.slice(selectedVariant.length-9, selectedVariant.length) === "discount!" ? props.product.productPrice - 5 : props.product.productPrice}</h3>
         <p className='detailsDescr'>{props.product.productDescription}</p>
 
 
@@ -127,18 +155,21 @@ export default function ProductDetail(props) {
         
             <div className='audioPlayer'>
             
+            
+              <audio id="audio" width="300" height="32" src={props.product.productAudio}  controls> </audio>
+
+              {/* <AudioPlayer/> */}
+            
               {/* <div className='player'>
-                <div className='playButton'>
+                <button className='playButton' onClick={() => document.getElementById("audio").play()}>
                   <div className='arrow'></div>
-                </div>
+                </button>
                 <div className='seekBar'>
                   <div className='elapsed'></div>
                 </div>
                 </div>
               <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
-            
-              <audio id="audio" width="300" height="32" src={props.product.productAudio} controls> </audio>
-            
+
               </div>
           : 
           <></>
@@ -148,8 +179,8 @@ export default function ProductDetail(props) {
             { props.product.hasVariant ? (
               <Container>
                 <Form.Group>
-                  <Form.Label>Choose a variant:</Form.Label>
-                  <Form.Select className='variantForm'>
+                  <Form.Label>{props.product.productSource == "Bootleg Bill" ? "Personalisation:" : "Choose a variant:"}</Form.Label>
+                  <Form.Select className='variantForm' onChange={(e) => setSelectedVariant(e.target.value)}>
                     {productVars}
                   </Form.Select>
                 </Form.Group>

@@ -8,7 +8,14 @@ export default function OrderDetails(props) {
   const [currentUser, setCurrentUser] = useState({})
   const [currentProducts, setCurrentProducts] = useState([])
 
+  const [orderCart, setOrderCart] = useState([])
 
+  useEffect(() => {
+    if (!!props.currentOrder.userOrder) {
+      setOrderCart(JSON.parse(props.currentOrder.userOrder))
+      console.log(JSON.parse(props.currentOrder.userOrder))
+    }
+  }, [])
 
   const orderSet = [...new Set(props.cart)]
 
@@ -25,6 +32,14 @@ export default function OrderDetails(props) {
     </div>
 
 ))
+
+  const newCart = orderCart.map((order, index) => (
+
+    <div className='order-card' key={index}>
+      <OrderDetailCard currentOrder={props.currentOrder} id={order} getQuantity={getQuantity} orderCart={orderCart}/>
+    </div>
+
+  ))
 
   // const getOrderUser = (id) => {
   //   Axios.get(`auth/users/detail?id=${id}`, {
@@ -108,7 +123,8 @@ export default function OrderDetails(props) {
             )}
           </div>
         </div>
-        {mappedProducts}
+        {/* {mappedProducts} */}
+        { !props.currentOrder.userOrder ? mappedProducts : newCart }
       </div>
 
     </div>

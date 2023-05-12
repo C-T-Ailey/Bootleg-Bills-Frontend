@@ -24,9 +24,6 @@ import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
 
-
-
-
 export default function App() {
 
   // window location handler
@@ -70,15 +67,25 @@ export default function App() {
         Token is currently ${timeNow - user.user.timestamp < 1800000 ? "valid" : "invalid"}.\n
         Full object :`, [user])
 
-      if(user){
+      if (verifyToken() === false) {
+        console.log("token invalid")
+        localStorage.removeItem("token");
+        setIsAuth(false)
+      } else if (verifyToken() === true) {
+        console.log("token valid")
         setIsAuth(true)
         setUser(user)
         setUserRole(user.user.role)
       }
-      else if (!user){
-        localStorage.removeItem("token");
-        setIsAuth(false)
-      }
+      // if(user){
+      //   setIsAuth(true)
+      //   setUser(user)
+      //   setUserRole(user.user.role)
+      // }
+      // else if (!user){
+      //   localStorage.removeItem("token");
+      //   setIsAuth(false)
+      // }
     }
 
     let parseCart = JSON.parse(localStorage.getItem("Cart"))
@@ -99,7 +106,12 @@ export default function App() {
 
   }, [cart])
 
-
+  const verifyToken = () => {
+    let token = localStorage.getItem("token")
+    let timeNow = new Date().valueOf()
+    let user = jwt_decode(token)
+    return timeNow - user.user.timestamp < 1800000
+  }
   
   const addNewsletterEmail = (email) => {
     // The url is the api and the recipe post comma is the body 
@@ -156,7 +168,7 @@ export default function App() {
   const loadProductList = () => {
     Axios.get("https://bootlegbackend.herokuapp.com/product/index")
     .then((response) => {
-      console.log(response)
+      // console.log(response)
         // Setting state here:
         setProducts(response.data.product)
     })
@@ -322,14 +334,14 @@ export default function App() {
         </div> */}
         <div id='slashRouting'>
           <Routes>
-            <Route path="/" element={<Home products={products} />} />
+            <Route path="/" element={<Home products={products} isAuth={isAuth} user={user}/>} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/products" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
             <Route path="/cart" element={<Cart isAuth={isAuth} user={user} cart={cart} setCart={setCart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>}/>
-            <Route path="/checkout" element={<Checkout cart={cart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}  totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>} />
+            <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}  totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />
           </Routes>
         </div>

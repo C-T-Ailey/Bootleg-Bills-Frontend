@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
+import './Cart.css'
 
 export default function Cart(props) {
 
@@ -42,7 +43,7 @@ export default function Cart(props) {
 
     const handleRemoveFromCart = (deletedItem) => {
         console.log(deletedItem.product._id)
-        const findItem = props.cart.find(item => item.product._id === deletedItem.product._id) 
+        const findItem = props.cart.find(item => item.product._id === deletedItem.product._id && item.variant === deletedItem.variant) 
         const updatedCart = Array.from(props.cart)
         console.log("index:",updatedCart.indexOf(findItem))
         updatedCart.splice(updatedCart.indexOf(findItem),1)
@@ -94,15 +95,16 @@ export default function Cart(props) {
                 </div>
                 <div>
                     <Col>
-                        <Card.Body style={{width: '20rem'}}>
-                            <Card.Title className='title'> {item.product.productName} </Card.Title>
+                        <Card.Body style={{maxWidth: '28rem'}}>
+                            <Card.Title id='title'> {item.product.productName} </Card.Title>
                             <Card.Text> £{item.product.productPrice} </Card.Text>
                             {/* <Card.Text> Quantity: {props.productQuantity}</Card.Text> */}
                             <Card.Text>
-                                Quantity:  <input className='cartQuantity' type="number" placeholder={"#"} value={item.cartQuantity} min="0" onChange={(e) => handleInputChange(e, item)}></input>
+                                {item.product.hasVariant ? <Card.Title id='title'> Variant: {item.variant} </Card.Title> : <></>}
+                                Quantity:  <input className='cartQuantity' type="number" placeholder={"#"} value={item.cartQuantity} min="0" onChange={(e) => handleInputChange(e, item)} onWheel={(e) => e.target.blur()} ></input>
                                 {/* <Card.Text>{item.cartQuantity}</Card.Text> */}
-                            </Card.Text>
                             <Card.Text>Subtotal: £{item.product.productPrice * item.cartQuantity}</Card.Text>
+                            </Card.Text>
                             {/* <input type="number" placeholder={countOccurrences(props.cart, item)} min="0" onChange={(e) => handleInputChange(e)}></input> */}
                             <Button onClick={(e) => {handleRemoveFromCart(item)}}> Remove from Cart</Button>
                         </Card.Body>
@@ -132,7 +134,7 @@ export default function Cart(props) {
         <h1> In your cart: </h1>
             {cartItems}
             <h4> Total: £{props.totalPrice} </h4>
-            <Button variant="primary" onClick={() => makeCart(props.cart)}>Go to Checkout</Button>  
+            {props.cart.length ? <Button variant="primary" onClick={() => makeCart(props.cart)}>Go to Checkout</Button> : <></>}  
     </div>
   )
 }

@@ -1,0 +1,44 @@
+.color-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.color-box-flex {
+    display: flex;
+}
+
+.color-box {
+    position: relative;
+    height: 38px;
+    width: 38px;
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.color-box-bg {
+    position: relative;
+    height: 38px;
+    width: 38px;
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 5px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 5px;
+}
+
+.black-box {
+    height: 50%;
+    width: 50%;
+    background-color: gray;
+    z-index: 0;
+}
+
+.white-box {
+    height: 50%;
+    width: 50%;
+    background-color: white;
+    z-index: 0;
+}
