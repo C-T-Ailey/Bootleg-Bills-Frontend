@@ -334,7 +334,7 @@ export default function App() {
         </div> */}
         <div id='slashRouting'>
           <Routes>
-            <Route path="/" element={<Home products={products} isAuth={isAuth}/>} />
+            <Route path="/" element={<Home products={products} isAuth={isAuth} user={user}/>} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/products" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />

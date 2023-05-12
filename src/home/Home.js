@@ -8,11 +8,12 @@ import './home.css'
 import Axios from 'axios';
 import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
-import storeThumb from './assets/products.jpg'
-import signupThumb from './assets/signup.jpg'
-import loginThumb from './assets/login.jpg'
-import dashThumb from './assets/dash.jpg'
-import aboutThumb from './assets/about.jpg'
+import storeThumb from './assets/products-tape.png'
+import signupThumb from './assets/signup-tape.png'
+import loginThumb from './assets/login-tape.png'
+import dashThumb from './assets/dash-tape.png'
+import dashSellerThumb from './assets/dash-seller-tape.png'
+import aboutThumb from './assets/about-tape.png'
 import { Link } from 'react-router-dom';
 
 // const options = {
@@ -44,7 +45,8 @@ export default function Home(props) {
     useEffect(()=>{
       // run getOrder, then set getOrderState to the response
       getOrder().then(response => setGetOrderState(response));
-      window.scrollTo(0, 0)
+
+      window.scrollTo(0, 0);
     },[])
     
 
@@ -171,7 +173,7 @@ export default function Home(props) {
           <div className='thumbs-flex' id="bootstrap-overrides">
             <Nav.Link as={Link} to="/products">
             <div>
-              <img className='nav-thumb' src={storeThumb}/>
+              <img alt='View Products' className='nav-thumb' src={storeThumb}/>
             </div>
             </Nav.Link>
               
@@ -179,12 +181,12 @@ export default function Home(props) {
             <>
               <Nav.Link as={Link} to="/login">
                 <div>
-                  <img className='nav-thumb' src={loginThumb}/>
+                  <img alt='Log In' className='nav-thumb' src={loginThumb}/>
                 </div>
               </Nav.Link>
               <Nav.Link as={Link} to="/signup">
                 <div>
-                  <img className='nav-thumb' src={signupThumb}/>
+                  <img alt='Sign Up' className='nav-thumb' src={signupThumb}/>
                 </div>
               </Nav.Link>
             </>
@@ -192,14 +194,14 @@ export default function Home(props) {
             <>
             <Nav.Link as={Link} to="/manage">
               <div>
-                <img className='nav-thumb' src={dashThumb}/>
+                {props.user.user.role === "seller" ? <img alt="Seller Dash" className='nav-thumb' src={dashSellerThumb}/> : <img alt='View Orders' className='nav-thumb' src={dashThumb}/>}
               </div>
             </Nav.Link>
             </>
             }
             <Nav.Link as={Link} to="/about">
               <div>
-                <img className='nav-thumb' src={aboutThumb}/>
+                <img alt='About Us' className='nav-thumb' src={aboutThumb}/>
               </div>
             </Nav.Link>
           </div>

@@ -202,12 +202,12 @@
 .thumbs-flex div {
     cursor: pointer;
     width: 500px;
-    height: 229px;
+    height: 314px;
     background-size: contain;
-    background-color: #00BFC3;
+    /* background-color: #00BFC3; */
     border-radius: 10px;
     margin-bottom: 30px;
-    box-shadow: 5px 5px 8px rgba(107, 107, 107, 0.6);
+    /* box-shadow: 5px 5px 8px rgba(107, 107, 107, 0.6); */
 }
 
 #bootstrap-overrides .nav-link {
@@ -327,7 +327,7 @@
         width: fit-content;
         height: fit-content;
         background-size: contain;
-        background-color: #00BFC3;
+        /* background-color: #00BFC3; */
         border-radius: 10px;
         margin-bottom: 30px;
         box-shadow: 5px 5px 8px rgba(107, 107, 107, 0.6);
