@@ -4,13 +4,12 @@ import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
 import AboutBills from './home/AboutBills'
-import {Route, Routes, Link, NavLink, useNavigate} from 'react-router-dom'
+import {Route, Routes, Link, useNavigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
-import Product from './product/Product'
+// import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
-import ProductMetrics from './product/ProductMetrics'
 import {BsCart4} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import Footer from './footer/Footer'
@@ -19,7 +18,7 @@ import OrderConfirmation from './cart/OrderConfirmation'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Container, Nav, Navbar, Image, Alert } from 'react-bootstrap';
+import { Nav, Navbar, Image, Alert } from 'react-bootstrap';
 import logo from './product/images/nav_logo_new.png'
 
 // const logo = './product/images/logo.png'
@@ -46,8 +45,6 @@ export default function App() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
-  
-  const [sortedPopular, setSortedPopular] = useState([])
 
   useEffect(() => {
 
@@ -285,37 +282,37 @@ export default function App() {
     
       {/* React Bootstrap Nav Bar*/}
       <Navbar id="navId" collapseOnSelect="true" expand="lg" className="navbar-bg"  sticky="top">
-      <Container >
+      {/* <Container> */}
 
-        <Navbar.Brand href="/"><Image src={logo} height="50px" /></Navbar.Brand>
+        <Navbar.Brand href="/" id="nav-brand"><Image src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
-        <Nav className="nav-style">
+        {/* <Nav className="nav-style"> */}
           { isAuth ? (
-          <>
-          <Nav.Link as={Link} to="/"> Home</Nav.Link>
-          <Nav.Link as={Link} to="/products"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/logout" onClick={onLogoutHandler}>Logout</Nav.Link>
-          <Nav.Link as={Link} to="/manage"> 
+          <Nav id="nav-style">
+          <Nav.Link as={Link} to="/" eventKey={"1"}> Home</Nav.Link>
+          <Nav.Link as={Link} to="/products" eventKey={"2"}> Products</Nav.Link>
+          <Nav.Link as={Link} to="/logout" onClick={onLogoutHandler} eventKey={"3"}>Logout</Nav.Link>
+          <Nav.Link as={Link} to="/manage" eventKey={"4"}> 
           <Navbar.Text className="dash-link">
           {userRole === "seller" ? "Seller Dashboard" : "My Orders"}
           </Navbar.Text>
           </Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
+          <Nav.Link as={Link} to="/cart" eventKey={"5"}><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>
           <Navbar.Text style={{textShadow: '-2px 2px #000000'}}>{`Welcome, ${user.user.name}!`}</Navbar.Text>
-          </>
-          ):(
-          <>
-          <Nav.Link as={Link} to="/"> Home</Nav.Link>
-          <Nav.Link as={Link} to="/products"> Products</Nav.Link>
-          <Nav.Link as={Link} to="/login"> Login</Nav.Link>
-          <Nav.Link as={Link} to="/signup"> Signup</Nav.Link>
-          <Nav.Link as={Link} to="/cart"><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
-          </>
-          )}
           </Nav>
+          ):(
+          <Nav id="nav-style">
+          <Nav.Link as={Link} to="/" eventKey={"1"}> Home</Nav.Link>
+          <Nav.Link as={Link} to="/products" eventKey={"2"}> Products</Nav.Link>
+          <Nav.Link as={Link} to="/login" eventKey={"3"}> Login</Nav.Link>
+          <Nav.Link as={Link} to="/signup" eventKey={"4"}> Signup</Nav.Link>
+          <Nav.Link as={Link} to="/cart" eventKey={"5"}><BsCart4 size={26}> </BsCart4> <Badge bg="secondary"> {cartCount} </Badge></Nav.Link>          
+          </Nav>
+          )}
+          {/* </Nav> */}
         </Navbar.Collapse>
-      </Container>
+      {/* </Container> */}
     </Navbar>
      {sucMessage}
      {errMessage}

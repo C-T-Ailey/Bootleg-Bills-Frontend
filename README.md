@@ -77,6 +77,8 @@ This specific repository is for the application's frontend, to which the majorit
     * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel occasionally briefly appears just once before displaying the populated carousel. Efforts continue to be made to fix fully.
+* :white_check_mark: despite CollapseOnSelect being set in the Navbar component's attributes, the navbar doesn't collapse after selecting a link.
+  * Fixed by adding an eventKey attribute to each Nav.Link component.
 * :white_check_mark: Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
   * Fully fixed as part of a full overhaul of the Cart and Checkout components.
 * :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
