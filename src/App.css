@@ -20,10 +20,13 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: flex-start;
 } */
 
+#nav-brand {
+    margin-left: 20px;
+}
 
-.nav-style {
-    color: black;
+#nav-style {
     font-family: 'Bungee', cursive;
+    margin-right: 20px;
 }
 
 .nav-link {
@@ -43,4 +46,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-bg {
     filter: drop-shadow(0 -4mm 5mm rgb(0, 0, 0));
+}
+
+@media (max-width: 790px) {
+    #nav-brand {
+        margin-left: 5px;
+    }
+    #nav-style {
+        margin-left: 20px;
+    }
 }

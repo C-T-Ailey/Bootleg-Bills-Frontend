@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import {Nav} from 'react-bootstrap';
+// import {Nav} from 'react-bootstrap';
 import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 
 import Axios from 'axios';
-import Image from 'react-bootstrap/Image'
+// import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
-import storeThumb from './assets/products-tape.png'
-import signupThumb from './assets/signup-tape.png'
-import loginThumb from './assets/login-tape.png'
-import dashThumb from './assets/dash-tape.png'
-import dashSellerThumb from './assets/dash-seller-tape.png'
-import aboutThumb from './assets/about-tape.png'
+// import storeThumb from './assets/products-tape.png'
+// import signupThumb from './assets/signup-tape.png'
+// import loginThumb from './assets/login-tape.png'
+// import dashThumb from './assets/dash-tape.png'
+// import dashSellerThumb from './assets/dash-seller-tape.png'
+// import aboutThumb from './assets/about-tape.png'
 import { Link } from 'react-router-dom';
 
 // const options = {
@@ -33,8 +33,6 @@ export default function Home(props) {
     const [popular, setPopular] = useState({})
 
     const [getOrderState, setGetOrderState] = useState([])
-
-    const [lock, setLock] = useState(true)
 
     // function to retrieve all orders from db
     const getOrder = async () => {
@@ -147,7 +145,7 @@ export default function Home(props) {
                     {/* background image taken from the last index of popProduct's productImageUrls property array */}
                     <div id="imageBg" className='imageBg'>
                       {/* <img src={popProduct.product.productImageUrls[popProduct.product.productImageUrls.length -1]}/> */}
-                      <img src={popProduct.product.productBestsellerImage}/>
+                      <img alt={`${popProduct.product.productName}`} src={popProduct.product.productBestsellerImage}/>
                     </div>
                   </div>
               ))}
@@ -169,7 +167,7 @@ export default function Home(props) {
           </div>
         </div>
 
-        <div className='homepage-nav-thumbs'>
+        {/* <div className='homepage-nav-thumbs'>
           <div className='thumbs-flex' id="bootstrap-overrides">
             <Nav.Link as={Link} to="/products">
             <div>
@@ -205,6 +203,11 @@ export default function Home(props) {
               </div>
             </Nav.Link>
           </div>
+        </div> */}
+
+        <div className='upcoming'>
+          <h2>{"Featured Products"}</h2>
+          <p>Under Construction</p>
         </div>
 
         <div className="upcoming">
