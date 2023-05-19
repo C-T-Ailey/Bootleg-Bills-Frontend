@@ -225,4 +225,8 @@ justify-content: center;
     font-size: 1px;
   }
 
+  #variant-notice {
+      max-width: 100vw;
+  }
+
 }
