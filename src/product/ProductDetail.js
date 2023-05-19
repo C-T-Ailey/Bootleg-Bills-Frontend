@@ -156,7 +156,7 @@ export default function ProductDetail(props) {
             <div className='audioPlayer'>
             
             
-              <audio id="audio" width="300" height="32" src={props.product.productAudio}  controls> </audio>
+              <audio id="audio" width="300" height="55" src={props.product.productAudio} controls="true"> </audio>
 
               {/* <AudioPlayer/> */}
             
@@ -179,7 +179,7 @@ export default function ProductDetail(props) {
             { props.product.hasVariant ? (
               <Container>
                 <Form.Group>
-                  <Form.Label>{props.product.productSource == "Bootleg Bill" ? "Personalisation:" : "Choose a variant:"}</Form.Label>
+                  <Form.Label>{props.product.productSource === "Bootleg Bill" ? "Personalisation:" : "Choose a variant:"}</Form.Label>
                   <Form.Select className='variantForm' onChange={(e) => setSelectedVariant(e.target.value)}>
                     {productVars}
                   </Form.Select>

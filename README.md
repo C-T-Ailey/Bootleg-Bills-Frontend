@@ -68,6 +68,7 @@ This specific repository is for the application's frontend, to which the majorit
 * :construction_worker: Improved layout for the homepage.
   * In progress.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
+* Make the product index page's filters collapsible.
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
 
 #### Known Bugs
@@ -77,7 +78,7 @@ This specific repository is for the application's frontend, to which the majorit
     * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
 * :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Somewhat fixed - the carousel occasionally briefly appears just once before displaying the populated carousel. Efforts continue to be made to fix fully.
-* :white_check_mark: despite CollapseOnSelect being set in the Navbar component's attributes, the navbar doesn't collapse after selecting a link.
+* :white_check_mark: Despite CollapseOnSelect being set in the Navbar component's attributes, the navbar doesn't collapse after selecting a link.
   * Fixed by adding an eventKey attribute to each Nav.Link component.
 * :white_check_mark: Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
   * Fully fixed as part of a full overhaul of the Cart and Checkout components.
