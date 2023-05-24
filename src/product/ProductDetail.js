@@ -156,7 +156,7 @@ export default function ProductDetail(props) {
             <div className='audioPlayer'>
             
             
-              <audio id="audio" width="300" height="55" src={props.product.productAudio} controls="true"> </audio>
+              <audio id="audio" width="300" height="55" src={props.product.productAudio} controls={true}> </audio>
 
               {/* <AudioPlayer/> */}
             

@@ -64,7 +64,8 @@ This specific repository is for the application's frontend, to which the majorit
   * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
 * :construction_worker: Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
   * Requires adjustments so counters renew when a product is updated without reloading the dashboard - also requires a significant loading period before orders and statistics are viewable.
-  * Feature has been temporarily suspended due to unacceptably slow loading, and will be reinstated when a more efficient solution is found. 
+  * Feature has been temporarily suspended due to unacceptably slow loading, and will be reinstated when a more efficient solution is found.
+    * "Total Orders" has been reinstated as this statistic is now readily available by reading each product's unitsSold property.
 * :construction_worker: Improved layout for the homepage.
   * In progress.
 * Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
@@ -76,8 +77,8 @@ This specific repository is for the application's frontend, to which the majorit
   * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
     * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
-* :warning: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
-  * Somewhat fixed - the carousel occasionally briefly appears just once before displaying the populated carousel. Efforts continue to be made to fix fully.
+* :white_check_mark: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
+  * Fully fixed by implementing a "unitsSold" property in the backend's Product schema and simply sorting the full array of products by most to least unitsSold in Home.js' useEffect hook.
 * :white_check_mark: Despite CollapseOnSelect being set in the Navbar component's attributes, the navbar doesn't collapse after selecting a link.
   * Fixed by adding an eventKey attribute to each Nav.Link component.
 * :white_check_mark: Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
@@ -115,8 +116,13 @@ Bootleg Bill's Unofficial Audio Rarities is an E-Commerce application for custom
 
 #### Contributors
 * [Chris Ailey](https://github.com/C-T-Ailey)
+  * Current Project Lead
+  * Active Developer
 * [Christopher Carey](https://github.com/christopher-k-c)
-* [Ailish McLaughlin](https://github.com/ailishmcl) (Project Lead)
+  * Contributing Developer
+* [Ailish McLaughlin](https://github.com/ailishmcl)
+  * Project Lead (during development for General Assembly submission)
+  * Contributing Developer
 
 #### Timeframe
 This project was completed as a three-person group assignment over 14 days.
