@@ -162,8 +162,8 @@ export default function ProductMetrics(props) {
             <Card.Body>
                 <Card.Title>{props.product.productName}</Card.Title>
                 <Card.Text>Stock: {props.product.productStock}</Card.Text>
-                <Card.Text># of Outstanding Orders: {outstandingOrders}</Card.Text>
-                <Card.Text>Total Ordered: {totalOrdered}</Card.Text>
+                {/* <Card.Text># of Outstanding Orders: {outstandingOrders}</Card.Text> */}
+                <Card.Text>Total Ordered: {props.product.unitsSold}</Card.Text>
                 <Button variant="primary" onClick={() => onEditClick()}>Update Record</Button> &nbsp;
                 <Button variant="primary" onClick={() => onDeleteClick()}>De-list Item</Button>
                 {/* <Button variant="warning" onClick={() => fetchTotal()}>Test</Button> */}

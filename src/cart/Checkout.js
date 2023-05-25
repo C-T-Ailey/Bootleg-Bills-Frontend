@@ -55,13 +55,31 @@ export default function Checkout(props) {
         return getTotalPrice
     }
 
-   const decreaseStock = () => {
-        
-        console.log(props.cart)
+    const decreaseStock = () => {
+            
+            console.log(props.cart)
 
+            props.cart.forEach(item => {
+                const newStockLevel = {"_id": item.product._id, "productStock": item.product.productStock - item.cartQuantity}
+                Axios.put('https://bootlegbackend.herokuapp.com/product/update', newStockLevel, {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    }
+                })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            });
+    }
+
+    const increaseUnitsSold = () => {
+        console.log("test")
         props.cart.forEach(item => {
-            const newStockLevel = {"_id": item.product._id, "productStock": item.product.productStock - item.cartQuantity}
-            Axios.put('https://bootlegbackend.herokuapp.com/product/update', newStockLevel, {
+            const newUnitsSold = {"_id": item.product._id, "unitsSold": item.product.unitsSold + item.cartQuantity}
+            Axios.put('https://bootlegbackend.herokuapp.com/product/update', newUnitsSold, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
@@ -73,7 +91,7 @@ export default function Checkout(props) {
                 console.log(error)
             })
         });
-   }
+    }
 
     const handleChange = (e) => {
         console.log(e.target)
@@ -129,6 +147,7 @@ export default function Checkout(props) {
                 console.log(response)
                 console.log("order added successfully")
                 decreaseStock()
+                increaseUnitsSold()
                 props.setCart([])
                 navigate("/confirmation")
             } else {
