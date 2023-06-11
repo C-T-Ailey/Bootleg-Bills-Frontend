@@ -55,22 +55,29 @@ This specific repository is for the application's frontend, to which the majorit
 * Cart and Checkout components have been completely reworked. Several persistent bugs have been remedied, layouts and styling have been improved, and code has been significantly streamlined.
 * "Add to Cart" functions have been rewritten (and Product & Orders models updated on the backend) so that any selected variant for a product will be displayed in the Cart/Checkout and recorded in a customer's orders. If a product is added to the cart from the Products index, the user will be notified that the product has variants and that proceeding will add the default variation to the cart.
 * "Search by Name" feature has been added to the Product index and the Seller Dashboard's product list. 
+* Sellers can now specify the name and artist for the track featured in the audio sample when creating/editing a product, which is in turn displayed under the audio player on the Product Details.
+* Users can now enjoy a selection of music while they browse, courtesy of the newly implemented Radio feature.
+  * Fully functional, but subject to further improvements and additions.
 * For a comprehensive view of additions and changes, please refer to this repository's commit history.
 
 #### Planned Improvements
 * :construction_worker: The majority of variables and functions are currently declared at the top level in App.js and passed as props to various components; refactor the codebase so more functions and props are employed only on their required pages to reduce memory usage.
   * In progress.
 * :construction_worker: Rewrite/update styling to make the site more responsive to mobile devices.
-  * In progress - Homepage, Products and About Bill's now display adequately on mobile devices.
+  * In progress.
 * :construction_worker: Implement functional counters for each product's "Total orders" and "Outstanding orders" metrics on the Seller dashboard.
   * Requires adjustments so counters renew when a product is updated without reloading the dashboard - also requires a significant loading period before orders and statistics are viewable.
   * Feature has been temporarily suspended due to unacceptably slow loading, and will be reinstated when a more efficient solution is found.
     * "Total Orders" has been reinstated as this statistic is now readily available by reading each product's unitsSold property.
 * :construction_worker: Improved layout for the homepage.
   * In progress.
-* Featured Product section on the homepage, with a component in the Seller dashboard for updating it.
-* Make the product index page's filters collapsible.
+* :construction_worker: Make the product index page's filters collapsible.
+  * In progress.
+* :construction_worker: Featured Product(s) section on the homepage, with a component in the Seller dashboard for updating it.
+  * In progress.
 * Dedicated lower-resolution images to use as thumbnails on the Products page in order to reduce time and data spent loading them, and a corresponding field in the Product model to designate it.
+* Optional "Track list" form input when creating/editing a product.
+* Fully custom-designed audio player on the product details view. 
 
 #### Known Bugs
 * Firefox Browser-specific issues:

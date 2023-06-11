@@ -303,8 +303,8 @@ export default function ProductCreateForm(props) {
 
             <Form.Group>
                 <Form.Label>Product Description</Form.Label>
-                <Form.Control id="description" className='select-text' name="productDescription" as="textarea" rows={5} maxLength={600} onChange={(e) => handleDescrChange(e)}></Form.Control>
-                {<p>{characterCount}/600</p>}
+                <Form.Control id="description" className='select-text' name="productDescription" as="textarea" rows={5} maxLength={1000} onChange={(e) => handleDescrChange(e)}></Form.Control>
+                {<p>{characterCount}/1000</p>}
             </Form.Group>
 
             <Form.Group>
@@ -376,9 +376,20 @@ export default function ProductCreateForm(props) {
             } 
 
             <Form.Group>
-                <Form.Label>Product Audio</Form.Label>
-                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productAudio" onChange={handleChange} autoFocus></Form.Control>
+                <Form.Label>Product Audio Sample</Form.Label>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productAudio" onChange={handleChange}></Form.Control>
             </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Sample Track Title</Form.Label>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productSampleName" onChange={handleChange}></Form.Control>
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Sample Track Artist</Form.Label>
+                <Form.Control style={{lineHeight:"1", height:"35px"}} name="productSampleArtist" onChange={handleChange}></Form.Control>
+            </Form.Group>
+            
             <br/>
             <Button variant="primary" onClick={(e) => handleSubmit(e)}>Add Product</Button>
 

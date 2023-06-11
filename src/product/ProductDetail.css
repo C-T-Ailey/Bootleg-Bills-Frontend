@@ -312,20 +312,41 @@ img:hover {
 
 /* Audio Player */
 
-#audio {
+audio::-webkit-media-controls-panel {
+    background: #00BFC3;
+    border: 4px solid black;
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: #FF2273;
+    border-radius: 10%; 
+}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: yellow;
+    border-radius: 10%; 
+}
+
+
+
+audio {
+    background-color: #00BFC3;
+    border-radius: 5px;
+    box-shadow: -3px 3px black;
+    
+}
+
+.audioPlayer {
     margin-bottom: 30px;
 }
 
-audio::-webkit-media-controls-panel {
-
-    margin: 10px;
-
+.sampleInfo {
+    margin-top: 10px;
 }
 
-
-audio::-webkit-media-controls-play-button {
-    background-color: rgb(255, 255, 255);
-    border-radius: 10%; 
+.sampleName {
+    font-size: smaller;
+    line-height: 0.5rem;
 }
 
 .widthSpacer {

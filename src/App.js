@@ -4,13 +4,14 @@ import Login from './user/Login'
 import Dash from './user/Dash'
 import Cart from './cart/Cart'
 import AboutBills from './home/AboutBills'
+import FrequentlyAsked from './home/FrequentlyAsked'
 import {Route, Routes, Link, useNavigate} from 'react-router-dom'
 import Axios from 'axios'
 import ProductList from './product/ProductList'
 // import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
-import {BsCart4} from 'react-icons/bs'
+import {BsCart4, BsFillVolumeUpFill, BsSkipForwardCircle, BsVolumeMuteFill} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import Footer from './footer/Footer'
 import Checkout from './cart/Checkout' 
@@ -45,6 +46,55 @@ export default function App() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
+
+  const [audioMuted, setAudioMuted] = useState(true)
+
+  const randInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+  
+  const audioLibrary = [
+    {
+      name:"Brian Bright - THPS Menu Loop",
+      url: "https://od.lk/s/OTFfMjgxMzAyMjFf/thps_loop_neater.mp3"
+    },
+    {
+      name:"Grimes ft. Astrophysics - Oblivion (Double Bill Mix)",
+      url: "https://od.lk/s/OTFfMjgxMzA1OTZf/grimes-miku%20oblivion%20mix.mp3"
+    },
+    {
+      name: "Brian Bright - THPS2 Menu Loop",
+      url: "https://od.lk/s/OTFfMjgxMzA1OTdf/Brian%20Bright%20-%20THPS%202%20Menu%20Music.mp3"
+    },
+    {
+      name: "Disconscious - Midnight Specimen",
+      url: "https://od.lk/s/OTFfMjgxMzA2MDBf/Disconscious%20-%20Hologram%20Plaza%20-%2009%20Midnight%20Specimen.mp3"
+    },
+    {
+      name: "Luxury Elite - Self-Discovery",
+      url: "https://od.lk/s/OTFfMjgxMzA2MTdf/Self-Discovery.mp3"
+    },
+    {
+      name: "Aim ft. YZ - Ain't Got Time to Waste",
+      url: "https://od.lk/s/OTFfMjgxMzA2NDVf/Ain%27t%20Got%20Time%20to%20Waste%20-%20Aim%20ft.%20YZ.mp3"
+    },
+    {
+      name: "Blue Thunder - Aquasky",
+      url: "https://od.lk/s/OTFfMjgxMzA2NDdf/Aquasky%20-%20Blue%20Thunder.mp3"
+    },
+    {
+      name: "Grand Unified - Le Hot '99",
+      url: "https://od.lk/s/OTFfMjgxMzA2NDlf/Grand%20Unified%20-%20Le%20Hot%20%2799.mp3"
+    },
+    {
+      name: "Gex 3D Enter the Gecko OST - In Drag Net",
+      url: "https://od.lk/s/OTFfMjgxMzA2NDhf/Gex%20Enter%20the%20Gecko%20OST%20-%20In%20Drag%20Net.mp3"
+    }
+  ]
+
+  const [selectedTrack,setSelectedTrack] = useState(randInt(0, audioLibrary.length-1))
 
   useEffect(() => {
 
@@ -269,6 +319,28 @@ export default function App() {
   ): null;
 
 
+  const handleMute = () => {
+    let audio = document.getElementById("daFunk")
+    audio.muted = !!audio.muted ? false : true
+    audio.volume = 0.5
+    console.log(audio.audioTracks)
+    setAudioMuted(audio.muted)
+  }
+
+  const handleSkip = () => {
+    // let newTrack = audioLibrary[randInt(0, audioLibrary.length-1)]
+    // const isSame = () => {
+    //   return newTrack.name === selectedTrack.name
+    // } 
+    // while (!!isSame()) {
+    //   newTrack = audioLibrary[randInt(0, audioLibrary.length-1)]
+    //   console.log("Rerolled cos same")
+    //   isSame()
+    // }
+    // setSelectedTrack(newTrack)
+    let newTrack = selectedTrack !== audioLibrary.length - 1 ? selectedTrack+1 : 0
+    setSelectedTrack(newTrack)
+  }
 
 
   return (
@@ -278,7 +350,25 @@ export default function App() {
     <div>
 
 
-
+      <audio id="daFunk" controls={false} src={audioLibrary[selectedTrack].url} autoPlay loop muted></audio>
+      
+      {
+        <div className='radioContainer'>
+          <div className="muteContainer">
+            { !audioMuted ? <BsFillVolumeUpFill id="mute" size={38} onClick={() => handleMute()}></BsFillVolumeUpFill> : <BsVolumeMuteFill id="mute" size={38} onClick={() => handleMute()}></BsVolumeMuteFill>}
+          </div>
+          <div className='marqueeContainer'>
+            <div id='marquee'>
+              <div id="marquee__content">
+                <p className='marqueeContent'>Now Playing: &nbsp; &nbsp; &nbsp; {audioLibrary[selectedTrack].name}</p>
+                </div>
+            </div>
+          </div>
+          <div className="newTrackContainer">
+          <BsSkipForwardCircle id="skip" size={38} onClick={() => handleSkip()}/>
+          </div>
+        </div>
+      }
     
       {/* React Bootstrap Nav Bar*/}
       <Navbar id="navId" collapseOnSelect="true" expand="lg" className="navbar-bg"  sticky="top">
@@ -335,6 +425,7 @@ export default function App() {
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/products" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />
+            <Route path="/faq" element={<FrequentlyAsked />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
             <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
             <Route path="/cart" element={<Cart isAuth={isAuth} user={user} cart={cart} setCart={setCart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>}/>
@@ -347,7 +438,7 @@ export default function App() {
 
 
 
-        <Footer addNewsletterEmail={addNewsletterEmail}/>
+        <Footer style={{zIndex:0}} addNewsletterEmail={addNewsletterEmail}/>
         
       
 
