@@ -94,14 +94,14 @@ export default function Signup(props) {
 
             <Form.Group>
                 <div className="userType">
-                    <Form.Label>Register as a seller?:</Form.Label>
+                    <Form.Label>Register as Bootleg Bill's staff:</Form.Label>
                     <Switch className='switch' onChange={handleToggleChange} checked={checked}/>
                 </div>
                 
             </Form.Group>
 
                 <Form.Group className='verify-seller'>
-                    <Form.Label>{userRole === "seller" ? ("Enter your seller verification code:") : ("")}</Form.Label>
+                    <Form.Label>{userRole === "seller" ? ("Enter your staff registration code:") : ("")}</Form.Label>
                     <Form.Control className='auth-input' id="sellerKeyForm" type={userRole === "buyer" ? ("hidden") : ("text")} onChange={(e) => console.log(e.target.value)} autoComplete='new-password' onClick={(e) => {handleMask(e)}}></Form.Control>
                 </Form.Group>
                 

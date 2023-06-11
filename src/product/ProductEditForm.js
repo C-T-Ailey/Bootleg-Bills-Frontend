@@ -201,7 +201,7 @@ export default function ProductEditForm(props) {
             <Container>
                 <Form.Group>
                     <Form.Label>Product Name</Form.Label>
-                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productName" onChange={(e) => handleChange(e)} defaultValue={props.product.productName}></Form.Control>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productName" onChange={(e) => handleChange(e)} defaultValue={props.product.productName} autoFocus></Form.Control>
                 </Form.Group>
 
                 <Form.Group>
@@ -236,8 +236,8 @@ export default function ProductEditForm(props) {
 
                 <Form.Group>
                     <Form.Label>Product Description</Form.Label>
-                    <Form.Control name="productDescription" as="textarea" rows={5} maxLength={600} style={{fontWeight:"bolder"}} onChange={(e) => handleChange(e)} defaultValue={props.product.productDescription}></Form.Control>
-                    {<p>{characterCount}/600</p>}
+                    <Form.Control name="productDescription" as="textarea" rows={5} maxLength={1000} style={{fontWeight:"bolder"}} onChange={(e) => handleChange(e)} defaultValue={props.product.productDescription}></Form.Control>
+                    {<p>{characterCount}/1000</p>}
                 </Form.Group>
 
                 <Form.Group>
@@ -301,8 +301,18 @@ export default function ProductEditForm(props) {
                 } 
 
                 <Form.Group>
-                    <Form.Label>Product Audio</Form.Label>
+                    <Form.Label>Product Audio Sample</Form.Label>
                     <Form.Control style={{lineHeight:"1", height:"35px"}} name="productAudio" onChange={handleChange} defaultValue={props.product.productAudio}></Form.Control>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Sample Track Title</Form.Label>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productSampleName" onChange={handleChange} defaultValue={props.product.productSampleName}></Form.Control>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Sample Track Artist</Form.Label>
+                    <Form.Control style={{lineHeight:"1", height:"35px"}} name="productSampleArtist" onChange={handleChange} defaultValue={props.product.productSampleArtist}></Form.Control>
                 </Form.Group>
                 
                 <Button variant="primary" onClick={(e) => handleSubmit(e)}>Update Product</Button>

@@ -23,11 +23,14 @@ h1 {
 
 h5 {
   font-size: 1.8rem;
+  line-height: 0.5rem;
 }
 
 /* #sourceFilter, #formatFilter, #sortBy {
     margin: 20px;
 } */
+
+
 
 .filter {
   margin-bottom: 20px;
@@ -87,7 +90,6 @@ h5 {
     align-items: center;
     flex-wrap: wrap;
 
-
   }
   
   .numInput:disabled{
@@ -101,11 +103,20 @@ h5 {
 
 .filter-flex-container{
   display: flex;
+  align-items: center;
   text-align: center;
   flex-direction: column;
 }
 
+#filterToggle {
+  margin-bottom: 40px;
+}
 
+#filterToggle:active, #filterToggle:focus {
+  box-shadow: none;
+  background-color: #FF2273;
+  border-color: rgba(0,0,0,0);
+}
 
 /* .filter-container{
 display: flex;

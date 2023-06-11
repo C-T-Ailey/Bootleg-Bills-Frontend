@@ -170,7 +170,12 @@ export default function ProductDetail(props) {
                 </div>
               <p className="timeCount"><span>0:19</span> / <span>0:30</span></p> */}
 
+              <div className='sampleInfo'>
+                <p className='sampleName'>{props.product.productSampleName}</p>
+                <p className='sampleName'>By {props.product.productSampleArtist}</p>
               </div>
+
+            </div>
           : 
           <></>
         }

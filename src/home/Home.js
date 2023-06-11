@@ -94,7 +94,7 @@ export default function Home(props) {
           </div>
           <div className="homepage-about">
             <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
-            <p>Founded in 2016 as a small word-of-mouth creative project, we finally established an online presence in 2022 thanks to Software Engineers Ailish McLaughlin, Christopher Carey and Chris Ailey. Now you can have a look at what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest releases, and bag one of your very own unofficial audio rarities!</p>
+            <p>Founded in 2016 as a small word-of-mouth creative project, we finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
             {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
           </div>
         </div>

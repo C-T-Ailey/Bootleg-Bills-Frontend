@@ -13,6 +13,18 @@
     margin-bottom: 3%
 }
 
+.question h5 {
+    color: black;
+    margin-top: 5%;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.question span {
+    font-family: "Bungee", 'Courier New', monospace;
+    font-size: 1.5rem;
+}
+
 .billsStory p {
 
     color: black;

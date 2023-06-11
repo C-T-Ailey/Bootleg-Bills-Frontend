@@ -20,6 +20,7 @@ export default function ProductList(props) {
   const [products, setProducts] = useState([])
   
   // filter handling states
+  const [filterHidden, setFilterHidden] = useState(true)
   const [productList, setProductList] = useState(products)
   const [selectedSource, setSelectedSource] = useState("All Sources")
   const [selectedFormat, setSelectedFormat] = useState("All Formats")
@@ -97,6 +98,10 @@ export default function ProductList(props) {
       setProductList(toSort)
     },[selectedSort])
 
+    const handleToggleChange = (e) => {
+      setFilterHidden(!filterHidden)
+    }
+
     // function used in selectedSource/selectedFormat-dependent useEffect hooks for performing above sorting on update of those states
     const sorting = (sortThis) => {
       let toSort = Array.from(sortThis)
@@ -169,51 +174,58 @@ export default function ProductList(props) {
           : 
             console.log("Neutral entry.")}
         {console.log(bestseller)}
+        
 
-        <div className="filter-flex-container">
-          <div className="filter-container">
-          
-            <h5>Filter by Source</h5>
-          
-            <ButtonGroup id="sourceFilter" className="filter" >
-              <Button variant="primary" id={selectedSource==="All Sources" ? "isSelected" : ""} name="All Sources" onClick={(e) => {setSelectedSource(e.target.name)}}>All</Button>
-              <Button variant="primary" id={selectedSource==="Film/TV" ? "isSelected" : ""} name="Film/TV" onClick={(e) => {setSelectedSource(e.target.name)}}>Film/TV</Button>
-              <Button variant="primary" id={selectedSource==="Video Game" ? "isSelected" : ""} name="Video Game" onClick={(e) => {setSelectedSource(e.target.name)}}>Video Game</Button>
-              <Button variant="primary" id={selectedSource==="Original Release" ? "isSelected" : ""} name="Original Release" onClick={(e) => {setSelectedSource(e.target.name)}}>Original Release</Button>
-            </ButtonGroup>
-            &nbsp;
-          
+
+          <div className="filter-flex-container">
+            <Button variant="primary" id="filterToggle" name="Show filters" onClick={() => {handleToggleChange()}}>{!filterHidden ? 'Hide Filters' : 'Show Filters'}</Button>
+            
+            <div className={filterHidden ? "filtersHidden" : "filtersVisible"} hidden={filterHidden}>
+              <div className="filter-container">
+              
+                <h5>Filter by Source</h5>
+              
+                <ButtonGroup id="sourceFilter" className="filter" >
+                  <Button variant="primary" id={selectedSource==="All Sources" ? "isSelected" : ""} name="All Sources" onClick={(e) => {setSelectedSource(e.target.name)}}>All</Button>
+                  <Button variant="primary" id={selectedSource==="Film/TV" ? "isSelected" : ""} name="Film/TV" onClick={(e) => {setSelectedSource(e.target.name)}}>Film/TV</Button>
+                  <Button variant="primary" id={selectedSource==="Video Game" ? "isSelected" : ""} name="Video Game" onClick={(e) => {setSelectedSource(e.target.name)}}>Video Game</Button>
+                  <Button variant="primary" id={selectedSource==="Original Release" ? "isSelected" : ""} name="Original Release" onClick={(e) => {setSelectedSource(e.target.name)}}>Original Release</Button>
+                </ButtonGroup>
+                &nbsp;
+              
+              </div>
+              
+              <div className="filter-container">
+              
+                <h5>Filter by Format</h5>
+              
+                <ButtonGroup id="formatFilter" className="filter" >
+                  <Button variant="primary" id={selectedFormat==="All Formats" ? "isSelected" : ""}  name="All Formats" onClick={(e) => {setSelectedFormat(e.target.name)}}>All</Button>
+                  <Button variant="primary" id={selectedFormat==="Cassette" ? "isSelected" : ""} name="Cassette" onClick={(e) => {setSelectedFormat(e.target.name)}}>Cassette</Button>
+                  <Button variant="primary" id={selectedFormat==="Vinyl" ? "isSelected" : ""} name="Vinyl" onClick={(e) => {setSelectedFormat(e.target.name)}}>Vinyl</Button>
+                  <Button variant="primary" id={selectedFormat==="Apparel" ? "isSelected" : ""} name="Apparel" onClick={(e) => {setSelectedFormat(e.target.name)}}>Apparel</Button>
+                </ButtonGroup>
+                &nbsp;
+              
+              </div>
+              
+              <div className="filter-container">
+              
+                <h5>Sort by:</h5>
+              
+                <ButtonGroup id="sortBy" className="filter" >
+                  <Button variant="primary" id={selectedSort==="Alpha AZ" ? "isSelected" : ""} name="Alpha AZ" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(A-Z)</Button>
+                  <Button variant="primary" id={selectedSort==="Alpha ZA" ? "isSelected" : ""} name="Alpha ZA" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(Z-A)</Button>
+                  <Button variant="primary" id={selectedSort==="Date Desc" ? "isSelected" : ""} name="Date Desc" onClick={(e) => {setSelectedSort(e.target.name)}}>Added<br/>(Recent)</Button>
+                  <Button variant="primary" id={selectedSort==="Date Asc" ? "isSelected" : ""}  name="Date Asc" onClick={(e) => {setSelectedSort(e.target.name)}}>Added<br/>(Oldest)</Button>
+                </ButtonGroup>
+                &nbsp;
+              
+              </div>
+            </div>
+            
           </div>
-          
-          <div className="filter-container">
-          
-            <h5>Filter by Format</h5>
-          
-            <ButtonGroup id="formatFilter" className="filter" >
-              <Button variant="primary" id={selectedFormat==="All Formats" ? "isSelected" : ""}  name="All Formats" onClick={(e) => {setSelectedFormat(e.target.name)}}>All</Button>
-              <Button variant="primary" id={selectedFormat==="Cassette" ? "isSelected" : ""} name="Cassette" onClick={(e) => {setSelectedFormat(e.target.name)}}>Cassette</Button>
-              <Button variant="primary" id={selectedFormat==="Vinyl" ? "isSelected" : ""} name="Vinyl" onClick={(e) => {setSelectedFormat(e.target.name)}}>Vinyl</Button>
-              <Button variant="primary" id={selectedFormat==="Apparel" ? "isSelected" : ""} name="Apparel" onClick={(e) => {setSelectedFormat(e.target.name)}}>Apparel</Button>
-            </ButtonGroup>
-            &nbsp;
-          
-          </div>
-          
-          <div className="filter-container">
-          
-            <h5>Sort by:</h5>
-          
-            <ButtonGroup id="sortBy" className="filter" >
-              <Button variant="primary" id={selectedSort==="Alpha AZ" ? "isSelected" : ""} name="Alpha AZ" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(A-Z)</Button>
-              <Button variant="primary" id={selectedSort==="Alpha ZA" ? "isSelected" : ""} name="Alpha ZA" onClick={(e) => {setSelectedSort(e.target.name)}}>Name<br/>(Z-A)</Button>
-              <Button variant="primary" id={selectedSort==="Date Desc" ? "isSelected" : ""} name="Date Desc" onClick={(e) => {setSelectedSort(e.target.name)}}>Added<br/>(Recent)</Button>
-              <Button variant="primary" id={selectedSort==="Date Asc" ? "isSelected" : ""}  name="Date Asc" onClick={(e) => {setSelectedSort(e.target.name)}}>Added<br/>(Oldest)</Button>
-            </ButtonGroup>
-            &nbsp;
-          
-          </div>
-          
-        </div>
+
 
         <div className='search-name'>
           <Container>

@@ -20,7 +20,7 @@ export default function Footer(props) {
         <Link to={'/about'}>About us</Link>
         <a href="">Careers</a>
         <a href="">Terms of Service</a>
-        <a href="">FAQs</a>
+        <Link to={'/faq'}>FAQs</Link>
       </div>
       <div className="footer-heading footer-3">
         <h2>Products</h2>
