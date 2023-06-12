@@ -223,6 +223,31 @@
     border-radius: 10px;
 }
 
+.radioNew {
+    position: fixed;
+    top: 130px;
+    user-select: none;
+}
+
+.radioNewMobile {
+    display: none;
+}
+
+.radioNew img {
+    cursor: default;
+}
+
+.radioNew .confirm {
+    position: fixed;
+    left: 250px;
+    top: 210px;
+    font-family: bungee;
+    cursor: pointer;
+}
+
+.confirm:hover {
+    color:#FF2273
+}
 
 @media (max-width: 790px) {
 
@@ -264,6 +289,30 @@
         display: none;
     
         user-select: none;
+    }
+
+    .radioNewMobile {
+        display: flex;
+        position: fixed;
+        left: 0px;
+        bottom: 50px;
+        user-select: none;
+    }
+    
+    .radioNew {
+        display: none;
+    }
+    
+    .radioNewMobile img {
+        cursor: default;
+    }
+    
+    .radioNewMobile .confirm {
+        position: fixed;
+        right: 10px;
+        bottom: 120px;
+        font-family: bungee;
+        cursor: pointer;
     }
 
     #imageBg img {

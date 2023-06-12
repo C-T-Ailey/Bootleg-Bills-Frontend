@@ -6,6 +6,8 @@ import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 // import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
+import radioNew from './assets/radio_new.png'
+import radioNewMobile from './assets/radio_new_mobile.png'
 // import storeThumb from './assets/products-tape.png'
 // import signupThumb from './assets/signup-tape.png'
 // import loginThumb from './assets/login-tape.png'
@@ -13,6 +15,7 @@ import bigLogoNew from './assets/big_logo_new.png'
 // import dashSellerThumb from './assets/dash-seller-tape.png'
 // import aboutThumb from './assets/about-tape.png'
 import { Link } from 'react-router-dom';
+import { BsXCircle } from 'react-icons/bs';
 
 // const options = {
 //   showArrows: false,
@@ -47,6 +50,16 @@ export default function Home(props) {
     return (
              
       <>
+
+        <div className='radioNew' hidden={props.noticeClosed}>
+          <img src={radioNew}></img>
+          <div className='confirm' onClick={() => props.setNoticeClosed(true)}><BsXCircle/></div>
+        </div>
+
+        <div className='radioNewMobile' hidden={props.noticeClosed}>
+          <img src={radioNewMobile}></img>
+          <div className='confirm' onClick={() => props.setNoticeClosed(true)}><BsXCircle/></div>
+        </div>
       
         { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
 
