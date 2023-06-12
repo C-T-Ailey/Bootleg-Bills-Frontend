@@ -150,4 +150,13 @@ h1, h2, h3, h4, h5, h6 {
     #nav-style {
         margin-left: 20px;
     }
+
+    .radioContainer {
+        position: fixed;
+        top: unset;
+        bottom: 0px;
+        width: 100%;
+        border-radius: unset;
+        box-shadow: 2px -2px 4px rgb(153, 153, 153);
+    }
 }
