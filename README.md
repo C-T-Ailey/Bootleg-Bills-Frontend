@@ -1,10 +1,10 @@
-# GA SEI Project 4: “Bootleg Bill’s Unofficial Audio Rarities” - Bootleg Mixtape E-Commerce App
+# “Bootleg Bill’s Unofficial Audio Rarities” - A Non-Existent Bootleg Record & Cassette E-Commerce App
 
 ### Deployed App: https://bootleg-bills.herokuapp.com/
 
 > *This repository contains the code for the project's frontend. For the backend code, see [here](https://github.com/C-T-Ailey/project-04).*
 
-**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku, and the backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well either of the following CORS solutions:
+**Note:** The project's frontend is configured to communicate with the deployed backend, currently hosted on Heroku. The backend has CORS configured to allow communication with the deployed frontend. If you intend to host this project locally, you will need to reconfigure each API endpoint in the frontend to point to the localhost address of the backend, as well either of the following CORS solutions:
 * Use a CORS browser extension;
 * Adjust the CORS configuration in the backend's server.js file to reflect whichever localhost address the frontend will be running on.
 
