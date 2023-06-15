@@ -53,18 +53,45 @@ h1, h2, h3, h4, h5, h6 {
     filter: drop-shadow(0 -4mm 5mm rgb(0, 0, 0));
 }
 
-.radioContainer {
+.radioHidden {
+    animation: hideRadio 0.5s linear;
     display: flex;
     flex-direction: row;
     height: 50px;
     width: 325px;
     position: fixed;
-    top: 75px;
-    z-index: 1;
-    padding-left: 10px;
-    background-color: white;
+    z-index: 2;
+    top: 26px;
+    left: 0px;
     border-radius: 0px 0px 10px 0px;
     box-shadow: -2px 2px 6px rgb(36, 36, 36);
+}
+
+.radioVisible {
+    animation: showRadio 0.5s linear;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 325px;
+    position: fixed;
+    z-index: 2;
+    top: 75px;
+    left: 0px;
+    border-radius: 0px 0px 10px 0px;
+    box-shadow: -2px 2px 6px rgb(36, 36, 36);
+}
+
+
+.radioContainer {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 325px;
+    top: 75px;
+    left: 0px;
+    z-index: 1;
+    background-color: white;
+    border-radius: 0px 0px 10px 0px;
 }
 
 .textContainer {
@@ -83,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #mute:hover {
     color: #F8DC38;
-    
+    cursor: pointer;    
 }
 
 #skip {
@@ -93,20 +120,21 @@ h1, h2, h3, h4, h5, h6 {
 
 #skip:hover {
     color: #F8DC38;
-    
+    cursor: pointer;
 }
 
 .muteContainer {
     display: flex;
     align-items: center;
-    margin-right: 25px;
+    margin: 0px 10px;
 }
 
 .newTrackContainer {
     display: flex;
     align-items: center;
     margin-left: 10px;
-    padding-right: 10px;
+    right: 10px;
+    /* padding-right: 10px; */
 }
 
 .marqueeContainer {
@@ -114,6 +142,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     background-color: white;
     border-radius: 10px;
+    width: 210px;
 }
 
 #marquee {
@@ -133,6 +162,89 @@ h1, h2, h3, h4, h5, h6 {
     gap: var(--gap);
     min-width: 100%;
 }
+
+.toggleContainer {
+    display: flex;
+    justify-content: center;
+    width: 325px;
+    height: 20px;
+    position: absolute;
+    top: 50px;
+    left: 0px;
+}
+
+.hideToggle {
+    animation: hideToggle 0.7s linear;
+    z-index: -1;
+    position: relative;
+    top: -25px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0px 2px 2px #363636;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.showToggle {
+    z-index: 0;
+    position: relative;
+    animation: showToggle 0.5s linear;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0px 2px 2px #363636;
+    border-radius: 0px 0px 5px 5px;    
+    cursor: pointer;
+}
+
+.toggleButton {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+@keyframes showRadio {
+    0% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes hideRadio {
+    0% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes showToggle {
+    0% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes hideToggle {
+    0% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
     
 @keyframes marquee {
     10% {
@@ -158,5 +270,24 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
         border-radius: unset;
         box-shadow: 2px -2px 4px rgb(153, 153, 153);
+    }
+    .marqueeContainer {
+        width: fit-content;
+    }
+
+    /* #mute:hover {
+        color: #FF2273;
+    } */
+
+    .newTrackContainer {
+        margin-right: 10px;
+    }
+
+    #skip:hover {
+        color: #FF2273;
+    }
+
+    #skip:active {
+        color:#F8DC38;
     }
 }

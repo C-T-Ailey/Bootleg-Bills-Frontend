@@ -11,7 +11,7 @@ import ProductList from './product/ProductList'
 // import Product from './product/Product'
 import jwt_decode from 'jwt-decode'
 import Home from './home/Home'
-import {BsCart4, BsFillVolumeUpFill, BsSkipForwardCircle, BsVolumeMuteFill} from 'react-icons/bs'
+import {BsCart4, BsChevronCompactDown, BsChevronCompactUp, BsFillVolumeUpFill, BsSkipForwardCircle, BsVolumeMuteFill} from 'react-icons/bs'
 import Badge from 'react-bootstrap/Badge'
 import Footer from './footer/Footer'
 import Checkout from './cart/Checkout' 
@@ -21,6 +21,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Nav, Navbar, Image, Alert } from 'react-bootstrap';
 import logo from './product/images/nav_logo_new.png'
+
+
 
 // const logo = './product/images/logo.png'
 
@@ -47,8 +49,7 @@ export default function App() {
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
 
-  const [audioMuted, setAudioMuted] = useState(true)
-
+  
   const randInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -91,20 +92,30 @@ export default function App() {
     {
       name: "Gex 3D Enter the Gecko OST - In Drag Net",
       url: "https://od.lk/s/OTFfMjgxMzA2NDhf/Gex%20Enter%20the%20Gecko%20OST%20-%20In%20Drag%20Net.mp3"
+    },
+    {
+      name: "Frank Contreras - SimpsonWave1995",
+      url: "https://od.lk/s/OTFfMjgxMzc2Njdf/FrankJavCee%20-%20SimpsonWave1995.mp3"
     }
   ]
-
+  
   const [selectedTrack,setSelectedTrack] = useState(randInt(0, audioLibrary.length-1))
+  const [audioMuted, setAudioMuted] = useState(true)
+  const [toggleVisible, setToggleVisible] = useState("hideToggle")
+  const [playerVisible, setPlayerVisible] = useState("radioVisible")
+  const [audioCanPlay, setAudioCanPlay] = useState(false)
 
+  const [noticeClosed, setNoticeClosed] = useState(false)
+  
   useEffect(() => {
-
     
-
+    
+    
     console.log("useEffect triggered")
     loadProductList()
     
     let token = localStorage.getItem("token")
-
+    
     if(token != null){
       let user = jwt_decode(token)
       let timeNow = new Date().valueOf()
@@ -323,7 +334,6 @@ export default function App() {
     let audio = document.getElementById("daFunk")
     audio.muted = !!audio.muted ? false : true
     audio.volume = 0.5
-    console.log(audio.audioTracks)
     setAudioMuted(audio.muted)
   }
 
@@ -342,6 +352,11 @@ export default function App() {
     setSelectedTrack(newTrack)
   }
 
+  const audioIsReady = () => {
+    let audio = document.getElementById("daFunk")
+    return audio.canPlayThrough
+  }
+
 
   return (
     
@@ -349,23 +364,35 @@ export default function App() {
     
     <div>
 
-
-      <audio id="daFunk" controls={false} src={audioLibrary[selectedTrack].url} autoPlay loop muted></audio>
+      <audio id="daFunk" controls={false} src={audioLibrary[selectedTrack].url} autoPlay loop muted onCanPlay={() => setAudioCanPlay(true)}></audio>
       
       {
-        <div className='radioContainer'>
-          <div className="muteContainer">
-            { !audioMuted ? <BsFillVolumeUpFill id="mute" size={38} onClick={() => handleMute()}></BsFillVolumeUpFill> : <BsVolumeMuteFill id="mute" size={38} onClick={() => handleMute()}></BsVolumeMuteFill>}
-          </div>
-          <div className='marqueeContainer'>
-            <div id='marquee'>
-              <div id="marquee__content">
-                <p className='marqueeContent'>Now Playing: &nbsp; &nbsp; &nbsp; {audioLibrary[selectedTrack].name}</p>
-                </div>
+        <div className={playerVisible}>
+          <div className="radioContainer" onMouseOver={() => setToggleVisible("showToggle")} onMouseOut={() => setToggleVisible("hideToggle")}>
+            <div className="muteContainer">
+              { !audioMuted ? <BsFillVolumeUpFill id="mute" size={38} onClick={() => handleMute()}></BsFillVolumeUpFill> : <BsVolumeMuteFill id="mute" size={38} onClick={() => handleMute()}></BsVolumeMuteFill>}
+            </div>
+            <div className='marqueeContainer'>
+              <div id='marquee'>
+                { !!audioCanPlay ?
+                  <div id="marquee__content">
+                    <p className='marqueeContent'>&nbsp; &nbsp; &nbsp; Now Playing: &nbsp; &nbsp; &nbsp; {audioLibrary[selectedTrack].name}</p>
+                  </div>
+                  :
+                  <div>
+                    <p className='marqueeContent'>Loading...</p>
+                  </div>
+                }
+              </div>
+            </div>
+            <div className="newTrackContainer">
+            <BsSkipForwardCircle id="skip" size={38} onClick={() => handleSkip()}/>
             </div>
           </div>
-          <div className="newTrackContainer">
-          <BsSkipForwardCircle id="skip" size={38} onClick={() => handleSkip()}/>
+          <div className='toggleContainer' onMouseEnter={() => setToggleVisible("showToggle")} onMouseLeave={() => setToggleVisible("hideToggle")}>
+            <div className={toggleVisible} onClick={() => setPlayerVisible(playerVisible === "radioVisible" ? "radioHidden" : "radioVisible")}>
+              {playerVisible === "radioVisible" ? <BsChevronCompactUp/> : <BsChevronCompactDown/>}
+            </div>
           </div>
         </div>
       }
@@ -403,7 +430,7 @@ export default function App() {
           {/* </Nav> */}
         </Navbar.Collapse>
       {/* </Container> */}
-    </Navbar>
+      </Navbar>
      {sucMessage}
      {errMessage}
         {/* <div id='slashRouting'>
@@ -421,7 +448,7 @@ export default function App() {
         </div> */}
         <div id='slashRouting'>
           <Routes>
-            <Route path="/" element={<Home products={products} isAuth={isAuth} user={user}/>} />
+            <Route path="/" element={<Home products={products} isAuth={isAuth} user={user} noticeClosed={noticeClosed} setNoticeClosed={setNoticeClosed}/>} />
             <Route path="/signup" element={<Signup register={registerHandler} />} />
             <Route path="/products" element={<ProductList cart={cart} setCart={setCart}/>} />
             <Route path="/about" element={<AboutBills />} />
