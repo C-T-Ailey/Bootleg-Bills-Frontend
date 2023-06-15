@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #mute:hover {
     color: #F8DC38;
-    
+    cursor: pointer;    
 }
 
 #skip {
@@ -120,7 +120,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #skip:hover {
     color: #F8DC38;
-    
+    cursor: pointer;
 }
 
 .muteContainer {
@@ -142,7 +142,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     background-color: white;
     border-radius: 10px;
-    max-width: 210px;
+    width: 210px;
 }
 
 #marquee {
@@ -196,6 +196,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     box-shadow: 0px 2px 2px #363636;
     border-radius: 0px 0px 5px 5px;    
+    cursor: pointer;
 }
 
 .toggleButton {
@@ -271,7 +272,7 @@ h1, h2, h3, h4, h5, h6 {
         box-shadow: 2px -2px 4px rgb(153, 153, 153);
     }
     .marqueeContainer {
-        max-width: fit-content;
+        width: fit-content;
     }
 
     /* #mute:hover {

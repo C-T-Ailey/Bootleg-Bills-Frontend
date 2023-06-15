@@ -84,6 +84,7 @@ This specific repository is for the application's frontend, to which the majorit
   * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
     * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
+* Any component which makes use of the scrollTo method within a useEffect hook will trigger the scroll any time the radio player is interacted with.
 * :white_check_mark: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
   * Fully fixed by implementing a "unitsSold" property in the backend's Product schema and simply sorting the full array of products by most to least unitsSold in Home.js' useEffect hook.
 * :white_check_mark: Despite CollapseOnSelect being set in the Navbar component's attributes, the navbar doesn't collapse after selecting a link.

@@ -49,12 +49,7 @@ export default function App() {
   const [productToEdit, setProductToEdit] = useState("")
   const [allOrders, setAllOrders] = useState([])
 
-  const [audioMuted, setAudioMuted] = useState(true)
-  const [toggleVisible, setToggleVisible] = useState("hideToggle")
-  const [playerVisible, setPlayerVisible] = useState("radioVisible")
-
-  const [noticeClosed, setNoticeClosed] = useState(false)
-
+  
   const randInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -103,18 +98,24 @@ export default function App() {
       url: "https://od.lk/s/OTFfMjgxMzc2Njdf/FrankJavCee%20-%20SimpsonWave1995.mp3"
     }
   ]
-
+  
   const [selectedTrack,setSelectedTrack] = useState(randInt(0, audioLibrary.length-1))
+  const [audioMuted, setAudioMuted] = useState(true)
+  const [toggleVisible, setToggleVisible] = useState("hideToggle")
+  const [playerVisible, setPlayerVisible] = useState("radioVisible")
+  const [audioCanPlay, setAudioCanPlay] = useState(false)
 
+  const [noticeClosed, setNoticeClosed] = useState(false)
+  
   useEffect(() => {
-
     
-
+    
+    
     console.log("useEffect triggered")
     loadProductList()
     
     let token = localStorage.getItem("token")
-
+    
     if(token != null){
       let user = jwt_decode(token)
       let timeNow = new Date().valueOf()
@@ -333,7 +334,6 @@ export default function App() {
     let audio = document.getElementById("daFunk")
     audio.muted = !!audio.muted ? false : true
     audio.volume = 0.5
-    console.log(audio.audioTracks)
     setAudioMuted(audio.muted)
   }
 
@@ -352,6 +352,11 @@ export default function App() {
     setSelectedTrack(newTrack)
   }
 
+  const audioIsReady = () => {
+    let audio = document.getElementById("daFunk")
+    return audio.canPlayThrough
+  }
+
 
   return (
     
@@ -359,7 +364,7 @@ export default function App() {
     
     <div>
 
-      <audio id="daFunk" controls={false} src={audioLibrary[selectedTrack].url} autoPlay loop muted></audio>
+      <audio id="daFunk" controls={false} src={audioLibrary[selectedTrack].url} autoPlay loop muted onCanPlay={() => setAudioCanPlay(true)}></audio>
       
       {
         <div className={playerVisible}>
@@ -369,9 +374,15 @@ export default function App() {
             </div>
             <div className='marqueeContainer'>
               <div id='marquee'>
-                <div id="marquee__content">
-                  <p className='marqueeContent'>Now Playing: &nbsp; &nbsp; &nbsp; {audioLibrary[selectedTrack].name}</p>
+                { !!audioCanPlay ?
+                  <div id="marquee__content">
+                    <p className='marqueeContent'>&nbsp; &nbsp; &nbsp; Now Playing: &nbsp; &nbsp; &nbsp; {audioLibrary[selectedTrack].name}</p>
                   </div>
+                  :
+                  <div>
+                    <p className='marqueeContent'>Loading...</p>
+                  </div>
+                }
               </div>
             </div>
             <div className="newTrackContainer">
@@ -419,7 +430,7 @@ export default function App() {
           {/* </Nav> */}
         </Navbar.Collapse>
       {/* </Container> */}
-    </Navbar>
+      </Navbar>
      {sucMessage}
      {errMessage}
         {/* <div id='slashRouting'>
