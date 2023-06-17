@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #nav-brand {
     margin-left: 20px;
+    user-select: none;
 }
 
 #nav-style {
@@ -48,212 +49,24 @@ h1, h2, h3, h4, h5, h6 {
     color: #F8DC38 !important;
 }
 
-
 .navbar-bg {
     filter: drop-shadow(0 -4mm 5mm rgb(0, 0, 0));
 }
 
-.radioHidden {
-    animation: hideRadio 0.5s linear;
-    display: flex;
-    flex-direction: row;
-    height: 50px;
-    width: 325px;
+.radioClose {
     position: fixed;
-    z-index: 2;
-    top: 26px;
-    left: 0px;
-    border-radius: 0px 0px 10px 0px;
-    box-shadow: -2px 2px 6px rgb(36, 36, 36);
+    top: 200px;
+    left: 250px;
 }
 
-.radioVisible {
-    animation: showRadio 0.5s linear;
-    display: flex;
-    flex-direction: row;
-    height: 50px;
-    width: 325px;
+.radioNew {
     position: fixed;
-    z-index: 2;
-    top: 75px;
-    left: 0px;
-    border-radius: 0px 0px 10px 0px;
-    box-shadow: -2px 2px 6px rgb(36, 36, 36);
-}
-
-
-.radioContainer {
-    display: flex;
-    flex-direction: row;
-    height: 50px;
-    width: 325px;
-    top: 75px;
-    left: 0px;
-    z-index: 1;
-    background-color: white;
-    border-radius: 0px 0px 10px 0px;
-}
-
-.textContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.radioContainer p {
-    margin: auto;
-}
-
-#mute {
-    color: #FF2273;
-    margin:auto;
-}
-
-#mute:hover {
-    color: #F8DC38;
-    cursor: pointer;    
-}
-
-#skip {
-    color: #FF2273;
-    margin:auto;
-}
-
-#skip:hover {
-    color: #F8DC38;
-    cursor: pointer;
-}
-
-.muteContainer {
-    display: flex;
-    align-items: center;
-    margin: 0px 10px;
-}
-
-.newTrackContainer {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    right: 10px;
-    /* padding-right: 10px; */
-}
-
-.marqueeContainer {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 10px;
-    width: 210px;
-}
-
-#marquee {
-    --gap: 1rem;
-    position: relative;
-    display: flex;
-    overflow: hidden;
+    top: 145px;
     user-select: none;
-    gap: var(--gap);
-  }
-  
-#marquee__content {
-    animation: marquee 10s linear infinite;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: left;
-    gap: var(--gap);
-    min-width: 100%;
+    z-index: 2;
 }
 
-.toggleContainer {
-    display: flex;
-    justify-content: center;
-    width: 325px;
-    height: 20px;
-    position: absolute;
-    top: 50px;
-    left: 0px;
-}
 
-.hideToggle {
-    animation: hideToggle 0.7s linear;
-    z-index: -1;
-    position: relative;
-    top: -25px;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0px 2px 2px #363636;
-    border-radius: 0px 0px 5px 5px;
-}
-
-.showToggle {
-    z-index: 0;
-    position: relative;
-    animation: showToggle 0.5s linear;
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0px 2px 2px #363636;
-    border-radius: 0px 0px 5px 5px;    
-    cursor: pointer;
-}
-
-.toggleButton {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
-@keyframes showRadio {
-    0% {
-        transform: translateY(-50px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes hideRadio {
-    0% {
-        transform: translateY(50px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes showToggle {
-    0% {
-        transform: translateY(-20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes hideToggle {
-    0% {
-        transform: translateY(20px);
-    }
-    100% {
-        transform: translateY(-20px);
-    }
-}
-
-    
-@keyframes marquee {
-    10% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(calc(-100% - var(--gap)));
-    }
-}
 
 @media (max-width: 790px) {
     #nav-brand {
@@ -263,31 +76,19 @@ h1, h2, h3, h4, h5, h6 {
         margin-left: 20px;
     }
 
-    .radioContainer {
+    .radioNew {
+        display: none;
+    }
+    
+    .radioNewMobile img {
+        cursor: default;
+    }
+    
+    .radioNewMobile .confirm {
         position: fixed;
-        top: unset;
-        bottom: 0px;
-        width: 100%;
-        border-radius: unset;
-        box-shadow: 2px -2px 4px rgb(153, 153, 153);
-    }
-    .marqueeContainer {
-        width: fit-content;
-    }
-
-    /* #mute:hover {
-        color: #FF2273;
-    } */
-
-    .newTrackContainer {
-        margin-right: 10px;
-    }
-
-    #skip:hover {
-        color: #FF2273;
-    }
-
-    #skip:active {
-        color:#F8DC38;
+        right: 10px;
+        bottom: 120px;
+        font-family: bungee;
+        cursor: pointer;
     }
 }

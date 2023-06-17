@@ -6,16 +6,9 @@ import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 // import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
-import radioNew from './assets/radio_new.png'
-import radioNewMobile from './assets/radio_new_mobile.png'
-// import storeThumb from './assets/products-tape.png'
-// import signupThumb from './assets/signup-tape.png'
-// import loginThumb from './assets/login-tape.png'
-// import dashThumb from './assets/dash-tape.png'
-// import dashSellerThumb from './assets/dash-seller-tape.png'
-// import aboutThumb from './assets/about-tape.png'
+
 import { Link } from 'react-router-dom';
-import { BsXCircle } from 'react-icons/bs';
+
 
 // const options = {
 //   showArrows: false,
@@ -32,6 +25,8 @@ import { BsXCircle } from 'react-icons/bs';
 export default function Home(props) {
 
     const [popular, setPopular] = useState({})
+
+    
     
     useEffect(()=>{
       window.scrollTo(0, 0);
@@ -41,25 +36,19 @@ export default function Home(props) {
     useEffect(() => {
       // if the site hosts more than one product,
       if(!!props.products.length){
-        let popularProducts = Array.from(props.products).sort((a, b) => b.unitsSold - a.unitsSold).slice(0,3)
+        let popularProducts = Array.from(props.products).sort((a, b) => b.unitsSold - a.unitsSold).slice(0,5)
         console.log(popularProducts)
         setPopular(popularProducts)
       }
     }, [props.products])
+
+    
  
     return (
              
       <>
 
-        <div className='radioNew' hidden={props.noticeClosed}>
-          <img src={radioNew}></img>
-          <div className='confirm' onClick={() => props.setNoticeClosed(true)}><BsXCircle/></div>
-        </div>
-
-        <div className='radioNewMobile' hidden={props.noticeClosed}>
-          <img src={radioNewMobile}></img>
-          <div className='confirm' onClick={() => props.setNoticeClosed(true)}><BsXCircle/></div>
-        </div>
+          
       
         { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
 
@@ -111,44 +100,6 @@ export default function Home(props) {
             {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
           </div>
         </div>
-
-        {/* <div className='homepage-nav-thumbs'>
-          <div className='thumbs-flex' id="bootstrap-overrides">
-            <Nav.Link as={Link} to="/products">
-            <div>
-              <img alt='View Products' className='nav-thumb' src={storeThumb}/>
-            </div>
-            </Nav.Link>
-              
-            { !props.isAuth ? 
-            <>
-              <Nav.Link as={Link} to="/login">
-                <div>
-                  <img alt='Log In' className='nav-thumb' src={loginThumb}/>
-                </div>
-              </Nav.Link>
-              <Nav.Link as={Link} to="/signup">
-                <div>
-                  <img alt='Sign Up' className='nav-thumb' src={signupThumb}/>
-                </div>
-              </Nav.Link>
-            </>
-            :
-            <>
-            <Nav.Link as={Link} to="/manage">
-              <div>
-                {props.user.user.role === "seller" ? <img alt="Seller Dash" className='nav-thumb' src={dashSellerThumb}/> : <img alt='View Orders' className='nav-thumb' src={dashThumb}/>}
-              </div>
-            </Nav.Link>
-            </>
-            }
-            <Nav.Link as={Link} to="/about">
-              <div>
-                <img alt='About Us' className='nav-thumb' src={aboutThumb}/>
-              </div>
-            </Nav.Link>
-          </div>
-        </div> */}
 
         <div className='upcoming'>
           <h2>{"Featured Products"}</h2>
