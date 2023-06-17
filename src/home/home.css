@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh;
 }
 
 .upcoming h2 {
@@ -249,6 +250,61 @@
 
 .confirm:hover {
     color:#FF2273
+}
+
+.featureFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 80vw;
+}
+
+.featuredProduct {
+    max-width: 400px;
+    height: 400px;
+    box-shadow: 2px 2px 6px #3a3a3a;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.featureDisplay {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.featureThumb {
+    position: absolute;
+    left: 0;
+    max-width: 400px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.featureName {
+    position: absolute;
+    left: 15px;
+    text-align: left;
+    width: 350px;
+    padding-top: 10px;
+    font-size: 24px;
+    line-height: 30px;
+    text-shadow: -2px 2px 1px #FF2273;
+    z-index: 2;
+}
+
+.featureDscrpt {
+    font-size: 85%;
+    text-align: center;
+    width: 400px;
+    height: fit-content;
+    margin: auto;
+    padding-bottom: 15px;
 }
 
 @media (max-width: 790px) {

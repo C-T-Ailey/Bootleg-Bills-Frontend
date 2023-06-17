@@ -6,8 +6,9 @@ import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 // import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
-
+import Axios from 'axios';
 import { Link } from 'react-router-dom';
+import Product from '../product/Product';
 
 
 // const options = {
@@ -26,23 +27,38 @@ export default function Home(props) {
 
     const [popular, setPopular] = useState({})
 
+    const [featured, setFeatured] = useState([])
+
+    const [test, setTest] = useState()
     
-    
+    const featuredProducts = ["645040d6f21d0a8076260d83","637d1d226f5d7ad3b9ae4d23","640fcd206a370ac37cacf1e4"]
+
     useEffect(()=>{
       window.scrollTo(0, 0);
     },[])
     
-
+    
     useEffect(() => {
       // if the site hosts more than one product,
       if(!!props.products.length){
         let popularProducts = Array.from(props.products).sort((a, b) => b.unitsSold - a.unitsSold).slice(0,5)
         console.log(popularProducts)
         setPopular(popularProducts)
+        
+        let features = []
+
+        features.push(props.products.find(element => element._id === "645040d6f21d0a8076260d83"),props.products.find(element => element._id === "637d1d226f5d7ad3b9ae4d23"),props.products.find(element => element._id === "640fcd206a370ac37cacf1e4"))
+
+        console.log(features)
+
+        setFeatured(features)
+        
       }
     }, [props.products])
 
-    
+    const product1Description = "The debut entry in our new series of limited, cassette-only releases has arrived! Celebrate two of our favourite synthpop stars with the Synthpop Edition of the Double Bill, featuring indie artpop icon Grimes and underground vocaloid powerhouse Astrophysics."
+
+    const product2Description = "Help spread the word! Bootleg Bill's only official merchandise is hot off the press and ready to take home today!"
  
     return (
              
@@ -101,10 +117,34 @@ export default function Home(props) {
           </div>
         </div>
 
-        <div className='upcoming'>
+        <section className='upcoming'>
           <h2>{"Featured Products"}</h2>
           <p>Under Construction</p>
-        </div>
+          <div className='featureFlex'>
+            {
+              featured.map(product => (
+                <div className='featuredProduct'>
+                  <div className='featureDisplay'>
+                    <h5 className='featureName'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
+                    <img className='featureThumb' src={product.productImageUrls[0]}/>
+                  </div>
+                  {console.log(product.productName.slice(0,12))}
+                  <div className='featureDscrpt'>
+                  {
+                    product._id === featuredProducts[0] ? product1Description 
+                    : 
+                    (product._id === featuredProducts[1] ? product2Description
+                    : 
+                    "product 3")
+                  }
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
+          
+        </section>
 
         <div className="upcoming">
           <h2>{"Coming Soon!"}</h2>

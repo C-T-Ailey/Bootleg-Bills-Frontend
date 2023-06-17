@@ -29,7 +29,7 @@ export default function ProductList(props) {
     // useEffect hook with API call to retrieve all products from database on page load
     useEffect(() => {
       console.log("Productlist useEffect")
-        Axios.get("https://bootlegbackend.herokuapp.com/product/index")
+      Axios.get("https://bootlegbackend.herokuapp.com/product/index")
       .then((response) => {
         console.log(response)
 
@@ -173,7 +173,6 @@ export default function ProductList(props) {
             )
           : 
             console.log("Neutral entry.")}
-        {console.log(bestseller)}
         
 
 
