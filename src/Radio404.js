@@ -102,20 +102,20 @@ export default function Radio404(props) {
     
     const handleSkip = () => {
 
-        let newTrack = randInt(0,audioLibrary.length-1)
+        // let newTrack = randInt(0,audioLibrary.length-1)
 
 
-        const querySame = () => {return newTrack === selectedTrack}
+        // const querySame = () => {return newTrack === selectedTrack}
 
 
-        while (querySame()) {
-            let newerTrack = randInt(0,audioLibrary.length-1)
-            console.log(newerTrack)
-            newTrack = newerTrack
+        // while (querySame()) {
+        //     let newerTrack = randInt(0,audioLibrary.length-1)
+        //     console.log(newerTrack)
+        //     newTrack = newerTrack
 
-        }
+        // }
 
-        // let newTrack = selectedTrack !== audioLibrary.length - 1 ? selectedTrack+1 : 0
+        let newTrack = selectedTrack !== audioLibrary.length - 1 ? selectedTrack+1 : 0
 
         setSelectedTrack(newTrack)
     }
