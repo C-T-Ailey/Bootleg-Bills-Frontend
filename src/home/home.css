@@ -223,11 +223,13 @@
     border-radius: 10px;
 }
 
-.radioNew {
-    position: fixed;
-    top: 130px;
-    user-select: none;
-}
+
+
+/* .radioCloseHover {
+    display: flex;
+    z-index: 1;
+} */
+
 
 .radioNewMobile {
     display: none;
@@ -299,21 +301,7 @@
         user-select: none;
     }
     
-    .radioNew {
-        display: none;
-    }
     
-    .radioNewMobile img {
-        cursor: default;
-    }
-    
-    .radioNewMobile .confirm {
-        position: fixed;
-        right: 10px;
-        bottom: 120px;
-        font-family: bungee;
-        cursor: pointer;
-    }
 
     #imageBg img {
         display: flex;
