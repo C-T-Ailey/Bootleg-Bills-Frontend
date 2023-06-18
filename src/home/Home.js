@@ -32,11 +32,14 @@ export default function Home(props) {
     const [featured, setFeatured] = useState([])
 
     const [test, setTest] = useState()
+
+    // const [featuredYPos, setFeaturedYPos] = useState()
     
     const featuredProducts = ["645040d6f21d0a8076260d83","637d1d226f5d7ad3b9ae4d23","640fcd206a370ac37cacf1e4"]
 
     useEffect(()=>{
       window.scrollTo(0, 0);
+      // setFeaturedYPos()
     },[])
     
     
@@ -61,13 +64,24 @@ export default function Home(props) {
     const product1Description = "The debut entry in our new series of limited, cassette-only releases has arrived! Celebrate two of our favourite synthpop stars with the Synthpop Edition of the Double Bill, featuring indie artpop icon Grimes and underground vocaloid powerhouse Astrophysics."
 
     const product2Description = "Help spread the word! Bootleg Bill's only official merchandise is hot off the press and ready to take home today!"
+
+    const product3Description = ""
+
+    const scrollToFeatures = (e) => {
+      console.log(e.deltaY)
+      if (e.deltaY > 0) {
+        const featuredYPos = document.getElementById("featured").getBoundingClientRect().top
+        window.scroll(0,featuredYPos)
+      }
+      // document.getElementById("featured").scrollIntoView();
+    }
  
     return (
              
       <>
 
           
-        <section className='upcoming'>
+        <section className='homeSection' onWheel={(e) => scrollToFeatures(e)}>
           <div className='homepage-welcome'>
             <div className='homepage-logo'>
               {/* <h3>Welcome to</h3> */}
@@ -81,93 +95,102 @@ export default function Home(props) {
           </div>
         </section>
       
-        { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
-
-          <div className='loading'>
-            <p>Loading bestsellers...</p>
+        <section className="featuresSection" id="featured">
+          
+          <div className='bestseller-head'>
+            <h2>Bill's Best Sellers</h2>
           </div>
 
-          :
+          { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
           
-          <>
-          <div className='bestsellerCarousel'>
-
-            <div className='bestseller-head'>
-              <h2>Bill's Best Sellers</h2>
+            <div className='loading'>
+              <p>Loading bestsellers...</p>
             </div>
+          
+            :
             
-            <Carousel className='main-slide' showThumbs={false} swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"80rem"}>
-              {/* Map each of the "popular" state's objects to a div with a key corresponding to its product id */}
-              {popular.map(product => (
-                  <div key={product._id}>
-                    <div className="type">
-                      {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
-                      <Link className='bestLink' to={'/products'} state={product}>
-                        {product.productName}
-                      </Link>
+            <>
+              <div className='bestsellerCarousel'>
+            
+                
+                <Carousel className='main-slide' showThumbs={false} swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"80rem"}>
+                  {/* Map each of the "popular" state's objects to a div with a key corresponding to its product id */}
+                  {popular.map(product => (
+                      <div key={product._id}>
+                        <div className="type">
+                          {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
+                          <Link className='bestLink' to={'/products'} state={product}>
+                            {product.productName}
+                          </Link>
+                          </div>
+                        {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
+                        <div className='carousel-source'> {product.productSourceType!== "Original Release" ? `From "${product.productSource}"` : `By ${product.productSource}`}</div>
+                        {/* background image taken from the last index of product's productImageUrls property array */}
+                        <div id="imageBg" className='imageBg'>
+                          <img alt={`${product.productName}`} src={product.productBestsellerImage}/>
+                        </div>
                       </div>
-                    {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
-                    <div className='carousel-source'> {product.productSourceType!== "Original Release" ? `From "${product.productSource}"` : `By ${product.productSource}`}</div>
-                    {/* background image taken from the last index of product's productImageUrls property array */}
-                    <div id="imageBg" className='imageBg'>
-                      <img alt={`${product.productName}`} src={product.productBestsellerImage}/>
+                  ))}
+                </Carousel>
+              </div>
+            </>
+          }
+          
+          {/* <p>Under Construction</p> */}
+          <div className='featured'>
+            <h2 id='featureHeader'>Featured Products</h2>
+            <div className='featureFlex'>
+              {
+                featured.map(product => (
+                  <div className='featuredProduct'>
+                    <div className='featureDisplay'>
+                      <h5 className='featureName'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
+                      <img className='featureThumb' src={product.productImageUrls[0]}/>
+                    </div>
+                    {console.log(product.productName.slice(0,12))}
+                    <div className='featureDscrpt'>
+                    {
+                      product._id === featuredProducts[0] ? product1Description 
+                      : 
+                      (product._id === featuredProducts[1] ? product2Description
+                      : 
+                      "product 3")
+                    }
                     </div>
                   </div>
-              ))}
-            </Carousel>
-          </div>
-        </>
-        }
-      
-
-
-        <section className='upcoming'>
-          <h2>{"Featured Products"}</h2>
-          <p>Under Construction</p>
-          <div className='featureFlex'>
-            {
-              featured.map(product => (
-                <div className='featuredProduct'>
-                  <div className='featureDisplay'>
-                    <h5 className='featureName'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
-                    <img className='featureThumb' src={product.productImageUrls[0]}/>
-                  </div>
-                  {console.log(product.productName.slice(0,12))}
-                  <div className='featureDscrpt'>
-                  {
-                    product._id === featuredProducts[0] ? product1Description 
-                    : 
-                    (product._id === featuredProducts[1] ? product2Description
-                    : 
-                    "product 3")
-                  }
-                  </div>
-                </div>
-              ))
-            }
+                ))
+              }
+            </div>
           </div>
 
-          
         </section>
 
-        <div className="upcoming">
-          <h2>{"Coming Soon!"}</h2>
-          <h4>{"Products"}</h4>
-          <ul className='comingList'>
-            <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
-            <li>Video Game: DOOM (1993), Cassette</li>
-            <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
-            <li>Limited Release: Double Bill (New!), Cassette</li>
-          </ul>
-          <p></p>
-          <h4>{"Site Features"}</h4>
-          <ul className='comingList'>
-            <li>News</li>
-            <li>Articles & Archives</li>
-            <li>FAQs</li>
-          </ul>
-          <p></p>
-        </div>
+
+        
+
+          
+        
+
+        <section className='homeSection'>
+          {/* <div className="upcoming"> */}
+            <h2>{"Coming Soon!"}</h2>
+            <h4>{"Products"}</h4>
+            <ul className='comingList'>
+              <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
+              <li>Video Game: DOOM (1993), Cassette</li>
+              <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
+              <li>Limited Release: Double Bill (New!), Cassette</li>
+            </ul>
+            <p></p>
+            <h4>{"Site Features"}</h4>
+            <ul className='comingList'>
+              <li>News</li>
+              <li>Articles & Archives</li>
+              <li>FAQs</li>
+            </ul>
+            <p></p>
+          {/* </div> */}
+        </section>
 
 
       {/* <div className='featured'>
