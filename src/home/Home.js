@@ -3,10 +3,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 // import {Nav} from 'react-bootstrap';
 import './home.css'
-// import ReactAudioPlayer from 'react-audio-player';
-// import Image from 'react-bootstrap/Image'
-import bigLogoNew from './assets/big_logo_new.png'
-import bigLogoV2 from './assets/big_logo_v2.png'
 import bigLogoV2Text from './assets/big_logo_v4.png'
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -117,7 +113,7 @@ export default function Home(props) {
                 
                 <div className='productsCarousel'>
               
-                  <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} stopOnHover useKeyboardArrows interval={3000} width={"55vw"}>
+                  <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} useKeyboardArrows interval={3000} width={"55vw"}>
                     {props.products.map(product => (
 
                         <div key={product._id}>
