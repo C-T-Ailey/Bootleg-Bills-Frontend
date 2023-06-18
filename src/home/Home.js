@@ -6,6 +6,8 @@ import './home.css'
 // import ReactAudioPlayer from 'react-audio-player';
 // import Image from 'react-bootstrap/Image'
 import bigLogoNew from './assets/big_logo_new.png'
+import bigLogoV2 from './assets/big_logo_v2.png'
+import bigLogoV2Text from './assets/big_logo_v4.png'
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Product from '../product/Product';
@@ -65,6 +67,19 @@ export default function Home(props) {
       <>
 
           
+        <section className='upcoming'>
+          <div className='homepage-welcome'>
+            <div className='homepage-logo'>
+              {/* <h3>Welcome to</h3> */}
+              <img className="billsLogo" src={bigLogoV2Text} alt=""/>
+            </div>
+            <div className="homepage-about">
+              {/* <p id="super">Your one-stop shop<br/>for one-of-a-kind,<br/>custom designed,<br/>100% unofficial<br/>tapes, records and apparel.</p> */}
+              <p id='text'>Founded in 2016 as a small word-of-mouth creative project, "Bootleg Bill's Unofficial Audio Rarities" finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
+              {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
+            </div>
+          </div>
+        </section>
       
         { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
 
@@ -105,17 +120,6 @@ export default function Home(props) {
         }
       
 
-        <div className='homepage-welcome'>
-          <div className='homepage-logo'>
-            <h3>Welcome to</h3>
-            <img className="billsLogo" src={bigLogoNew} alt=""/>
-          </div>
-          <div className="homepage-about">
-            <p>Bootleg Bill's Unofficial Audio Rarities is your one-stop shop for one-of-a-kind, custom designed, 100% unofficial mix tapes, soundtracks and rare releases.</p> 
-            <p>Founded in 2016 as a small word-of-mouth creative project, we finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
-            {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
-          </div>
-        </div>
 
         <section className='upcoming'>
           <h2>{"Featured Products"}</h2>

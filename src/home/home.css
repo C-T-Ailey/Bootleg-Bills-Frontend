@@ -2,12 +2,90 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     height: 100vh;
 }
 
 .upcoming h2 {
     color: black;
     margin: 30px 10%;
+}
+
+.billsLogo {
+    max-width: 700px;
+    position: absolute;
+    top: 20vh;
+    max-width: 50vw;
+}
+
+.homepage-welcome {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.homepage-welcome p {
+    /* font-family: "Permanent Marker"; */
+    /* font-weight: lighter; */
+    position: relative;
+    top: 10vh;
+    max-width: 35vw;
+    font-size: 1.1em;
+    
+    width: 35rem;
+    text-align: justify;
+}
+
+.homepage-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homepage-logo img {
+    cursor: default;
+}
+.homepage-logo h3 {
+    /* font-family: "Permanent Marker"; */
+    text-align: center;
+    font-weight: bold;
+}
+
+.homepage-about {
+
+    
+    /* F8DC38 00BFC3 */
+}
+
+#super {
+    line-height: 1.6em;
+    /* text-align: left;
+    line-height: 2em;
+    font-size: 1.7em;
+    transform: skew(0deg,-25deg) */
+}
+
+#text {
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+.homepage-about p {
+    width: 50vw;
+    text-align: center;
+}
+
+/* .mainNameBrand {
+    font-size: 2.5rem;
+    font-weight: 100;
+    line-height:50%;
+} */
+
+.about-link {
+    display: flex;
+    text-decoration: none;
 }
 
 .bestseller-container {
@@ -134,49 +212,6 @@
     height: 50px;
 }
 
-.billsLogo {
-    max-width: 300px;
-}
-
-.homepage-welcome {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.homepage-welcome p {
-    width: 35rem;
-    text-align: justify;
-}
-
-.homepage-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.homepage-logo img {
-    cursor: default;
-}
-.homepage-logo p {
-    max-width: 300px;
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.homepage-about {
-    margin-left: 5rem;
-}
-
-.homepage-about p {
-    width: 30vw;
-}
-
-.about-link {
-    display: flex;
-    text-decoration: none;
-}
 
 .loading {
     height: 400px;
