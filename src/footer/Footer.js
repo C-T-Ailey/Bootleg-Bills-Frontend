@@ -7,50 +7,46 @@ import NewsLetter from './NewsLetter';
 export default function Footer(props) {
   return (
 
-    <>
-    <div className="clear"></div>
+    <div className='footer-bg'>
+      <div className='footer-cols'>
+        <div className='about'>
+          <h2>About Us</h2>
+          <hr></hr>
+          <Link to={'/about'}>About us</Link>
+          <a className='nope' href="">Careers</a>
+          <a className='nope' href="">Terms of Service</a>
+          <Link to={'/faq'}>FAQs</Link>
+        </div>
 
-    <div className="footer-container fixed-bottom d-flex justify-content-center m-auto" >
+        <div className='products'>
+          <h2>Products</h2>
+          <hr></hr>
+          <Link to={'/products'}>All</Link>
+          <Link to={'/products'}>Film/TV</Link>
+          <Link to={'/products'}>Video Games</Link>
+          <Link to={'/products'}>Originals</Link>
+        </div>
 
+        <div className='socials'>
+          <h2>Social Media</h2>
+          <hr></hr>
+          <a className='nope' href="">Instagram</a>
+          <a className='nope' href="">Facebook</a>
+          <a className='nope' href="">Twitter</a>
+        </div>
 
-    <div className="footer"> 
-      <div className="footer-heading footer-2">
-        <h2>About Us</h2>
-        <hr></hr>
-        <Link to={'/about'}>About us</Link>
-        <a href="">Careers</a>
-        <a href="">Terms of Service</a>
-        <Link to={'/faq'}>FAQs</Link>
-      </div>
-      <div className="footer-heading footer-3">
-        <h2>Products</h2>
-        <hr></hr>
-        <a href="">Movies</a>
-        <a href="">Music</a>
-        <a href="">All</a>
-      </div>
-      <div className="footer-heading footer-3">
-        <h2>Social Media</h2>
-        <hr></hr>
-        <a href="">Instagram</a>
-        <a href="">Facebook</a>
-        <a href="">Twitter</a>
-      </div>
-
-      <div>
-        <NewsLetter addNewsletterEmail={props.addNewsletterEmail}/>
-      </div>
+        <div id="emailContainer">
+          <NewsLetter addNewsletterEmail={props.addNewsletterEmail}/>
+        </div>
       
-      <div className='footer-heading footer-3 copyright'>
+      </div>
+
+      <div className='copyright'>
         <p>&copy; 2022 Chris Ailey, Chris Carey & Ailish McLaughlin</p>
       </div>
-      
-    </div>
-    
-    
+
     </div>
 
-    </>
   )
 }
 

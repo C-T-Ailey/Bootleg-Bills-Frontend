@@ -11,6 +11,7 @@ import bigLogoV2Text from './assets/big_logo_v4.png'
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Product from '../product/Product';
+import { BsChevronCompactDown } from 'react-icons/bs';
 
 
 // const options = {
@@ -32,14 +33,11 @@ export default function Home(props) {
     const [featured, setFeatured] = useState([])
 
     const [test, setTest] = useState()
-
-    // const [featuredYPos, setFeaturedYPos] = useState()
     
     const featuredProducts = ["645040d6f21d0a8076260d83","637d1d226f5d7ad3b9ae4d23","640fcd206a370ac37cacf1e4"]
 
     useEffect(()=>{
       window.scrollTo(0, 0);
-      // setFeaturedYPos()
     },[])
     
     
@@ -47,14 +45,12 @@ export default function Home(props) {
       // if the site hosts more than one product,
       if(!!props.products.length){
         let popularProducts = Array.from(props.products).sort((a, b) => b.unitsSold - a.unitsSold).slice(0,5)
-        console.log(popularProducts)
+
         setPopular(popularProducts)
         
         let features = []
 
         features.push(props.products.find(element => element._id === "645040d6f21d0a8076260d83"),props.products.find(element => element._id === "637d1d226f5d7ad3b9ae4d23"),props.products.find(element => element._id === "640fcd206a370ac37cacf1e4"))
-
-        console.log(features)
 
         setFeatured(features)
         
@@ -68,137 +64,170 @@ export default function Home(props) {
     const product3Description = ""
 
     const scrollToFeatures = (e) => {
-      console.log(e.deltaY)
       if (e.deltaY > 0) {
         const featuredYPos = document.getElementById("featured").getBoundingClientRect().top
         window.scroll(0,featuredYPos)
       }
       // document.getElementById("featured").scrollIntoView();
     }
+
+    const scrollFromFeatures = (e) => {
+      if (e.deltaY > 0) {
+        const comingSoonYPos = document.getElementById("comingSoon").getBoundingClientRect().bottom
+        window.scroll(0,comingSoonYPos)
+      } 
+      else if (e.deltaY < 0) {
+        const homeYPos = document.getElementById("top").getBoundingClientRect().top
+        window.scroll(0,homeYPos)
+      }
+    }
+
+    const goToFeatures = (e) => {
+
+      const navBar = document.getElementById('navId')
+      const navHeight = parseInt(navBar.offsetHeight)
+      let features = document.getElementById("featured")
+      const featureTop = features.getBoundingClientRect().top
+
+      let viewPortOffset = document.body.getBoundingClientRect();
+      let viewTop = viewPortOffset.top;
+
+
+      window.scroll(0,(featureTop - navHeight)-viewTop)
+
+    }
  
     return (
-             
-      <>
 
-          
-        <section className='homeSection' onWheel={(e) => scrollToFeatures(e)}>
-          <div className='homepage-welcome'>
-            <div className='homepage-logo'>
-              {/* <h3>Welcome to</h3> */}
-              <img className="billsLogo" src={bigLogoV2Text} alt=""/>
-            </div>
-            <div className="homepage-about">
-              {/* <p id="super">Your one-stop shop<br/>for one-of-a-kind,<br/>custom designed,<br/>100% unofficial<br/>tapes, records and apparel.</p> */}
-              <p id='text'>Founded in 2016 as a small word-of-mouth creative project, "Bootleg Bill's Unofficial Audio Rarities" finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
-              {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
-            </div>
-          </div>
-        </section>
-      
-        <section className="featuresSection" id="featured">
-          
-          <div className='bestseller-head'>
-            <h2>Bill's Best Sellers</h2>
-          </div>
+        <div className='sectionWrapper' id="top">
 
-          { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
-          
-            <div className='loading'>
-              <p>Loading bestsellers...</p>
-            </div>
-          
-            :
-            
-            <>
-              <div className='bestsellerCarousel'>
-            
-                
-                <Carousel className='main-slide' showThumbs={false} swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"80rem"}>
-                  {/* Map each of the "popular" state's objects to a div with a key corresponding to its product id */}
-                  {popular.map(product => (
-                      <div key={product._id}>
-                        <div className="type">
-                          {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
-                          <Link className='bestLink' to={'/products'} state={product}>
-                            {product.productName}
-                          </Link>
-                          </div>
-                        {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
-                        <div className='carousel-source'> {product.productSourceType!== "Original Release" ? `From "${product.productSource}"` : `By ${product.productSource}`}</div>
-                        {/* background image taken from the last index of product's productImageUrls property array */}
-                        <div id="imageBg" className='imageBg'>
-                          <img alt={`${product.productName}`} src={product.productBestsellerImage}/>
-                        </div>
-                      </div>
-                  ))}
-                </Carousel>
+          <section className='homeSection' id="home">
+            <div className='homepage-welcome'>
+              <div className='homepage-logo'>
+                {/* <h3>Welcome to</h3> */}
+                <img className="billsLogo" src={bigLogoV2Text} alt=""/>
               </div>
-            </>
-          }
-          
-          {/* <p>Under Construction</p> */}
-          <div className='featured'>
-            <h2 id='featureHeader'>Featured Products</h2>
-            <div className='featureFlex'>
-              {
-                featured.map(product => (
-                  <div className='featuredProduct'>
-                    <div className='featureDisplay'>
-                      <h5 className='featureName'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
-                      <img className='featureThumb' src={product.productImageUrls[0]}/>
-                    </div>
-                    {console.log(product.productName.slice(0,12))}
-                    <div className='featureDscrpt'>
-                    {
-                      product._id === featuredProducts[0] ? product1Description 
-                      : 
-                      (product._id === featuredProducts[1] ? product2Description
-                      : 
-                      "product 3")
-                    }
+              <div className="homepage-about">
+                {/* <p id="super">Your one-stop shop<br/>for one-of-a-kind,<br/>custom designed,<br/>100% unofficial<br/>tapes, records and apparel.</p> */}
+                <p className='about-text'>Founded in 2016 as a small word-of-mouth creative project, "Bootleg Bill's Unofficial Audio Rarities" finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
+                {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
+              </div>
+
+              <div className='nextSection'>
+                
+                  <p>Take a look at<br/>our featured works!</p>
+
+                  {/* <BsChevronCompactDown size={48} id="nextSectionButton" onClick={(e) => {goToFeatures(e)}}/> */}
+                  <div id="buttonWrap" onClick={(e) => {goToFeatures(e)}}>
+                    <div id="nextSectionButton">
+                      <span id="downButton">V</span>
                     </div>
                   </div>
-                ))
+                
+              </div>
+
+            </div>
+
+
+          </section>
+          
+          <section className="featuresSection" >
+            
+            <div className='bestseller-head' id="featured">
+              <h2>Bill's Best Sellers</h2>
+            </div>
+          
+            <div className='carouselContainer'>
+              { Object.keys(popular).length < 1 || !Object.keys(props.products).length ?
+              
+                <div className='loading'>
+                  <p>Loading bestsellers...</p>
+                </div>
+              
+                :
+                
+              
+                <div className='bestsellerCarousel'>
+              
+                  <Carousel className='main-slide' showThumbs={false} swipeable={true} emulateTouch={true} infiniteLoop={true} autoPlay={true} interval={5000} width={"70vw"}>
+                    {/* Map each of the "popular" state's objects to a div with a key corresponding to its product id */}
+                    {popular.map(product => (
+                        <div key={product._id}>
+                          <div className="type">
+                            {/* Name of the product as a link to its store page - state prop passes the specified bestseller to the product index and stores it with location.state */}
+                            <Link className='bestLink' to={'/products'} state={product}>
+                              {product.productName}
+                            </Link>
+                            </div>
+                          {/* Display the product's source material or original artist, prefixed with "from" or "by" depending on which */}
+                          <div className='carousel-source'> {product.productSourceType!== "Original Release" ? `From "${product.productSource}"` : `By ${product.productSource}`}</div>
+                          {/* background image taken from the last index of product's productImageUrls property array */}
+                          <div id="imageBg" className='imageBg'>
+                            <img alt={`${product.productName}`} src={product.productBestsellerImage}/>
+                          </div>
+                        </div>
+                    ))}
+                  </Carousel>
+                </div>
+                
               }
             </div>
-          </div>
+            
+            <div className='featured'>
+              <h2 id='featureHeader'>Featured Products</h2>
+              <div className='featureFlex'>
+                {
+                  featured.map(product => (
+                    <div className='featuredProduct'>
+                      <div className='featureDisplay'>
+                        <h5 className='featureName'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
+                        <img className='featureThumb' src={product.productImageUrls[0]}/>
+                      </div>
 
-        </section>
-
-
-        
-
+                      <div className='featureDscrpt'>
+                      {
+                        product._id === featuredProducts[0] ? product1Description 
+                        : 
+                        (product._id === featuredProducts[1] ? product2Description
+                        : 
+                        "product 3")
+                      }
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
           
-        
+          </section>
+          
+          
+          
+          
+            
+          
+          
+          <section className='comingSoonSection' id="comingSoon">
+            {/* <div className="upcoming"> */}
+              <h2>{"Coming Soon!"}</h2>
+              <h4>{"Products"}</h4>
+              <ul className='comingList'>
+                <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
+                <li>Video Game: DOOM (1993), Cassette</li>
+                <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
+              </ul>
+              <p></p>
+              <h4>{"Site Features"}</h4>
+              <ul className='comingList'>
+                <li>News</li>
+                <li>Articles & Archives</li>
+              </ul>
+              <p></p>
+            {/* </div> */}
+          </section>
 
-        <section className='homeSection'>
-          {/* <div className="upcoming"> */}
-            <h2>{"Coming Soon!"}</h2>
-            <h4>{"Products"}</h4>
-            <ul className='comingList'>
-              <li>Film/TV: Hackers (1995), Cassette + Vinyl</li>
-              <li>Video Game: DOOM (1993), Cassette</li>
-              <li>Film/TV: Blade (1998), Cassette + Vinyl</li>
-              <li>Limited Release: Double Bill (New!), Cassette</li>
-            </ul>
-            <p></p>
-            <h4>{"Site Features"}</h4>
-            <ul className='comingList'>
-              <li>News</li>
-              <li>Articles & Archives</li>
-              <li>FAQs</li>
-            </ul>
-            <p></p>
-          {/* </div> */}
-        </section>
+        </div>
 
-
-      {/* <div className='featured'>
-        <h3>This Month's Featured Release</h3>
-      </div> */}
-
-
-     </>
     )
   }
 // }

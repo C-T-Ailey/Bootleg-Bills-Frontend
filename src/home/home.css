@@ -1,10 +1,16 @@
+.sectionWrapper {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: space-between;
+}
+
 .homeSection {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
-    margin: auto;
+    height: 95vh;
 }
 
 .featuresSection {
@@ -12,8 +18,37 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 100vh;
-    margin: auto;
+    height: 95vh;
+}
+
+.comingSoonSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 50vh;
+}
+
+.nextSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Permanent Marker";
+    text-align: center;
+    font-size: 2rem;
+}
+
+#nextSectionButton {
+    color: #FF2273;
+    text-shadow: 0px 6px 0px black;
+    transform: scaleX(180%) scaleY(130%) rotate(-5deg);
+    font-weight: 100;
+    user-select: none;
+}
+
+#nextSectionButton:hover {
+    color:#ffb310;
+    text-shadow: 0px 18px 0px black;
 }
 
 section h2 {
@@ -21,9 +56,20 @@ section h2 {
     /* margin: 30px 10%; */
 }
 
+.homepage-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: fit-content;
+}
+
+.homepage-logo img {
+    cursor: default;
+}
+
 .billsLogo {
     max-width: 700px;
-    position: absolute;
+    /* position: absolute; */
     top: 20vh;
     max-width: 50vw;
     user-select: none;
@@ -34,51 +80,21 @@ section h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-}
-
-.homepage-welcome p {
-    /* font-family: "Permanent Marker"; */
-    /* font-weight: lighter; */
-    position: relative;
-    top: 10vh;
-    max-width: 35vw;
-    font-size: 1.1em;
-    
-    width: 35rem;
-    text-align: justify;
-}
-
-.homepage-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.homepage-logo img {
-    cursor: default;
-}
-.homepage-logo h3 {
-    /* font-family: "Permanent Marker"; */
-    text-align: center;
-    font-weight: bold;
+    justify-content: space-between;
+    margin-top: 10vh;
+    margin-bottom: 6vh;
 }
 
 .homepage-about {
-
+    display: flex;
+    justify-content: center;
+    font-size: 1.1em;
+    text-align: justify;
     
     /* F8DC38 00BFC3 */
 }
 
-#super {
-    line-height: 1.6em;
-    /* text-align: left;
-    line-height: 2em;
-    font-size: 1.7em;
-    transform: skew(0deg,-25deg) */
-}
-
-#text {
+.about-text {
     font-size: 1em;
     line-height: 1.5em;
 }
@@ -113,13 +129,12 @@ section h2 {
     /* user-select: none;
     margin-top: 0.5rem;
     margin-left: 1rem; */
-    margin-top: 1vh;
+    padding-top: 1vh;
 }
 
 .bestseller-head h2 {
     color: #000000;
     text-shadow: -2px 2px #FF2273;
-    user-select: none;
 }
 
 .bestsellerCarousel {
@@ -127,6 +142,7 @@ section h2 {
     width: fit-content;
     display: flex;
     justify-content: center;
+    height: 45vh;
     /* margin-left: 20rem;
     margin-right: 20rem; */
 }
@@ -134,11 +150,11 @@ section h2 {
 .main-slide {
     position: relative;
     background-color: #f5f5f5; 
-    height: 400px;
+    height: 45vh;
 }
 
 .slide {
-    height: 400px;    
+    height: 45vh;    
 }
 
 .carousel-status {
@@ -310,8 +326,8 @@ section h2 {
 }
 
 .featuredProduct {
-    max-width: 400px;
-    height: 400px;
+    max-width: 18vw;
+    height: 18vw;
     box-shadow: 2px 2px 6px #3a3a3a;
     border-radius: 5px;
     display: flex;
@@ -337,11 +353,10 @@ section h2 {
 
 .featureName {
     position: absolute;
-    left: 15px;
     text-align: left;
-    width: 350px;
+    width: 18vw;
     padding-top: 10px;
-    font-size: 24px;
+    font-size: 1.5em;
     line-height: 30px;
     text-shadow: -2px 2px 1px #FF2273;
     z-index: 2;
@@ -350,7 +365,7 @@ section h2 {
 .featureDscrpt {
     font-size: 85%;
     text-align: center;
-    width: 400px;
+    width: 18vw;
     height: fit-content;
     margin: auto;
     padding-bottom: 15px;
