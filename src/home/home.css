@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: flex-start;
     height: 95vh;
+    max-width: 100%;
 }
 
 .featuresSection {
@@ -35,7 +36,7 @@
     align-items: center;
     font-family: "Permanent Marker";
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5vh;
 }
 
 #nextSectionButton {
@@ -56,6 +57,12 @@ section h2 {
     /* margin: 30px 10%; */
 }
 
+#homeCarousel {
+    position: absolute;
+    top: 12vh;
+    z-index: 0;
+}
+
 .homepage-logo {
     display: flex;
     flex-direction: column;
@@ -69,8 +76,8 @@ section h2 {
 
 .billsLogo {
     max-width: 700px;
-    /* position: absolute; */
-    top: 20vh;
+    position: absolute;
+    top: 15vh;
     max-width: 50vw;
     user-select: none;
 }
@@ -86,9 +93,11 @@ section h2 {
 }
 
 .homepage-about {
+    position: absolute;
+    top: 64vh;
     display: flex;
     justify-content: center;
-    font-size: 1.1em;
+    font-size: 1.9vh;
     text-align: justify;
     
     /* F8DC38 00BFC3 */

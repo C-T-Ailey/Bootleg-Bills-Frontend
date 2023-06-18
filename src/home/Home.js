@@ -96,21 +96,54 @@ export default function Home(props) {
       window.scroll(0,(featureTop - navHeight)-viewTop)
 
     }
+
+
  
     return (
 
         <div className='sectionWrapper' id="top">
 
           <section className='homeSection' id="home">
+
+            <div id='homeCarousel'>
+
+              { !Object.keys(props.products).length ?
+              
+                <div className='loading'>
+                  <p>Loading products...</p>
+                </div>
+              
+                :
+                
+                <div className='productsCarousel'>
+              
+                  <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} stopOnHover useKeyboardArrows interval={3000} width={"55vw"}>
+                    {props.products.map(product => (
+
+                        <div key={product._id}>
+
+                          <div id="imageBg" className='imageBg'>
+                            <img alt={`${product.productName}`} src={product.productBestsellerImage}/>
+                          </div>
+
+                        </div>
+
+                    ))}
+                  </Carousel>
+
+                </div>
+                
+              }
+              
+            </div>
+
             <div className='homepage-welcome'>
               <div className='homepage-logo'>
-                {/* <h3>Welcome to</h3> */}
                 <img className="billsLogo" src={bigLogoV2Text} alt=""/>
               </div>
+
               <div className="homepage-about">
-                {/* <p id="super">Your one-stop shop<br/>for one-of-a-kind,<br/>custom designed,<br/>100% unofficial<br/>tapes, records and apparel.</p> */}
                 <p className='about-text'>Founded in 2016 as a small word-of-mouth creative project, "Bootleg Bill's Unofficial Audio Rarities" finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
-                {/* <Link to={'/about'} className={'about-link'}>Want to know more about us?</Link> */}
               </div>
 
               <div className='nextSection'>
