@@ -22,9 +22,9 @@ export default function Footer(props) {
           <h2>Products</h2>
           <hr></hr>
           <Link to={'/products'}>All</Link>
-          <Link to={'/products'}>Film/TV</Link>
-          <Link to={'/products'}>Video Games</Link>
-          <Link to={'/products'}>Originals</Link>
+          <Link to={'/products'}>Cassettes</Link>
+          <Link to={'/products'}>Vinyl</Link>
+          <Link to={'/products'}>Apparel</Link>
         </div>
 
         <div className='socials'>

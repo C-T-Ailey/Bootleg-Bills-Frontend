@@ -15,6 +15,8 @@ export default function ProductList(props) {
   const location = useLocation()
   // Stores the bestseller state
   const bestseller = location.state
+
+  
   
   // products state, populated by below useEffect hook on initial load
   const [products, setProducts] = useState([])
@@ -25,6 +27,8 @@ export default function ProductList(props) {
   const [selectedSource, setSelectedSource] = useState("All Sources")
   const [selectedFormat, setSelectedFormat] = useState("All Formats")
   const [selectedSort, setSelectedSort] = useState("Alpha AZ")
+
+  const [locType, setLocType] = useState("")
 
     // useEffect hook with API call to retrieve all products from database on page load
     useEffect(() => {
@@ -42,7 +46,7 @@ export default function ProductList(props) {
 
       window.scrollTo(0, 0)
 
-      !!bestseller ? console.log(bestseller) : console.log("no bestseller")
+      !!bestseller ? console.log(bestseller.filter) : console.log("no bestseller")
       
     }, [])
 
@@ -120,6 +124,7 @@ export default function ProductList(props) {
       }
     }
     
+    // const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(!!bestseller ? true : false);
 
     const setModalOpen =()=>{

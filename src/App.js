@@ -367,7 +367,9 @@ export default function App() {
 
 
 
-        <Footer style={{zIndex:0}} addNewsletterEmail={addNewsletterEmail}/>
+        <div>
+          <Footer style={{zIndex:0}} addNewsletterEmail={addNewsletterEmail}/>
+        </div>
         
       
 

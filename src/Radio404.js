@@ -1,15 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {BsChevronCompactDown, BsChevronCompactUp, BsFillVolumeUpFill, BsSkipForwardCircle, BsVolumeMuteFill} from 'react-icons/bs'
 import './Radio.css'
 
 
 export default function Radio404(props) {
 
+    useEffect(() => {
+        shufflePlaylist()
+    }, [])
+
+    
+    
     const randInt = (min, max) => {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1) + min)
-      }
+    }
     
     const audioLibrary = [
         {
@@ -95,14 +101,34 @@ export default function Radio404(props) {
         }
     ]
 
+    const shufflePlaylist = () => {
+        let tracks = []
+        for (let i=0; i < audioLibrary.length-1; i++) {
+            while (tracks.length !== audioLibrary.length) {
+                let newTrack = randInt(0,audioLibrary.length-1)
+                if (!tracks.includes(newTrack)) {
+                    tracks.push(newTrack)
+                }
+            }
+        };
+        setPlaylist(tracks)
+        setSelectedTrack(tracks[0])
+        // console.log("Playlist:",tracks)
+    }
     
-    const [selectedTrack, setSelectedTrack] = useState(randInt(0, audioLibrary.length-1))
+    // default state is a random number between 0 and the index of Audiolibrary's last element
+    const [selectedTrack, setSelectedTrack] = useState(0)
     const [audioMuted, setAudioMuted] = useState(true)
     const [toggleVisible, setToggleVisible] = useState("hideToggle")
     const [playerVisible, setPlayerVisible] = useState("radioVisible")
     const [audioCanPlay, setAudioCanPlay] = useState(false)
     const [volume, setVolume] = useState(5)
     const [tracksPlayed, setTracksPlayed] = useState([])
+    const [playlist, setPlaylist] = useState([])
+    
+    useEffect(()=>{
+        console.log("Now playing:", audioLibrary[selectedTrack]["name"])
+    },[selectedTrack])
 
     const handleMute = () => {
         let audio = document.getElementById("daFunk")
@@ -114,23 +140,19 @@ export default function Radio404(props) {
     }
     
     const handleSkip = () => {
+        
+        const indexOfSelected = playlist.indexOf(selectedTrack)
+        
+        const nextIndex = indexOfSelected+1
+        
+        if (indexOfSelected !== playlist.length - 1) {
+            setSelectedTrack(playlist[nextIndex])
 
-        // let newTrack = randInt(0,audioLibrary.length-1)
-
-
-        // const querySame = () => {return newTrack === selectedTrack}
-
-
-        // while (querySame()) {
-        //     let newerTrack = randInt(0,audioLibrary.length-1)
-        //     console.log(newerTrack)
-        //     newTrack = newerTrack
-
-        // }
-
-        let newTrack = selectedTrack !== audioLibrary.length - 1 ? selectedTrack+1 : 0
-
-        setSelectedTrack(newTrack)
+        } else {
+            shufflePlaylist()
+            console.log("Playlist shuffled!")
+        }
+        
     }
 
     const handleVolume = (e) => {
