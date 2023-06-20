@@ -1,8 +1,8 @@
 #undercon {
     position: relative;
-    top: 220px;
+    top: 27vh;
     transform: rotate(-20deg);
-    z-index: 3;
+    z-index: 2;
 }
 
 
@@ -399,6 +399,7 @@ section h2 {
     height: fit-content;
     margin: auto;
     padding-bottom: 15px;
+    display: none;
 }
 
 @media (max-width: 790px) {
@@ -426,6 +427,7 @@ section h2 {
         left: 0px;
         bottom: 50px;
         user-select: none;
+        z-index: 3 !important;
     }
 
     /* Carousel styling */
