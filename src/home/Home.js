@@ -8,7 +8,8 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Product from '../product/Product';
 import { BsChevronCompactDown } from 'react-icons/bs';
-import underConstruction from './assets/construction_bg.png'
+import underConstruction from './assets/construction_bg_2.png'
+import cautionBg from './assets/caution-bg.jpg'
 
 
 // const options = {
@@ -29,7 +30,7 @@ export default function Home(props) {
 
     const [featured, setFeatured] = useState([])
 
-    const [test, setTest] = useState()
+    const [test, setTest] = useState(false)
     
     const featuredProducts = ["645040d6f21d0a8076260d83","637d1d226f5d7ad3b9ae4d23","640fcd206a370ac37cacf1e4"]
 
@@ -94,6 +95,11 @@ export default function Home(props) {
 
     }
 
+    const toggleVariants = (e) => {
+        // e.preventDefault();
+        setTest(!test)
+    }
+
 
  
     return (
@@ -113,6 +119,7 @@ export default function Home(props) {
                 :
                 
                 <div className='productsCarousel'>
+                  
               
                   <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} useKeyboardArrows interval={3000} width={matchMedia("max-width: 790px") ?"55vw":""}>
                     {props.products.map(product => (
@@ -120,7 +127,8 @@ export default function Home(props) {
                         <div key={product._id}>
 
                           <div id="imageBg" className='imageBg'>
-                            <img alt={`${product.productName}`} src={product.productImageUrls[!!product.hasVariant ?((Math.random() < 0.5) ? 1 : 0 ): 0]}/>
+                            {/* <img alt={`${product.productName}`} src={product.productImageUrls[!!product.hasVariant ?((Math.random() < 0.5) ? 1 : 0 ): 0]}/> */}
+                            <img alt={`${product.productName}`} src={product.productImageUrls[!!test ? 1 : 0]}/>
                           </div>
 
                         </div>
@@ -128,15 +136,22 @@ export default function Home(props) {
                     ))}
                   </Carousel>
 
+
                 </div>
                 
               }
+
+              <div className='homepage-logo'>
+                <img className="billsLogo" src={bigLogoV2Text} alt=""/>
+              </div>
+              
+              <div className='toggleDiv'>
+                <button className='variantToggle' onClick={(e)=>toggleVariants(e)}>{!!test ? "X" : ""}</button>
+                <div className='variantText'>show variants?</div>
+              </div>
               
             </div>
             
-            <div className='homepage-logo'>
-              <img className="billsLogo" src={bigLogoV2Text} alt=""/>
-            </div>
 
             <div className='homepage-welcome'>
 
@@ -144,12 +159,12 @@ export default function Home(props) {
                 <p className='about-text'>Founded in 2016 as a small word-of-mouth creative project, "Bootleg Bill's Unofficial Audio Rarities" finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
               </div>
 
-              <div className='nextSection'>
+              <div className='nextSection' onClick={(e) => {goToFeatures(e)}}>
                 
                   <p>Take a look at<br/>our featured works!</p>
 
                   {/* <BsChevronCompactDown size={48} id="nextSectionButton" onClick={(e) => {goToFeatures(e)}}/> */}
-                  <div id="buttonWrap" onClick={(e) => {goToFeatures(e)}}>
+                  <div id="buttonWrap" >
                     <div id="nextSectionButton">
                       <span id="downButton">V</span>
                     </div>
@@ -204,11 +219,11 @@ export default function Home(props) {
               }
             </div>
             
-            <div className='featured'>
-              <h2 id='featureHeader'>Featured Products</h2>
+            <div className='featured indev'>
               <div id="undercon">
                 <img alt="under construction" src={underConstruction}/>
               </div>
+              <h2 id='featureHeader'>Featured Products</h2>
               <div className='featureFlex'>
                 {
                   featured.map(product => (
@@ -223,14 +238,19 @@ export default function Home(props) {
                         product._id === featuredProducts[0] ? product1Description 
                         : 
                         (product._id === featuredProducts[1] ? product2Description
-                        : 
-                        "product 3")
-                      }
+                          : 
+                          "product 3")
+                        }
                       </div>
                     </div>
                   ))
                 }
               </div>
+              
+              <div id="dev-bg">
+                <img alt="This section is under construction!" src={cautionBg}/>
+              </div>
+                            
             </div>
           
           </section>
@@ -241,8 +261,8 @@ export default function Home(props) {
             
           
           
-          <section className='comingSoonSection' id="comingSoon">
-            {/* <div className="upcoming"> */}
+          <section className='comingSoonSection indev' id="comingSoon">
+            <div className="upcoming">
               <h2>{"Coming Soon!"}</h2>
               <h4>{"Products"}</h4>
               <ul className='comingList'>
@@ -257,7 +277,7 @@ export default function Home(props) {
                 <li>Articles & Archives</li>
               </ul>
               <p></p>
-            {/* </div> */}
+            </div>
           </section>
 
         </div>
