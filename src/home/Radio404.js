@@ -3,22 +3,11 @@ import {BsChevronCompactDown, BsChevronCompactUp, BsFillVolumeUpFill, BsSkipForw
 import RadioTrans1 from './assets/audio/radio_transition_1.ogg'
 import RadioTrans2 from './assets/audio/radio_transition_2.ogg'
 import RadioTrans3 from './assets/audio/radio_transition_3.ogg'
+import TapeClick from './assets/audio/tape_click.ogg'
 import './Radio.css'
 
 
 export default function Radio404(props) {
-
-    useEffect(() => {
-        shufflePlaylist()
-    }, [])
-
-    
-    
-    const randInt = (min, max) => {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min)
-    }
     
     const audioLibrary = [
         {
@@ -104,6 +93,30 @@ export default function Radio404(props) {
         }
     ]
 
+    // default state is a random number between 0 and the index of Audiolibrary's last element
+    const [selectedTrack, setSelectedTrack] = useState(0)
+    const [audioMuted, setAudioMuted] = useState(true)
+    const [toggleVisible, setToggleVisible] = useState("hideToggle")
+    const [playerVisible, setPlayerVisible] = useState("radioVisible")
+    const [audioCanPlay, setAudioCanPlay] = useState(false)
+    const [volume, setVolume] = useState(5)
+    const [tracksPlayed, setTracksPlayed] = useState([])
+    const [playlist, setPlaylist] = useState([])
+
+    const [initialSkip, setInitialSkip] = useState(false)
+
+    useEffect(() => {
+        shufflePlaylist()
+    }, [])
+      
+    
+    const randInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    
+
     const radioSounds = [RadioTrans2,RadioTrans3]
 
     const shufflePlaylist = () => {
@@ -118,22 +131,35 @@ export default function Radio404(props) {
         };
         setPlaylist(tracks)
         setSelectedTrack(tracks[0])
+        // setNewSelected(tracks[0])
         // console.log("Playlist:",tracks)
     }
     
-    // default state is a random number between 0 and the index of Audiolibrary's last element
-    const [selectedTrack, setSelectedTrack] = useState(0)
-    const [audioMuted, setAudioMuted] = useState(true)
-    const [toggleVisible, setToggleVisible] = useState("hideToggle")
-    const [playerVisible, setPlayerVisible] = useState("radioVisible")
-    const [audioCanPlay, setAudioCanPlay] = useState(false)
-    const [volume, setVolume] = useState(5)
-    const [tracksPlayed, setTracksPlayed] = useState([])
-    const [playlist, setPlaylist] = useState([])
+
     
     useEffect(()=>{
+
         console.log("Now playing:", audioLibrary[selectedTrack]["name"])
+
+        
+
+        if (!!initialSkip) {let audio = document.getElementById("daFunk")
+    
+        const changeStation = new Audio(TapeClick)
+
+        changeStation.volume = 0.5;
+
+        audio.pause();
+
+        changeStation.play();
+
+        const timeout = setTimeout(() => {audio.play();}, 1500);
+
+        return () => clearTimeout(timeout);}
+
     },[selectedTrack])
+
+
 
     const handleMute = () => {
         let audio = document.getElementById("daFunk")
@@ -152,21 +178,24 @@ export default function Radio404(props) {
         
         if (indexOfSelected !== playlist.length - 1) {
             
-            let audio = document.getElementById("daFunk")
+            // let audio = document.getElementById("daFunk")
     
-            const changeStation = new Audio(radioSounds[randInt(0,1)])
+            // const changeStation = new Audio(TapeClick)
 
-            changeStation.volume = 0.5;
+            // changeStation.volume = 0.5;
     
             // audio.pause();
 
-            changeStation.play();
+            // changeStation.play();
+
             
-            console.log(changeStation)
 
-            changeStation.onended = function(){setSelectedTrack(playlist[nextIndex])}
+            // changeStation.onended = function(){setSelectedTrack(playlist[nextIndex])}
 
-            // setSelectedTrack(playlist[nextIndex])
+            setInitialSkip(true)
+
+            setSelectedTrack(playlist[nextIndex])
+            // setNewSelected(0)
 
         } else {
             shufflePlaylist()

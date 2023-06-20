@@ -8,6 +8,7 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Product from '../product/Product';
 import { BsChevronCompactDown } from 'react-icons/bs';
+import underConstruction from './assets/construction_bg.png'
 
 
 // const options = {
@@ -205,6 +206,9 @@ export default function Home(props) {
             
             <div className='featured'>
               <h2 id='featureHeader'>Featured Products</h2>
+              <div id="undercon">
+                <img alt="under construction" src={underConstruction}/>
+              </div>
               <div className='featureFlex'>
                 {
                   featured.map(product => (
