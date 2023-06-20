@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {BsChevronCompactDown, BsChevronCompactUp, BsFillVolumeUpFill, BsSkipForwardCircle, BsVolumeMuteFill} from 'react-icons/bs'
+import RadioTrans1 from './assets/audio/radio_transition_1.ogg'
+import RadioTrans2 from './assets/audio/radio_transition_2.ogg'
+import RadioTrans3 from './assets/audio/radio_transition_3.ogg'
 import './Radio.css'
 
 
@@ -101,6 +104,8 @@ export default function Radio404(props) {
         }
     ]
 
+    const radioSounds = [RadioTrans2,RadioTrans3]
+
     const shufflePlaylist = () => {
         let tracks = []
         for (let i=0; i < audioLibrary.length-1; i++) {
@@ -146,7 +151,22 @@ export default function Radio404(props) {
         const nextIndex = indexOfSelected+1
         
         if (indexOfSelected !== playlist.length - 1) {
-            setSelectedTrack(playlist[nextIndex])
+            
+            let audio = document.getElementById("daFunk")
+    
+            const changeStation = new Audio(radioSounds[randInt(0,1)])
+
+            changeStation.volume = 0.5;
+    
+            // audio.pause();
+
+            changeStation.play();
+            
+            console.log(changeStation)
+
+            changeStation.onended = function(){setSelectedTrack(playlist[nextIndex])}
+
+            // setSelectedTrack(playlist[nextIndex])
 
         } else {
             shufflePlaylist()

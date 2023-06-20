@@ -65,6 +65,10 @@ section h2 {
 }
 
 .homepage-logo {
+    position: absolute;
+    top: 12vh;
+    width: 55vw;
+    height: 45vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,45 +77,44 @@ section h2 {
 
 .homepage-logo img {
     cursor: default;
+    margin:auto;
 }
 
 .billsLogo {
-    max-width: 700px;
-    position: absolute;
-    top: 15vh;
+    position: relative;
+    /* top: 15vh; */
     max-width: 50vw;
     user-select: none;
 }
 
 .homepage-welcome {
-    height: 90vh;
+    position: absolute;
+    top: 60vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10vh;
-    margin-bottom: 6vh;
+
+    /* margin-top: 10vh; */
+    /* margin-bottom: 6vh; */
 }
 
 .homepage-about {
-    position: absolute;
-    top: 64vh;
+    /* position: absolute; */
+    /* top: 64vh; */
     display: flex;
     justify-content: center;
     font-size: 1.9vh;
     text-align: justify;
-    
+    text-align: center;
+    max-width: 50vw;
     /* F8DC38 00BFC3 */
 }
 
 .about-text {
     font-size: 1em;
     line-height: 1.5em;
-}
-
-.homepage-about p {
-    width: 50vw;
-    text-align: center;
 }
 
 /* .mainNameBrand {
@@ -160,11 +163,12 @@ section h2 {
 .main-slide {
     position: relative;
     background-color: #f5f5f5; 
-    height: 45vh;
+    
 }
 
 .slide {
-    height: 45vh;    
+    height: 45vh;
+    /* width: 100vw;     */
 }
 
 .carousel-status {
@@ -172,17 +176,20 @@ section h2 {
 }
 
 .carousel {
-    text-align: center;
-    
+    text-align: center;    
 }
 
 .imageBg {
-    height: 400px;
+    position: absolute;
+    z-index: -1;
+    height: 15em;
+    width: 100%;
+    /* top: -270px; */
 }
 
-.thumbs {
+/* .thumbs {
     display: none;
-}
+} */
 
 .bestLink {
     text-decoration: none;
@@ -383,6 +390,25 @@ section h2 {
 
 @media (max-width: 790px) {
 
+    .carouselContainer {
+
+        height: 37vh;
+    }
+
+    .carouselContainer .bestsellerCarousel {
+        height: inherit;
+    }
+    
+    .radioNewMobile {
+        display: flex;
+        position: fixed;
+        left: 0px;
+        bottom: 50px;
+        user-select: none;
+    }
+
+    /* Carousel styling */
+
     .loading {
         height: 225px;
         display: flex;
@@ -393,12 +419,13 @@ section h2 {
 
     .main-slide {
         background-color: #f5f5f5; 
-        max-height: 200px;
+        /* max-height: 200px; */
         
     }
     
     .slide {
-        height: 225px;    
+        /* height: 45vh; */
+        /* height: 225px;     */
     }
     
 
@@ -412,9 +439,18 @@ section h2 {
         background-color: rgba(255, 255, 255, 0.5);
     }
 
-    .carousel {
-        max-width: 100vw;
-        max-height: 200px;
+    #homeCarousel {
+        top: 7vh;
+
+    }
+
+    .main-slide {
+        
+    }
+
+    .carousel { 
+        width: 100vw !important;
+        max-height: 37vh;
     }
 
     .carousel-source {
@@ -423,55 +459,95 @@ section h2 {
         user-select: none;
     }
 
-    .radioNewMobile {
-        display: flex;
-        position: fixed;
-        left: 0px;
-        bottom: 50px;
-        user-select: none;
+    .imageBg {
+        top: 0px;
+        height: 100%;
+        /* height: 20em; */
     }
-    
-    
 
     #imageBg img {
-        display: flex;
-        justify-content: center;
         height: 100%;
         width: 100%;
         object-fit: cover;
     }
     
-    .homepage-welcome {
+    
+    
+
+    /* End carousel styling */
+    /* -------------------- */
+    /* Homepage styling */
+
+    .homeSection {
         display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: white;
+
+    }
+    
+    .homepage-welcome {
+        margin: 0px;
+        position: absolute;
+        top:45vh;
+        display: flex;
+        height: 55vh;
+        justify-content: flex-start;
         flex-direction: column;
         align-items: center;
         /* justify-content: flex-start; */
     }
     
-    .homepage-logo {
-        display: flex;
-        justify-content: center;
-    }
-    
     .billsLogo {
-        max-width: 225px;
+        /* position: absolute; */
+        /* top: 2vh; */
+        max-width: 95vw;
+        margin: auto;
+        padding-top: 15vh;
     }
     
-    .homepage-logo p {
-        margin-top: auto;
-        font-size: 1rem;
+    .nextSection p {
+        margin: 0;
+    }
+    
+    #nextSectionButton {
+        color: #FF2273;
+        
+    }
+    
+    #nextSectionButton:hover {
+        color:#ffb310;
+        text-shadow: 0px 18px 0px black;
+    }
+
+    .homepage-logo {
+        position: absolute;
+        top: 0;
+        height: 44vh;
+        width: 100vw;
+
+    }
+    
+    .homepage-logo img {
     }
     
     .homepage-about {
-        width: 90vw;
-        margin-left: 0px;
-        margin-top: 2rem;
+        position: unset;
+        /* top: 45vh; */
+        max-width: 90vw;
+        padding-top: 2vh;
+        
+        /* margin-top: 2rem; */
     }
     
-    .homepage-about p {
+    /* .homepage-about p {
         font-size: 1rem;
         width: 90vw;
         text-align: center;
+    } */
+
+    .about-text {
+        width: 100vw;
     }
     
     .about-link {
@@ -480,6 +556,13 @@ section h2 {
         text-align: center;
         text-decoration: none;
         margin: auto;
+    }
+
+
+/* Features section */
+
+    .featuresSection {
+        justify-content: flex-start;
     }
 
     .thumbs-flex {
@@ -517,6 +600,9 @@ section h2 {
         padding: 0px 15px 0px 15px;
     }
 
+    .mobileHidden {
+        display: none;
+    }
 
 }
 

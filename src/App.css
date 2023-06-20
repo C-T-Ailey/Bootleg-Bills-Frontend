@@ -82,6 +82,11 @@ h1, h2, h3, h4, h5, h6 {
     .radioNew {
         display: none;
     }
+
+    .radioNewMobile {
+        position: fixed;
+        z-index: 2;
+    }
     
     .radioNewMobile img {
         cursor: default;
@@ -90,8 +95,6 @@ h1, h2, h3, h4, h5, h6 {
     .radioNewMobile .confirm {
         position: fixed;
         right: 10px;
-        bottom: 120px;
-        font-family: bungee;
         cursor: pointer;
     }
 }

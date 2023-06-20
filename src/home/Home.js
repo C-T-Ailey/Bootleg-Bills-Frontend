@@ -113,13 +113,13 @@ export default function Home(props) {
                 
                 <div className='productsCarousel'>
               
-                  <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} useKeyboardArrows interval={3000} width={"55vw"}>
+                  <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} useKeyboardArrows interval={3000} width={matchMedia("max-width: 790px") ?"55vw":""}>
                     {props.products.map(product => (
 
                         <div key={product._id}>
 
                           <div id="imageBg" className='imageBg'>
-                            <img alt={`${product.productName}`} src={product.productBestsellerImage}/>
+                            <img alt={`${product.productName}`} src={product.productImageUrls[!!product.hasVariant ?((Math.random() < 0.5) ? 1 : 0 ): 0]}/>
                           </div>
 
                         </div>
@@ -132,11 +132,12 @@ export default function Home(props) {
               }
               
             </div>
+            
+            <div className='homepage-logo'>
+              <img className="billsLogo" src={bigLogoV2Text} alt=""/>
+            </div>
 
             <div className='homepage-welcome'>
-              <div className='homepage-logo'>
-                <img className="billsLogo" src={bigLogoV2Text} alt=""/>
-              </div>
 
               <div className="homepage-about">
                 <p className='about-text'>Founded in 2016 as a small word-of-mouth creative project, "Bootleg Bill's Unofficial Audio Rarities" finally established an online presence in 2022. Now you can see for yourself what's to plunder from our catalogue of obscure counterfeit treasures, keep up to date on our latest and upcoming releases, and bag one of your very own unofficial audio rarities!</p>
@@ -209,7 +210,7 @@ export default function Home(props) {
                   featured.map(product => (
                     <div className='featuredProduct'>
                       <div className='featureDisplay'>
-                        <h5 className='featureName'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
+                        <h5 className='featureName mobileHidden'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
                         <img className='featureThumb' src={product.productImageUrls[0]}/>
                       </div>
 

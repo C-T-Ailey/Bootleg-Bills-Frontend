@@ -21,7 +21,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Nav, Navbar, Image, Alert } from 'react-bootstrap';
 import logo from './product/images/nav_logo_new.png'
-import Radio404 from './Radio404'
+import Radio404 from './home/Radio404'
 
 import radioNew from './home/assets/radio_new.png'
 import radioNewMobile from './home/assets/radio_new_mobile.png'
@@ -367,9 +367,9 @@ export default function App() {
 
 
 
-        <div>
-          <Footer style={{zIndex:0}} addNewsletterEmail={addNewsletterEmail}/>
-        </div>
+      
+        <Footer style={{zIndex:0}} addNewsletterEmail={addNewsletterEmail}/>
+        
         
       
 

@@ -28,8 +28,8 @@ export default function NewsLetter(props) {
 
   return (
     <div className="email-container">
-    <h2 className="EmailTitle" >Newsletter Signup</h2>
-    <hr></hr>
+    <h2 className="emailTitle" >Newsletter Signup</h2>
+    <hr className='mobileHide'></hr>
     <form onSubmit={handleClick} id="clear-form">
 
         <input className="emailInput" type="text" name="emailAddress" placeholder="bill@bootleg.com" onChange={handleChange}></input>

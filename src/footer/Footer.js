@@ -9,27 +9,27 @@ export default function Footer(props) {
 
     <div className='footer-bg'>
       <div className='footer-cols'>
-        <div className='about'>
+        <div className='footer-links' id='about'>
           <h2>About Us</h2>
-          <hr></hr>
+          <hr className='mobileHide'></hr>
           <Link to={'/about'}>About us</Link>
           <a className='nope' href="">Careers</a>
           <a className='nope' href="">Terms of Service</a>
           <Link to={'/faq'}>FAQs</Link>
         </div>
 
-        <div className='products'>
+        <div className='footer-links' id='products'>
           <h2>Products</h2>
-          <hr></hr>
+          <hr className='mobileHide'></hr>
           <Link to={'/products'}>All</Link>
           <Link to={'/products'}>Cassettes</Link>
           <Link to={'/products'}>Vinyl</Link>
           <Link to={'/products'}>Apparel</Link>
         </div>
 
-        <div className='socials'>
+        <div className='footer-links' id='socials'>
           <h2>Social Media</h2>
-          <hr></hr>
+          <hr className='mobileHide'></hr>
           <a className='nope' href="">Instagram</a>
           <a className='nope' href="">Facebook</a>
           <a className='nope' href="">Twitter</a>
