@@ -5,8 +5,6 @@
     z-index: 2;
 }
 
-
-
 .sectionWrapper {
     display: flex;
     flex-direction: column;
@@ -36,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 50vh;
+    height: fit-content;
     padding-top: 5vh
 }
 
@@ -48,6 +46,7 @@
     text-align: center;
     font-size: 2.5vh;
     padding-top: 2vh;
+    user-select: none;
 }
 
 #nextSectionButton {
@@ -80,9 +79,38 @@ section h2 {
     bottom: 22vh;
 }
 
+.toggleDiv {
+    position: relative;
+    bottom: 3vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 4;
+    padding-left: .5vw;
+}
+
+.variantToggle {
+    all: unset;
+    width: .5em;
+    height: .5em;
+    text-align: center;
+    border: 3px solid #FF2273;
+    border-radius: 8px;
+    font-family: "Permanent Marker";
+    font-size: 2vw;
+    line-height: 0px;
+}
+
+.variantText {
+    padding-left: .5vw;
+    font-family: "Bungee";
+    color: #FF2273;
+    text-shadow: -2px 2px 0px black;
+}
+
 .homepage-logo {
     position: absolute;
-    top: 12vh;
+    top: 0;
     width: 55vw;
     height: 45vh;
     display: flex;
@@ -98,7 +126,7 @@ section h2 {
 
 .billsLogo {
     position: relative;
-    /* top: 15vh; */
+    top: 0;
     max-width: 50vw;
     user-select: none;
 }
@@ -143,6 +171,10 @@ section h2 {
     display: flex;
     text-decoration: none;
 }
+
+
+/* ##### FEATURED SECTION STARTS HERE ##### */
+
 
 .bestseller-container {
     display: flex;
@@ -279,31 +311,6 @@ section h2 {
     margin: 0 auto 0 auto;
 }
 
-.homepage-nav-thumbs {
-    display: flex;
-    margin: auto;
-    margin-top: 50px;
-    justify-content: center;
-}
-
-.thumbs-flex {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1280px;
-    justify-content: space-evenly;
-}
-
-.thumbs-flex div {
-    cursor: pointer;
-    width: 500px;
-    height: 314px;
-    background-size: contain;
-    /* background-color: #00BFC3; */
-    border-radius: 10px;
-    margin-bottom: 30px;
-    /* box-shadow: 5px 5px 8px rgba(107, 107, 107, 0.6); */
-}
-
 #bootstrap-overrides .nav-link {
     padding: 0;
 }
@@ -313,6 +320,17 @@ section h2 {
     border-radius: 10px;
 }
 
+
+/* Coming Soon starts here */
+
+
+.upcoming {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    height: fit-content;
+}
 
 .radioNewMobile {
     display: none;
@@ -328,7 +346,7 @@ section h2 {
     top: 210px;
     font-family: bungee;
     cursor: pointer;
-}
+}           
 
 .confirm:hover {
     color:#FF2273
@@ -341,12 +359,32 @@ section h2 {
     margin-bottom: 20vh;
 }
 
+/* #dev-bg {
+    transform: scale(80%);
+} */
+
+.indev {
+    text-shadow: 2px 2px 0px #ffb310, -2px -2px 0px #ffb310, 2px -2px 0px #ffb310, -2px 2px 0px #ffb310
+}
+
+#dev-bg img {
+    position: absolute;
+    margin-top: 5vh;
+    top: 156vh;
+    left: 0;
+    object-fit: cover;
+    width: 100vw;
+    height: 50em;
+    z-index: -1;
+    overflow: hidden;
+}
+
 .featureFlex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: 80vw;
+    width: 60vw;
 }
 
 #featureHeader {
@@ -357,7 +395,7 @@ section h2 {
 
 .featuredProduct {
     max-width: 18vw;
-    height: 18vw;
+    /* height: 18vw; */
     box-shadow: 2px 2px 6px #3a3a3a;
     border-radius: 5px;
     display: flex;
@@ -376,12 +414,13 @@ section h2 {
 .featureThumb {
     position: relative;
     left: 0;
-    max-width: 18vw;
+    max-width: 250px;
     border-radius: 5px;
-    z-index: 1;
+    z-index: 0;
 }
 
 .featureName {
+    display: none;
     position: absolute;
     text-align: left;
     width: 18vw;
@@ -389,7 +428,7 @@ section h2 {
     font-size: 1.5em;
     line-height: 30px;
     text-shadow: -2px 2px 1px #FF2273;
-    z-index: 2;
+    z-index: 1;
 }
 
 .featureDscrpt {
@@ -400,6 +439,11 @@ section h2 {
     margin: auto;
     padding-bottom: 15px;
     display: none;
+}
+
+.comingList {
+    text-shadow:  1px -1px 0px #ffb310, -1px 1px 0px #ffb310, -1px -1px 0px #ffb310, 1px 1px 0px #ffb310
+
 }
 
 @media (max-width: 790px) {
@@ -420,6 +464,37 @@ section h2 {
     .carouselContainer .bestsellerCarousel {
         height: inherit;
     }
+
+    .toggleDiv {
+        position: relative;
+        left: 1vw;
+        bottom: 5vh;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        z-index: 4;
+        padding-left: .5vw;
+    }
+    
+    .variantToggle {
+        all: unset;
+        width: 7vw;
+        height: 7vw;
+        text-align: center;
+        border: 3px solid #FF2273;
+        border-radius: 8px;
+        font-family: "Permanent Marker";
+        font-size: 10vw;
+        line-height: 0px;
+    }
+    
+    .variantText {
+        line-break: auto;
+        max-width: 20vw;
+        line-height: 1rem;
+        font-size: 2vh;
+        margin-left: 5px;
+    }
     
     .radioNewMobile {
         display: flex;
@@ -431,6 +506,8 @@ section h2 {
     }
 
     /* Carousel styling */
+
+
 
     .loading {
         height: 225px;
@@ -446,6 +523,9 @@ section h2 {
         
     }
     
+    .bestseller-head h2 {
+        text-shadow: -2px -2px 0 #ffb310, 2px 2px 0 #ffb310
+    }
 
     .type {
         position: absolute;
@@ -512,7 +592,6 @@ section h2 {
         justify-content: flex-start;
         flex-direction: column;
         align-items: center;
-        padding: 0;
         /* justify-content: flex-start; */
     }
     
@@ -521,7 +600,7 @@ section h2 {
         /* top: 2vh; */
         max-width: 95vw;
         margin: auto;
-        padding-top: 15vh;
+        padding-top: 1vh;
     }
 
     .nextSection {
@@ -587,12 +666,18 @@ section h2 {
     }
 
     .featuresSection {
-        justify-content: flex;
+        justify-content: flex-start;
+        height: fit-content;
+    }
+
+    #dev-bg img {
+        position: fixed;
+        top: 0;
     }
 
     .featured {
         margin: 0;
-        height: 50vh;
+        height: fit-content;
         width: 100vw;
         position: relative;
         top: 0px;
@@ -619,7 +704,7 @@ section h2 {
 
     .featureThumb {
         position: relative;
-        width: 1000px;
+        width: 4.5em;
     }
     
 
@@ -655,11 +740,26 @@ section h2 {
         font-size: 1.2rem;
         text-align: center;
         margin: auto;
+        padding-top: 2vh;
+    }
+
+    .upcoming h4 {
+        color: black;
+        padding-top: 2vh;
     }
 
     .comingList {
         list-style-position: inside;
+        list-style-type: none;
         padding: 0px 15px 0px 15px;
+        font-family: "Permanent Marker";
+        color: black;
+        text-shadow:  1px -1px 0px #ffb310, -1px 1px 0px #ffb310, -1px -1px 0px #ffb310, 1px 1px 0px #ffb310
+    }
+
+    .comingList li {
+        padding-top: 2vh;
+        /* line-height: 1.3em; */
     }
 
     .mobileHidden {
