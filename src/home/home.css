@@ -373,7 +373,7 @@ section h2 {
     top: 156vh;
     left: 0;
     object-fit: cover;
-    width: 100vw;
+    width: 100%;
     height: 50em;
     z-index: -1;
     overflow: hidden;
@@ -673,6 +673,7 @@ section h2 {
     #dev-bg img {
         position: fixed;
         top: 0;
+        width: 100%;
     }
 
     .featured {
