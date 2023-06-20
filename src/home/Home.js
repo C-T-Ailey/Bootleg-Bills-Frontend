@@ -205,10 +205,10 @@ export default function Home(props) {
             </div>
             
             <div className='featured'>
-              <h2 id='featureHeader'>Featured Products</h2>
               <div id="undercon">
                 <img alt="under construction" src={underConstruction}/>
               </div>
+              <h2 id='featureHeader'>Featured Products</h2>
               <div className='featureFlex'>
                 {
                   featured.map(product => (

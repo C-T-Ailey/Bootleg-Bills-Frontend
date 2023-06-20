@@ -47,6 +47,7 @@
     font-family: "Permanent Marker";
     text-align: center;
     font-size: 2.5vh;
+    padding-top: 2vh;
 }
 
 #nextSectionButton {
@@ -110,7 +111,7 @@ section h2 {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
+    padding-top: 2vh;
     /* margin-top: 10vh; */
     /* margin-bottom: 6vh; */
 }
@@ -202,9 +203,6 @@ section h2 {
     /* top: -270px; */
 }
 
-/* .thumbs {
-    display: none;
-} */
 
 .bestLink {
     text-decoration: none;
@@ -376,7 +374,7 @@ section h2 {
 }
 
 .featureThumb {
-    position: absolute;
+    position: relative;
     left: 0;
     max-width: 18vw;
     border-radius: 5px;
@@ -446,11 +444,6 @@ section h2 {
         
     }
     
-    .slide {
-        /* height: 45vh; */
-        /* height: 225px;     */
-    }
-    
 
     .type {
         position: absolute;
@@ -464,12 +457,11 @@ section h2 {
 
     #homeCarousel {
         top: 7vh;
-
     }
 
-    .main-slide {
-        
-    }
+    #homeCarousel img {
+    position: unset;
+}
 
     .carousel { 
         width: 100vw !important;
@@ -518,6 +510,7 @@ section h2 {
         justify-content: flex-start;
         flex-direction: column;
         align-items: center;
+        padding: 0;
         /* justify-content: flex-start; */
     }
     
@@ -527,6 +520,11 @@ section h2 {
         max-width: 95vw;
         margin: auto;
         padding-top: 15vh;
+    }
+
+    .nextSection {
+        padding-top: 0px;
+
     }
     
     .nextSection p {
@@ -551,14 +549,10 @@ section h2 {
 
     }
     
-    .homepage-logo img {
-    }
-    
     .homepage-about {
         position: unset;
         /* top: 45vh; */
         max-width: 90vw;
-        padding-top: 2vh;
         
         /* margin-top: 2rem; */
     }
@@ -584,8 +578,51 @@ section h2 {
 
 /* Features section */
 
+    #undercon {
+        position: absolute;
+        top: 6.5vh;
+        max-height: fit-content;
+    }
+
     .featuresSection {
-        justify-content: flex-start;
+        justify-content: flex;
+    }
+
+    .featured {
+        margin: 0;
+        height: 50vh;
+        width: 100vw;
+        position: relative;
+        top: 0px;
+    }
+
+    .featureFlex {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90vw;
+        
+    }
+
+    .featuredProduct {
+        margin: 0px;
+        max-width: fit-content;
+        /* height: fit-content; */
+    }
+
+    .featureDisplay {
+        max-width: fit-content;
+    }
+
+    .featureThumb {
+        position: relative;
+        width: 1000px;
+    }
+    
+
+    .featureDscrpt {
+        display: none;
     }
 
     .thumbs-flex {
