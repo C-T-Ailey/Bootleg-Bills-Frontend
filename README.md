@@ -10,7 +10,7 @@
 
 The frontend also requires a .env file storing the key `REACT_APP_SELLER_KEY=` with a value of your choosing. This will be required if you wish to register as a Seller during the site's Signup process.
 
-![bootlegbills](https://i.imgur.com/X5cwrx5.png)
+![bootlegbills](https://i.imgur.com/cWfMbaG.png)
 
 #### Table of Contents
 * Development Status
