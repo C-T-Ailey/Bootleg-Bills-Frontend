@@ -10,6 +10,7 @@ body {
     font-weight: bolder;
     font-size: 1.3rem;
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Bungee', 'Courier New',
     monospace;
@@ -66,7 +67,9 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 2;
 }
 
-
+#footerContainer{
+    max-width: 100vw;
+}
 
 @media (max-width: 790px) {
     #nav-brand {
@@ -79,6 +82,11 @@ h1, h2, h3, h4, h5, h6 {
     .radioNew {
         display: none;
     }
+
+    .radioNewMobile {
+        position: fixed;
+        z-index: 2;
+    }
     
     .radioNewMobile img {
         cursor: default;
@@ -87,8 +95,6 @@ h1, h2, h3, h4, h5, h6 {
     .radioNewMobile .confirm {
         position: fixed;
         right: 10px;
-        bottom: 120px;
-        font-family: bungee;
         cursor: pointer;
     }
 }
