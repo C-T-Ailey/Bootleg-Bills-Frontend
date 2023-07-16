@@ -10,6 +10,7 @@ import Product from '../product/Product';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import underConstruction from './assets/construction_bg_2.png'
 import cautionBg from './assets/caution-bg.jpg'
+import cautionTape from './assets/caution-tape.png'
 
 
 // const options = {
@@ -28,6 +29,8 @@ export default function Home(props) {
 
     const [popular, setPopular] = useState({})
 
+    const [hotProduct, setHotProduct] = useState([])
+
     const [featured, setFeatured] = useState([])
 
     const [test, setTest] = useState(false)
@@ -45,17 +48,23 @@ export default function Home(props) {
         let popularProducts = Array.from(props.products).sort((a, b) => b.unitsSold - a.unitsSold).slice(0,5)
 
         setPopular(popularProducts)
+
+        let hot = [props.products.find(element => element._id === "645040d6f21d0a8076260d83")]
+
+        console.log(hot)
         
         let features = []
-
+        
         features.push(props.products.find(element => element._id === "645040d6f21d0a8076260d83"),props.products.find(element => element._id === "637d1d226f5d7ad3b9ae4d23"),props.products.find(element => element._id === "640fcd206a370ac37cacf1e4"))
-
+        
+        setHotProduct(hot)
+        
         setFeatured(features)
         
       }
     }, [props.products])
 
-    const product1Description = "The debut entry in our new series of limited, cassette-only releases has arrived! Celebrate two of our favourite synthpop stars with the Synthpop Edition of the Double Bill, featuring indie artpop icon Grimes and underground vocaloid powerhouse Astrophysics."
+    const product1Description = "The debut entry in our new series of limited, cassette-only releases has arrived! Celebrate the union of two spectacular artists with volume 1 of the brand-new Double Bill: Sixty meticulously curated and artfully remixed minutes of ethereal synth, featuring indie artpop icon Grimes and underground vocaloid powerhouse Astrophysics. \n \n Each volume of the Double Bill is a limited run of only 200 tapes, so don't expect them to hang around - once they're gone, they're really gone, so get 'em while they're hot!"
 
     const product2Description = "Help spread the word! Bootleg Bill's only official merchandise is hot off the press and ready to take home today!"
 
@@ -100,6 +109,32 @@ export default function Home(props) {
         setTest(!test)
     }
 
+    const mediaExceptions = ["62e3bba3aa1145047e6c0c5e","62e3b727aa1145047e6c0c31","62e3ba31aa1145047e6c0c5a","62e3bd8eaa1145047e6c0c69","62e3be09aa1145047e6c0c6c","62e3bf8eaa1145047e6c0c82","","640fcd206a370ac37cacf1e4"]
+
+    const getImageIndex = (product) => {
+
+      if (product.productMediaFormat === "Cassette") {
+        if (mediaExceptions.includes(product._id)) {
+          return 0
+        } 
+        else {
+          return 1
+        }
+      }
+      else if (product.productMediaFormat === "Vinyl") {
+        if (mediaExceptions.includes(product._id)) {
+          return 0
+        } 
+        else {
+          return (Math.random() > 0.5 ? 1 : 0)
+        }
+      }
+      else if (product.productMediaFormat === "Apparel") {
+        return 1
+      }
+
+
+    }
 
  
     return (
@@ -128,7 +163,8 @@ export default function Home(props) {
 
                           <div id="imageBg" className='imageBg'>
                             {/* <img alt={`${product.productName}`} src={product.productImageUrls[!!product.hasVariant ?((Math.random() < 0.5) ? 1 : 0 ): 0]}/> */}
-                            <img alt={`${product.productName}`} src={product.productImageUrls[!!test ? 1 : 0]}/>
+                            {/* <img alt={`${product.productName}`} src={product.productImageUrls[!!test ? 1 : 0]}/> */}
+                            <img alt={`${product.productName}`} src={product.productImageUrls[getImageIndex(product)]}/>
                           </div>
 
                         </div>
@@ -141,14 +177,22 @@ export default function Home(props) {
                 
               }
 
-              <div className='homepage-logo'>
-                <img className="billsLogo" src={bigLogoV2Text} alt=""/>
-              </div>
+              { !Object.keys(props.products).length ?
+
+                <></>
+
+              :
+
+                <div className='homepage-logo'>
+                  <img className="billsLogo" src={bigLogoV2Text} alt=""/>
+                </div>
+
+              }
               
-              <div className='toggleDiv'>
+              {/* <div className='toggleDiv'>
                 <button className='variantToggle' onClick={(e)=>toggleVariants(e)}>{!!test ? "X" : ""}</button>
-                <div className='variantText'>show variants?</div>
-              </div>
+                <div className='variantText'>{test ? "B" : "A"}</div>
+              </div> */}
               
             </div>
             
@@ -161,10 +205,10 @@ export default function Home(props) {
 
               <div className='nextSection' onClick={(e) => {goToFeatures(e)}}>
                 
-                  <p>Take a look at<br/>our featured works!</p>
+                  <p>Take a look at our<br/>best sellers and latest releases!</p>
 
                   {/* <BsChevronCompactDown size={48} id="nextSectionButton" onClick={(e) => {goToFeatures(e)}}/> */}
-                  <div id="buttonWrap" >
+                  <div id="buttonWrap">
                     <div id="nextSectionButton">
                       <span id="downButton">V</span>
                     </div>
@@ -220,36 +264,48 @@ export default function Home(props) {
             </div>
             
             <div className='featured indev'>
-              <div id="undercon">
+              {/* <div id="caution-tape">
+                <img alt="caution tape" src={cautionTape}/>
+              </div> */}
+              {/* <div id="undercon">
                 <img alt="under construction" src={underConstruction}/>
-              </div>
-              <h2 id='featureHeader'>Featured Products</h2>
+              </div> */}
               <div className='featureFlex'>
                 {
-                  featured.map(product => (
+                  hotProduct.map(product => (
                     <div className='featuredProduct'>
-                      <div className='featureDisplay'>
-                        <h5 className='featureName mobileHidden'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
-                        <img className='featureThumb' src={product.productImageUrls[0]}/>
+                      <h2 id='featureHeader'>HOT OFF THE PRESSES</h2>
+                      
+                      <div className='featureDetails'>
+                        
+                        <div className='featureDisplay'>
+                          <h5 className='featureName mobileHidden'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
+                          <img className='featureThumb' src={product.productImageUrls[0]}/>
+                        </div>
+                        
+                        <div className='featureDscrpt'>
+                          <p id='featureText'>
+                            {
+                              product1Description 
+                            }
+                          </p>
+                        </div>
+                        
                       </div>
 
-                      <div className='featureDscrpt'>
-                      {
-                        product._id === featuredProducts[0] ? product1Description 
-                        : 
-                        (product._id === featuredProducts[1] ? product2Description
-                          : 
-                          "product 3")
-                        }
-                      </div>
                     </div>
                   ))
                 }
+
+                <div className='featureSpotlight'>
+
+                </div>
+                
               </div>
               
-              <div id="dev-bg">
+              {/* <div id="dev-bg">
                 <img alt="This section is under construction!" src={cautionBg}/>
-              </div>
+              </div> */}
                             
             </div>
           

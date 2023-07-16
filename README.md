@@ -10,7 +10,7 @@
 
 The frontend also requires a .env file storing the key `REACT_APP_SELLER_KEY=` with a value of your choosing. This will be required if you wish to register as a Seller during the site's Signup process.
 
-![bootlegbills](https://i.imgur.com/cWfMbaG.png)
+![bootlegbills](https://i.imgur.com/d6JCKSg.png)
 
 #### Table of Contents
 * Development Status
@@ -38,11 +38,11 @@ The frontend also requires a .env file storing the key `REACT_APP_SELLER_KEY=` w
   * Future Inclusions and Improvements
   * Key Learnings
 
-### Development Status
+### Background & Status
 
-Since finishing development of the application within the scope of the General Assembly course for which it was submitted, I have independently been making incremental progress towards refactoring several components and rectifying bugs and incomplete features from the initial development process. As all the product images and audio samples used on the site were (and continue to be) personally designed and edited, the application now serves as a minor portfolio for my graphic design work in addition to an example of my previous software development projects. The version of the project as it stood upon completion of the course can be found under the "Legacy" branch of this repository.
+Bootleg Bill's Unofficial Audio Rarities originated (at least, as a web app) as a project submission for General Assembly's 2022 Software Engineering Immersive bootcamp, developed collaboratively alongside [Christopher Carey](https://www.linkedin.com/in/chriskcarey/ "Chris Carey's LinkedIn") and [Ailish McLaughlin](https://www.linkedin.com/in/ailish-mclaughlin/ "Ailish McLaughlin's LinkedIn"). In the months since completion of the course, I have independently been making efforts towards refactoring several components, rectifying bugs, resolving incomplete features from the initial development process and implementing new ones. The application now serves as both a minor portfolio for my previous code/design work and a testing ground for new ideas. The version of the project as it stood upon completion of the course can be found under the "Legacy" branch of this repository.
 
-This specific repository is for the application's frontend, to which the majority of adjustments so far have been made. Several styling improvements and bugfixes have been implemented, along with new features such as the means to offer (and "purchase") design variations for different products, filtering by products by category, and an About Us page detailing the project's conceptual background.
+This specific repository is for the application's frontend, to which the majority of adjustments so far have been made. Several styling improvements and bugfixes have been implemented, along with new features such as the means to offer and "purchase" design variations for different products, filtering by products by category, About Us & FAQs, and a custom-built "radio" player.
 
 #### Post-Submission Additions and Changes
 * Alphabetical/Reverse Alphabetical and Date Added (ascending/descending) sorting to accompany the Source/Format filters on the Products page.
@@ -56,8 +56,7 @@ This specific repository is for the application's frontend, to which the majorit
 * "Add to Cart" functions have been rewritten (and Product & Orders models updated on the backend) so that any selected variant for a product will be displayed in the Cart/Checkout and recorded in a customer's orders. If a product is added to the cart from the Products index, the user will be notified that the product has variants and that proceeding will add the default variation to the cart.
 * "Search by Name" feature has been added to the Product index and the Seller Dashboard's product list. 
 * Sellers can now specify the name and artist for the track featured in the audio sample when creating/editing a product, which is in turn displayed under the audio player on the Product Details.
-* Users can now enjoy a selection of music while they browse, courtesy of the newly implemented Radio feature.
-  * Fully functional, but subject to further improvements and additions.
+* Users can now enjoy a selection of music while they browse, courtesy of the newly implemented Radio feature (subject to further additions and improvements).
 * For a comprehensive view of additions and changes, please refer to this repository's commit history.
 
 #### Planned Improvements
@@ -81,26 +80,9 @@ This specific repository is for the application's frontend, to which the majorit
 
 #### Known Bugs
 * Firefox Browser-specific issues:
-  * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser.
+  * The primary font for the site, Bungee Hairline, displays poorly in the Firefox browser. Use of Google Chrome or Microsoft Edge is recommended for viewing until a universally browser-friendly alternative is found.
   * The "Choose a Variant" dropdown selection options are displayed with the Comic Sans font, instead of the intended Bungee Hairline.
-    * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. Might not be ideal, but it beats Comic Sans.
-* Any component which makes use of the scrollTo method within a useEffect hook will trigger the scroll any time the radio player is interacted with.
-* :white_check_mark: The "Bestsellers" carousel on the homepage briefly displays names and images for non-bestseller products as the function for populating the carousel runs its course.
-  * Fully fixed by implementing a "unitsSold" property in the backend's Product schema and simply sorting the full array of products by most to least unitsSold in Home.js' useEffect hook.
-* :white_check_mark: Despite CollapseOnSelect being set in the Navbar component's attributes, the navbar doesn't collapse after selecting a link.
-  * Fixed by adding an eventKey attribute to each Nav.Link component.
-* :white_check_mark: Removing any item which isn't last in the list from your cart causes each successive remaining item to inherit the quantity of the product which formerly preceded it.
-  * Fully fixed as part of a full overhaul of the Cart and Checkout components.
-* :white_check_mark: When attempting to update the product details for a product which has variants, the "Has variants?" selection will default to "No". Attempting to modify details after encountering this bug will sometimes alter the details for a different product instead of the intended one - exact criteria for replicating this bug are unknown.
-  * Fully fixed as part of a full overhaul of the ProductCreateForm and ProductEditForm components.
-* :white_check_mark: When navigating to a product from the "Bestsellers" carousel, the +/- quantity buttons on the product details modal view are non-functional.
-  * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
-* :white_check_mark: On the "Products" page, selecting a "media" filter and then selecting an "origin" filter will apply the chosen "origin" filter as if the "media" filter was set to "All", regardless of the user's selection.
-  * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
-* :white_check_mark: On the "Products" page, clicking "Add to cart" for a product will only add one of that product to the cart, regardless of the quantity set by the user.
-  * Fully fixed as part of a full overhaul of the ProductList, Product and ProductDetail components.
-* :white_check_mark: Attempting to update a product's details from the Seller dashboard (or perform any other operation which requires the user to be logged in) with an expired session token will crash the app.
-  * Fully fixed by implementing more extensive auth-token validation and checks to sign a user out, remove their expired token from local storage, and redirect them to the login page.
+    * Issue seems to be a major hitch inherent to Firefox. For now, the select options font has been adjusted to display Courier instead. It might not be ideal, but it's better than Comic Sans.
 
 
 ### Project Debrief: Introduction
@@ -119,7 +101,7 @@ This specific repository is for the application's frontend, to which the majorit
 
 
 #### Project Overview
-Bootleg Bill's Unofficial Audio Rarities is an E-Commerce application for custom-made cassette mixtapes, including rare/obscure original releases and replications of tapes shown in movies, TV shows and video games. Using a combination of React on the frontend and Express/MongoDB on the backend, Bootleg Bill's allows you to sign up as either a buyer or a seller, where they can browse the shop, see details about specific products, add items to the cart, go to checkout to complete their order and see a list and the status of their past orders. Sellers can also access a dashboard allowing them to add, edit or delete products from the inventory as well as view and edit each order status.
+Bootleg Bill's Unofficial Audio Rarities is an E-Commerce application for custom-made cassette mixtapes, including rare/obscure original releases and replications of tapes shown in movies, TV shows and video games. Using a combination of React on the frontend and Express/MongoDB on the backend, Bootleg Bill's allows users to sign up as either a customer or as site staff, browse a wide variety of products, see details about specific products, add items to the cart, go to checkout to complete their order and see a list and the status of their past orders. Staff can also access a dashboard allowing them to add, edit or delete products from the inventory as well as view and edit each order status.
 
 
 #### Contributors
@@ -160,7 +142,7 @@ We dedicated a significant amount of time to planning; above all else, we felt i
 Once we had a firm idea of them, we drafted our Entity Relationship Diagram and began developing our wireframe models of each site component. With our broad plan outlined, we broke it down into workable steps by setting up a Trello board with detailed user stories, the minimum viable product requirements, and an icebox for tracking individual development status in order to establish a clear roadmap for the process ahead.
 
 #### User Stories
-After settling on our concept for the application, we assembled a list of user stories to ensure we had a guide for the main points of functionality we wanted our users to experience.
+After settling on our concept for the application, we assembled a list of user stories to ensure we had a guide for the main points of functionality we wanted our users to experience.e
 * As an unregistered user, I want to be able to view the shop's products, so that I can decide if I want to buy a product. 
 * As an unregistered user, I want to sign up for an account, so that I can log in and make purchases.
 * As an unregistered seller, I want to be able to use a unique identifier on sign up, so that I can generate a seller account.
