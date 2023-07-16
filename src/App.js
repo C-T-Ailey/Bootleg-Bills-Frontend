@@ -299,16 +299,16 @@ export default function App() {
 
       <div className='radioNew' hidden={noticeClosed}>
             <div className="radioClose" onMouseOver={() => changeClose()} onMouseLeave={()=>{changeClose()}} onClick={() => setNoticeClosed(true)}>
-              <img src={closeOver ? radioClose : radioCloseHover}></img>
+              <img alt="Radio notification close button" src={closeOver ? radioClose : radioCloseHover}></img>
             </div>
             <div className="radioNewLogo">
-              <img src={radioNew}></img>
+              <img alt="Desktop radio notification" src={radioNew}></img>
             </div>
             {/* <div className='confirm' onClick={() => setNoticeClosed(true)}><BsXCircle/></div> */}
           </div>
           
           <div className='radioNewMobile' hidden={noticeClosed}>
-            <img src={radioNewMobile}></img>
+            <img alt="Mobile radio notification" src={radioNewMobile}></img>
           <div className='confirm' onClick={() => setNoticeClosed(true)}><BsXCircle/></div>
       </div>
     
@@ -316,7 +316,7 @@ export default function App() {
       <Navbar id="navId" collapseOnSelect="true" expand="lg" className="navbar-bg"  sticky="top">
       {/* <Container> */}
 
-        <Navbar.Brand href="/" id="nav-brand"><Image src={logo} height="50px" /></Navbar.Brand>
+        <Navbar.Brand href="/" id="nav-brand"><Image alt="Nav-brand image" src={logo} height="50px" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
         <Navbar.Collapse className="justify-content-end" >
         {/* <Nav className="nav-style"> */}
