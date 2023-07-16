@@ -4,13 +4,13 @@ import { Carousel } from 'react-responsive-carousel';
 // import {Nav} from 'react-bootstrap';
 import './home.css'
 import bigLogoV2Text from './assets/big_logo_v4.png'
-import Axios from 'axios';
+// import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import Product from '../product/Product';
-import { BsChevronCompactDown } from 'react-icons/bs';
-import underConstruction from './assets/construction_bg_2.png'
-import cautionBg from './assets/caution-bg.jpg'
-import cautionTape from './assets/caution-tape.png'
+// import Product from '../product/Product';
+// import { BsChevronCompactDown } from 'react-icons/bs';
+// import underConstruction from './assets/construction_bg_2.png'
+// import cautionBg from './assets/caution-bg.jpg'
+// import cautionTape from './assets/caution-tape.png'
 
 
 // const options = {
@@ -156,7 +156,7 @@ export default function Home(props) {
                 <div className='productsCarousel'>
                   
               
-                  <Carousel showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} useKeyboardArrows interval={3000} width={matchMedia("max-width: 790px") ?"55vw":""}>
+                  <Carousel animationHandler={'fade'} showThumbs={false} showIndicators={false} showArrows={false} swipeable={false} infiniteLoop={true} autoPlay={true} interval={5000} width={matchMedia("max-width: 790px") ?"55vw":""}>
                     {props.products.map(product => (
 
                         <div key={product._id}>
@@ -184,7 +184,7 @@ export default function Home(props) {
               :
 
                 <div className='homepage-logo'>
-                  <img className="billsLogo" src={bigLogoV2Text} alt=""/>
+                  <img className="billsLogo" src={bigLogoV2Text} alt="Homepage logo"/>
                 </div>
 
               }
@@ -280,7 +280,7 @@ export default function Home(props) {
                         
                         <div className='featureDisplay'>
                           <h5 className='featureName mobileHidden'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
-                          <img className='featureThumb' src={product.productImageUrls[0]}/>
+                          <img alt="Featured product thumbnail" className='featureThumb' src={product.productImageUrls[0]}/>
                         </div>
                         
                         <div className='featureDscrpt'>
