@@ -109,7 +109,7 @@ export default function Home(props) {
         setTest(!test)
     }
 
-    const mediaExceptions = ["62e3bba3aa1145047e6c0c5e","62e3b727aa1145047e6c0c31","62e3ba31aa1145047e6c0c5a","62e3bd8eaa1145047e6c0c69","62e3be09aa1145047e6c0c6c","62e3bf8eaa1145047e6c0c82","","640fcd206a370ac37cacf1e4"]
+    const mediaExceptions = ["62e3bba3aa1145047e6c0c5e","62e3b727aa1145047e6c0c31","62e3ba31aa1145047e6c0c5a","62e3bd8eaa1145047e6c0c69","62e3be09aa1145047e6c0c6c","640fcd206a370ac37cacf1e4"]
 
     const getImageIndex = (product) => {
 
@@ -280,7 +280,9 @@ export default function Home(props) {
                         
                         <div className='featureDisplay'>
                           <h5 className='featureName mobileHidden'>{product.productName.slice(0,11) === "! LIMITED !" ? product.productName.slice(11,product.productName.length) : product.productName}</h5>
-                          <img alt="Featured product thumbnail" className='featureThumb' src={product.productImageUrls[0]}/>
+                          <Link to={'/products'} state={product}>    
+                            <img alt="Featured product thumbnail" className='featureThumb' src={product.productImageUrls[0]}/>
+                          </Link>
                         </div>
                         
                         <div className='featureDscrpt'>

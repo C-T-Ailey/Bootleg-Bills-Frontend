@@ -11,10 +11,10 @@ import './ProductList.css'
 // Props required by this component from App.js: cart, setCart
 export default function ProductList(props) {
 
-  // Initialises the useLocation hook for storing the bestseller state
+  // Initialises the useLocation hook for storing the refproduct state
   const location = useLocation()
-  // Stores the bestseller state
-  const bestseller = location.state
+  // Stores the refproduct state
+  const refproduct = location.state
 
   
   
@@ -46,7 +46,7 @@ export default function ProductList(props) {
 
       window.scrollTo(0, 0)
 
-      !!bestseller ? console.log(bestseller.filter) : console.log("no bestseller")
+      !!refproduct ? console.log(refproduct.filter) : console.log("no refproduct")
       
     }, [])
 
@@ -125,7 +125,7 @@ export default function ProductList(props) {
     }
     
     // const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(!!bestseller ? true : false);
+    const [modalIsOpen, setModalIsOpen] = useState(!!refproduct ? true : false);
 
     const setModalOpen =()=>{
       !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false);
@@ -159,19 +159,19 @@ export default function ProductList(props) {
 
     <div className="product-body">
 
-        { !!bestseller 
+        { !!refproduct 
           ? 
             (
               
               <Modal className='detailsModal' id="product-modal" bsPrefix='modal' centered show={modalIsOpen} onHide={() => setModalOpen()}>
                   <Modal.Header closeButton>
                     <Modal.Title style={{fontWeight: "bolder"}}>
-                      More about this bestseller...
+                      More about this product...
                     </Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
   
-                    <ProductDetail product={bestseller} cart={props.cart} setCart={props.setCart}/>
+                    <ProductDetail product={refproduct} cart={props.cart} setCart={props.setCart}/>
 
                   </Modal.Body>
                 </Modal>
