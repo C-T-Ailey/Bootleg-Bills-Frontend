@@ -26,7 +26,7 @@ export default function ProductList(props) {
   const [productList, setProductList] = useState(products)
   const [selectedSource, setSelectedSource] = useState("All Sources")
   const [selectedFormat, setSelectedFormat] = useState("All Formats")
-  const [selectedSort, setSelectedSort] = useState("Alpha AZ")
+  const [selectedSort, setSelectedSort] = useState("Date Desc")
 
   const [locType, setLocType] = useState("")
 

@@ -81,7 +81,7 @@ export default function OrderHistory(props) {
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <OrderDetails {...currentOrder} user={props.user} currentOrder={currentOrder} setCurrentOrder={setCurrentOrder} products={props.products} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                <OrderDetails {...currentOrder} user={props.user} currentOrder={currentOrder} setCurrentOrder={setCurrentOrder} products={props.products} refreshSessionHandler={props.refreshSessionHandler} sessionExpiredHandler={props.sessionExpiredHandler}/>
             </Modal.Body>
         </Modal>
 

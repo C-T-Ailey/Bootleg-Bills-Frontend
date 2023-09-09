@@ -19,6 +19,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     /* background-color: blue; */
 }
 
@@ -61,16 +64,21 @@ table {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    width: 500px;
+    height: 69vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
     /* background-color: green; */
 }
 
-.scroll {
+/* .scroll {
     width: 500px;
     height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
     text-align:justify;
-}
+} */
 
 .order-details {
     display: flex;
@@ -82,6 +90,7 @@ table {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     width: 40%;
     /* background-color: red; */
 }
@@ -124,17 +133,22 @@ table {
     padding: 10px;
 }
 
+.order-ref-head {
+    margin: 0;
+    height: 1.5rem;
+}
+
 .ref-status {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: flex-end;
 }
 
 .status-dropdown {
     display: flex;
     align-self: center;
     width: 150px;
-    height: 35px;
 }
 
 .open {
