@@ -1,4 +1,4 @@
-# “Bootleg Bill’s Unofficial Audio Rarities” - A Non-Existent Bootleg Record & Cassette E-Commerce App
+# “Bootleg Bill’s Unofficial Audio Rarities” - A Bootleg Record & Cassette E-Commerce App
 
 ### Deployed App: https://bootleg-bills.herokuapp.com/
 * Please be aware that this project is hosted using Heroku's "Eco" dynos. As such, it may take a few moments for both the frontend and backend to wake up before loading.
