@@ -805,9 +805,9 @@ section h2 {
         list-style-position: inside;
         list-style-type: none;
         padding: 0px 15px 0px 15px;
-        font-family: "Permanent Marker";
+        /* font-family: "Permanent Marker"; */
         color: black;
-        text-shadow:  1px -1px 0px #ffb310, -1px 1px 0px #ffb310, -1px -1px 0px #ffb310, 1px 1px 0px #ffb310
+        /* text-shadow:  1px -1px 0px #ffb310, -1px 1px 0px #ffb310, -1px -1px 0px #ffb310, 1px 1px 0px #ffb310 */
     }
 
     .comingList li {

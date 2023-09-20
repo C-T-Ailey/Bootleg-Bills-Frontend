@@ -22,9 +22,9 @@ export default function Footer(props) {
           <h2>Products</h2>
           <hr className='mobileHide'></hr>
           <Link to={'/products'}>All</Link>
-          <Link to={'/products'}>Cassettes</Link>
-          <Link to={'/products'}>Vinyl</Link>
-          <Link to={'/products'}>Apparel</Link>
+          <Link to={'/products'} state={"Cassette"}>Cassettes</Link>
+          <Link to={'/products'} state={"Vinyl"}>Vinyl</Link>
+          <Link to={'/products'} state={"Apparel"}>Apparel</Link>
         </div>
 
         <div className='footer-links' id='socials'>
