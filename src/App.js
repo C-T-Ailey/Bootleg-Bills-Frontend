@@ -59,8 +59,6 @@ export default function App() {
   
   useEffect(() => {
     
-    
-    
     console.log("useEffect triggered")
     loadProductList()
     
@@ -72,7 +70,7 @@ export default function App() {
       console.log(
         `Token issued at ${new Date(user.iat * 1000)}, and expires at ${new Date(user.exp * 1000)}.\n
         Logged in as [${user.user.name}] with ${user.user.role} privileges.\n
-        Token is currently ${timeNow - user.user.timestamp < 1800000 ? "valid" : "invalid"}.\n
+        Token is currently ${!!verifyToken() ? "valid" : "invalid"}.\n
         Full object :`, [user])
 
       if (verifyToken() === false) {
@@ -85,15 +83,6 @@ export default function App() {
         setUser(user)
         setUserRole(user.user.role)
       }
-      // if(user){
-      //   setIsAuth(true)
-      //   setUser(user)
-      //   setUserRole(user.user.role)
-      // }
-      // else if (!user){
-      //   localStorage.removeItem("token");
-      //   setIsAuth(false)
-      // }
     }
 
     let parseCart = JSON.parse(localStorage.getItem("Cart"))
@@ -115,10 +104,12 @@ export default function App() {
   }, [cart])
 
   const verifyToken = () => {
-    let token = localStorage.getItem("token")
-    let timeNow = new Date().valueOf()
-    let user = jwt_decode(token)
-    return timeNow - user.user.timestamp < 1800000
+    if (!!localStorage.getItem("token")){
+      let token = localStorage.getItem("token")
+      let timeNow = new Date().valueOf()
+      let user = jwt_decode(token)
+      return timeNow - user.user.timestamp < 1800000
+    }
   }
   
   const addNewsletterEmail = (email) => {
@@ -256,6 +247,15 @@ export default function App() {
       }, 3000);
   }
 
+  const refreshSessionHandler = () => {
+    Axios.post("https://bootlegbackend.herokuapp.com/auth/refresh", user.user)
+    .then(response => {
+      console.log(response);
+      localStorage.setItem("token", response.data.token);
+    })
+    .catch(error => {console.log(error)})
+}
+
   const sessionExpiredHandler = () => {
     localStorage.removeItem("token");
     setIsAuth(false)
@@ -356,7 +356,7 @@ export default function App() {
             <Route path="/about" element={<AboutBills />} />
             <Route path="/faq" element={<FrequentlyAsked />} />
             <Route path="/login" element={<Login login={loginHandler} role={userRole}/>} />
-            <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} sessionExpiredHandler={sessionExpiredHandler}/>} />
+            <Route path="/manage" element={<Dash user={user} role={userRole} products={products} productToEdit={productToEdit} setProductToEdit={setProductToEdit} allOrders={allOrders} setAllOrders={setAllOrders} loadProductList={loadProductList} sucMessage={sucMessage} setSuccess={setSuccessMessage} error={errMessage} setError={setErrorMessage} refreshSessionHandler={refreshSessionHandler} sessionExpiredHandler={sessionExpiredHandler}/>} />
             <Route path="/cart" element={<Cart isAuth={isAuth} user={user} cart={cart} setCart={setCart} makeCart={makeCart} productQuantity={productQuantity} handleRemoveFromCart={handleRemoveFromCart} handleProductQuantity={handleProductQuantity} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>}/>
             <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} user={user} orderRef={orderRef} setOrderRef={setOrderRef} allOrders={allOrders} setAllOrders={setAllOrders} setCartCount={setCartCount} cartCount={cartCount}  totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>} />
             <Route path="/confirmation" element={<OrderConfirmation orderRef={orderRef} setOrderRef={setOrderRef}/>} />

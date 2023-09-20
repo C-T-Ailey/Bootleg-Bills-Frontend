@@ -108,7 +108,7 @@ export default function OrderDetails(props) {
         <h3>Order Details</h3>
         <div>
           <div className='ref-status'>
-            <h4>Order Ref: {props.currentOrder.orderRef}</h4>
+            <h4 className='order-ref-head'>Order Ref: {props.currentOrder.orderRef}</h4>
             {props.user.user.role === "seller" ? (
               <Form.Select bsPrefix="status-dropdown" size='sm' className='status-option' defaultValue={props.currentOrder.status} aria-label="Default select example" onChange={(e) => handleStatus(e)}>
                 <option className='status-option' value="open">Open</option>

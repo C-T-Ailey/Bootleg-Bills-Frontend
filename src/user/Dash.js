@@ -4,6 +4,7 @@ import OrderHistory from './OrderHistory'
 import ProductCreateForm from '../product/ProductCreateForm'
 import { Button, Modal, Container, Form } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
+import Axios from 'axios'
 import './Dash.css'
 import ProductMetrics from '../product/ProductMetrics'
 
@@ -28,6 +29,8 @@ export default function Dash(props) {
         </div>
     
       ))
+
+    let nameSearch = document.getElementById("input")
 
     useEffect(() => {
         let timeNow = new Date().valueOf()
@@ -57,8 +60,13 @@ export default function Dash(props) {
                 setProductList(props.products)
             }
     }
-    },[props.products])
+    },[nameSearch])
 
+
+    const testRefreshToken = () => {
+        console.log(props.user.user)
+        Axios.post("https://bootlegbackend.herokuapp.com/auth/refresh", props.user.user).then(response => {console.log(response)}).catch(error => {console.log(error)})
+    }
 
     const setModalIsOpenToTrue =()=>{
         let timeNow = new Date().valueOf()
@@ -124,7 +132,7 @@ export default function Dash(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <ProductCreateForm loadProductList={props.loadProductList} closeModal={setModalIsOpenToFalse} success={props.sucMessage} setSuccess={props.setSuccess} error={props.errMessage} setError={props.setError} refreshSessionHandler={props.refreshSessionHandler} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </Modal.Body>
             </Modal>
             </div>
@@ -132,9 +140,11 @@ export default function Dash(props) {
             <h1 className='dash-title'>Dashboard</h1>
 
             <div className='dash-contents'>
-                <div className='order-table'>
+                <div>
                     <h4>Customer Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <div className='order-table'>
+                        <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} refreshSessionHandler={props.refreshSessionHandler} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    </div>
                 </div>
             
                 <div>
@@ -147,8 +157,8 @@ export default function Dash(props) {
                         </Container>
                     </div>
 
-                    <Button onClick={setModalIsOpenToTrue}>Add new product to inventory</Button>
-                    <div className='inventory-list scroll'>
+                    <Button onClick={setModalIsOpenToTrue}>Add a new product</Button>
+                    <div className='inventory-list'>
                     {allStock}
                     </div>
                 </div>
@@ -159,7 +169,7 @@ export default function Dash(props) {
             <div className='dash-contents'>
                 <div className='order-table-buyer'>
                     <h4>My Orders</h4>
-                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} sessionExpiredHandler={props.sessionExpiredHandler}/>
+                    <OrderHistory allOrders={props.allOrders} setAllOrders={props.setAllOrders} products={props.products} user={props.user} refreshSessionHandler={props.refreshSessionHandler} sessionExpiredHandler={props.sessionExpiredHandler}/>
                 </div>
             </div>
         )

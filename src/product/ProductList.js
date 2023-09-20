@@ -25,14 +25,14 @@ export default function ProductList(props) {
   const [filterHidden, setFilterHidden] = useState(true)
   const [productList, setProductList] = useState(products)
   const [selectedSource, setSelectedSource] = useState("All Sources")
-  const [selectedFormat, setSelectedFormat] = useState("All Formats")
-  const [selectedSort, setSelectedSort] = useState("Alpha AZ")
+  const [selectedFormat, setSelectedFormat] = useState(!!refproduct && typeof refproduct === "string" ? refproduct : "All Formats")
+  const [selectedSort, setSelectedSort] = useState("Date Desc")
 
   const [locType, setLocType] = useState("")
 
     // useEffect hook with API call to retrieve all products from database on page load
     useEffect(() => {
-      console.log("Productlist useEffect")
+      console.log("Productlist useEffect");
       Axios.get("https://bootlegbackend.herokuapp.com/product/index")
       .then((response) => {
         console.log(response)
@@ -42,21 +42,20 @@ export default function ProductList(props) {
       })
       .catch((error) => {
         console.log(error.response.data)
-      })
+      });
 
-      window.scrollTo(0, 0)
-
-      !!refproduct ? console.log(refproduct.filter) : console.log("no refproduct")
+      window.scrollTo(0, 0);
+      
+      !!refproduct ? console.log(typeof refproduct, refproduct) : console.log("no refproduct");
       
     }, [])
-
-    // useEffect(()=>{
-    //   window.scrollTo(0, 0)
-    // },[])
-
+    
     // useEffect hook for setting productList (used to render mapped products) once products state is set above
     useEffect(() => {
-      setProductList(sorting(products))
+      let productsToFilter = Array.from(products)
+      let filteredProducts = filtering(productsToFilter)
+
+      setProductList(sorting(filteredProducts))
     },[products])
 
     // useEffect hook for filtering product state when Source filter is changed (after selectedSource is updated)
@@ -123,9 +122,18 @@ export default function ProductList(props) {
         return toSort.sort((a,b) => (a.productName < b.productName) ? 1 : -1)
       }
     }
+
+    const filtering = (filterThis) => {
+      // check to see if format filter is set to "All Formats"; if not, filter all products by the selected format, otherwise set to product state ("all products") 
+      let firstByFormat = (selectedFormat !== "All Formats" ? filterThis.filter(products => products.productMediaFormat === selectedFormat) : filterThis)
+
+      // check to see if source filter is set to "All Sources"; if not, filter the above variable by the selected format, otherwise set to above variable without changes
+      let thenBySource = (selectedSource !== "All Sources" ? firstByFormat.filter(products => products.productSourceType === selectedSource) : firstByFormat)
+      return thenBySource
+    }
     
     // const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(!!refproduct ? true : false);
+    const [modalIsOpen, setModalIsOpen] = useState((!!refproduct && typeof refproduct === "object") ? true : false);
 
     const setModalOpen =()=>{
       !modalIsOpen ? setModalIsOpen(true) : setModalIsOpen(false);
@@ -159,7 +167,7 @@ export default function ProductList(props) {
 
     <div className="product-body">
 
-        { !!refproduct 
+        { !!refproduct && typeof refproduct === "object"
           ? 
             (
               
