@@ -42,7 +42,7 @@ export default function OrderDetailCard(props) {
             <p>{props.id.product.productName}</p>
             <p>Quantity: {props.id.cartQuantity}</p>
             <p>Variant: {props.id.variant}</p>
-            {props.id.product.productName.slice(0,6).toLowerCase() === "mix-by" ? <MixtapeCreateForm personal={props.id.variant.slice(0,4)==="Full"}/> : ""}
+            {props.id.product.productName.slice(0,6).toLowerCase() === "mix-by" ? <MixtapeCreateForm personal={props.id.variant.slice(0,4)==="Full"} order={props.currentOrder} setOrder={props.setCurrentOrder}/> : ""}
         </div>
   )
 }

@@ -28,7 +28,7 @@ export default function OrderDetails(props) {
   const mappedProducts = orderSet?.map((product, index) => (
     
     <div className='order-card' key={index}>
-      <OrderDetailCard currentOrder={props.currentOrder} id={product} getQuantity={getQuantity} />
+      <OrderDetailCard currentOrder={props.currentOrder} setCurrentOrder={props.setCurrentOrder} id={product} getQuantity={getQuantity} />
     </div>
 
 ))
@@ -36,7 +36,7 @@ export default function OrderDetails(props) {
   const newCart = orderCart.map((order, index) => (
 
     <div className='order-card' key={index}>
-      <OrderDetailCard currentOrder={props.currentOrder} id={order} getQuantity={getQuantity} orderCart={orderCart}/>
+      <OrderDetailCard currentOrder={props.currentOrder} setCurrentOrder={props.setCurrentOrder} id={order} getQuantity={getQuantity} orderCart={orderCart}/>
     </div>
 
   ))
